@@ -9,8 +9,8 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
-import InputField from "../../../shared/FormElement/Input";
-import ButtonField from "../../../shared/FormElement/Button";
+import InputField from "../../FormElement/Input";
+import ButtonField from "../../FormElement/Button";
 import { Link } from "react-router-dom";
 
 function Footer() {

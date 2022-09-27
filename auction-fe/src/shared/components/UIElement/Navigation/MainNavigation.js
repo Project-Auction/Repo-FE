@@ -1,4 +1,4 @@
-import Header from "../../Layouts/Header/Header";
+import Header from "../../Layouts/Header";
 import NavLinks from "./NavLinks";
 
 function MainNavigation() {
