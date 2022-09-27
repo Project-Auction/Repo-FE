@@ -1,19 +1,5 @@
-import Input from "./shared/FormElement/Input";
-
 function App() {
-  return (
-    <div className="App">
-      <Input
-        required
-        variant="outlined"
-        id="outlined-required"
-        htmlFor="outlined-required"
-        label="Username"
-        type="text"
-        fullWidth
-      />
-    </div>
-  );
+  return <div className="App"></div>;
 }
 
 export default App;

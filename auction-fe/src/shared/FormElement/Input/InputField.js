@@ -2,14 +2,24 @@ import { FormControl, TextField } from "@mui/material";
 
 import "./Input.css";
 
-function Input(props) {
-  console.log(props.label);
+function InputFiled(props) {
   const handleOnChange = (event) => {
     props.onChange(event.target.value);
   };
 
   return (
-    <FormControl fullWidth={props.fullWidth}>
+    <FormControl
+      fullWidth={props.fullWidth}
+      disabled={props.disabled}
+      error={props.error}
+      sx={{
+        width: props.width,
+        minWidth: props.minWidth,
+        height: props.height,
+        minHeight: props.minHeight,
+        m: props.m,
+      }}
+    >
       <TextField
         variant={props.variant}
         onChange={handleOnChange}
@@ -35,4 +45,4 @@ function Input(props) {
   );
 }
 
-export default Input;
+export default InputFiled;
