@@ -1,0 +1,44 @@
+:root {
+    --primary-color: #ff3366;
+    --green-color: #11b683;
+    --white-color: #fff;
+    --border-color: #dadada;
+    --font-color: #333333;
+
+    --dark-color: #2c2b30;
+    --yellow-color: #ffec17;
+}
+
+* {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+    line-height: 1.4rem;
+    font-family: 'Fira Code', monospace;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+ul {
+    padding-left: 0 !important;
+}
+
+li {
+    list-style: none;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/* Content */
+.section {
+    padding: 100px 0;
+}
