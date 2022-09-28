@@ -1,6 +1,13 @@
-.MuiTextField-root .form-input {
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.form-input {
     height: 50px;
     display: flex;
     align-items: center;
-    padding: 4px;
+    border: none;
+    outline: none;
 }
