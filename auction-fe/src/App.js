@@ -12,55 +12,9 @@ import Modal from "./shared/components/UIElement/Modal";
 
 function App() {
   const [user, setUser] = useState();
-  const [show, setShow] = useState(false);
-
-  const handleLogin = () => {
-    setUser({
-      id: "1",
-      name: "Tuan",
-      permissions: ["analyze"],
-      roles: ["admin"],
-    });
-  };
-
-  const handleClear = () => {
-    setShow(false);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
 
   return (
     <div className="App" style={{ marginTop: 100 }}>
-      {user ? (
-        <button onClick={handleLogout}>LOG OUT</button>
-      ) : (
-        <button onClick={handleLogin}>LOGIN</button>
-      )}
-
-      <button
-        onClick={() => {
-          setShow(true);
-        }}
-      >
-        SHOW MODAL
-      </button>
-
-      <Modal
-        show={show}
-        header="Modal"
-        footer={
-          <>
-            <button className="btn btn-primary">BUTTON</button>
-            <button className="btn btn-danger">BUTTON</button>
-          </>
-        }
-        onClear={handleClear}
-      >
-        THIS IS MODAL
-      </Modal>
-
       <Router>
         <MainNavigation />
         <Routes>
