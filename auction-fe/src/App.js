@@ -8,9 +8,11 @@ import ProtectRoutes from "./routes/ProtectRoutes";
 import MainNavigation from "./shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "./shared/components/Layouts/Footer";
 import AboutUs from "./app/home/page/about-us/about-us";
+import Modal from "./shared/components/UIElement/Modal";
 
 function App() {
   const [user, setUser] = useState();
+  const [show, setShow] = useState(false);
 
   const handleLogin = () => {
     setUser({
@@ -19,6 +21,10 @@ function App() {
       permissions: ["analyze"],
       roles: ["admin"],
     });
+  };
+
+  const handleClear = () => {
+    setShow(false);
   };
 
   const handleLogout = () => {
@@ -32,6 +38,28 @@ function App() {
       ) : (
         <button onClick={handleLogin}>LOGIN</button>
       )}
+
+      <button
+        onClick={() => {
+          setShow(true);
+        }}
+      >
+        SHOW MODAL
+      </button>
+
+      <Modal
+        show={show}
+        header="Modal"
+        footer={
+          <>
+            <button className="btn btn-primary">BUTTON</button>
+            <button className="btn btn-danger">BUTTON</button>
+          </>
+        }
+        onClear={handleClear}
+      >
+        THIS IS MODAL
+      </Modal>
 
       <Router>
         <MainNavigation />
