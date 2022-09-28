@@ -22,6 +22,18 @@ function NavLinks() {
           SERVICE
         </NavLink>
       </li>
+
+      <li>
+        <NavLink to="/admin" end>
+          ADMIN
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/payment" end>
+          PAYMENT
+        </NavLink>
+      </li>
     </ul>
   );
 }
