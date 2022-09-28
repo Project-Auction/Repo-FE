@@ -47,7 +47,7 @@
 
 /* SUB NAV */
 .nav-links__list li:hover .sub-nav__popper {
-    opacity: 1;
+    display: block;
 }
 
 .sub-nav {
@@ -59,10 +59,14 @@
 }
 
 .sub-nav__popper {
+    --growthFrom: 0.3;
+    --growthTo: 1;
     border-radius: 5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    opacity: 0;
+    display: none;
+    animation: fadeIn 0.3s linear, growth 0.3s linear;
+    transition: all 0.3s;
 }
 
 .sub-nav a {
