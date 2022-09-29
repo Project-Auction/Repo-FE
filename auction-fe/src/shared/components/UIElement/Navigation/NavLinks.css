@@ -59,14 +59,13 @@
 }
 
 .sub-nav__popper {
-    --growthFrom: 0.3;
-    --growthTo: 1;
     border-radius: 5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     display: none;
-    animation: fadeIn 0.3s linear, growth 0.3s linear;
-    transition: all 0.3s;
+    animation: fadeIn 0.2s linear, growth 0.2s linear;
+    transform-origin: top left;
+    transition: all 0.2s;
 }
 
 .sub-nav a {
