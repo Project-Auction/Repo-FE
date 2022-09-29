@@ -251,3 +251,15 @@
     font-weight: 300;
     margin: 24px 0 0 0;
 }
+
+/* Home current actions */
+.home__page-current-action {
+    background-color: var(--background-color);
+}
+
+.home__page-current-action .view-all {
+    display: flex;
+    margin: 42px auto;
+    margin-bottom: 0px;
+    border-radius: 50px;
+}

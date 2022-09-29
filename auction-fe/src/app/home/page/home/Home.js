@@ -157,17 +157,54 @@ function Home() {
 
         {/* CURRENT AUCTIONS*/}
         <div className="home__page-current-action section">
-          <div className="row">
-            <div className="col-3">
-              <CardProduct
-                name="Macbook Air"
-                headerTitle="COUNTDOWN FINISHED"
-                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
-                startPrice="20000"
-                currentPrice="20000"
-              />
+          <h3 className="title-header">Current Actions</h3>
+          <div className="container">
+            <div className="row">
+              <div className="col-3">
+                <CardProduct
+                  name="Macbook Air"
+                  headerTitle="COUNTDOWN FINISHED"
+                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
+                  startPrice="20000"
+                  currentPrice="20000"
+                />
+              </div>
+
+              <div className="col-3">
+                <CardProduct
+                  name="Macbook Air"
+                  headerTitle="COUNTDOWN FINISHED"
+                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
+                  startPrice="20000"
+                  currentPrice="20000"
+                />
+              </div>
+
+              <div className="col-3">
+                <CardProduct
+                  name="Macbook Air"
+                  headerTitle="COUNTDOWN FINISHED"
+                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
+                  startPrice="20000"
+                  currentPrice="20000"
+                />
+              </div>
+
+              <div className="col-3">
+                <CardProduct
+                  name="Macbook Air"
+                  headerTitle="COUNTDOWN FINISHED"
+                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
+                  startPrice="20000"
+                  currentPrice="20000"
+                />
+              </div>
             </div>
           </div>
+
+          <ButtonFiled primary size="big" className="view-all">
+            VIEW ALL AUCTION
+          </ButtonFiled>
         </div>
         {/* CURRENT AUCTIONS*/}
       </div>
