@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartShopping,
   faMagnifyingGlass,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./HeaderNavInner.css";
