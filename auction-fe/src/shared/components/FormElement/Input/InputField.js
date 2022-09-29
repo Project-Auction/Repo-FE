@@ -13,6 +13,7 @@ function InputFiled(props) {
         type={props.type}
         placeholder={props.placeholder}
         onChange={handleOnChange}
+        required={props.required}
       />
     ) : (
       <textarea
@@ -20,6 +21,7 @@ function InputFiled(props) {
         id={props.id}
         rows={props.rows || 3}
         onChange={handleOnChange}
+        required={props.required}
       />
     );
 
