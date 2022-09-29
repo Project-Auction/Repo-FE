@@ -43,9 +43,35 @@ a {
     text-decoration: none !important;
 }
 
+.main-wrapper {
+    overflow: hidden;
+}
+
 /* Content */
 .section {
     padding: 100px 0;
+}
+
+/* Title Header */
+.title-header {
+    position: relative;
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin: 0;
+    padding-bottom: 12px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-header::before {
+    position: absolute;
+    content: "";
+    top: 100%;
+    width: 100px;
+    background-color: var(--primary-color);
+    height: 3px;
 }
 
 /* Circle */

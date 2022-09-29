@@ -88,6 +88,71 @@ function Home() {
           </div>
         </div>
         {/* Advertisement */}
+
+        {/* How it work */}
+        <div className="home__page-instruction section">
+          <h3 className="title-header">How it works</h3>
+
+          <div className="row home__page-instruction-list">
+            <div className="col-3">
+              <div className="home__page-instruction-item">
+                <div className="header">
+                  <span className="circle">01</span>
+                </div>
+
+                <h3 className="title-header">Register</h3>
+
+                <p className="desc">
+                  To start using our auction, you’ll need to register. It’s
+                  completely free!
+                </p>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="home__page-instruction-item">
+                <div className="header">
+                  <span className="circle">02</span>
+                </div>
+
+                <h3 className="title-header">BUY OR BID</h3>
+
+                <p className="desc">
+                  You can instantly buy or place a bid on a desired product
+                  right after registration.
+                </p>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="home__page-instruction-item">
+                <div className="header">
+                  <span className="circle">03</span>
+                </div>
+
+                <h3 className="title-header">SUBMIT A BID</h3>
+
+                <p className="desc">
+                  Submitting a bid is fast and easy. The process takes
+                  approximately 5 minutes.
+                </p>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="home__page-instruction-item">
+                <div className="header">
+                  <span className="circle">04</span>
+                </div>
+
+                <h3 className="title-header">WIN</h3>
+
+                <p className="desc">
+                  Easily win at our auction and enjoy owning the product you
+                  dream of.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* How it work */}
       </div>
       {/* Content */}
 
