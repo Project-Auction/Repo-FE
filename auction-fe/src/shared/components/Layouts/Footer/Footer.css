@@ -15,7 +15,7 @@
 
 .footer__container .footer__item .header {
     position: relative;
-    font-size: 22px;
+    font-size: 2.2rem;
     color: #fff;
     text-transform: uppercase;
     margin-bottom: 24px;
@@ -44,7 +44,7 @@
     display: flex;
     align-items: center;
     border-radius: 4px;
-    margin-top: 18px;
+    margin-top: 1.8rem;
     transition: all 0.3s;
     width: 200px;
     cursor: pointer;
@@ -56,7 +56,7 @@
 
 .footer__item .download-app .download-app__item .icon__download {
     font-size: 2.6rem;
-    margin-right: 18px;
+    margin-right: 1.8rem;
 }
 
 .footer__item .download-app__item-content span {
@@ -80,7 +80,7 @@
 
 .footer__item .content__item .content__icon {
     font-size: 1.8rem;
-    margin-right: 18px;
+    margin-right: 1.8rem;
     color: var(--primary-color);
 }
 
@@ -149,7 +149,7 @@
     border: none;
     height: 60px;
     color: #fff;
-    font-size: 14px;
+    font-size: 1.4rem;
     padding: 0 12px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -176,7 +176,7 @@
 }
 
 .footer__bottom-left-area a {
-    font-size: 22px;
+    font-size: 2.2rem;
     text-transform: uppercase;
     color: #fff !important;
     display: block;
@@ -188,7 +188,7 @@
 
 .footer__bottom-right-area {
     color: #fff;
-    font-size: 22px;
+    font-size: 2.2rem;
     display: block;
     font-weight: 300;
     margin: 0;
@@ -209,19 +209,19 @@
     }
 
     .content .content__item span {
-        font-size: 14px;
+        font-size: 1.4rem;
     }
 
     .footer__item .content span {
-        font-size: 14px;
+        font-size: 1.4rem;
     }
 
     .footer__bottom .footer__bottom-left-area {
-        font-size: 16px;
+        font-size: 1.6rem;
     }
 
     .footer__bottom-right-area {
-        font-size: 18px;
+        font-size: 1.8rem;
     }
 
     .footer__item .footer__form {
@@ -233,7 +233,7 @@
         flex: unset;
         height: 60px;
         width: 100%;
-        /*font-size: 1.8rem;*/
+        font-size: 1.8rem;
         margin-top: 12px;
         border-radius: 5px;
     }
@@ -252,7 +252,7 @@
     }
 
     .footer__bottom-right-area {
-        margin-top: 18px;
+        margin-top: 1.8rem;
     }
 }
 
