@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
+
+import "./Home.css";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import ButtonFiled from "../../../../shared/components/FormElement/Button";
-
-import "./Home.css";
-import { Link } from "react-router-dom";
+import CardProduct from "../../../../shared/components/UIElement/Card/CardProduct";
 
 function Home() {
   return (
@@ -153,6 +154,22 @@ function Home() {
           </div>
         </div>
         {/* How it work */}
+
+        {/* CURRENT AUCTIONS*/}
+        <div className="home__page-current-action section">
+          <div className="row">
+            <div className="col-3">
+              <CardProduct
+                name="Macbook Air"
+                headerTitle="COUNTDOWN FINISHED"
+                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
+                startPrice="20000"
+                currentPrice="20000"
+              />
+            </div>
+          </div>
+        </div>
+        {/* CURRENT AUCTIONS*/}
       </div>
       {/* Content */}
 
