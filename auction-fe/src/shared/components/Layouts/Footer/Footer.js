@@ -63,7 +63,6 @@ function Footer() {
                   <div className="content__item">
                     <FontAwesomeIcon icon={faPhone} className="content__icon" />
 
-                    <i className="fa-solid fa-phone"></i>
                     <span>(+84)236 6517 021</span>
                   </div>
 
@@ -99,11 +98,10 @@ function Footer() {
                   </span>
                 </div>
 
-                <div className="footer__form">
+                <div className="footer__form mt-3">
                   <InputField
-                    variant="filled"
+                    element="input"
                     type="email"
-                    fullWidth
                     required
                     placeholder="Enter your email"
                   />
