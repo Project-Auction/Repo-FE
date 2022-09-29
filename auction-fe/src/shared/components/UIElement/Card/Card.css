@@ -38,11 +38,15 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
-    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .card__img-group:hover>.card__btn-bid {
-    top: 60%;
+    top: 70%;
+}
+
+.card__img-group:hover .card__content-img {
+    transform: scale(1.05);
 }
 
 .card__btn-bid {
