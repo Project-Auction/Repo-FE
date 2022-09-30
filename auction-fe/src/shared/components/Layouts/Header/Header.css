@@ -5,5 +5,5 @@
     right: 0;
     height: var(--height-main-header);
     background-color: var(--dark-color);
-    z-index: 99;
+    z-index: 999;
 }

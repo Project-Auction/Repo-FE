@@ -1,7 +1,6 @@
 import HeadlessTippy from "@tippyjs/react/headless";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Controller } from "react-hook-form";
 
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
@@ -14,8 +13,9 @@ import PopperWrapper from "../../UIElement/PopperWrapper";
 import InputFiled from "../Input/InputField";
 import useDebounce from "../../../hook/useDebounce";
 import { toast } from "react-toastify";
+import ProductItem from "../../UIElement/ProductItem";
 
-const SearchInput = ({ control, name, inputClass, placeholder, ...props }) => {
+const SearchInput = ({ inputClass, placeholder }) => {
   const inputRef = useRef();
 
   const [searchInput, setSearchInput] = useState("");
@@ -75,8 +75,24 @@ const SearchInput = ({ control, name, inputClass, placeholder, ...props }) => {
       onClickOutside={handleClickOutside}
       render={(attrs) => (
         <div className="search-result" tabIndex="-1" {...attrs}>
-          <PopperWrapper>
-            <h1>hii</h1>
+          <PopperWrapper className="popper__search">
+            <ProductItem
+              image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
+              name="Macbook"
+              price="50000"
+            />
+
+            <ProductItem
+              image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
+              name="Macbook"
+              price="50000"
+            />
+
+            <ProductItem
+              image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
+              name="Macbook"
+              price="50000"
+            />
           </PopperWrapper>
         </div>
       )}

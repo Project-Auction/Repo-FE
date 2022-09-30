@@ -11,6 +11,8 @@
     --yellow-color: #ffec17;
 
     --height-main-header: 67px;
+
+    --width-header-inner-search: 600px;
 }
 
 * {

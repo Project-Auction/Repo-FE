@@ -29,7 +29,16 @@
     animation: spinner 0.8s linear infinite;
 }
 
+/* Popper Wrapper */
+.popper__search {
+    position: relative;
+    top: 0;
+    left: 24px;
+    padding: 12px;
+}
+
 /* Search result*/
 .search-result {
-    width: 465px;
+    width: calc(var(--width-header-inner-search) - 24px);
+    max-height: 45vh;
 }

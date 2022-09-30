@@ -27,7 +27,6 @@ function HeaderNavInner() {
         <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
         <SearchInput
           control={methods.control}
-          setValue={methods.setValue}
           name="searchInput"
           inputClass="header__inner-search-input"
           placeholder="Search..."
