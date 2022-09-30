@@ -1,0 +1,35 @@
+.form-input__search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.close-icon,
+.spinner-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    font-size: 2.2rem;
+    color: var(--font-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+
+.form-input__search .close-icon {
+    height: 20px;
+    width: 20px;
+    transform: translateY(-50%);
+}
+
+
+/* CSS for spinner */
+.spinner-icon {
+    animation: spinner 0.8s linear infinite;
+}
+
+/* Search result*/
+.search-result {
+    width: 465px;
+}

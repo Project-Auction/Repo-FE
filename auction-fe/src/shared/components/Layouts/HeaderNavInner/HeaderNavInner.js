@@ -4,12 +4,16 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { useForm } from "react-hook-form";
+
 import "./HeaderNavInner.css";
-import InputField from "../../FormElement/Input";
 import ButtonFiled from "../../FormElement/Button";
 import PopperWrapper from "../../UIElement/PopperWrapper";
+import SearchInput from "../../FormElement/SearchInput";
 
 function HeaderNavInner() {
+  const methods = useForm();
+
   return (
     <div className="header__inner-wrapper">
       <div className="header__inner-logo">
@@ -21,11 +25,12 @@ function HeaderNavInner() {
 
       <div className="header__inner-search">
         <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
-        <InputField
-          element="input"
+        <SearchInput
+          control={methods.control}
+          setValue={methods.setValue}
+          name="searchInput"
           inputClass="header__inner-search-input"
-          placeholder="Tìm kiếm..."
-          type="text"
+          placeholder="Search..."
         />
         <ButtonFiled primary className="header__inner-search-button">
           SEARCH

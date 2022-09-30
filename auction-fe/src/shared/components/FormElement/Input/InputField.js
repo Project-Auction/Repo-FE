@@ -1,8 +1,13 @@
+import { forwardRef } from "react";
 import "./Input.css";
 
-function InputFiled(props) {
+const InputFiled = forwardRef((props, ref) => {
   const handleOnChange = (event) => {
     props.onChange(event.target.value);
+  };
+
+  const handleOnFocus = () => {
+    props.onFocus(true);
   };
 
   const element =
@@ -14,6 +19,8 @@ function InputFiled(props) {
         placeholder={props.placeholder}
         onChange={handleOnChange}
         required={props.required}
+        ref={ref}
+        onFocus={handleOnFocus}
       />
     ) : (
       <textarea
@@ -22,6 +29,8 @@ function InputFiled(props) {
         rows={props.rows || 3}
         onChange={handleOnChange}
         required={props.required}
+        ref={ref}
+        onFocus={handleOnFocus}
       />
     );
 
@@ -31,6 +40,6 @@ function InputFiled(props) {
       {element}
     </div>
   );
-}
+});
 
 export default InputFiled;

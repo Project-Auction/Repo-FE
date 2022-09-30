@@ -89,6 +89,22 @@ a {
     z-index: 1;
 }
 
+/* Spinner */
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Fix size toast */
+.Toastify__toast-body {
+    font-size: 1.6rem;
+}
+
 /* Animation */
 /* Animation */
 @keyframes fadeIn {
