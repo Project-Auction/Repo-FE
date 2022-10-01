@@ -42,3 +42,22 @@
     width: calc(var(--width-header-inner-search) - 24px);
     max-height: 45vh;
 }
+
+/* Search no result */
+.popper__no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popper__no-result img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.popper__no-result .message {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 6px;
+}

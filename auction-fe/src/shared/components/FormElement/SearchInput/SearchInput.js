@@ -2,7 +2,10 @@ import HeadlessTippy from "@tippyjs/react/headless";
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -69,30 +72,44 @@ const SearchInput = ({ inputClass, placeholder }) => {
   return (
     <HeadlessTippy
       appendTo={() => document.body}
-      visible={isShowResult && searchResult.length > 0}
+      // visible={isShowResult}
       interactive
       placement="bottom"
       onClickOutside={handleClickOutside}
       render={(attrs) => (
         <div className="search-result" tabIndex="-1" {...attrs}>
           <PopperWrapper className="popper__search">
-            <ProductItem
-              image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-              name="Macbook"
-              price="50000"
-            />
+            {searchResult.length > 0 && (
+              <>
+                <ProductItem
+                  image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
+                  name="Macbook"
+                  price="50000"
+                />
 
-            <ProductItem
-              image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-              name="Macbook"
-              price="50000"
-            />
+                <ProductItem
+                  image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
+                  name="Macbook"
+                  price="50000"
+                />
 
-            <ProductItem
-              image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-              name="Macbook"
-              price="50000"
-            />
+                <ProductItem
+                  image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
+                  name="Macbook"
+                  price="50000"
+                />
+              </>
+            )}
+            {searchResult.length === 0 && (
+              <div className="popper__no-result">
+                <img
+                  src="https://raw.githubusercontent.com/nguyenhoanganhtuan1206/SE397/main/se397/src/main/resources/static/assets/img/product/no_cart.png"
+                  alt="No product"
+                />
+
+                <p className="message">No Product Available</p>
+              </div>
+            )}
           </PopperWrapper>
         </div>
       )}
