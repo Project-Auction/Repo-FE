@@ -1,0 +1,47 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+    padding: 12px;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.button--fullWidth {
+    width: 100%;
+}
+
+.button--primary {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.button--primary:hover {
+    background-color: var(--green-color);
+}
+
+.button--danger {
+    color: var(--white-color);
+    background-color: var(--danger-color);
+}
+
+.button--danger:hover {
+    background-color: #f34343;
+}
+
+/*Size*/
+.button--small {
+    padding: 8px;
+    font-size: 1.2rem;
+}
+
+.button--big {
+    padding: 16px;
+    font-size: 1.6rem;
+}

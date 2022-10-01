@@ -1,0 +1,14 @@
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.form-input {
+    height: 50px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+}

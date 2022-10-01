@@ -1,0 +1,9 @@
+.header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--height-main-header);
+    background-color: var(--dark-color);
+    z-index: 999;
+}
