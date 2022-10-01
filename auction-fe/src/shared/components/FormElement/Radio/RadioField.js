@@ -2,12 +2,14 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  Radio,
   RadioGroup,
 } from "@mui/material";
 
-function Radio(props) {
+function RadioField(props) {
   /*
    * row is  RadioGroup arranged by row or column
+   * set defaultValue for form default value
    */
 
   const handleChange = (event) => {
@@ -28,21 +30,34 @@ function Radio(props) {
       }}
     >
       <FormLabel>{props.label}</FormLabel>
-      <RadioGroup row={props.row}>
-        {props.items.map((item) => (
+      <RadioGroup row={props.row} defaultValue={props.defaultValue}>
+        {!props.list && (
           <FormControlLabel
-            key={item.value}
-            value={item.value}
+            key={props.name}
+            value={props.name}
             control={<Radio />}
-            label={item.label}
-            disabled={item.disabled}
+            label={props.labelInput}
+            disabled={props.disabled}
             onChange={handleChange}
-            checked={item.checked}
+            checked={props.checked}
           />
-        ))}
+        )}
+
+        {props.list > 0 &&
+          props.items.map((item) => (
+            <FormControlLabel
+              key={item.value}
+              value={item.value || item.name}
+              control={<Radio />}
+              label={item.labelInput}
+              disabled={item.disabled}
+              onChange={handleChange}
+              checked={item.checked}
+            />
+          ))}
       </RadioGroup>
     </FormControl>
   );
 }
 
-export default Radio;
+export default RadioField;

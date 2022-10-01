@@ -6,6 +6,7 @@ import Home from "./app/home/page/home/Home";
 import Payment from "./app/payment/page/Payment";
 import ProtectRoutes from "./routes/ProtectRoutes";
 import AboutUs from "./app/home/page/about-us/about-us";
+import HomeCatalog from "./app/home/page/home/HomeCatalog";
 
 function App() {
   const [user, setUser] = useState();
@@ -17,6 +18,7 @@ function App() {
           {/* Public Page */}
           <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
+          <Route path="/home-catalog" element={<HomeCatalog />} />
           <Route path="/about-us" element={<AboutUs />} />
           {/* Public Page */}
 

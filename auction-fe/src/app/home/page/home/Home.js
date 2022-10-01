@@ -202,7 +202,12 @@ function Home() {
             </div>
           </div>
 
-          <ButtonFiled primary size="big" className="view-all">
+          <ButtonFiled
+            to="/home-catalog"
+            primary
+            size="big"
+            className="view-all"
+          >
             VIEW ALL AUCTION
           </ButtonFiled>
         </div>

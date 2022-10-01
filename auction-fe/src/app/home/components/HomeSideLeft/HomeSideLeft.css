@@ -1,0 +1,45 @@
+.home__side-let-container {
+    max-height: calc(100vh - var(--height-main-header) - 0px);
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.home__side-let-container .title {
+    font-size: 2.4rem;
+    color: var(--font-color);
+}
+
+.range-money .title {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.home__side-let-container .categories__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 1.7rem;
+    color: var(--primary-color);
+    font-weight: 400;
+    padding: 12px 0;
+    right: 0;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.home__side-let-container .categories__item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.home__side-let-container .categories__item:hover {
+    right: -4px;
+    color: var(--green-color);
+}
+
+
+.categories__list .icon-arrow-right {
+    transform: translateY(1px);
+    font-size: 1.6rem;
+    margin-right: 6px;
+}
