@@ -16,7 +16,7 @@ function CardProduct(props) {
         <div className="card__img-group">
           <img
             className={`card__content-img ${props.imageClass}`}
-            src={props.src}
+            src={props.image}
             alt={props.name}
           />
 
@@ -28,10 +28,10 @@ function CardProduct(props) {
         <div className="info">
           <Link className="name">{props.name}</Link>
           <div className="detail__price">
-            {props.startPrice && (
+            {props.initialPrice && (
               <div className="price">
                 <span>Start Price</span>
-                <p>{props.startPrice}</p>
+                <p>{props.initialPrice}</p>
               </div>
             )}
 

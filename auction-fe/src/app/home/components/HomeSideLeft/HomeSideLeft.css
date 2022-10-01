@@ -9,10 +9,26 @@
     color: var(--font-color);
 }
 
+.home__side-let-container .range-money {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    background-color: #fff;
+}
+
 .range-money .title {
     font-size: 1.8rem;
     display: flex;
     align-items: center;
+    color: var(--font-color)
+}
+
+.home__side-let-container .categories {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 5px;
 }
 
 .home__side-let-container .categories__item {

@@ -4,7 +4,39 @@ import "./Home.css";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import ButtonFiled from "../../../../shared/components/FormElement/Button";
-import CardProduct from "../../../../shared/components/UIElement/Card/CardProduct";
+import ProductList from "../../components/ProductList";
+
+export const DUMMY_PRODUCTS = [
+  {
+    codeProduct: 1,
+    name: "Macbook Air",
+    headerTitle: "COUNTDOWN FINISHED",
+    image:
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
+    initialPrice: "20000",
+    currentPrice: "20000",
+  },
+
+  {
+    codeProduct: 2,
+    name: "Macbook Air",
+    headerTitle: "COUNTDOWN FINISHED",
+    image:
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
+    initialPrice: "20000",
+    currentPrice: "20000",
+  },
+
+  {
+    codeProduct: 3,
+    name: "Macbook Air",
+    headerTitle: "COUNTDOWN FINISHED",
+    image:
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
+    initialPrice: "20000",
+    currentPrice: "20000",
+  },
+];
 
 function Home() {
   return (
@@ -160,45 +192,7 @@ function Home() {
           <h3 className="title-header">Current Actions</h3>
           <div className="container">
             <div className="row">
-              <div className="col-3">
-                <CardProduct
-                  name="Macbook Air"
-                  headerTitle="COUNTDOWN FINISHED"
-                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
-                  startPrice="20000"
-                  currentPrice="20000"
-                />
-              </div>
-
-              <div className="col-3">
-                <CardProduct
-                  name="Macbook Air"
-                  headerTitle="COUNTDOWN FINISHED"
-                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
-                  startPrice="20000"
-                  currentPrice="20000"
-                />
-              </div>
-
-              <div className="col-3">
-                <CardProduct
-                  name="Macbook Air"
-                  headerTitle="COUNTDOWN FINISHED"
-                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
-                  startPrice="20000"
-                  currentPrice="20000"
-                />
-              </div>
-
-              <div className="col-3">
-                <CardProduct
-                  name="Macbook Air"
-                  headerTitle="COUNTDOWN FINISHED"
-                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80"
-                  startPrice="20000"
-                  currentPrice="20000"
-                />
-              </div>
+              <ProductList items={DUMMY_PRODUCTS} className="col-3" />
             </div>
           </div>
 
