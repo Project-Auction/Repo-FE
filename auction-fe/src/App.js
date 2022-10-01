@@ -7,6 +7,7 @@ import Payment from "./app/payment/page/Payment";
 import ProtectRoutes from "./routes/ProtectRoutes";
 import AboutUs from "./app/home/page/about-us/about-us";
 import HomeCatalog from "./app/home/page/home/HomeCatalog";
+import { ScrollToTop } from "./shared/hook/scroll-to-top";
 
 function App() {
   const [user, setUser] = useState();
@@ -14,32 +15,34 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Routes>
-          {/* Public Page */}
-          <Route index element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/home-catalog" element={<HomeCatalog />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          {/* Public Page */}
+        <ScrollToTop>
+          <Routes>
+            {/* Public Page */}
+            <Route index element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/home-catalog" element={<HomeCatalog />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            {/* Public Page */}
 
-          {/* Logged In page */}
-          <Route element={<ProtectRoutes isAllowed={!!user} />}>
-            <Route path="/payment" element={<Payment />} />
-          </Route>
-          {/* Logged In page */}
+            {/* Logged In page */}
+            <Route element={<ProtectRoutes isAllowed={!!user} />}>
+              <Route path="/payment" element={<Payment />} />
+            </Route>
+            {/* Logged In page */}
 
-          {/* Admin page */}
-          <Route
-            element={
-              <ProtectRoutes
-                isAllowed={!!user && user.roles.includes("admin")}
-              />
-            }
-          >
-            <Route path="/admin" element={<Admin />} />
-          </Route>
-          {/* Admin page */}
-        </Routes>
+            {/* Admin page */}
+            <Route
+              element={
+                <ProtectRoutes
+                  isAllowed={!!user && user.roles.includes("admin")}
+                />
+              }
+            >
+              <Route path="/admin" element={<Admin />} />
+            </Route>
+            {/* Admin page */}
+          </Routes>
+        </ScrollToTop>
       </Router>
     </div>
   );

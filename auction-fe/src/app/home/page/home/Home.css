@@ -262,4 +262,5 @@
     margin: 42px auto;
     margin-bottom: 0px;
     border-radius: 50px;
+    width: max-content;
 }

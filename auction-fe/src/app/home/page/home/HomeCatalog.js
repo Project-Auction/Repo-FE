@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import HomeSideLeft from "../../components/HomeSideLeft/HomeSideLeft";
@@ -7,6 +8,11 @@ import { DUMMY_PRODUCTS } from "./Home";
 import "./HomeCatalog.css";
 
 const HomeCatalog = () => {
+  /* Scroll to top */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <MainNavigation />
