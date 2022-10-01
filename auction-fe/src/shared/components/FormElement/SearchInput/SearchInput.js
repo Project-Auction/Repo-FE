@@ -72,7 +72,7 @@ const SearchInput = ({ inputClass, placeholder }) => {
   return (
     <HeadlessTippy
       appendTo={() => document.body}
-      // visible={isShowResult}
+      visible={isShowResult}
       interactive
       placement="bottom"
       onClickOutside={handleClickOutside}
