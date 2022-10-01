@@ -232,7 +232,7 @@ function Home() {
           <h3 className="title-header">Current Actions</h3>
           <div className="container">
             <div className="row">
-              <ProductList items={DUMMY_PRODUCTS} className="col-3" />
+              <ProductList items={DUMMY_PRODUCTS} className="col-3 home__page-current-action-list" />
             </div>
           </div>
 

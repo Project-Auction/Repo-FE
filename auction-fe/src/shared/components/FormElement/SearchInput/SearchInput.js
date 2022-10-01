@@ -27,7 +27,7 @@ const SearchInput = ({ inputClass, placeholder }) => {
 
   const [searchResult, setSearchResult] = useState([]);
 
-  const [isShowResult, setIsShowResult] = useState(true);
+  const [isShowResult, setIsShowResult] = useState(false);
 
   const { sendRequest, isLoading } = useHttpClient();
 

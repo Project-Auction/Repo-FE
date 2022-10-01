@@ -257,6 +257,10 @@
     background-color: var(--background-color);
 }
 
+.home__page-current-action-list {
+    margin-top: 30px;
+}
+
 .home__page-current-action .view-all {
     display: flex;
     margin: 42px auto;
@@ -264,3 +268,4 @@
     border-radius: 50px;
     width: max-content;
 }
+
