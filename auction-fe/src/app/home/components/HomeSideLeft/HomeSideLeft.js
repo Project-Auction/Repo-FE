@@ -11,13 +11,13 @@ const rangeMoney = [
   { labelInput: "Giá từ thấp đến cao", value: "lowToPrice" },
 ];
 
-const HomeSideLeft = () => {
+const HomeSideLeft = (props) => {
   const handleChange = (value) => {
     console.log(value);
   };
 
   return (
-    <div className="home__side-let-container">
+    <div className={`home__side-let-container ${props.className}`}>
       <div className="range-money">
         <h3 className="title">
           <FontAwesomeIcon icon={faRightLeft} />

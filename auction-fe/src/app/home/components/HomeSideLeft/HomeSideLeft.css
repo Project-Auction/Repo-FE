@@ -11,7 +11,7 @@
 
 .home__side-let-container .range-money {
     border: 1px solid var(--border-color);
-    padding: 8px;
+    padding: 16px 8px;
     border-radius: 5px;
     margin-bottom: 12px;
     background-color: #fff;
@@ -21,7 +21,8 @@
     font-size: 1.8rem;
     display: flex;
     align-items: center;
-    color: var(--font-color)
+    color: var(--font-color);
+    margin-bottom: 8px;
 }
 
 .home__side-let-container .categories {
@@ -58,4 +59,14 @@
     transform: translateY(1px);
     font-size: 1.6rem;
     margin-right: 6px;
+}
+
+/* CSS radio */
+.MuiFormGroup-root.MuiFormGroup-row.css-qfz70r-MuiFormGroup-root {
+    flex-direction: column;
+}
+
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+    display: block;
+    font-size: 1.6rem;
 }
