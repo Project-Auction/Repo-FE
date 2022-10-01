@@ -6,7 +6,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 
-const CheckboxField = (props) => {
+const RadioField = (props) => {
   const handleOnChange = (event) => {
     props.onChange(event.target.value);
   };
@@ -28,4 +28,4 @@ const CheckboxField = (props) => {
   </FormControl>;
 };
 
-export default CheckboxField;
+export default RadioField;
