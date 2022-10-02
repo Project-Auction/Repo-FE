@@ -2,9 +2,10 @@ import { forwardRef } from "react";
 import "./Input.css";
 
 const InputFiled = forwardRef((props, ref) => {
-  const classes = `form-input ${props.fullWidth && "full-width"} ${
-    props.inputClass
-  }`;
+  const classes = `form-input 
+  ${props.fullWidth && "full-width"}
+  ${props.inputClass} 
+  ${props.noBorder && "no-border"}`;
 
   const handleOnChange = (event) => {
     props.onChange(event.target.value);

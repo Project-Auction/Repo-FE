@@ -3,7 +3,6 @@ import HeadlessTippy from "@tippyjs/react/headless";
 import React, { useEffect, useRef, useState } from "react";
 
 import {
-  faMagnifyingGlass,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
@@ -125,6 +124,7 @@ const SearchInput = ({ inputClass, placeholder }) => {
             setIsShowResult(isFocused);
           }}
           ref={inputRef}
+          noBorder
         />
         {!isLoading && !!searchInput && (
           <FontAwesomeIcon
