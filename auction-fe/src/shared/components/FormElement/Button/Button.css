@@ -1,4 +1,6 @@
 .button {
+    height: 50px;
+    min-width: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +13,7 @@
     outline: none;
     transition: all 0.2s;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .button--fullWidth {

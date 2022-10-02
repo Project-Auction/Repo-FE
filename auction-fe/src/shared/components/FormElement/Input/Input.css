@@ -9,6 +9,17 @@
     font-size: 1.6rem;
     display: flex;
     align-items: center;
-    border: none;
+    border-radius: 5px;
+    padding: 0 12px;
+    border: 1px solid var(--border-color);
     outline: none;
+}
+
+.form-input.full-width {
+    width: 100%;
+}
+
+.form-input:focus {
+    border: 1px solid var(--primary-color);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }

@@ -2,6 +2,10 @@ import { forwardRef } from "react";
 import "./Input.css";
 
 const InputFiled = forwardRef((props, ref) => {
+  const classes = `form-input ${props.fullWidth && "full-width"} ${
+    props.inputClass
+  }`;
+
   const handleOnChange = (event) => {
     props.onChange(event.target.value);
   };
@@ -13,7 +17,7 @@ const InputFiled = forwardRef((props, ref) => {
   const element =
     props.element === "input" ? (
       <input
-        className={`form-input ${props.inputClass}`}
+        className={classes}
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
@@ -24,7 +28,7 @@ const InputFiled = forwardRef((props, ref) => {
       />
     ) : (
       <textarea
-        className={`form-input ${props.inputClass}`}
+        className={classes}
         id={props.id}
         rows={props.rows || 3}
         onChange={handleOnChange}

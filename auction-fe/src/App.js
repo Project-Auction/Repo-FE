@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
 import { ScrollToTop } from "./shared/hook/scroll-to-top";
 import Admin from "./app/admin/page/Admin";
 import Home from "./app/home/page/home/Home";
