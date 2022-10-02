@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import { ScrollToTop } from "./shared/hook/scroll-to-top";
 import Admin from "./app/admin/page/Admin";
 import Home from "./app/home/page/home/Home";
 import Payment from "./app/payment/page/Payment";
 import ProtectRoutes from "./routes/ProtectRoutes";
 import AboutUs from "./app/home/page/about-us/about-us";
 import HomeCatalog from "./app/home/page/home/HomeCatalog";
-import { ScrollToTop } from "./shared/hook/scroll-to-top";
+import ProductDetail from "./app/product/components/ProductDetail";
 
 function App() {
   const [user, setUser] = useState();
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home-catalog" element={<HomeCatalog />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/:productId/detail" element={<ProductDetail />} />
             {/* Public Page */}
 
             {/* Logged In page */}

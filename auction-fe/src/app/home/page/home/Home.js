@@ -4,7 +4,7 @@ import "./Home.css";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import ButtonFiled from "../../../../shared/components/FormElement/Button";
-import ProductList from "../../components/ProductList";
+import ProductList from "../../../product/components/ProductList";
 
 export const DUMMY_PRODUCTS = [
   {

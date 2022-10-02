@@ -60,7 +60,14 @@
 }
 
 .card__content .info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     padding: 12px 24px;
+}
+
+.card__content .info:hover .name {
+    color: var(--green-color);
 }
 
 .card__content .name {

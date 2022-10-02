@@ -8,12 +8,13 @@ const ProductList = ({ items = [], className, classCard }) => {
         <div className={className} key={item.codeProduct}>
           <CardProduct
             headerTitle="COUNTDOWN FINISHED"
+            name={item.name}
             codeProduct={item.codeProduct}
             initialPrice={item.initialPrice}
             currentPrice={item.currentPrice}
             image={item.image}
             nameProduct={item.nameProduct}
-            classNam={classCard}
+            className={classCard}
           />
         </div>
       ))}

@@ -5,7 +5,7 @@ import MainNavigation from "../../../../shared/components/UIElement/Navigation/M
 import Pagination from "../../../../shared/components/UIElement/Pagination";
 import usePaginate from "../../../../shared/hook/usePaginate";
 import HomeSideLeft from "../../components/HomeSideLeft/HomeSideLeft";
-import ProductList from "../../components/ProductList";
+import ProductList from "../../../product/components/ProductList";
 import { DUMMY_PRODUCTS } from "./Home";
 
 import "./HomeCatalog.css";

@@ -25,8 +25,8 @@ function CardProduct(props) {
           </ButtonField>
         </div>
 
-        <div className="info">
-          <Link className="name">{props.name}</Link>
+        <Link to={`${props.codeProduct}/detail`} className="info">
+          <h3 className="name">{props.name}</h3>
           <div className="detail__price">
             {props.initialPrice && (
               <div className="price">
@@ -42,7 +42,7 @@ function CardProduct(props) {
               </div>
             )}
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );
