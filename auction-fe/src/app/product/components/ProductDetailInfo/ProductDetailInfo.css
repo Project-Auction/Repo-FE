@@ -6,7 +6,7 @@
 /* Header */
 .product-detail__info-container {
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    height: 80vh;
+    max-height: 80vh;
     overflow-y: auto;
     width: 100%;
     border-radius: 20px;
