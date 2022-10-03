@@ -5,6 +5,14 @@ import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import ButtonFiled from "../../../../shared/components/FormElement/Button";
 import ProductList from "../../../product/components/ProductList";
+import Table from "../../../../shared/components/UIElement/Table";
+
+export const HEADER_GRID = [
+  { field: "STT" },
+  { field: "Name" },
+  { field: "Header Title" },
+  { field: "Initial Price" },
+];
 
 export const DUMMY_PRODUCTS = [
   {
@@ -232,7 +240,10 @@ function Home() {
           <h3 className="title-header">Current Actions</h3>
           <div className="container">
             <div className="row">
-              <ProductList items={DUMMY_PRODUCTS} className="col-3 home__page-current-action-list" />
+              <ProductList
+                items={DUMMY_PRODUCTS}
+                className="col-3 home__page-current-action-list"
+              />
             </div>
           </div>
 
@@ -248,6 +259,17 @@ function Home() {
         {/* CURRENT AUCTIONS*/}
       </div>
       {/* Content */}
+
+      <div className="w-100">
+        <Table
+          thPrimary
+          bordered
+          select
+          striped
+          header={HEADER_GRID}
+          items={DUMMY_PRODUCTS}
+        />
+      </div>
 
       {/* Footer */}
       <Footer />

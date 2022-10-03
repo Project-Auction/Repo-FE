@@ -1,0 +1,32 @@
+:root {
+    --height-thead: 55px;
+}
+
+.table__container {
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.table__container .table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.6rem;
+}
+
+.table__container .selecting {
+    width: 60px;
+}
+
+.table__container .thead-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.table__container thead {
+    height: var(--height-thead);
+}
+
+.table__container thead th {
+    height: calc(var(--height-thead) + 2px);
+    line-height: var(--height-thead);
+}
