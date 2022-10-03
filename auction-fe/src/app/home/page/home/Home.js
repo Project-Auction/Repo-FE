@@ -262,7 +262,6 @@ function Home() {
 
       <div className="w-100">
         <Table
-          thPrimary
           bordered
           select
           striped
