@@ -1,9 +1,21 @@
 import "./Table.css";
 
 import CheckboxField from "../../FormElement/Checkbox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import SelectFilter from "../Filter/SelectFilter";
+
+export const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 const Table = (props) => {
+  /*
+  ? props.select to use Checkbox in table
+  ? props.filter to use feature search with filter in table
+  ? props.search to use search in table
+  */
   const classes = `table 
   ${props.bordered && "table-bordered"}  
   ${props.striped && "table-striped"}
@@ -18,6 +30,7 @@ const Table = (props) => {
   /* To store items selected */
   const [itemsSelected, setItemsSelected] = useState([]);
 
+  /* Handle select all */
   const handleCheckedAll = (event) => {
     if (event.target.checked) {
       setItemsSelected(props.items);
@@ -28,6 +41,7 @@ const Table = (props) => {
     setCheckedState(updateCheckedState.map((state) => state));
   };
 
+  /* Handle select each elements */
   const handleChange = (item, pos, event) => {
     const updateCheckedState = checkedState.map((state, index) =>
       pos === index ? !state : state
@@ -43,6 +57,7 @@ const Table = (props) => {
     }
   };
 
+  /* Handle Submit */
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(itemsSelected);
@@ -51,6 +66,16 @@ const Table = (props) => {
   return (
     <div className="table__container table-responsive">
       <form>
+        {props.filter && (
+          <SelectFilter
+            options={options}
+            isMulti
+            autoFocus
+            isSearchable
+            className="search-filter"
+          />
+        )}
+
         <table className={classes}>
           <thead className={classes}>
             <tr>

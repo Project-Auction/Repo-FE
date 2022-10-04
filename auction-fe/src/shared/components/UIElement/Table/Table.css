@@ -26,7 +26,9 @@
     height: var(--height-thead);
 }
 
-.table__container thead th {
+.table__container thead th,
+.table__container td,
+.table__container th {
     height: calc(var(--height-thead) + 2px);
     line-height: var(--height-thead);
 }
