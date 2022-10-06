@@ -26,6 +26,10 @@ const InputFiled = forwardRef((props, ref) => {
   ${inputClass} 
   ${noBorder && "no-border"}`;
 
+  const handleOnFocus = () => {
+    onFocus(true);
+  };
+
   const elementType = (
     <Controller
       name={fieldName}
@@ -33,10 +37,6 @@ const InputFiled = forwardRef((props, ref) => {
       render={({ field: { onChange }, fieldState: { error } }) => {
         const onChangeValue = (e) => {
           onChange(e.target.value);
-        };
-
-        const handleOnFocus = () => {
-          onFocus(true);
         };
 
         return element === "input" ? (

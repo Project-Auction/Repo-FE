@@ -1,7 +1,6 @@
 import HeadlessTippy from "@tippyjs/react/headless";
 
 import React, { useEffect, useRef, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
@@ -17,8 +16,6 @@ import useDebounce from "../../../hook/useDebounce";
 import ProductItem from "../../UIElement/ProductItem";
 
 const SearchInput = ({ inputClass, placeholder }) => {
-  const methods = useForm();
-
   const inputRef = useRef();
 
   const [searchInput, setSearchInput] = useState("");
@@ -115,7 +112,29 @@ const SearchInput = ({ inputClass, placeholder }) => {
       )}
     >
       <div className="form-input__search">
-        {/* Search */}
+        <InputFiled
+          fieldName="searchInput"
+          element="input"
+          type="text"
+          onChange={handleOnChange}
+          inputClass={inputClass}
+          placeholder={placeholder}
+          onFocus={(isFocused) => {
+            setIsShowResult(isFocused);
+          }}
+          ref={inputRef}
+          noBorder
+        />
+        {!isLoading && !!searchInput && (
+          <FontAwesomeIcon
+            className="close-icon circle"
+            icon={faXmarkCircle}
+            onClick={handleClearResult}
+          />
+        )}
+        {isLoading && (
+          <FontAwesomeIcon className="spinner-icon" icon={faSpinner} />
+        )}
       </div>
     </HeadlessTippy>
   );

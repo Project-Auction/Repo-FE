@@ -2,10 +2,14 @@ import { useState } from "react";
 
 import "./Table.css";
 
+import { useForm } from "react-hook-form";
+
 import CheckboxField from "../../FormElement/Checkbox";
 import SelectFilter from "../Filter/SelectFilter";
 import InputFiled from "../../FormElement/Input";
-import { FormProvider, useForm } from "react-hook-form";
+import ButtonFiled from "../../FormElement/Button";
+import CustomFormProvider from "../../FormElement/CustomFormProvider";
+import SelectField from "../../FormElement/Select/SelectField";
 
 export const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -19,15 +23,32 @@ const Table = (props) => {
   ? props.filter to use feature search with filter in table
   ? props.search to use search in table
   */
+  const {
+    items,
+    bordered,
+    striped,
+    filter,
+    select,
+    header,
+    thPrimary,
+    thLight,
+  } = props;
+
+  const methods = useForm();
+
+  const searchInput = methods.watch();
+  const selectInput = methods.watch();
+  console.log(searchInput);
+
   const classes = `table 
-  ${props.bordered && "table-bordered"}  
-  ${props.striped && "table-striped"}
-  ${props.thPrimary && "thead-primary"}
-  ${props.thLight && "thead-light"}`;
+  ${bordered && "table-bordered"}  
+  ${striped && "table-striped"}
+  ${thPrimary && "thead-primary"}
+  ${thLight && "thead-light"}`;
 
   /* Set state checked for Checkbox */
   const [checkedState, setCheckedState] = useState(
-    new Array(props.items.length).fill(false)
+    new Array(items.length).fill(false)
   );
 
   /* To store items selected */
@@ -36,7 +57,7 @@ const Table = (props) => {
   /* Handle select all */
   const handleCheckedAll = (event) => {
     if (event.target.checked) {
-      setItemsSelected(props.items);
+      setItemsSelected(items);
     } else {
       setItemsSelected([]);
     }
@@ -66,73 +87,103 @@ const Table = (props) => {
     console.log(itemsSelected);
   };
 
-  const methods = useForm();
-
   return (
     <div className="table__container table-responsive">
-      <form>
-        {/* Search */}
+      <CustomFormProvider {...methods}>
+        <form>
+          <div className="table__filter-container">
+            <div className="row">
+              <div className="col-8">
+                {/* Search Input */}
+                <InputFiled
+                  element="input"
+                  fieldName="searchInputTable"
+                  required
+                  placeholder="Nhập tên khách hàng"
+                  fullWidth
+                  className="table__filter-input"
+                  onFocus={() => {}}
+                />
+                {/* Search Input */}
+              </div>
 
-        {/*
-         Dropdown search 
-        */}
+              <div className="col-4">
+                <SelectField
+                  fieldName="selectInputTable"
+                  width="150px"
+                  items={options}
+                  defaultValue={options[0].value}
+                  label="Tìm kiếm"
+                  variant="outlined"
+                />
+              </div>
+            </div>
+          </div>
 
-        {props.filter && (
-          <SelectFilter
-            options={options}
-            isMulti
-            autoFocus
-            isSearchable
-            className="search-filter"
-          />
-        )}
+          {filter && (
+            <SelectFilter
+              options={options}
+              isMulti
+              autoFocus
+              isSearchable
+              className="search-filter"
+            />
+          )}
 
-        <table className={classes}>
-          <thead className={classes}>
-            <tr>
-              {props.select && (
-                <th scope="col" className="selecting">
-                  <CheckboxField
-                    fontSize={22}
-                    color="#000"
-                    checkedColor="#ff3366"
-                    onChange={(e) => handleCheckedAll(e)}
-                  />
-                </th>
-              )}
-              {props.header.map((header, index) => (
-                <th scope="col" key={index}>
-                  {header.field}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {props.items.map((item, pos) => (
-              <tr key={pos}>
-                {props.select && (
-                  <th>
+          <table className={classes}>
+            <thead className={classes}>
+              <tr>
+                {select && (
+                  <th scope="col" className="selecting">
                     <CheckboxField
                       fontSize={22}
                       color="#000"
                       checkedColor="#ff3366"
-                      onChange={(e) => handleChange(item, pos, e)}
-                      checked={checkedState[pos]}
+                      onChange={(e) => handleCheckedAll(e)}
                     />
                   </th>
                 )}
-                <th scope="row">{item.codeProduct}</th>
-                <td>{item.name}</td>
-                <td>{item.headerTitle}</td>
-                <td>{item.initialPrice}</td>
+                {header.map((header, index) => (
+                  <th scope="col" key={index}>
+                    {header.field}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <button type="submit" onClick={handleSubmit}>
-          SUBMIT
-        </button>
-      </form>
+            </thead>
+            <tbody>
+              {items.map((item, pos) => (
+                <tr key={pos}>
+                  {select && (
+                    <th>
+                      <CheckboxField
+                        fontSize={22}
+                        color="#000"
+                        checkedColor="#ff3366"
+                        onChange={(e) => handleChange(item, pos, e)}
+                        checked={checkedState[pos]}
+                      />
+                    </th>
+                  )}
+                  <th scope="row">{item.codeProduct}</th>
+                  <td>{item.name}</td>
+                  <td>{item.headerTitle}</td>
+                  <td>{item.initialPrice}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {props.select && (
+            <ButtonFiled
+              type="submit"
+              onClick={handleSubmit}
+              primary
+              size="small"
+            >
+              Xóa
+            </ButtonFiled>
+          )}
+        </form>
+      </CustomFormProvider>
     </div>
   );
 };

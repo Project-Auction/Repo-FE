@@ -20,7 +20,8 @@
 }
 
 .form-input.no-border,
-.form-input.no-border:focus {
+.form-input.no-border:focus ,
+.form-input.no-border:active {
     border: none;
 }
 

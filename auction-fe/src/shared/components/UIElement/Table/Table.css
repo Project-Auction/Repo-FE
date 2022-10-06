@@ -5,12 +5,17 @@
 .table__container {
     border-radius: 5px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 32px;
+    background-color: var(--background-color);
 }
 
 .table__container .table {
     border-collapse: collapse;
     width: 100%;
     font-size: 1.6rem;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    border-radius: 10px;
 }
 
 .table__container .selecting {
@@ -31,4 +36,17 @@
 .table__container th {
     height: calc(var(--height-thead) + 2px);
     line-height: var(--height-thead);
+}
+
+/* Filter */
+.table__filter-container {
+    padding: 18px;
+    margin: 24px 0;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.table__filter-container .table__filter-input {
+    flex: 1;
 }
