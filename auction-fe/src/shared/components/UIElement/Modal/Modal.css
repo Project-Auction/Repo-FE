@@ -3,10 +3,12 @@
     position: fixed;
     top: 22vh;
     left: 10%;
-    width: 80%;
+    min-width: 80%;
     background-color: var(--white-color);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 60vh;
     border-radius: 6px;
+    overflow-x: auto;
 }
 
 .modal__main-header {
@@ -35,13 +37,6 @@
 .map-container {
     height: 15rem;
     width: 100%;
-}
-
-@media (min-width: 768px) {
-    .modal__main {
-        left: calc(50% - 20rem);
-        width: 43rem;
-    }
 }
 
 /* CSS for modal */

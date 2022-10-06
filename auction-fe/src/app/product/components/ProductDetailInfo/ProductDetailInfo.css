@@ -58,4 +58,6 @@
     padding: 20px;
     height: max-content;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }

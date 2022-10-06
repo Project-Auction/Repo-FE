@@ -21,11 +21,11 @@ function SelectField(props) {
     minHeight,
     m,
     disabled,
-    error,
     variant,
     label,
     value,
     defaultValue,
+    helperText,
   } = props;
 
   const { control } = useFormContext();
@@ -71,10 +71,16 @@ function SelectField(props) {
               ))}
             </Select>
             <FormHelperText>
-              {props.helperText || (props.error && props.detailError.message)}
+              {helperText || (error && error.message)}
             </FormHelperText>
           </FormControl>
         );
+      }}
+      rules={{
+        required: {
+          value: true,
+          message: "Không được để trống",
+        },
       }}
     />
   );

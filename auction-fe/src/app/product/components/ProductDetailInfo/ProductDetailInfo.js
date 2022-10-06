@@ -1,15 +1,50 @@
-import { Controller, useForm } from "react-hook-form";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 import "./ProductDetailInfo.css";
 import InputField from "../../../../shared/components/FormElement/Input";
 import ButtonField from "../../../../shared/components/FormElement/Button";
 import CardField from "../../../../shared/components/UIElement/Card/CardField";
+import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
+import Modal from "../../../../shared/components/UIElement/Modal";
+import Table from "../../../../shared/components/UIElement/Table";
+
+import { HEADER_GRID, DUMMY_PRODUCTS } from "../../../home/page/home/Home";
 
 const ProductDetailInfo = (props) => {
   const methods = useForm();
 
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOnClear = () => {
+    setShowModal(false);
+  };
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
+      <Modal
+        show={showModal}
+        footerClass="d-flex justify-content-end"
+        onClear={showModal}
+        footer={
+          <>
+            <ButtonField danger onClick={handleOnClear}>
+              HỦY
+            </ButtonField>
+          </>
+        }
+      >
+        <Table filter header={HEADER_GRID} items={DUMMY_PRODUCTS} />
+      </Modal>
+
       <CardField className="product-detail__info-container">
         <div className="header">
           <h3 className="name">
@@ -56,30 +91,32 @@ const ProductDetailInfo = (props) => {
 
           <h3 className="title">Giá của bạn</h3>
 
-          <form className="product-detail__info-group">
-            {/* <Controller
-              control={methods.control}
-              name="priceAuction"
-              render={({ field: { onChange } }) => (
-                <InputField
-                  element="input"
-                  type="text"
-                  onChange={onChange}
-                  placeholder="Nhập giá của bạn"
-                  required
-                  fullWidth
-                />
-              )} */}
-            {/* /> */}
-            <ButtonField type="submit" primary>
-              Đấu giá
-            </ButtonField>
-          </form>
+          <CustomFormProvider {...methods}>
+            <form
+              className="product-detail__info-group"
+              onSubmit={methods.handleSubmit(onSubmit)}
+            >
+              <InputField
+                fieldName="priceAuction"
+                element="input"
+                type="number"
+                placeholder="Nhập giá của bạn"
+                required
+                fullWidth
+                onFocus={() => {}}
+              />
+              <ButtonField type="submit" primary>
+                Đấu giá
+              </ButtonField>
+            </form>
+          </CustomFormProvider>
         </div>
       </CardField>
 
       <CardField className="product-detail__info-container footer">
-        <ButtonField primary>DANH SÁCH ĐANG ĐẤU GIÁ</ButtonField>
+        <ButtonField primary onClick={handleOpenModal} type="button">
+          DANH SÁCH ĐANG ĐẤU GIÁ
+        </ButtonField>
       </CardField>
     </>
   );

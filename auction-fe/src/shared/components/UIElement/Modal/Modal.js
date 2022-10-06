@@ -7,9 +7,11 @@ import "./Modal.css";
 const ModalOverlay = (props) => {
   const content = (
     <div className={`modal__main ${props.className}`}>
-      <header className={`modal__main-header ${props.headerClass}`}>
-        <h2>{props.header}</h2>
-      </header>
+      {props.header && (
+        <header className={`modal__main-header ${props.headerClass}`}>
+          <h2>{props.header}</h2>
+        </header>
+      )}
 
       <form
         onSubmit={props.onSubmit ? props.onSubmit : (e) => e.preventDefault()}

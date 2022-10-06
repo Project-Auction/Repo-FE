@@ -5,7 +5,6 @@ import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import ButtonFiled from "../../../../shared/components/FormElement/Button";
 import ProductList from "../../../product/components/ProductList";
-import Table from "../../../../shared/components/UIElement/Table/Table";
 
 export const HEADER_GRID = [
   { field: "STT" },
@@ -264,8 +263,6 @@ function Home() {
         {/* Footer */}
         <Footer />
         {/* Footer */}
-
-        <Table items={DUMMY_PRODUCTS} select header={HEADER_GRID} />
       </div>
     </>
   );

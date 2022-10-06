@@ -50,3 +50,11 @@
 .table__filter-container .table__filter-input {
     flex: 1;
 }
+
+.search-filter {
+    flex: 1;
+}
+
+.css-1s2u09g-control {
+    height: 50px;
+}

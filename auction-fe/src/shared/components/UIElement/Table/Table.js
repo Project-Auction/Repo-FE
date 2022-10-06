@@ -25,20 +25,16 @@ const Table = (props) => {
   */
   const {
     items,
-    bordered,
-    striped,
+    header,
     filter,
     select,
-    header,
+    striped,
+    bordered,
     thPrimary,
     thLight,
   } = props;
 
   const methods = useForm();
-
-  const searchInput = methods.watch();
-  const selectInput = methods.watch();
-  console.log(searchInput);
 
   const classes = `table 
   ${bordered && "table-bordered"}  
@@ -91,43 +87,43 @@ const Table = (props) => {
     <div className="table__container table-responsive">
       <CustomFormProvider {...methods}>
         <form>
-          <div className="table__filter-container">
-            <div className="row">
-              <div className="col-8">
-                {/* Search Input */}
-                <InputFiled
-                  element="input"
-                  fieldName="searchInputTable"
-                  required
-                  placeholder="Nhập tên khách hàng"
-                  fullWidth
-                  className="table__filter-input"
-                  onFocus={() => {}}
-                />
-                {/* Search Input */}
-              </div>
+          {filter && (
+            <div className="table__filter-container">
+              <div className="row align-items-center">
+                <div className="col-5">
+                  {/* Search Input */}
+                  <InputFiled
+                    element="input"
+                    fieldName="searchInputTable"
+                    required
+                    placeholder="Nhập tên khách hàng"
+                    fullWidth
+                    className="table__filter-input"
+                    onFocus={() => {}}
+                  />
+                  {/* Search Input */}
+                </div>
 
-              <div className="col-4">
-                <SelectField
-                  fieldName="selectInputTable"
-                  width="150px"
-                  items={options}
-                  defaultValue={options[0].value}
-                  label="Tìm kiếm"
-                  variant="outlined"
-                />
+                <div className="col-7 d-flex align-items-center">
+                  <SelectField
+                    fieldName="selectInputTable"
+                    width="150px"
+                    items={options}
+                    defaultValue={options[0].value}
+                    label="Tìm kiếm"
+                    variant="outlined"
+                  />
+
+                  <SelectFilter
+                    options={options}
+                    isMulti
+                    autoFocus
+                    isSearchable
+                    className="search-filter"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
-          {filter && (
-            <SelectFilter
-              options={options}
-              isMulti
-              autoFocus
-              isSearchable
-              className="search-filter"
-            />
           )}
 
           <table className={classes}>

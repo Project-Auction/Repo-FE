@@ -38,6 +38,15 @@
     background-color: #f34343;
 }
 
+.button--green {
+    color: #fff;
+    background-color: var(--green-color);
+}
+
+.button--green:hover {
+    background-color: var(--primary-color);
+}
+
 /*Size*/
 .button--small {
     height: 40px;
