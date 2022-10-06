@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Controller, useFormState } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import "./Input.css";
 
 const InputFiled = forwardRef((props, ref) => {
@@ -19,7 +19,7 @@ const InputFiled = forwardRef((props, ref) => {
     label,
   } = props;
 
-  const { control } = useFormState();
+  const { control } = useFormContext();
 
   const classes = `form-input 
   ${fullWidth && "full-width"}
@@ -68,6 +68,11 @@ const InputFiled = forwardRef((props, ref) => {
           </>
         );
       }}
+      rules={
+        required && {
+          required: { value: true, message: "Không được để trống" },
+        }
+      }
     />
   );
 

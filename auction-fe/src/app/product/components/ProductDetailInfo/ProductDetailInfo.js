@@ -57,7 +57,7 @@ const ProductDetailInfo = (props) => {
           <h3 className="title">Giá của bạn</h3>
 
           <form className="product-detail__info-group">
-            <Controller
+            {/* <Controller
               control={methods.control}
               name="priceAuction"
               render={({ field: { onChange } }) => (
@@ -69,8 +69,8 @@ const ProductDetailInfo = (props) => {
                   required
                   fullWidth
                 />
-              )}
-            />
+              )} */}
+            {/* /> */}
             <ButtonField type="submit" primary>
               Đấu giá
             </ButtonField>

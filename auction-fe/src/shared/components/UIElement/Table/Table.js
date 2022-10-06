@@ -5,6 +5,7 @@ import "./Table.css";
 import CheckboxField from "../../FormElement/Checkbox";
 import SelectFilter from "../Filter/SelectFilter";
 import InputFiled from "../../FormElement/Input";
+import { FormProvider, useForm } from "react-hook-form";
 
 export const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -65,17 +66,12 @@ const Table = (props) => {
     console.log(itemsSelected);
   };
 
+  const methods = useForm();
+
   return (
     <div className="table__container table-responsive">
       <form>
-        {props.search && (
-          <InputFiled
-            element="input"
-            type="text"
-            placeholder={props.placeholder}
-            noBorder
-          />
-        )}
+        {/* Search */}
 
         {/*
          Dropdown search 

@@ -16,7 +16,6 @@ const HomeCatalog = () => {
   const [capacityPage, setCapacityPage] = useState(6);
   const { paginate } = usePaginate();
   const storage = paginate(DUMMY_PRODUCTS, currentPage, capacityPage);
-  console.log(storage);
 
   /* Handle redirect page */
   const handleRedirectPage = useCallback((pageNumber) => {

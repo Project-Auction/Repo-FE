@@ -1,5 +1,8 @@
 import "./Footer.css";
 
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import GoogleIcon from "@mui/icons-material/Google";
 import AppleIcon from "@mui/icons-material/Apple";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,11 +12,13 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
+import CustomFormProvider from "../../FormElement/CustomFormProvider";
 import InputField from "../../FormElement/Input";
 import ButtonField from "../../FormElement/Button";
-import { Link } from "react-router-dom";
 
 function Footer() {
+  const methods = useForm();
+
   return (
     <div className="footer__container">
       <div className="container">
@@ -98,16 +103,21 @@ function Footer() {
                   </span>
                 </div>
 
-                <div className="footer__form mt-3">
-                  <InputField
-                    element="input"
-                    type="email"
-                    required
-                    placeholder="Enter your email"
-                  />
-                  <ButtonField type="submit" primary small>
-                    Subscribe
-                  </ButtonField>
+                <div className="mt-4">
+                  <CustomFormProvider {...methods}>
+                    <form className="footer__form">
+                      <InputField
+                        fieldName="sendEmailFooter"
+                        element="input"
+                        type="email"
+                        required
+                        placeholder="Enter your email"
+                      />
+                      <ButtonField type="submit" primary small>
+                        Subscribe
+                      </ButtonField>
+                    </form>
+                  </CustomFormProvider>
                 </div>
               </div>
             </div>
