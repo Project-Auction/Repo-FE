@@ -1,48 +1,80 @@
 import { forwardRef } from "react";
+import { Controller, useFormState } from "react-hook-form";
 import "./Input.css";
 
 const InputFiled = forwardRef((props, ref) => {
+  const {
+    fieldName,
+    fullWidth,
+    inputClass,
+    noBorder,
+    onFocus,
+    element,
+    placeholder,
+    id,
+    type,
+    required,
+    rows,
+    formClass,
+    label,
+  } = props;
+
+  const { control } = useFormState();
+
   const classes = `form-input 
-  ${props.fullWidth && "full-width"}
-  ${props.inputClass} 
-  ${props.noBorder && "no-border"}`;
+  ${fullWidth && "full-width"}
+  ${inputClass} 
+  ${noBorder && "no-border"}`;
 
-  const handleOnChange = (event) => {
-    props.onChange(event.target.value);
-  };
+  const elementType = (
+    <Controller
+      name={fieldName}
+      control={control}
+      render={({ field: { onChange }, fieldState: { error } }) => {
+        const onChangeValue = (e) => {
+          onChange(e.target.value);
+        };
 
-  const handleOnFocus = () => {
-    props.onFocus(true);
-  };
+        const handleOnFocus = () => {
+          onFocus(true);
+        };
 
-  const element =
-    props.element === "input" ? (
-      <input
-        className={classes}
-        id={props.id}
-        type={props.type}
-        placeholder={props.placeholder}
-        onChange={handleOnChange}
-        required={props.required}
-        ref={ref}
-        onFocus={handleOnFocus}
-      />
-    ) : (
-      <textarea
-        className={classes}
-        id={props.id}
-        rows={props.rows || 3}
-        onChange={handleOnChange}
-        required={props.required}
-        ref={ref}
-        onFocus={handleOnFocus}
-      />
-    );
+        return element === "input" ? (
+          <>
+            <input
+              className={classes}
+              id={id}
+              type={type}
+              placeholder={placeholder}
+              onChange={onChangeValue}
+              required={required}
+              ref={ref}
+              onFocus={handleOnFocus}
+            />
+            {!!error && <p className="error">{error.message}</p>}
+          </>
+        ) : (
+          <>
+            <textarea
+              className={classes}
+              id={id}
+              rows={rows || 3}
+              onChange={onChangeValue}
+              required={required}
+              ref={ref}
+              onFocus={handleOnFocus}
+            />
+            {!!error && <p className="error">{error.message}</p>}
+          </>
+        );
+      }}
+    />
+  );
 
   return (
-    <div className={`form-wrapper ${props.formClass}`}>
-      <label htmlFor={props.id}>{props.label}</label>
-      {element}
+    <div className={`form-wrapper ${formClass}`}>
+      <label htmlFor={id}>{label}</label>
+      {elementType}
     </div>
   );
 });

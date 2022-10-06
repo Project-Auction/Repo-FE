@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 
 import "./SearchInput.css";
 
@@ -14,7 +15,6 @@ import { useHttpClient } from "../../../hook/http-client";
 import PopperWrapper from "../../UIElement/PopperWrapper";
 import InputFiled from "../Input/InputField";
 import useDebounce from "../../../hook/useDebounce";
-import { toast } from "react-toastify";
 import ProductItem from "../../UIElement/ProductItem";
 
 const SearchInput = ({ inputClass, placeholder }) => {

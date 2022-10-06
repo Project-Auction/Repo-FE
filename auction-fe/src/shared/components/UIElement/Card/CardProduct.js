@@ -3,6 +3,10 @@ import ButtonField from "../../FormElement/Button";
 
 import "./Card.css";
 
+/*
+  ? Show on Home to "SUBMIT A BID" 
+*/
+
 function CardProduct(props) {
   return (
     <div className={`card__wrapper card__product ${props.className}`}>

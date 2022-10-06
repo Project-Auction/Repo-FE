@@ -1,8 +1,10 @@
+import { useState } from "react";
+
 import "./Table.css";
 
 import CheckboxField from "../../FormElement/Checkbox";
-import { useState } from "react";
 import SelectFilter from "../Filter/SelectFilter";
+import InputFiled from "../../FormElement/Input";
 
 export const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -66,6 +68,19 @@ const Table = (props) => {
   return (
     <div className="table__container table-responsive">
       <form>
+        {props.search && (
+          <InputFiled
+            element="input"
+            type="text"
+            placeholder={props.placeholder}
+            noBorder
+          />
+        )}
+
+        {/*
+         Dropdown search 
+        */}
+
         {props.filter && (
           <SelectFilter
             options={options}
