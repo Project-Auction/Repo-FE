@@ -2,6 +2,12 @@ import { forwardRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import "./Input.css";
 
+import Constants from "../../../../utils/Constants";
+import {
+  formatCurrency,
+  formatPhoneNumber,
+} from "../../../format/format-input";
+
 const InputFiled = forwardRef((props, ref) => {
   const {
     fieldName,
@@ -12,12 +18,13 @@ const InputFiled = forwardRef((props, ref) => {
     element,
     placeholder,
     id,
-    value,
     type,
     required,
     rows,
     formClass,
     label,
+    format,
+    readOnly,
   } = props;
 
   const { control } = useFormContext();
@@ -35,11 +42,19 @@ const InputFiled = forwardRef((props, ref) => {
     <Controller
       name={fieldName}
       control={control}
-      render={({ field: { onChange }, fieldState: { error } }) => {
+      render={({ field: { onChange, value = "" }, fieldState: { error } }) => {
         const onChangeValue = (e) => {
-          onChange(e.target.value);
+          if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
+            value = formatPhoneNumber(e.target.value);
+            onChange(value);
+          } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
+            value = formatCurrency(e.target.value);
+            onChange(value);
+          } else {
+            value = e.target.value;
+            onChange(e.target.value);
+          }
         };
-
         return element === "input" ? (
           <>
             <input
@@ -52,6 +67,7 @@ const InputFiled = forwardRef((props, ref) => {
               ref={ref}
               onFocus={handleOnFocus}
               value={value}
+              readOnly={readOnly}
             />
             {!!error && <p className="error">{error.message}</p>}
           </>
@@ -66,6 +82,7 @@ const InputFiled = forwardRef((props, ref) => {
               ref={ref}
               onFocus={handleOnFocus}
               value={value}
+              readOnly={readOnly}
             />
             {!!error && <p className="error">{error.message}</p>}
           </>

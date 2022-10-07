@@ -7,22 +7,11 @@ import InputFiled from "../../shared/components/FormElement/Input";
 import ButtonFiled from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
-import { useEffect, useState } from "react";
-import { formatPhoneNumber } from "../../shared/format/format-input";
 
 const Auth = () => {
   const methods = useForm();
 
-  const [phoneNumber, setPhoneNumber] = useState();
-
   const onSubmit = (data) => {};
-
-  useEffect(() => {
-    setPhoneNumber(formatPhoneNumber(methods.watch("phoneNumber")));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formatPhoneNumber(methods.watch("phoneNumber"))]);
-
-  console.log(methods.watch("phoneNumber"));
 
   return (
     <>
@@ -111,17 +100,18 @@ const Auth = () => {
                     required
                     formClass="mr-4"
                     label="Phone Number (*)"
-                    value={phoneNumber}
+                    format="phone_number"
                   />
 
                   <InputFiled
-                    fieldName="identityNumber"
-                    element="input"
-                    type="text"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    label="Identity Number (*)"
+                   fieldName="identityNumber"
+                   element="input"
+                   type="text"
+                   fullWidth
+                   onFocus={() => {}}
+                   required
+                   label="Identity Number (*)"
+                   format="money"
                   />
                 </div>
 
