@@ -1,0 +1,58 @@
+.form__auth-container {
+    background-color: var(--background-color);
+    margin-top: calc(var(--height-main-header));
+    padding: 32px 0;
+}
+
+/* Right area*/
+.form__auth-right-area {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    margin: auto;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form__auth-group {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+/* Left area */
+.form__auth-left-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__auth-img-group {
+    position: relative;
+}
+
+.form__auth-img-group .message {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+
+.form__auth-img-group .message h3 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.form__auth-img-group .message p {
+    font-size: 1.6rem;
+    margin: 4px 0;
+    color: var(--font-color);
+}
+
+.form__auth-img-group .message span {
+    color: var(--green-color);
+    font-weight: 600;
+    cursor: pointer;
+}

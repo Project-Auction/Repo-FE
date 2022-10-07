@@ -13,6 +13,7 @@ import ProtectRoutes from "./routes/ProtectRoutes";
 import AboutUs from "./app/home/page/about-us/about-us";
 import HomeCatalog from "./app/home/page/home/HomeCatalog";
 import ProductDetail from "./app/product/components/ProductDetail";
+import Auth from "./app/auth";
 
 function App() {
   const [user, setUser] = useState();
@@ -25,6 +26,7 @@ function App() {
             {/* Public Page */}
             <Route index element={<Home />} />
             <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/home-catalog" element={<HomeCatalog />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/:productId/detail" element={<ProductDetail />} />

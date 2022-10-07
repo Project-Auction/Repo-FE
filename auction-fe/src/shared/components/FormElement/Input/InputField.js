@@ -12,6 +12,7 @@ const InputFiled = forwardRef((props, ref) => {
     element,
     placeholder,
     id,
+    value,
     type,
     required,
     rows,
@@ -50,6 +51,7 @@ const InputFiled = forwardRef((props, ref) => {
               required={required}
               ref={ref}
               onFocus={handleOnFocus}
+              value={value}
             />
             {!!error && <p className="error">{error.message}</p>}
           </>
@@ -63,6 +65,7 @@ const InputFiled = forwardRef((props, ref) => {
               required={required}
               ref={ref}
               onFocus={handleOnFocus}
+              value={value}
             />
             {!!error && <p className="error">{error.message}</p>}
           </>
@@ -78,7 +81,7 @@ const InputFiled = forwardRef((props, ref) => {
 
   return (
     <div className={`form-wrapper ${formClass}`}>
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={id}>{label}</label>}
       {elementType}
     </div>
   );
