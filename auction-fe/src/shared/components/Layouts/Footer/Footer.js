@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
-import InputField from "../../FormElement/Input";
+import { FormInput } from "../../FormElement/Input";
 import ButtonField from "../../FormElement/Button";
 
 function Footer() {
@@ -106,7 +106,7 @@ function Footer() {
                 <div className="mt-4">
                   <CustomFormProvider {...methods}>
                     <form className="footer__form">
-                      <InputField
+                      <FormInput
                         fieldName="sendEmailFooter"
                         element="input"
                         type="email"

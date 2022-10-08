@@ -53,7 +53,7 @@
 }
 
 /* Footer */
-.footer {
+.product-detail__info-container.footer {
     margin-top: 32px;
     padding: 20px;
     height: max-content;

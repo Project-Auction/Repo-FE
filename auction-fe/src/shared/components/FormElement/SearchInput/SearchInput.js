@@ -11,9 +11,9 @@ import "./SearchInput.css";
 
 import { useHttpClient } from "../../../hook/http-client";
 import PopperWrapper from "../../UIElement/PopperWrapper";
-import InputFiled from "../Input/InputField";
 import useDebounce from "../../../hook/useDebounce";
 import ProductItem from "../../UIElement/ProductItem";
+import { FormInput } from "../Input";
 
 const SearchInput = ({ inputClass, placeholder }) => {
   const inputRef = useRef();
@@ -112,7 +112,7 @@ const SearchInput = ({ inputClass, placeholder }) => {
       )}
     >
       <div className="form-input__search">
-        <InputFiled
+        <FormInput
           fieldName="searchInput"
           element="input"
           type="text"

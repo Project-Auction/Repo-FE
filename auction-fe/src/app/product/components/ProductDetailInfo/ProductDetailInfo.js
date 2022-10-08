@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import "./ProductDetailInfo.css";
-import InputField from "../../../../shared/components/FormElement/Input";
+import { FormInput } from "../../../../shared/components/FormElement/Input";
 import ButtonField from "../../../../shared/components/FormElement/Button";
 import CardField from "../../../../shared/components/UIElement/Card/CardField";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
@@ -96,7 +96,8 @@ const ProductDetailInfo = (props) => {
               className="product-detail__info-group"
               onSubmit={methods.handleSubmit(onSubmit)}
             >
-              <InputField
+              <FormInput
+                isMui
                 fieldName="priceAuction"
                 element="input"
                 type="number"

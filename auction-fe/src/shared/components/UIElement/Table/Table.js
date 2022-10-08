@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import CheckboxField from "../../FormElement/Checkbox";
 import SelectFilter from "../Filter/SelectFilter";
-import InputFiled from "../../FormElement/Input";
+import { FormInput } from "../../FormElement/Input";
 import ButtonFiled from "../../FormElement/Button";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
 import SelectField from "../../FormElement/Select/SelectField";
@@ -92,7 +92,7 @@ const Table = (props) => {
               <div className="row align-items-center">
                 <div className="col-5">
                   {/* Search Input */}
-                  <InputFiled
+                  <FormInput
                     element="input"
                     fieldName="searchInputTable"
                     required

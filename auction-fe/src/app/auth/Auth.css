@@ -4,6 +4,96 @@
     padding: 32px 0;
 }
 
+/* Header */
+.title {
+    font-size: 2.6rem;
+}
+
+span.sub-title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #888;
+    display: block;
+    margin: 6px 0 0 0;
+}
+
+/* Socials */
+.form__auth-socials {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.form__auth-socials .item {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.form__auth-socials .item.facebook:hover {
+    background-color: #4267B2;
+    color: #fff;
+}
+
+.form__auth-socials .item.facebook:hover>.icon,
+.form__auth-socials .item.facebook:hover>span {
+    color: #fff !important;
+    border: #fff;
+}
+
+.form__auth-socials .item.item.facebook span,
+.form__auth-socials .item.facebook i {
+    color: #4267B2;
+    font-weight: 600;
+}
+
+.form__auth-socials .item.item.google span,
+.form__auth-socials .item.google i {
+    color: #DB4437;
+    font-weight: 600;
+}
+
+.form__auth-socials .item.item.google:hover {
+    background-color: #DB4437;
+}
+
+.form__auth-socials .item.google:hover>.icon,
+.form__auth-socials .item.google:hover>span {
+    color: #fff !important;
+}
+
+.form__auth-socials .item i {
+    font-size: 2rem;
+    margin-right: 12px;
+}
+
+.form__auth-socials .item.facebook {
+    border: 1px solid #4267B2;
+    margin-right: 12px;
+}
+
+.form__auth-socials .item.google {
+    border: 1px solid #DB4437;
+}
+
+span.option {
+    font-size: 1.6rem;
+    color: #c5c1c1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+}
+
 /* Right area*/
 .form__auth-right-area {
     display: flex;
@@ -55,4 +145,41 @@
     color: var(--green-color);
     font-weight: 600;
     cursor: pointer;
+}
+
+/* Forget password */
+.forget-password {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.forget-password span,
+.forget-password a {
+    font-size: 1.4rem;
+    color: var(--font-color);
+    margin-left: 6px;
+    transition: all 0.2s;
+}
+
+.forget-password a:hover {
+    color: var(--primary-color);
+}
+
+/* Footer */
+.form__auth-right-area .footer {
+    margin-top: 24px;
+}
+
+.form__auth-right-area .footer p {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.form__auth-right-area .footer span {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 600;
 }
