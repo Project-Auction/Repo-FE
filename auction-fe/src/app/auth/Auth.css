@@ -172,6 +172,10 @@ span.option {
     margin-top: 24px;
 }
 
+.form__auth-right-area .footer button {
+    font-size: 1.6rem;
+}
+
 .form__auth-right-area .footer p {
     font-size: 1.6rem;
     text-align: center;
@@ -182,4 +186,5 @@ span.option {
     color: var(--primary-color);
     cursor: pointer;
     font-weight: 600;
+    cursor: pointer;
 }

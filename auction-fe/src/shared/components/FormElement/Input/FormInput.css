@@ -1,3 +1,7 @@
 .MuiInputBase-root {
     font-size: 1.6rem !important;
 }
+
+.MuiFormControl-root {
+    width: 100%;
+}

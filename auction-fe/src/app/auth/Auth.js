@@ -1,21 +1,29 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 import "./Auth.css";
 
-import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
 import { FormInput } from "../../shared/components/FormElement/Input";
+import FormInputTime from "../../shared/components/FormElement/InputTime";
+import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
 import ButtonFiled from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
-import { useState } from "react";
 
 const Auth = () => {
   const methods = useForm();
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
-  const onSubmit = (data) => {};
+  const handleSwitchMode = () => {
+    setIsLoginMode((prev) => !prev);
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
 
   return (
     <>
@@ -49,7 +57,7 @@ const Auth = () => {
                 className="form__auth-right-area"
               >
                 <h3 className="title">
-                  Login
+                  {!isLoginMode ? "Register" : "Login"}
                   <span className="sub-title">
                     You can login using your socials media account or email
                     address.
@@ -58,41 +66,43 @@ const Auth = () => {
 
                 <div className="form__auth-socials">
                   <div className="item facebook">
-                    <i class="fa-brands fa-facebook icon"></i>
+                    <i className="fa-brands fa-facebook icon"></i>
                     <span>Login with Facebook</span>
                   </div>
 
                   <div className="item google">
-                    <i class="fa-brands fa-google icon"></i>
+                    <i className="fa-brands fa-google icon"></i>
                     <span>Login with Google</span>
                   </div>
                 </div>
 
                 <span className="option">OR</span>
 
-                <div className="form__auth-group">
-                  <FormInput
-                    isMui
-                    variant="outlined"
-                    fieldName="username"
-                    type="text"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    label="Full Name"
-                    noBorder
-                    className="mr-4"
-                  />
-                  <FormInput
-                    isMui
-                    fieldName="accountName"
-                    type="text"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    label="Account Name"
-                  />
-                </div>
+                {!isLoginMode && (
+                  <div className="form__auth-group">
+                    <FormInput
+                      isMui
+                      variant="outlined"
+                      fieldName="username"
+                      type="text"
+                      fullWidth
+                      onFocus={() => {}}
+                      required
+                      label="Full Name"
+                      noBorder
+                      className="mr-4"
+                    />
+                    <FormInput
+                      isMui
+                      fieldName="accountName"
+                      type="text"
+                      fullWidth
+                      onFocus={() => {}}
+                      required
+                      label="Account Name"
+                    />
+                  </div>
+                )}
 
                 <div className="form__auth-group">
                   <FormInput
@@ -106,40 +116,40 @@ const Auth = () => {
                     label="Email"
                   />
 
-                  <FormInput
-                    isMui
-                    fieldName="dateOfBirth"
-                    type="date"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    label="Date Of Birth"
-                  />
+                  {!isLoginMode && (
+                    <FormInputTime
+                      fieldName="dateOfBirth"
+                      dataType="date_timer_picker"
+                      label="Date of birth"
+                    />
+                  )}
                 </div>
 
-                <div className="form__auth-group">
-                  <FormInput
-                    isMui
-                    fieldName="phoneNumber"
-                    type="text"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    className="mr-4"
-                    label="Phone Number"
-                    format="phone_number"
-                  />
+                {!isLoginMode && (
+                  <div className="form__auth-group">
+                    <FormInput
+                      isMui
+                      fieldName="phoneNumber"
+                      type="text"
+                      fullWidth
+                      onFocus={() => {}}
+                      required
+                      className="mr-4"
+                      label="Phone Number"
+                      format="phone_number"
+                    />
 
-                  <FormInput
-                    isMui
-                    fieldName="identityNumber"
-                    type="text"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    label="Identity Number"
-                  />
-                </div>
+                    <FormInput
+                      isMui
+                      fieldName="identityNumber"
+                      type="text"
+                      fullWidth
+                      onFocus={() => {}}
+                      required
+                      label="Identity Number"
+                    />
+                  </div>
+                )}
 
                 <div className="form__auth-group">
                   <FormInput
@@ -153,15 +163,17 @@ const Auth = () => {
                     label="Password"
                   />
 
-                  <FormInput
-                    isMui
-                    fieldName="confirmPassword"
-                    type="text"
-                    fullWidth
-                    onFocus={() => {}}
-                    required
-                    label="Confirm Password"
-                  />
+                  {!isLoginMode && (
+                    <FormInput
+                      isMui
+                      fieldName="confirmPassword"
+                      type="text"
+                      fullWidth
+                      onFocus={() => {}}
+                      required
+                      label="Confirm Password"
+                    />
+                  )}
                 </div>
 
                 <div className="forget-password">
@@ -177,11 +189,14 @@ const Auth = () => {
 
                 <div className="footer">
                   <ButtonFiled green fullWidth>
-                    SIGN UP
+                    {!isLoginMode ? "Register" : "Login"}
                   </ButtonFiled>
 
                   <p>
-                    Already have an account? <span>Login now</span>
+                    Already have an account?
+                    <span onClick={handleSwitchMode}>
+                      {!isLoginMode ? "Login now" : "Register now"}
+                    </span>
                   </p>
                 </div>
               </form>
