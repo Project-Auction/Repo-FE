@@ -10,6 +10,7 @@ import {
 import CustomFormInput from "./CustomFormInput";
 
 import Constants from "../../../../utils/Constants";
+import { validateEmail } from "../../../../utils/validate_form";
 
 const FormInput = (props) => {
   const {
@@ -25,10 +26,16 @@ const FormInput = (props) => {
     margin,
     readOnly,
     noBorder,
-    required,
     type,
     fullWidth,
     className,
+    requiredForm,
+    messageRequired,
+    minLengthForm,
+    minLengthMessage,
+    maxLengthForm,
+    maxLengthMessage,
+    emailRequired,
   } = props;
 
   const { control } = useFormContext();
@@ -38,7 +45,10 @@ const FormInput = (props) => {
       <Controller
         name={fieldName}
         control={control}
-        render={({ field: { onChange, value }, fieldState: { error } }) => {
+        render={({
+          field: { onChange, value = "" },
+          fieldState: { error },
+        }) => {
           const onChangeValue = (e) => {
             if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
               value = formatPhoneNumber(e.target.value);
@@ -61,12 +71,11 @@ const FormInput = (props) => {
                   placeholder={placeholder}
                   defaultValue={defaultValue}
                   onChange={onChangeValue}
-                  helperText={helperText}
-                  error={error}
+                  helperText={helperText || (!!error && error.message)}
+                  error={!!error}
                   value={value}
                   autoComplete={autoComplete}
                   margin={margin}
-                  required={required}
                   fullWidth={fullWidth}
                   className={className}
                 />
@@ -78,13 +87,37 @@ const FormInput = (props) => {
                   defaultValue={defaultValue}
                   error={error}
                   noBorder={noBorder}
-                  required={required}
+                  required={requiredForm}
                   type={type}
                   value={value}
                 />
               )}
             </>
           );
+        }}
+        rules={{
+          validate: {
+            validateRequired: (value) => {
+              if (!value) {
+                return requiredForm && messageRequired;
+              }
+            },
+            validateEmail: (value) => {
+              if (emailRequired) {
+                return validateEmail(value) || "Email is invalid";
+              }
+            },
+            validateMinlength: (value) => {
+              if (!!minLengthForm && value.length < minLengthForm) {
+                return minLengthMessage;
+              }
+            },
+            validateMaxLength: (value) => {
+              if (!!maxLengthForm && value.length < maxLengthForm) {
+                return maxLengthMessage;
+              }
+            },
+          },
         }}
       />
     </>

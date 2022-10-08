@@ -5,3 +5,8 @@
 .MuiFormControl-root {
     width: 100%;
 }
+
+.MuiFormHelperText-root {
+    font-size: 1.4rem !important;
+    margin: 4px 0 0 6px !important;
+}

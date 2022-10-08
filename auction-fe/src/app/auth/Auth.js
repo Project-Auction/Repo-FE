@@ -12,7 +12,10 @@ import MainNavigation from "../../shared/components/UIElement/Navigation/MainNav
 import Footer from "../../shared/components/Layouts/Footer";
 
 const Auth = () => {
-  const methods = useForm();
+  const methods = useForm({
+    mode: "onBlur",
+    shouldUnregister: true,
+  });
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -23,7 +26,6 @@ const Auth = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
-
 
   return (
     <>
@@ -87,10 +89,11 @@ const Auth = () => {
                       type="text"
                       fullWidth
                       onFocus={() => {}}
-                      required
                       label="Full Name"
                       noBorder
                       className="mr-4"
+                      required
+                      messageRequired="Username cannot be empty"
                     />
                     <FormInput
                       isMui
@@ -111,9 +114,13 @@ const Auth = () => {
                     type="email"
                     fullWidth
                     onFocus={() => {}}
-                    required
                     className="mr-4"
                     label="Email"
+                    requiredForm
+                    messageRequired="Email cannot be empty"
+                    minLengthForm={6}
+                    minLengthMessage="Email at least be 6 characters"
+                    emailRequired
                   />
 
                   {!isLoginMode && (
@@ -158,9 +165,12 @@ const Auth = () => {
                     type="text"
                     fullWidth
                     onFocus={() => {}}
-                    required
                     className="mr-4"
                     label="Password"
+                    requiredForm
+                    messageRequired="Password cannot be empty"
+                    minLengthForm={6}
+                    minLengthMessage="Password at least be 6 characters"
                   />
 
                   {!isLoginMode && (
