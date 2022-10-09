@@ -4,4 +4,7 @@ const validateEmail = (value) => {
   );
 };
 
-export { validateEmail };
+const useMatchingFields = () => {
+};
+
+export { validateEmail, useMatchingFields };

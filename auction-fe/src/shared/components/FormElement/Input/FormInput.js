@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
 import "./FormInput.css";
@@ -7,10 +7,12 @@ import {
   formatCurrency,
   formatPhoneNumber,
 } from "../../../format/format-input";
-import CustomFormInput from "./CustomFormInput";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import Constants from "../../../../utils/Constants";
 import { validateEmail } from "../../../../utils/validate_form";
+import CustomFormInput from "./CustomFormInput";
+import Constants from "../../../../utils/Constants";
+import { useState } from "react";
 
 const FormInput = (props) => {
   const {
@@ -36,9 +38,20 @@ const FormInput = (props) => {
     maxLengthForm,
     maxLengthMessage,
     emailRequired,
+    matchingMessage,
+    endAdornment
   } = props;
-
   const { control } = useFormContext();
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setIsShowPassword((prev) => !prev);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -70,6 +83,7 @@ const FormInput = (props) => {
                   variant={variant}
                   placeholder={placeholder}
                   defaultValue={defaultValue}
+                  type={isShowPassword ? "text" : "password"}
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}
@@ -78,6 +92,20 @@ const FormInput = (props) => {
                   margin={margin}
                   fullWidth={fullWidth}
                   className={className}
+                  InputProps={
+                    endAdornment && {
+                      endAdornment: (
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {!isShowPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      ),
+                    }
+                  }
                 />
               ) : (
                 <CustomFormInput
@@ -110,6 +138,10 @@ const FormInput = (props) => {
             validateMinlength: (value) => {
               if (!!minLengthForm && value.length < minLengthForm) {
                 return minLengthMessage;
+              }
+            },
+            validateMatch: (value) => {
+              if (!!matchingMessage) {
               }
             },
             validateMaxLength: (value) => {

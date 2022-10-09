@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -13,9 +13,22 @@ import Footer from "../../shared/components/Layouts/Footer";
 
 const Auth = () => {
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     shouldUnregister: true,
   });
+
+  const [isMatchPassword, setIsMatchPassword] = useState(true);
+
+  const getValuesPassword = methods.watch(["password", "confirmPassword"]);
+
+  /* Used to check match password */
+  useEffect(() => {
+    if (getValuesPassword.length > 0) {
+      setIsMatchPassword(
+        getValuesPassword.reduce((fir, second) => fir === second)
+      );
+    }
+  }, [getValuesPassword]);
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -92,8 +105,10 @@ const Auth = () => {
                       label="Full Name"
                       noBorder
                       className="mr-4"
-                      required
+                      requiredForm
                       messageRequired="Username cannot be empty"
+                      minLengthForm={6}
+                      minLengthMessage="Username at least 6 characters"
                     />
                     <FormInput
                       isMui
@@ -103,6 +118,10 @@ const Auth = () => {
                       onFocus={() => {}}
                       required
                       label="Account Name"
+                      requiredForm
+                      messageRequired="Account name cannot be empty"
+                      minLengthForm={6}
+                      minLengthMessage="Account name at least 6 characters"
                     />
                   </div>
                 )}
@@ -128,6 +147,8 @@ const Auth = () => {
                       fieldName="dateOfBirth"
                       dataType="date_timer_picker"
                       label="Date of birth"
+                      requiredForm
+                      messageRequired="Date of birth cannot be empty"
                     />
                   )}
                 </div>
@@ -140,10 +161,13 @@ const Auth = () => {
                       type="text"
                       fullWidth
                       onFocus={() => {}}
-                      required
                       className="mr-4"
                       label="Phone Number"
                       format="phone_number"
+                      requiredForm
+                      messageRequired="Phone number cannot be empty"
+                      minLengthForm={9}
+                      minLengthMessage="Phone number at least be 9 characters"
                     />
 
                     <FormInput
@@ -152,8 +176,11 @@ const Auth = () => {
                       type="text"
                       fullWidth
                       onFocus={() => {}}
-                      required
                       label="Identity Number"
+                      requiredForm
+                      messageRequired="Identity number cannot be empty"
+                      minLengthForm={9}
+                      minLengthMessage="Identity number at least be 9 characters"
                     />
                   </div>
                 )}
@@ -162,7 +189,7 @@ const Auth = () => {
                   <FormInput
                     isMui
                     fieldName="password"
-                    type="text"
+                    type="password"
                     fullWidth
                     onFocus={() => {}}
                     className="mr-4"
@@ -171,17 +198,24 @@ const Auth = () => {
                     messageRequired="Password cannot be empty"
                     minLengthForm={6}
                     minLengthMessage="Password at least be 6 characters"
+                    matchingMessage="Password is not matching"
+                    endAdornment
                   />
 
                   {!isLoginMode && (
                     <FormInput
                       isMui
                       fieldName="confirmPassword"
-                      type="text"
+                      type="password"
                       fullWidth
                       onFocus={() => {}}
-                      required
                       label="Confirm Password"
+                      requiredForm
+                      messageRequired="Password cannot be empty"
+                      minLengthForm={6}
+                      minLengthMessage="Password at least be 6 characters"
+                      matchingMessage="Password is not matching"
+                      endAdornment
                     />
                   )}
                 </div>
