@@ -177,6 +177,7 @@ const Auth = () => {
                       fullWidth
                       onFocus={() => {}}
                       label="Identity Number"
+                      format="identity_card"
                       requiredForm
                       messageRequired="Identity number cannot be empty"
                       minLengthForm={9}
@@ -189,7 +190,7 @@ const Auth = () => {
                   <FormInput
                     isMui
                     fieldName="password"
-                    type="password"
+                    type={isMatchPassword ? "text" : "password"}
                     fullWidth
                     onFocus={() => {}}
                     className="mr-4"
@@ -206,7 +207,7 @@ const Auth = () => {
                     <FormInput
                       isMui
                       fieldName="confirmPassword"
-                      type="password"
+                      type={isMatchPassword ? "text" : "password"}
                       fullWidth
                       onFocus={() => {}}
                       label="Confirm Password"

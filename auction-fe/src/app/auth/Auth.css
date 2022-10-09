@@ -185,6 +185,7 @@ span.option {
 .form__auth-right-area .footer span {
     color: var(--primary-color);
     cursor: pointer;
+    margin-left: 8px;
     font-weight: 600;
     cursor: pointer;
 }

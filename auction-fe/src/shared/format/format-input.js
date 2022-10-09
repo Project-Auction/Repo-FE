@@ -1,3 +1,4 @@
+/* Format Phone number */
 const formatPhoneNumber = (value) => {
   if (!value) {
     return value;
@@ -19,6 +20,28 @@ const formatPhoneNumber = (value) => {
   )} - ${phoneNumber.slice(7, 10)}`;
 };
 
+export const formatIdentityCard = (value) => {
+  if (!value) {
+    return value;
+  }
+
+  const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumberLength = phoneNumber.length;
+  if (phoneNumberLength < 4) {
+    return phoneNumber;
+  }
+
+  if (phoneNumberLength < 8) {
+    return `${phoneNumber.slice(0, 3)} - ${phoneNumber.slice(3)}`;
+  }
+
+  return `${phoneNumber.slice(0, 3)} - ${phoneNumber.slice(
+    3,
+    6
+  )} - ${phoneNumber.slice(6, 9)}`;
+};
+
+/* Format currency */
 const formatCurrency = (value) => {
   if (!value) {
     return value;
@@ -26,7 +49,7 @@ const formatCurrency = (value) => {
 
   const currencyNumber = value.replace(/[^0-9]+/g, "");
   const currencyNumberLength = currencyNumber.length;
-  if(currencyNumberLength < 5) {
+  if (currencyNumberLength < 5) {
     return currencyNumber;
   }
 

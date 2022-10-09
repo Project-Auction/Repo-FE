@@ -5,6 +5,7 @@ import "./FormInput.css";
 
 import {
   formatCurrency,
+  formatIdentityCard,
   formatPhoneNumber,
 } from "../../../format/format-input";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -39,7 +40,7 @@ const FormInput = (props) => {
     maxLengthMessage,
     emailRequired,
     matchingMessage,
-    endAdornment
+    endAdornment,
   } = props;
   const { control } = useFormContext();
 
@@ -65,13 +66,18 @@ const FormInput = (props) => {
           const onChangeValue = (e) => {
             if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
               value = formatPhoneNumber(e.target.value);
-              onChange(e.target.value);
+              onChange(value);
             } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
               value = formatCurrency(e.target.value);
-              onChange(e.target.value);
+              onChange(value);
+            } else if (
+              format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
+            ) {
+              value = formatIdentityCard(e.target.value);
+              onChange(value);
             } else {
               value = e.target.value;
-              onChange(e.target.value);
+              onChange(value);
             }
           };
 
@@ -83,7 +89,10 @@ const FormInput = (props) => {
                   variant={variant}
                   placeholder={placeholder}
                   defaultValue={defaultValue}
-                  type={isShowPassword ? "text" : "password"}
+                  type={
+                    (!endAdornment && "text") ||
+                    (isShowPassword && endAdornment ? "text" : "password")
+                  }
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}

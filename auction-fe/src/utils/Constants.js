@@ -4,6 +4,10 @@ class Constants {
       VALUE: "phone_number",
     },
 
+    IDENTITY_CARD: {
+      VALUE: "identity_card",
+    },
+
     MONEY: {
       VALUE: "money",
     },
