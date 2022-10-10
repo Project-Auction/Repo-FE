@@ -4,8 +4,4 @@ const validateEmail = (value) => {
   );
 };
 
-const validateMatchingFields = (firstV, secondV) => {
-  return firstV === secondV;
-};
-
-export { validateEmail, validateMatchingFields };
+export { validateEmail };

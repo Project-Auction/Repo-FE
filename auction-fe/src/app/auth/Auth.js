@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -29,7 +29,6 @@ const Auth = () => {
   });
 
   const { errors } = methods.formState;
-  console.log(errors);
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -232,7 +231,7 @@ const Auth = () => {
                 </div>
 
                 <div className="footer">
-                  <ButtonFiled green fullWidth>
+                  <ButtonFiled green fullWidth disabled={!!errors}>
                     {!isLoginMode ? "Register" : "Login"}
                   </ButtonFiled>
 
