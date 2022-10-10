@@ -1,6 +1,7 @@
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
 
 import PopperWrapper from "../PopperWrapper";
 import Image from "../Image";
@@ -62,6 +63,15 @@ function NavLinks() {
         </li>
       </ul>
       <ul className="right">
+        {authContext.isLoggedIn && (
+          <div className="notification circle">
+            <div className="ring">
+              <FontAwesomeIcon icon={faBell} />
+            </div>
+
+            <span className="numbers__notify circle">2</span>
+          </div>
+        )}
         <div className="info__user">
           {authContext.isLoggedIn && (
             <>
