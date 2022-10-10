@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 import "./Auth.css";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
@@ -12,23 +15,21 @@ import MainNavigation from "../../shared/components/UIElement/Navigation/MainNav
 import Footer from "../../shared/components/Layouts/Footer";
 
 const Auth = () => {
+  const formSchema = Yup.object().shape({
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password")],
+      "Password not matching"
+    ),
+  });
+
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: true,
+    resolver: yupResolver(formSchema),
   });
 
-  const [isMatchPassword, setIsMatchPassword] = useState(true);
-
-  const getValuesPassword = methods.watch(["password", "confirmPassword"]);
-
-  /* Used to check match password */
-  useEffect(() => {
-    if (getValuesPassword.length > 0) {
-      setIsMatchPassword(
-        getValuesPassword.reduce((fir, second) => fir === second)
-      );
-    }
-  }, [getValuesPassword]);
+  const { errors } = methods.formState;
+  console.log(errors);
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -190,7 +191,7 @@ const Auth = () => {
                   <FormInput
                     isMui
                     fieldName="password"
-                    type={isMatchPassword ? "text" : "password"}
+                    type="text"
                     fullWidth
                     onFocus={() => {}}
                     className="mr-4"
@@ -199,7 +200,6 @@ const Auth = () => {
                     messageRequired="Password cannot be empty"
                     minLengthForm={6}
                     minLengthMessage="Password at least be 6 characters"
-                    matchingMessage="Password is not matching"
                     endAdornment
                   />
 
@@ -207,7 +207,7 @@ const Auth = () => {
                     <FormInput
                       isMui
                       fieldName="confirmPassword"
-                      type={isMatchPassword ? "text" : "password"}
+                      type="text"
                       fullWidth
                       onFocus={() => {}}
                       label="Confirm Password"
@@ -215,7 +215,6 @@ const Auth = () => {
                       messageRequired="Password cannot be empty"
                       minLengthForm={6}
                       minLengthMessage="Password at least be 6 characters"
-                      matchingMessage="Password is not matching"
                       endAdornment
                     />
                   )}
