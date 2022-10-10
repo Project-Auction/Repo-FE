@@ -39,7 +39,6 @@ const FormInput = (props) => {
     maxLengthForm,
     maxLengthMessage,
     emailRequired,
-    matchingMessage,
     endAdornment,
   } = props;
   const { control } = useFormContext();
@@ -147,10 +146,6 @@ const FormInput = (props) => {
             validateMinlength: (value) => {
               if (!!minLengthForm && value.length < minLengthForm) {
                 return minLengthMessage;
-              }
-            },
-            validateMatch: (value) => {
-              if (!!matchingMessage) {
               }
             },
             validateMaxLength: (value) => {
