@@ -1,6 +1,7 @@
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, NavLink } from "react-router-dom";
+import Image from "../Image/Image";
 
 import PopperWrapper from "../PopperWrapper";
 
@@ -57,10 +58,11 @@ function NavLinks() {
       </ul>
       <ul className="right">
         <div className="info__user">
-          <img
+          <Image
             src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-1/272959223_1371248186637583_4113757049488479156_n.jpg?stp=dst-jpg_p160x160&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=e1sjKhWMFTsAX_B6jKc&_nc_ht=scontent.fhan2-4.fna&oh=00_AT8w6-xBfM2TMv0-FWgwVtA-EUkEwnlDA1xQgV0szUBpiQ&oe=6349394E"
             className="avatar"
             alt="avatar"
+            circle
           />
           <span>Nguyễn Hoàng Anh Tuấn</span>
 
