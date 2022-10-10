@@ -8,6 +8,7 @@ function ButtonFiled(props) {
     ${props.className}
     ${props.fullWidth && "button--fullWidth"}
     ${props.green && "button--green"}
+    ${props.border && "button--border"}
   `;
 
   if (props.to) {
