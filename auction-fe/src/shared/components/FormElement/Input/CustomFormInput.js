@@ -1,6 +1,7 @@
+import { forwardRef } from "react";
 import "./Input.css";
 
-const CustomFormInput = (props) => {
+const CustomFormInput = forwardRef((props, ref) => {
   const {
     formClass,
     id,
@@ -35,6 +36,7 @@ const CustomFormInput = (props) => {
       <input
         className={classes}
         id={id}
+        ref={ref}
         type={type}
         placeholder={placeholder}
         onChange={onChange}
@@ -47,6 +49,6 @@ const CustomFormInput = (props) => {
       {!!error && <p className="error">{error.message}</p>}
     </div>
   );
-};
+});
 
 export default CustomFormInput;

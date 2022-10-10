@@ -8,14 +8,14 @@ import {
   formatIdentityCard,
   formatPhoneNumber,
 } from "../../../format/format-input";
+import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { validateEmail } from "../../../../utils/validate_form";
 import CustomFormInput from "./CustomFormInput";
 import Constants from "../../../../utils/Constants";
-import { useState } from "react";
 
-const FormInput = (props) => {
+const FormInput = forwardRef((props, ref) => {
   const {
     isMui,
     fieldName,
@@ -40,6 +40,7 @@ const FormInput = (props) => {
     maxLengthMessage,
     emailRequired,
     endAdornment,
+    onFocus,
   } = props;
   const { control } = useFormContext();
 
@@ -92,6 +93,7 @@ const FormInput = (props) => {
                     (!endAdornment && "text") ||
                     (isShowPassword && endAdornment ? "text" : "password")
                   }
+                  ref={ref}
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}
@@ -126,6 +128,9 @@ const FormInput = (props) => {
                   required={requiredForm}
                   type={type}
                   value={value}
+                  fullWidth={fullWidth}
+                  onFocus={onFocus}
+                  ref={ref}
                 />
               )}
             </>
@@ -158,6 +163,6 @@ const FormInput = (props) => {
       />
     </>
   );
-};
+});
 
 export default FormInput;
