@@ -1,0 +1,14 @@
+.transaction__header-search-form {
+    margin-right: 24px;
+}
+
+.transaction__header-search-input {
+    height: 40px;
+    font-size: 1.4rem;
+}
+
+.header__search-filter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}

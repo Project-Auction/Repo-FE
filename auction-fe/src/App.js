@@ -15,11 +15,11 @@ import AboutUs from "./app/home/page/about-us/about-us";
 import HomeCatalog from "./app/home/page/home/HomeCatalog";
 import ProductDetail from "./app/product/components/ProductDetail";
 import Auth from "./app/auth";
+import ProductsList from "./app/admin/components/product-management/ProductsList";
+import TransactionsList from "./app/admin/components/transaction-management/TransactionsList";
 
 function App() {
   const authContext = useContext(AuthContext);
-
-  console.log(authContext.user);
 
   return (
     <div className="App">
@@ -53,6 +53,8 @@ function App() {
               }
             >
               <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/product/list" element={<ProductsList />} />
+              <Route path="/admin/transition" element={<TransactionsList />} />
             </Route>
             {/* Admin page */}
           </Routes>

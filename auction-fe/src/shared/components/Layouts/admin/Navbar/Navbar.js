@@ -27,6 +27,7 @@ const Navbar = (props) => {
             <div className="separate-hover"></div>
           </NavLink>
         </li>
+
         <li className="navbar__admin-item">
           <NavLink to="/admin/transition">
             <FontAwesomeIcon icon={faRightLeft} className="icon" />
@@ -34,6 +35,7 @@ const Navbar = (props) => {
             <div className="separate-hover"></div>
           </NavLink>
         </li>
+
         <li className="navbar__admin-item">
           <NavLink to="/admin/statistic">
             <FontAwesomeIcon icon={faChartLine} className="icon" />
@@ -43,9 +45,9 @@ const Navbar = (props) => {
         </li>
 
         <li className="navbar__admin-item">
-          <NavLink to="/admin/products/list">
+          <NavLink to="/admin/product/list">
             <FontAwesomeIcon icon={faTableList} className="icon" />
-            List Products
+            Products Management
             <div className="separate-hover"></div>
           </NavLink>
         </li>
