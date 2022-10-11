@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import "./Table.css";
 
@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import CheckboxField from "../../FormElement/Checkbox";
 import ButtonFiled from "../../FormElement/Button";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
+import Pagination from "../Pagination";
+import usePaginate from "../../../hook/usePaginate";
 
 export const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -26,6 +28,12 @@ const Table = (props) => {
     props;
 
   const methods = useForm();
+
+  /* Define to paginate */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [capacityPage, setCapacityPage] = useState(6);
+  const { paginate } = usePaginate();
+  const storage = paginate(items, currentPage, capacityPage);
 
   const classes = `table
   ${bordered && "table-bordered"}  
@@ -74,6 +82,11 @@ const Table = (props) => {
     console.log(itemsSelected);
   };
 
+  /* Handle redirect page */
+  const handleRedirectPage = useCallback((pageNumber) => {
+    setCurrentPage(pageNumber);
+  }, []);
+
   return (
     <div className="table__container">
       <CustomFormProvider {...methods}>
@@ -100,7 +113,7 @@ const Table = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {items.map((item, pos) => (
+                {storage.map((item, pos) => (
                   <tr key={pos}>
                     {select && (
                       <th>
@@ -134,6 +147,15 @@ const Table = (props) => {
           )}
         </form>
       </CustomFormProvider>
+
+      {/* Pagination */}
+      <Pagination
+        capacityPage={capacityPage}
+        totalData={items.length}
+        currentPage={currentPage}
+        onRedirect={handleRedirectPage}
+      />
+      {/* Pagination */}
     </div>
   );
 };
