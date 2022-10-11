@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
+import { AuthContext } from "./shared/context/auth-context";
 import { ScrollToTop } from "./shared/hook/scroll-to-top";
 import Admin from "./app/admin/page/Admin";
 import Home from "./app/home/page/home/Home";
@@ -16,7 +17,9 @@ import ProductDetail from "./app/product/components/ProductDetail";
 import Auth from "./app/auth";
 
 function App() {
-  const [user, setUser] = useState();
+  const authContext = useContext(AuthContext);
+
+  console.log(authContext.user);
 
   return (
     <div className="App">
@@ -33,7 +36,7 @@ function App() {
             {/* Public Page */}
 
             {/* Logged In page */}
-            <Route element={<ProtectRoutes isAllowed={!!user} />}>
+            <Route element={<ProtectRoutes isAllowed={!!authContext.user} />}>
               <Route path="/payment" element={<Payment />} />
             </Route>
             {/* Logged In page */}
@@ -42,7 +45,10 @@ function App() {
             <Route
               element={
                 <ProtectRoutes
-                  isAllowed={!!user && user.roles.includes("admin")}
+                  isAllowed={
+                    !!authContext.user &&
+                    authContext.user.roles.includes("admin")
+                  }
                 />
               }
             >

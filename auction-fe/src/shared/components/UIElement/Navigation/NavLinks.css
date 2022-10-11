@@ -24,8 +24,8 @@
 .nav-links__list .left a {
     display: flex;
     align-items: center;
-    padding: 20px 15px;
-    font-size: 1.8rem;
+    padding: 22px 15px;
+    font-size: 1.6rem;
     color: var(--white-color);
     font-weight: 500;
     letter-spacing: 1.2px;
@@ -121,7 +121,7 @@
     width: var(--width-nav-links-right-area);
 }
 
-.nav-links__list .right .info__user span {
+.nav-links__list .right .info__user .name {
     font-size: 1.4rem;
     color: #fff;
     font-weight: 600;
@@ -142,6 +142,10 @@
     display: none;
 }
 
+.popper__sub-list {
+    background-color: #3E4042;
+}
+
 .sub-list__info::before {
     position: absolute;
     content: "";
@@ -155,9 +159,14 @@
     padding: 12px;
     transition: all 0.1s;
     font-size: 1.6rem;
-    color: var(--font-color);
+    color: #fff;
     font-weight: 400;
+    text-align: left;
     cursor: pointer;
+}
+
+.sub-list__info li span {
+    margin-left: 8px;
 }
 
 .sub-list__info li:first-child {
@@ -171,18 +180,17 @@
 }
 
 .sub-list__info li:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 /* Notification */
 .notification.circle {
     position: relative;
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     color: #fff;
-    font-size: 2.4rem;
-    margin-right: 12px;
-    transform: all 0.2s;
+    font-size: 2.2rem;
+    margin-right: 16px;
 }
 
 .notification:hover {

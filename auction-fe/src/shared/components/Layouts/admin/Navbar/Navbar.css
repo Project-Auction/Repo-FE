@@ -1,0 +1,64 @@
+.navbar__admin-container {
+    background-color: var(--primary-dashboard-color);
+    height: 100vh;
+}
+
+/* Header */
+.navbar__admin-container .header {
+    padding: 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 24px;
+}
+
+.navbar__admin-container .title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 500;
+
+}
+
+.navbar__admin-container .title span {
+    color: #424345;
+    margin-left: 8px;
+    font-size: 1.8rem;
+}
+
+/* Admin list */
+.navbar__admin-item:hover .separate-hover {
+    top: 10px;
+}
+
+.navbar__admin-item a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    font-size: 1.6rem;
+    color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.separate-hover {
+    position: absolute;
+    content: "";
+    height: 60%;
+    width: 4px;
+    background-color: #fff;
+    left: 0px;
+    top: -50px;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.active .separate-hover {
+    top: 10px;
+}
+
+.navbar__admin-item .icon {
+    margin-right: 12px;
+    font-size: 2rem;
+}
