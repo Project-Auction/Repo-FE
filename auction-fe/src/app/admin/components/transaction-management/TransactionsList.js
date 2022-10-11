@@ -9,7 +9,9 @@ import "./TransactionsList.css";
 
 /* Set values default select options */
 const selectOptionsDefault = [
-  { label: "Tình trạng giao dịch", value: "statusTrade" },
+  { label: "Transaction status", value: "statusTrade" },
+  { label: "Sort by customer's name", value: "sortByName" },
+  { label: "Sort by quantity", value: "sortByQuantity" },
 ];
 
 const TransactionsList = () => {
@@ -36,8 +38,8 @@ const TransactionsList = () => {
               label="Filter"
               fieldName="filter"
               items={selectOptionsDefault}
-              defaultValue={selectOptionsDefault[0]}
               width={340}
+              className="transaction__header-search-input"
             />
           </CustomFormProvider>
         </div>
