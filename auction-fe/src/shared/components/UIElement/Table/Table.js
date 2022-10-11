@@ -5,11 +5,8 @@ import "./Table.css";
 import { useForm } from "react-hook-form";
 
 import CheckboxField from "../../FormElement/Checkbox";
-import SelectFilter from "../Filter/SelectFilter";
-import { FormInput } from "../../FormElement/Input";
 import ButtonFiled from "../../FormElement/Button";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
-import SelectField from "../../FormElement/Select/SelectField";
 
 export const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -22,21 +19,15 @@ const Table = (props) => {
   ? props.select to use Checkbox in table
   ? props.filter to use feature search with filter in table
   ? props.search to use search in table
+
+  ! header = [{id  , field}]
   */
-  const {
-    items,
-    header,
-    filter,
-    select,
-    striped,
-    bordered,
-    thPrimary,
-    thLight,
-  } = props;
+  const { items, header, select, striped, bordered, thPrimary, thLight } =
+    props;
 
   const methods = useForm();
 
-  const classes = `table 
+  const classes = `table
   ${bordered && "table-bordered"}  
   ${striped && "table-striped"}
   ${thPrimary && "thead-primary"}
@@ -84,90 +75,53 @@ const Table = (props) => {
   };
 
   return (
-    <div className="table__container table-responsive">
+    <div className="table__container">
       <CustomFormProvider {...methods}>
         <form>
-          {filter && (
-            <div className="table__filter-container">
-              <div className="row align-items-center">
-                <div className="col-5">
-                  {/* Search Input */}
-                  <FormInput
-                    element="input"
-                    fieldName="searchInputTable"
-                    required
-                    placeholder="Nhập tên khách hàng"
-                    fullWidth
-                    className="table__filter-input"
-                    onFocus={() => {}}
-                  />
-                  {/* Search Input */}
-                </div>
-
-                <div className="col-7 d-flex align-items-center">
-                  <SelectField
-                    fieldName="selectInputTable"
-                    width="150px"
-                    items={options}
-                    defaultValue={options[0].value}
-                    label="Tìm kiếm"
-                    variant="outlined"
-                  />
-
-                  <SelectFilter
-                    options={options}
-                    isMulti
-                    autoFocus
-                    isSearchable
-                    className="search-filter"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-
-          <table className={classes}>
-            <thead className={classes}>
-              <tr>
-                {select && (
-                  <th scope="col" className="selecting">
-                    <CheckboxField
-                      fontSize={22}
-                      color="#000"
-                      checkedColor="#ff3366"
-                      onChange={(e) => handleCheckedAll(e)}
-                    />
-                  </th>
-                )}
-                {header.map((header, index) => (
-                  <th scope="col" key={index}>
-                    {header.field}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item, pos) => (
-                <tr key={pos}>
+          <div className="table-responsive">
+            <table className={classes}>
+              <thead className={classes}>
+                <tr>
                   {select && (
-                    <th>
+                    <th scope="col" className="selecting">
                       <CheckboxField
                         fontSize={22}
                         color="#000"
                         checkedColor="#ff3366"
-                        onChange={(e) => handleChange(item, pos, e)}
-                        checked={checkedState[pos]}
+                        onChange={(e) => handleCheckedAll(e)}
                       />
                     </th>
                   )}
-                  <th scope="row">{item.codeProduct}</th>
-                  <td>{item.name}</td>
-                  <td>{item.headerTitle}</td>
-                  <td>{item.initialPrice}</td>
+                  {header.map((header, index) => (
+                    <th scope="col" key={index}>
+                      {header.field}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {items.map((item, pos) => (
+                  <tr key={pos}>
+                    {select && (
+                      <th>
+                        <CheckboxField
+                          fontSize={22}
+                          color="#000"
+                          checkedColor="#ff3366"
+                          onChange={(e) => handleChange(item, pos, e)}
+                          checked={checkedState[pos]}
+                        />
+                      </th>
+                    )}
+                    <th scope="row">{item.codeProduct}</th>
+                    <td>{item.name}</td>
+                    <td>{item.headerTitle}</td>
+                    <td>{item.initialPrice}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           {props.select && (
             <ButtonFiled
               type="submit"

@@ -1,7 +1,7 @@
 /* Right area */
 .dashboard__admin-right-area {
     background-color: #d1d2d5;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .dashboard__admin-right-area .admin__content {

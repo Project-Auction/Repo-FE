@@ -1,12 +1,9 @@
 :root {
-    --height-thead: 55px;
+    --height-thead: 45px;
 }
 
 .table__container {
-    border-radius: 5px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding: 32px;
-    background-color: var(--background-color);
+    border-radius: 8px;
 }
 
 .table__container .table {

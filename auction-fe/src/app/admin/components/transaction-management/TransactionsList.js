@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
 import { FormInput } from "../../../../shared/components/FormElement/Input";
 import SelectField from "../../../../shared/components/FormElement/Select/SelectField";
+import Table from "../../../../shared/components/UIElement/Table/Table";
+import { DUMMY_PRODUCTS } from "../../../home/page/home/Home";
 import Admin from "../../page/Admin";
 
 import "./TransactionsList.css";
@@ -13,6 +15,17 @@ const selectOptionsDefault = [
   { label: "Sort by customer's name", value: "sortByName" },
   { label: "Sort by quantity", value: "sortByQuantity" },
 ];
+
+/* Set header grid*/
+const headerGrid = [
+  { id: 1, field: "Tên" },
+  { id: 1, field: "Tên" },
+  { id: 1, field: "Tên" },
+  { id: 1, field: "Tên" },
+];
+
+/* Set items for table */
+const items = DUMMY_PRODUCTS;
 
 const TransactionsList = () => {
   const methods = useForm();
@@ -42,6 +55,10 @@ const TransactionsList = () => {
               className="transaction__header-search-input"
             />
           </CustomFormProvider>
+        </div>
+
+        <div className="content__table">
+          <Table select header={headerGrid} items={items} striped />
         </div>
       </div>
     </Admin>

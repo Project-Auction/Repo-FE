@@ -12,3 +12,7 @@
     align-items: flex-end;
     justify-content: space-between;
 }
+
+.content__table {
+    margin-top: 32px;
+}
