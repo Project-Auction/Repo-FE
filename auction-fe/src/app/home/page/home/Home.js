@@ -17,71 +17,85 @@ export const DUMMY_PRODUCTS = [
   {
     codeProduct: 1,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-16 15:12:21",
   },
 
   {
     codeProduct: 2,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-13 16:12:21",
   },
 
   {
     codeProduct: 3,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-13 16:12:21",
   },
 
   {
     codeProduct: 5,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-13 16:12:21",
   },
 
   {
     codeProduct: 6,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-13 16:12:21",
   },
 
   {
     codeProduct: 7,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-13 15:12:21",
   },
 
   {
     codeProduct: 4,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "2022-10-13 15:12:21",
+    endDate: "2022-10-13 17:12:21",
   },
 ];
 
@@ -242,7 +256,7 @@ function Home() {
               <div className="row">
                 <ProductList
                   items={DUMMY_PRODUCTS}
-                  className="col-3 home__page-current-action-list"
+                  className="col-4 home__page-current-action-list"
                 />
               </div>
             </div>

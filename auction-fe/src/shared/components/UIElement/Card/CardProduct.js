@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom";
-import ButtonField from "../../FormElement/Button";
 
 import "./Card.css";
+import ButtonField from "../../FormElement/Button";
+import { CalculateBetweenTwoDate } from "../../../../utils/calculate-time";
+import moment from "moment";
 
 /*
   ? Show on Home to "SUBMIT A BID" 
 */
 
 function CardProduct(props) {
+  const { remainingTime, calculateDates } = CalculateBetweenTwoDate(
+    Date.now(),
+    props.endDate
+  );
+
   return (
     <div className={`card__wrapper card__product ${props.className}`}>
-      {props.headerTitle && (
-        <div className={`card__header ${props.headerClass}`}>
-          <h2 className="card__header-title">{props.headerTitle}</h2>
-        </div>
-      )}
-
       <div className={`card__content ${props.contentClass}`}>
         <div className="card__img-group">
           <img
@@ -24,29 +25,58 @@ function CardProduct(props) {
             alt={props.name}
           />
 
+          {props.headerTitle && (
+            <div className={`card__title-status ${props.headerClass}`}>
+              <h2>{props.headerTitle}</h2>
+            </div>
+          )}
+
           <ButtonField className="card__btn-bid" primary>
             SUBMIT A BID
           </ButtonField>
         </div>
 
         <Link to={`${props.codeProduct}/detail`} className="info">
-          <h3 className="name">{props.name}</h3>
-          <div className="detail__price">
-            {props.initialPrice && (
-              <div className="price">
-                <span>Start Price</span>
-                <p>{props.initialPrice}</p>
-              </div>
-            )}
+          <span className="category">Vehicles</span>
 
-            {props.currentPrice && (
-              <div className="price">
-                <span>Current Price</span>
-                <p>{props.currentPrice}</p>
-              </div>
-            )}
+          <h3 className="product__name">BMW 5 Series GT Car</h3>
+
+          <div className="range__money">
+            <p className="price">
+              Start Price:
+              <span>$550.00</span>
+            </p>
+
+            <p className="price">
+              Current Price:
+              <span>$550.00</span>
+            </p>
           </div>
         </Link>
+
+        <div className="card__content-footer">
+          <p className="remaining__time-group">
+            2<span>Days</span>
+          </p>
+
+          <span className="dots">:</span>
+
+          <p className="remaining__time-group">
+            2<span>Hours</span>
+          </p>
+
+          <span className="dots">:</span>
+
+          <p className="remaining__time-group">
+            2<span>Minutes</span>
+          </p>
+
+          <span className="dots">:</span>
+
+          <p className="remaining__time-group">
+            2<span>Seconds</span>
+          </p>
+        </div>
       </div>
     </div>
   );
