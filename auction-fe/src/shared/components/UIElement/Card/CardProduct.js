@@ -2,18 +2,17 @@ import { Link } from "react-router-dom";
 
 import "./Card.css";
 import ButtonField from "../../FormElement/Button";
-import { CalculateBetweenTwoDate } from "../../../../utils/calculate-time";
-import moment from "moment";
+import useCountDown from "../../../hook/useCountDown";
 
 /*
   ? Show on Home to "SUBMIT A BID" 
 */
 
 function CardProduct(props) {
-  const { remainingTime, calculateDates } = CalculateBetweenTwoDate(
-    Date.now(),
-    props.endDate
-  );
+  /* Convert to Date */
+  const TIME_IN_SYSTEM = new Date(props.endDate).getTime();
+
+  const [days, hours, minutes, seconds] = useCountDown(TIME_IN_SYSTEM);
 
   return (
     <div className={`card__wrapper card__product ${props.className}`}>
@@ -56,25 +55,29 @@ function CardProduct(props) {
 
         <div className="card__content-footer">
           <p className="remaining__time-group">
-            2<span>Days</span>
+            {days}
+            <span>Days</span>
           </p>
 
           <span className="dots">:</span>
 
           <p className="remaining__time-group">
-            2<span>Hours</span>
+            {hours}
+            <span>Hours</span>
           </p>
 
           <span className="dots">:</span>
 
           <p className="remaining__time-group">
-            2<span>Minutes</span>
+            {minutes}
+            <span>Minutes</span>
           </p>
 
           <span className="dots">:</span>
 
           <p className="remaining__time-group">
-            2<span>Seconds</span>
+            {seconds}
+            <span>Seconds</span>
           </p>
         </div>
       </div>
