@@ -10,6 +10,7 @@ import "./HeaderNavInner.css";
 import ButtonFiled from "../../FormElement/Button";
 import PopperWrapper from "../../UIElement/PopperWrapper";
 import SearchInput from "../../FormElement/SearchInput";
+import CustomFormProvider from "../../FormElement/CustomFormProvider";
 
 function HeaderNavInner() {
   const methods = useForm();
@@ -25,15 +26,21 @@ function HeaderNavInner() {
 
       <div className="header__inner-search">
         <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
-        <SearchInput
-          control={methods.control}
-          name="searchInput"
-          inputClass="header__inner-search-input"
-          placeholder="Search..."
-        />
-        <ButtonFiled primary className="header__inner-search-button">
-          SEARCH
-        </ButtonFiled>
+        <CustomFormProvider {...methods}>
+          <SearchInput
+            control={methods.control}
+            name="searchInput"
+            inputClass="header__inner-search-input"
+            placeholder="Search..."
+          />
+          <ButtonFiled
+            type="submit"
+            primary
+            className="header__inner-search-button"
+          >
+            SEARCH
+          </ButtonFiled>
+        </CustomFormProvider>
       </div>
 
       <div className="header__inner-cart circle">

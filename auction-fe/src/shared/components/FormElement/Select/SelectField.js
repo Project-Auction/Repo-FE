@@ -5,47 +5,84 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import { Controller, useFormContext } from "react-hook-form";
+
+import "./Select.css";
 
 function SelectField(props) {
-  const handleChange = (event) => {
-    props.onChange(event.target.value);
-  };
+  const {
+    items,
+    fieldName,
+    id,
+    fullWidth,
+    width,
+    minWidth,
+    height,
+    minHeight,
+    m,
+    disabled,
+    variant,
+    label,
+    value,
+    defaultValue,
+    helperText,
+  } = props;
+
+  const { control } = useFormContext();
 
   return (
-    <FormControl
-      fullWidth={props.fullWidth}
-      sx={{
-        width: props.width,
-        minWidth: props.minWidth,
-        height: props.height,
-        minHeight: props.minHeight,
-        m: props.m,
+    <Controller
+      name={fieldName}
+      control={control}
+      render={({ field: { onChange }, fieldState: { error } }) => {
+        const handleOnChange = (event) => {
+          onChange(event.target.value);
+        };
+
+        return (
+          <FormControl
+            fullWidth={fullWidth}
+            sx={{
+              width: width,
+              minWidth: minWidth,
+              height: height,
+              minHeight: minHeight,
+              m: m,
+            }}
+            disabled={disabled}
+            error={error}
+          >
+            <InputLabel id={id} variant={variant}>
+              {label}
+            </InputLabel>
+            <Select
+              id={id}
+              label={label}
+              value={value}
+              onChange={handleOnChange}
+              variant={variant}
+              error={error}
+              defaultValue={defaultValue}
+            >
+              {items.map((item) => (
+                <MenuItem key={item.value} value={item.value}>
+                  {item.label}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText>
+              {helperText || (error && error.message)}
+            </FormHelperText>
+          </FormControl>
+        );
       }}
-      disabled={props.disabled}
-      error={props.error}
-    >
-      <InputLabel id={props.id} variant={props.variant}>
-        {props.label}
-      </InputLabel>
-      <Select
-        id={props.id}
-        label={props.label}
-        value={props.value}
-        onChange={handleChange}
-        variant={props.variant}
-        error={props.error}
-        defaultValue={props.defaultValue}
-      >
-        {props.items.map((item) => (
-          <MenuItem key={item.value} value={item.value}>
-            {item.label}
-          </MenuItem>
-        ))}
-      </Select>
-      <FormHelperText>
-        {props.helperText || (props.error && props.detailError.message)}
-      </FormHelperText>
-    </FormControl>
+      rules={{
+        required: {
+          value: true,
+          message: "Không được để trống",
+        },
+      }}
+    />
   );
 }
 

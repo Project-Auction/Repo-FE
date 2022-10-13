@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import "./ProductItem.css";
 
+/*
+ * used for render product when search
+*/
+
 const ProductItem = (props) => {
   return (
     <div className="product__item">

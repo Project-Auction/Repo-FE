@@ -2,21 +2,18 @@ import HeadlessTippy from "@tippyjs/react/headless";
 
 import React, { useEffect, useRef, useState } from "react";
 
-import {
-  faMagnifyingGlass,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 
 import "./SearchInput.css";
 
 import { useHttpClient } from "../../../hook/http-client";
 import PopperWrapper from "../../UIElement/PopperWrapper";
-import InputFiled from "../Input/InputField";
 import useDebounce from "../../../hook/useDebounce";
-import { toast } from "react-toastify";
 import ProductItem from "../../UIElement/ProductItem";
+import { FormInput } from "../Input";
 
 const SearchInput = ({ inputClass, placeholder }) => {
   const inputRef = useRef();
@@ -115,7 +112,8 @@ const SearchInput = ({ inputClass, placeholder }) => {
       )}
     >
       <div className="form-input__search">
-        <InputFiled
+        <FormInput
+          fieldName="searchInput"
           element="input"
           type="text"
           onChange={handleOnChange}
@@ -124,7 +122,9 @@ const SearchInput = ({ inputClass, placeholder }) => {
           onFocus={(isFocused) => {
             setIsShowResult(isFocused);
           }}
+          fullWidth
           ref={inputRef}
+          noBorder
         />
         {!isLoading && !!searchInput && (
           <FontAwesomeIcon
