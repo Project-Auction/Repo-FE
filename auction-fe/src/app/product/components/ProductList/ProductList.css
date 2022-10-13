@@ -1,0 +1,11 @@
+:root {
+    --space-top-catalog-item: 30px;
+}
+
+.home__catalog-side-left {
+    margin-top: var(--space-top-catalog-item);
+}
+
+.home__catalog-item {
+    margin-top: var(--space-top-catalog-item);
+}

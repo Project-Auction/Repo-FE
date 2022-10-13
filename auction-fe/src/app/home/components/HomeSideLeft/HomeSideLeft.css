@@ -1,0 +1,72 @@
+.home__side-let-container {
+    max-height: calc(100vh - var(--height-main-header) - 0px);
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.home__side-let-container .title {
+    font-size: 2.4rem;
+    color: var(--font-color);
+}
+
+.home__side-let-container .range-money {
+    border: 1px solid var(--border-color);
+    padding: 16px 8px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    background-color: #fff;
+}
+
+.range-money .title {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    color: var(--font-color);
+    margin-bottom: 8px;
+}
+
+.home__side-let-container .categories {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.home__side-let-container .categories__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 1.7rem;
+    color: var(--primary-color);
+    font-weight: 400;
+    padding: 12px 0;
+    right: 0;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.home__side-let-container .categories__item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.home__side-let-container .categories__item:hover {
+    right: -4px;
+    color: var(--green-color);
+}
+
+
+.categories__list .icon-arrow-right {
+    transform: translateY(1px);
+    font-size: 1.6rem;
+    margin-right: 6px;
+}
+
+/* CSS radio */
+.MuiFormGroup-root.MuiFormGroup-row.css-qfz70r-MuiFormGroup-root {
+    flex-direction: column;
+}
+
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+    display: block;
+    font-size: 1.6rem;
+}
