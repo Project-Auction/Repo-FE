@@ -19,9 +19,9 @@ const selectOptionsDefault = [
 /* Set header grid*/
 const headerGrid = [
   { id: 1, field: "Tên" },
-  { id: 1, field: "Tên" },
-  { id: 1, field: "Tên" },
-  { id: 1, field: "Tên" },
+  { id: 2, field: "Tên" },
+  { id: 3, field: "Tên" },
+  { id: 4, field: "Tên" },
 ];
 
 /* Set items for table */
@@ -58,7 +58,14 @@ const TransactionsList = () => {
         </div>
 
         <div className="content__table">
-          <Table select header={headerGrid} items={items} striped />
+          <Table
+            select
+            header={headerGrid}
+            items={items}
+            striped
+            thDark
+            colorCheckbox="#dadada"
+          />
         </div>
       </div>
     </Admin>

@@ -1,6 +1,6 @@
 .navbar__admin-container {
     background-color: var(--primary-dashboard-color);
-    height: 100vh;
+    height: 100%;
 }
 
 /* Header */

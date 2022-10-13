@@ -24,8 +24,18 @@ const Table = (props) => {
 
   ! header = [{id  , field}]
   */
-  const { items, header, select, striped, bordered, thPrimary, thLight } =
-    props;
+  const {
+    items,
+    header,
+    select,
+    striped,
+    bordered,
+    thPrimary,
+    thLight,
+    thDark,
+    colorCheckbox = "#fff",
+    colorCheckedCheckbox = "#ff3366",
+  } = props;
 
   const methods = useForm();
 
@@ -39,7 +49,8 @@ const Table = (props) => {
   ${bordered && "table-bordered"}  
   ${striped && "table-striped"}
   ${thPrimary && "thead-primary"}
-  ${thLight && "thead-light"}`;
+  ${thLight && "thead-light"}
+  ${thDark && "thead-dark"}`;
 
   /* Set state checked for Checkbox */
   const [checkedState, setCheckedState] = useState(
@@ -99,8 +110,8 @@ const Table = (props) => {
                     <th scope="col" className="selecting">
                       <CheckboxField
                         fontSize={22}
-                        color="#000"
-                        checkedColor="#ff3366"
+                        color={colorCheckbox}
+                        checkedColor={colorCheckedCheckbox}
                         onChange={(e) => handleCheckedAll(e)}
                       />
                     </th>
@@ -119,8 +130,8 @@ const Table = (props) => {
                       <th>
                         <CheckboxField
                           fontSize={22}
-                          color="#000"
-                          checkedColor="#ff3366"
+                          color={colorCheckbox}
+                          checkedColor={colorCheckedCheckbox}
                           onChange={(e) => handleChange(item, pos, e)}
                           checked={checkedState[pos]}
                         />
@@ -136,14 +147,16 @@ const Table = (props) => {
             </table>
           </div>
           {props.select && (
-            <ButtonFiled
-              type="submit"
-              onClick={handleSubmit}
-              primary
-              size="small"
-            >
-              Xóa
-            </ButtonFiled>
+            <div className="d-flex justify-content-end">
+              <ButtonFiled
+                type="submit"
+                onClick={handleSubmit}
+                primary
+                size="small"
+              >
+                Xóa
+              </ButtonFiled>
+            </div>
           )}
         </form>
       </CustomFormProvider>

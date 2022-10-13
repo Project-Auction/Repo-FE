@@ -1,5 +1,5 @@
 :root {
-    --height-thead: 45px;
+    --height-thead: 40px;
 }
 
 .table__container {
@@ -21,6 +21,11 @@
 
 .table__container .thead-primary {
     background-color: var(--primary-color);
+    color: #fff;
+}
+
+.table__container thead.thead-dark {
+    background-color: var(--primary-dashboard-color);
     color: #fff;
 }
 
