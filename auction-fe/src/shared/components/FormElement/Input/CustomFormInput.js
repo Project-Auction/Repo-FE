@@ -19,7 +19,7 @@ const CustomFormInput = forwardRef((props, ref) => {
     noBorder,
     defaultValue,
   } = props;
-
+  
   const handleOnFocus = () => {
     onFocus(true);
   };

@@ -5,7 +5,6 @@
 .form-wrapper label {
     font-weight: 600;
     font-size: 1.6rem;
-    color: var(--primary-color);
 }
 
 .form-input {
@@ -30,6 +29,6 @@
 }
 
 .form-input:focus {
-    border: 1px solid var(--primary-color);
+    border: 1px solid #4267B2;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }

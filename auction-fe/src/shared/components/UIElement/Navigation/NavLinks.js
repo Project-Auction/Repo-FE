@@ -1,7 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faChevronDown,
+  faRightLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
 
 import PopperWrapper from "../PopperWrapper";
 import Image from "../Image";
@@ -81,12 +85,24 @@ function NavLinks() {
                 alt="avatar"
                 circle
               />
-              <span>Nguyễn Hoàng Anh Tuấn</span>
+              <span className="name">Nguyễn Hoàng Anh Tuấn</span>
 
               <div className="sub-list__info">
-                <PopperWrapper>
-                  <li>Personal Information</li>
-                  <li>Transaction History</li>
+                <PopperWrapper className="popper__sub-list">
+                  <li>
+                    <FontAwesomeIcon icon={faUser} />
+                    <span>Personal Information</span>
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faRightLeft} />
+                    <span>Transaction History</span>
+                  </li>
+                  {authContext.isLoggedIn && (
+                    <li onClick={authContext.logout} size="small">
+                      <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                      <span>Sign Out</span>
+                    </li>
+                  )}
                 </PopperWrapper>
               </div>
             </>
@@ -100,11 +116,6 @@ function NavLinks() {
             </>
           )}
         </div>
-        {authContext.isLoggedIn && (
-          <ButtonFiled onClick={authContext.logout} border size="small">
-            LOGOUT
-          </ButtonFiled>
-        )}
       </ul>
     </div>
   );

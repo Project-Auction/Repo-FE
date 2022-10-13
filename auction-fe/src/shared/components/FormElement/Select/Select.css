@@ -1,4 +1,4 @@
-.MuiFormLabel-root.MuiInputLabel-root ,
+.MuiFormLabel-root.MuiInputLabel-root,
 .MuiButtonBase-root.MuiMenuItem-root {
     font-size: 1.6rem;
 }
@@ -8,4 +8,15 @@
     padding: 12px;
     display: flex;
     align-items: center;
+}
+
+.form--select {
+    height: 50px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 12px;
+    border: 1px solid var(--border-color);
+    outline: none;
 }

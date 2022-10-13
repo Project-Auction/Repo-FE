@@ -5,9 +5,17 @@ export const AuthContext = createContext();
 const AuthProvider = (props) => {
   const { children } = props;
 
+  const [user, setUser] = useState();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
+    setUser({
+      id: "1",
+      name: "robin",
+      permissions: ["analyze"],
+      roles: ["admin"],
+    });
     setIsLoggedIn(true);
   };
 
@@ -18,6 +26,7 @@ const AuthProvider = (props) => {
   /* To send context */
   const containValues = {
     isLoggedIn,
+    user: user,
     login: handleLogin,
     logout: handleLogout,
   };
