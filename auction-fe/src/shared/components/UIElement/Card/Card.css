@@ -65,7 +65,7 @@
 .card__content .info {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
 }
 
 .card__content .info .category {
@@ -76,7 +76,7 @@
 
 .card__content .info .product__name {
     font-size: 2.1rem;
-    margin: 8px 0;
+    margin: 8px 0 12px 0px;
     color: var(--font-color);
     transition: all 0.2s;
 }
