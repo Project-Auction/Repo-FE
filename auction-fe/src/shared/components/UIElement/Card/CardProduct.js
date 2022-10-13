@@ -9,25 +9,39 @@ import useCountDown from "../../../hook/useCountDown";
 */
 
 function CardProduct(props) {
+  const {
+    className,
+    endDate,
+    contentClass,
+    imageClass,
+    image,
+    name,
+    headerClass,
+    headerTitle,
+    codeProduct,
+    startPrice,
+    currentPrice,
+  } = props;
+
   /* Convert to Date */
-  const TIME_IN_SYSTEM = new Date(props.endDate).getTime();
+  const TIME_IN_SYSTEM = new Date(endDate).getTime();
 
   const [days, hours, minutes, seconds] = useCountDown(TIME_IN_SYSTEM);
 
   if (days + hours + minutes + seconds > 0) {
     return (
-      <div className={`card__wrapper card__product ${props.className}`}>
-        <div className={`card__content ${props.contentClass}`}>
+      <div className={`card__wrapper card__product ${className}`}>
+        <div className={`card__content ${contentClass}`}>
           <div className="card__img-group">
             <img
-              className={`card__content-img ${props.imageClass}`}
-              src={props.image}
-              alt={props.name}
+              className={`card__content-img ${imageClass}`}
+              src={image}
+              alt={name}
             />
 
-            {props.headerTitle && (
-              <div className={`card__title-status ${props.headerClass}`}>
-                <h2>{props.headerTitle}</h2>
+            {headerTitle && (
+              <div className={`card__title-status ${headerClass}`}>
+                <h2>{headerTitle}</h2>
               </div>
             )}
 
@@ -36,7 +50,7 @@ function CardProduct(props) {
             </ButtonField>
           </div>
 
-          <Link to={`${props.codeProduct}/detail`} className="info">
+          <Link to={`${codeProduct}/detail`} className="info">
             <span className="category">Vehicles</span>
 
             <h3 className="product__name">BMW 5 Series GT Car</h3>
@@ -44,12 +58,12 @@ function CardProduct(props) {
             <div className="range__money">
               <p className="price">
                 Start Price:
-                <span>$550.00</span>
+                <span>{startPrice}</span>
               </p>
 
               <p className="price">
                 Current Price:
-                <span>$550.00</span>
+                <span>{currentPrice}</span>
               </p>
             </div>
           </Link>

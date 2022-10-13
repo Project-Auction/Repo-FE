@@ -6,6 +6,7 @@ import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import SwiperSlider from "../../../../shared/components/UIElement/SwiperSlider";
 import ProductDetailInfo from "../ProductDetailInfo";
+import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
 
 const ProductDetail = (props) => {
   const productId = useParams().productId;
@@ -13,6 +14,8 @@ const ProductDetail = (props) => {
   return (
     <>
       <MainNavigation />
+
+      <HeaderBreadcrumbs />
 
       <div className="product__detail-container section">
         <div className="container">

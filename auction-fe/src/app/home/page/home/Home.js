@@ -23,7 +23,7 @@ export const DUMMY_PRODUCTS = [
     initialPrice: "20000",
     currentPrice: "20000",
     startDate: "13-10-2022 15:12:21",
-    endDate: "10/13/2022 22:12:21",
+    endDate: "10/15/2022 22:12:21",
   },
 
   {

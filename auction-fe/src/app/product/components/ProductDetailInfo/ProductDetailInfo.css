@@ -1,6 +1,7 @@
 .product-detail__info-container h3 {
     font-size: 2.2rem;
     margin-bottom: 12px;
+    font-weight: 700;
 }
 
 /* Header */
@@ -22,7 +23,7 @@
 
 .product-detail__info-container .title {
     margin: 12px 0 8px 0;
-    color: var(--primary-color);
+    color: var(--font-color);
 }
 
 .product-detail__info-group {
@@ -50,6 +51,37 @@
     font-weight: 500;
     margin: 8px 0 0 0;
     color: var(--primary-color);
+}
+
+/* Jump price */
+.btn__jump-price {
+    height: 50px;
+    width: 70px;
+    padding: 12px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transform: all 0.2s;
+}
+
+.btn__jump-price:hover {
+    opacity: 0.9;
+}
+
+.btn__jump-price .icon {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.product-detail__info-container .btn__auction {
+    margin-top: 22px;
+    font-size: 1.8rem;
+}
+
+.product-detail__info-container .btn__auction .icon {
+    font-size: 2.4rem;
+    margin-right: 12px;
 }
 
 /* Footer */

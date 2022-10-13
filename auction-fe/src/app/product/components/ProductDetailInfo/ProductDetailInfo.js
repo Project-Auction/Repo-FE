@@ -10,6 +10,8 @@ import Modal from "../../../../shared/components/UIElement/Modal";
 import Table from "../../../../shared/components/UIElement/Table";
 
 import { HEADER_GRID, DUMMY_PRODUCTS } from "../../../home/page/home/Home";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGavel, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const ProductDetailInfo = (props) => {
   const methods = useForm();
@@ -92,21 +94,27 @@ const ProductDetailInfo = (props) => {
           <h3 className="title">Giá của bạn</h3>
 
           <CustomFormProvider {...methods}>
-            <form
-              className="product-detail__info-group"
-              onSubmit={methods.handleSubmit(onSubmit)}
-            >
-              <FormInput
-                isMui
-                fieldName="priceAuction"
-                element="input"
-                type="number"
-                placeholder="Nhập giá của bạn"
-                required
-                fullWidth
-                onFocus={() => {}}
-              />
-              <ButtonField type="submit" primary>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <div className="price__auction product-detail__info-group">
+                <button primary className="btn__jump-price">
+                  <FontAwesomeIcon className="icon" icon={faMinus} />
+                </button>
+                <FormInput
+                  fieldName="priceAuction"
+                  element="input"
+                  type="number"
+                  placeholder="Nhập giá của bạn"
+                  required
+                  fullWidth
+                  onFocus={() => {}}
+                />
+                <button className="btn__jump-price">
+                  <FontAwesomeIcon className="icon" icon={faPlus} />
+                </button>
+              </div>
+
+              <ButtonField type="submit" green className="btn__auction">
+                <FontAwesomeIcon icon={faGavel} className="icon" />
                 Đấu giá
               </ButtonField>
             </form>
