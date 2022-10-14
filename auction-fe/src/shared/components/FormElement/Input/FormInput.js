@@ -41,6 +41,8 @@ const FormInput = forwardRef((props, ref) => {
     emailRequired,
     endAdornment,
     onFocus,
+    inputClass,
+    formClass,
   } = props;
   const { control } = useFormContext();
 
@@ -103,6 +105,7 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   className={className}
                   InputProps={
+                    ({ classes: inputClass },
                     endAdornment && {
                       endAdornment: (
                         <IconButton
@@ -114,7 +117,7 @@ const FormInput = forwardRef((props, ref) => {
                           {!isShowPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       ),
-                    }
+                    })
                   }
                 />
               ) : (
@@ -131,6 +134,9 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   onFocus={onFocus}
                   ref={ref}
+                  inputClass={inputClass}
+                  formClass={formClass}
+                  placeholder={placeholder}
                 />
               )}
             </>

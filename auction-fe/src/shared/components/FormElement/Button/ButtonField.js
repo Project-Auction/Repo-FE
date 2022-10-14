@@ -5,6 +5,7 @@ function ButtonFiled(props) {
   const classes = `button button--${props.size || "default"} 
     ${props.danger && "button--danger"}
     ${props.primary && "button--primary"}
+    ${props.dark && "button--dark"}
     ${props.className}
     ${props.fullWidth && "button--fullWidth"}
     ${props.green && "button--green"}
