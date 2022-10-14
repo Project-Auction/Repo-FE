@@ -24,7 +24,7 @@ const Navbar = () => {
 
         <ul className="navbar__profile-user__body">
           <li className="navbar__profile-user__item">
-            <NavLink end>
+            <NavLink end to={`/${3}/profile`}>
               <FontAwesomeIcon icon={faHouse} className="icon" />
               Dashboard
               <div className="separate-hover"></div>

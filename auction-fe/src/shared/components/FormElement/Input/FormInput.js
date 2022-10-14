@@ -95,6 +95,7 @@ const FormInput = forwardRef((props, ref) => {
                     (!endAdornment && "text") ||
                     (isShowPassword && endAdornment ? "text" : "password")
                   }
+                  required={requiredForm}
                   ref={ref}
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
