@@ -1,9 +1,10 @@
 import { useParams } from "react-router";
 import "./ProfileUser.css";
 
-import { NavbarProfile } from "../../components/profile";
+import NavbarProfile from "../../components/profile/Navbar";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
-import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs/HeaderBreadcrumbs";
+import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
+import Footer from "../../../../shared/components/Layouts/Footer";
 
 const ProfileUser = (props) => {
   const userId = useParams().userId;
@@ -20,10 +21,12 @@ const ProfileUser = (props) => {
             <div className="col-3">
               <NavbarProfile />
             </div>
-            <div className="col-9"></div>
+            <div className="col-9">{props.children}</div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };

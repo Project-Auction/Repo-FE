@@ -78,7 +78,7 @@ function NavLinks() {
         )}
         <div className="info__user">
           {authContext.isLoggedIn && (
-            <Link to={`${3}/profile`}>
+            <Link to={`/3/profile`}>
               <Image
                 src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-1/272959223_1371248186637583_4113757049488479156_n.jpg?stp=dst-jpg_p160x160&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=e1sjKhWMFTsAX_B6jKc&_nc_ht=scontent.fhan2-4.fna&oh=00_AT8w6-xBfM2TMv0-FWgwVtA-EUkEwnlDA1xQgV0szUBpiQ&oe=6349394E"
                 className="avatar"

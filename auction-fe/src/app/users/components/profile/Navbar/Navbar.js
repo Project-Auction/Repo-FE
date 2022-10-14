@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt, faHouse, faReceipt } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
-import CardField from "../../../../shared/components/UIElement/Card/CardField";
-import AccountItem from "../../../../shared/components/UIElement/AccountItem";
+import ButtonFiled from "../../../../../shared/components/FormElement/Button";
+import AccountItem from "../../../../../shared/components/UIElement/AccountItem";
+import CardField from "../../../../../shared/components/UIElement/Card/CardField";
 
 const Navbar = () => {
   return (
@@ -52,6 +53,10 @@ const Navbar = () => {
               Invoice
               <div className="separate-hover"></div>
             </NavLink>
+          </li>
+
+          <li className="navbar__profile-user__item">
+            <ButtonFiled danger>Logout</ButtonFiled>
           </li>
         </ul>
       </CardField>

@@ -52,3 +52,16 @@
 .navbar__profile-user__item a.active .separate-hover {
     top: 8px;
 }
+
+.navbar__profile-user__item:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+    margin-top: 12px;
+}
+
+.navbar__profile-user__item button {
+    padding: 0 24px;
+    font-size: 1.4rem;
+}
