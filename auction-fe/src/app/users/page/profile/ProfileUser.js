@@ -7,7 +7,6 @@ import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBre
 import Footer from "../../../../shared/components/Layouts/Footer";
 
 const ProfileUser = (props) => {
-  console.log(props);
   const userId = useParams().userId;
 
   return (
