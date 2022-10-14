@@ -2,7 +2,7 @@ import Header from "../../Layouts/Header";
 import HeaderNavInner from "../../Layouts/HeaderNavInner";
 import NavLinks from "./NavLinks";
 
-function MainNavigation({ noHeaderInner }) {
+function MainNavigation({ headerInner }) {
   return (
     <>
       {/* SideDrawer */}
@@ -11,7 +11,7 @@ function MainNavigation({ noHeaderInner }) {
       <Header>
         <NavLinks />
       </Header>
-      {!noHeaderInner && <HeaderNavInner />}
+      {headerInner && <HeaderNavInner />}
     </>
   );
 }

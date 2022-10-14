@@ -90,7 +90,7 @@ function Home() {
     <>
       <div className="home__page-container">
         {/* Nav and Header */}
-        <MainNavigation />
+        <MainNavigation headerInner />
         {/* Nav */}
 
         {/* Content */}

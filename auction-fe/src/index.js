@@ -6,14 +6,17 @@ import MainStyles from "./shared/components/Layouts/MainStyles";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./shared/context/auth-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ToastContainer />
-    <MainStyles>
-      <App />
-    </MainStyles>
+    <AuthProvider>
+      <ToastContainer />
+      <MainStyles>
+        <App />
+      </MainStyles>
+    </AuthProvider>
   </React.StrictMode>
 );
 

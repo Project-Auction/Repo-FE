@@ -122,6 +122,7 @@ const SearchInput = ({ inputClass, placeholder }) => {
           onFocus={(isFocused) => {
             setIsShowResult(isFocused);
           }}
+          fullWidth
           ref={inputRef}
           noBorder
         />
