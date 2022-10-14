@@ -17,6 +17,7 @@ import ProductDetail from "./app/product/components/ProductDetail";
 import Auth from "./app/auth";
 import ProductsList from "./app/admin/components/product-management/ProductsList";
 import TransactionsList from "./app/admin/components/transaction-management/TransactionsList";
+import ProfileUser from "./app/users/page/profile/ProfileUser";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -38,6 +39,7 @@ function App() {
             {/* Logged In page */}
             <Route element={<ProtectRoutes isAllowed={!!authContext.user} />}>
               <Route path="/payment" element={<Payment />} />
+              <Route path="/:userId/profile" element={<ProfileUser />} />
             </Route>
             {/* Logged In page */}
 
