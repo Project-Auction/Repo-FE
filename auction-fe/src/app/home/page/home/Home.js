@@ -20,8 +20,8 @@ export const DUMMY_PRODUCTS = [
     headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
-    initialPrice: "20000",
-    currentPrice: "20000",
+    initialPrice: "2000",
+    currentPrice: "2000",
     startDate: "13-10-2022 15:12:21",
     endDate: "10/15/2022 22:12:21",
   },

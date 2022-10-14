@@ -6,11 +6,12 @@
 
 /* Header */
 .product-detail__info-container {
-    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    max-height: 80vh;
+    box-shadow: none;
+    border: 1px solid var(--border-color);
+    height: 100%;
     overflow-y: auto;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 20px;
 }
 
@@ -63,6 +64,16 @@
     outline: none;
     border: none;
     transform: all 0.2s;
+}
+
+.btn__jump-price:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.btn__jump-price:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .btn__jump-price:hover {

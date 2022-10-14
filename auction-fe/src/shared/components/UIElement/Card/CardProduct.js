@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Card.css";
 import ButtonField from "../../FormElement/Button";
 import useCountDown from "../../../hook/useCountDown";
+import { formatCurrentUS } from "../../../format/format-input";
 
 /*
   ? Show on Home to "SUBMIT A BID" 
@@ -19,7 +20,7 @@ function CardProduct(props) {
     headerClass,
     headerTitle,
     codeProduct,
-    startPrice,
+    initialPrice,
     currentPrice,
   } = props;
 
@@ -58,12 +59,12 @@ function CardProduct(props) {
             <div className="range__money">
               <p className="price">
                 Start Price:
-                <span>{startPrice}</span>
+                <span>{formatCurrentUS(initialPrice)}</span>
               </p>
 
               <p className="price">
                 Current Price:
-                <span>{currentPrice}</span>
+                <span>{formatCurrentUS(currentPrice)}</span>
               </p>
             </div>
           </Link>

@@ -4,6 +4,7 @@ import {
   faArrowRightFromBracket,
   faChevronDown,
   faRightLeft,
+  faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
 
@@ -98,7 +99,7 @@ function NavLinks() {
                     <span>Transaction History</span>
                   </li>
                   {authContext.isLoggedIn && (
-                    <li onClick={authContext.logout} size="small">
+                    <li onClick={authContext.logout}>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} />
                       <span>Sign Out</span>
                     </li>
@@ -110,9 +111,15 @@ function NavLinks() {
 
           {!authContext.isLoggedIn && (
             <>
-              <ButtonFiled primary onClick={authContext.login}>
-                LOGIN
-              </ButtonFiled>
+              <li className="btn__header" onClick={authContext.login}>
+                <FontAwesomeIcon icon={faUser} />
+                <span>Register</span>
+              </li>
+
+              <li className="btn__header" onClick={authContext.login}>
+                <FontAwesomeIcon icon={faRightToBracket} />
+                <span>Login</span>
+              </li>
             </>
           )}
         </div>
