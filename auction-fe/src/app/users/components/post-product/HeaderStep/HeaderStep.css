@@ -1,0 +1,35 @@
+.header__step-form-container {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.header__step-form-numbers {
+    background-color: #fff;
+    color: var(--primary-color);
+    font-size: 2rem !important;
+    font-weight: 600;
+}
+
+.header__step-form-numbers.circle {
+    height: 53px;
+    width: 53px;
+}
+
+.header__step-form-container .title {
+    margin-left: 12px;
+    color: #fff;
+}
+
+.header__step-form-title {
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.header__step-form-sub {
+    font-size: 1.4rem;
+}

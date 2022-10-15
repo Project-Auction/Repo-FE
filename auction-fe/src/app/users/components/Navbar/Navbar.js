@@ -11,9 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
-import ButtonFiled from "../../../../../shared/components/FormElement/Button";
-import AccountItem from "../../../../../shared/components/UIElement/AccountItem";
-import CardField from "../../../../../shared/components/UIElement/Card/CardField";
+import ButtonFiled from "../../../../shared/components/FormElement/Button";
+import AccountItem from "../../../../shared/components/UIElement/AccountItem";
+import CardField from "../../../../shared/components/UIElement/Card/CardField";
 
 const Navbar = () => {
   return (
@@ -61,7 +61,7 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <NavLink end to={`/${3}/invoices`}>
+            <NavLink end to={`/${3}/post-product`}>
               <FontAwesomeIcon icon={faPlusCircle} className="icon" />
               Post Product
               <div className="separate-hover"></div>

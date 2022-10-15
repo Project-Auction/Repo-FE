@@ -1,0 +1,20 @@
+.form__step-container {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.form__step-header {
+    padding: 20px 20px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form__step-header .title {
+    font-size: 2rem;
+}
+
+/* Form Header */
+.form__step-header {
+    display: flex;
+    align-items: center;
+}
