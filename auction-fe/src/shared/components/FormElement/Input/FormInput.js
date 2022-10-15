@@ -109,6 +109,7 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   className={className}
                   variant={variant}
+                  required={requiredForm}
                   InputProps={
                     ({ classes: inputClass },
                     endAdornment && {
@@ -139,6 +140,8 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   readOnly={readOnly}
                   onFocus={onFocus}
+                  formClass={formClass}
+                  inputClass={inputClass}
                 />
               )}
             </>
