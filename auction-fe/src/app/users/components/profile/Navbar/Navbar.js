@@ -3,7 +3,12 @@ import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBolt, faHouse, faReceipt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBolt,
+  faHouse,
+  faPlusCircle,
+  faReceipt,
+} from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
 import ButtonFiled from "../../../../../shared/components/FormElement/Button";
@@ -42,7 +47,7 @@ const Navbar = () => {
           <li className="navbar__profile-user__item">
             <NavLink end to={`/${3}/myAds`}>
               <FontAwesomeIcon icon={faBolt} className="icon" />
-              Dashboard
+              My Products
               <div className="separate-hover"></div>
             </NavLink>
           </li>
@@ -51,6 +56,14 @@ const Navbar = () => {
             <NavLink end to={`/${3}/invoices`}>
               <FontAwesomeIcon icon={faReceipt} className="icon" />
               Invoice
+              <div className="separate-hover"></div>
+            </NavLink>
+          </li>
+
+          <li className="navbar__profile-user__item">
+            <NavLink end to={`/${3}/invoices`}>
+              <FontAwesomeIcon icon={faPlusCircle} className="icon" />
+              Post Product
               <div className="separate-hover"></div>
             </NavLink>
           </li>

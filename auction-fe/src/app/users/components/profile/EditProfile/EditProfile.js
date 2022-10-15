@@ -1,34 +1,32 @@
 import { useForm } from "react-hook-form";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
 import "./EditProfile.css";
-import Image from "../../../../../shared/components/UIElement/Image";
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRED,
+} from "../../../../../utils/Validator";
 import ProfileUser from "../../../page/profile/ProfileUser";
 import CustomFormProvider from "../../../../../shared/components/FormElement/CustomFormProvider";
 import { FormInput } from "../../../../../shared/components/FormElement/Input";
 import ButtonFiled from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
+import UploadImage from "../../../../../shared/components/FormElement/UploadImage";
 
 const EditProfile = (props) => {
-  const formSchema = Yup.object().shape({
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Password not matching"
-    ),
-  });
+  const {} = props;
 
   const methods = useForm({
     mode: "onChange",
-    resolver: yupResolver(formSchema),
+    defaultValues: {},
   });
 
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const handleGetUrlImage = (value) => {
+    console.log(value);
   };
 
   return (
@@ -40,14 +38,7 @@ const EditProfile = (props) => {
 
         <div className="form__edit-profile-body">
           <div className="form__edit-profile-body__avatar">
-            <Image
-              src="https://demo.graygrids.com/themes/classigrids-demo/assets/images/dashboard/user-image.jpg"
-              alt="Avatar"
-              className="image"
-              circle
-            />
-
-            <FontAwesomeIcon icon={faCamera} className="icon" />
+            <UploadImage onInput={handleGetUrlImage} />
           </div>
 
           <CustomFormProvider {...methods}>
@@ -67,10 +58,12 @@ const EditProfile = (props) => {
                   noBorder
                   className="mr-4"
                   requiredForm
-                  messageRequired="Username cannot be empty"
-                  minLengthForm={6}
-                  minLengthMessage="Username at least 6 characters"
+                  validators={[
+                    VALIDATOR_REQUIRED("Full name cannot be empty"),
+                    VALIDATOR_MINLENGTH(9, "Full name at least 9 characters"),
+                  ]}
                 />
+
                 <FormInput
                   isMui
                   fieldName="accountName"
@@ -80,14 +73,19 @@ const EditProfile = (props) => {
                   required
                   label="Account Name"
                   requiredForm
-                  messageRequired="Account name cannot be empty"
-                  minLengthForm={6}
-                  minLengthMessage="Account name at least 6 characters"
+                  validators={[
+                    VALIDATOR_REQUIRED("Account name cannot be empty"),
+                    VALIDATOR_MINLENGTH(
+                      9,
+                      "Account name at least 9 characters"
+                    ),
+                  ]}
                 />
               </div>
 
               <div className="form__edit-profile-body-form__group">
                 <FormInput
+                  defaultValue="heelo"
                   isMui
                   fieldName="email"
                   type="email"
@@ -96,10 +94,11 @@ const EditProfile = (props) => {
                   className="mr-4"
                   label="Email"
                   requiredForm
-                  messageRequired="Email cannot be empty"
-                  minLengthForm={6}
-                  minLengthMessage="Email at least be 6 characters"
-                  emailRequired
+                  validators={[
+                    VALIDATOR_REQUIRED("Email cannot be empty"),
+                    VALIDATOR_MINLENGTH(9, "Email at least 9 characters"),
+                    VALIDATOR_EMAIL("Email is invalid"),
+                  ]}
                 />
 
                 <FormInputTime
@@ -107,7 +106,9 @@ const EditProfile = (props) => {
                   dataType="date_timer_picker"
                   label="Date of birth"
                   requiredForm
-                  messageRequired="Date of birth cannot be empty"
+                  validators={[
+                    VALIDATOR_REQUIRED("Date of birth cannot be empty"),
+                  ]}
                 />
               </div>
 
@@ -122,9 +123,13 @@ const EditProfile = (props) => {
                   label="Phone Number"
                   format="phone_number"
                   requiredForm
-                  messageRequired="Phone number cannot be empty"
-                  minLengthForm={9}
-                  minLengthMessage="Phone number at least be 9 characters"
+                  validators={[
+                    VALIDATOR_REQUIRED("Phone number cannot be empty"),
+                    VALIDATOR_MINLENGTH(
+                      9,
+                      "Phone number at least 9 characters"
+                    ),
+                  ]}
                 />
 
                 <FormInput
@@ -136,9 +141,13 @@ const EditProfile = (props) => {
                   label="Identity Number"
                   format="identity_card"
                   requiredForm
-                  messageRequired="Identity number cannot be empty"
-                  minLengthForm={9}
-                  minLengthMessage="Identity number at least be 9 characters"
+                  validators={[
+                    VALIDATOR_REQUIRED("Identity numbers cannot be empty"),
+                    VALIDATOR_MINLENGTH(
+                      9,
+                      "Identity numbers at least 9 characters"
+                    ),
+                  ]}
                 />
               </div>
 
