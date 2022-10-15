@@ -1,0 +1,59 @@
+.form__edit-profile-header {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form__edit-profile-header h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.form__edit-profile-body-form {
+    padding: 20px;
+}
+
+
+/* Avatar body */
+.form__edit-profile-body {
+    background-color: #fff;
+    padding: 25px 0;
+}
+
+.form__edit-profile-body__avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.form__edit-profile-body__avatar .image {
+    height: 130px;
+    width: 130px;
+    border: 1px solid var(--border-color);
+}
+
+.form__edit-profile-body__avatar .icon {
+    position: absolute;
+    font-size: 2.4rem;
+    top: 75%;
+    left: 54%;
+    z-index: 1;
+    color: #333;
+}
+
+/* Form body */
+.form__edit-profile-body-form__group {
+    display: flex;
+    align-items: center;
+    margin: 18px 0;
+}
+
+.form__edit-profile-body-form__group .MuiFormControl-root:first-child {
+    margin-right: 16px;
+}
+
+.form__edit-profile-body-form .btn__submit {
+    margin-top: 42px;
+}

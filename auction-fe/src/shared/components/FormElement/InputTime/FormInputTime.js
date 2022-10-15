@@ -12,18 +12,18 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "../Input/FormInput.css";
 
 const FormInputTime = (props) => {
-  const { fieldName, label, inputFormat = "DD/MM/YYYY", dateType } = props;
+  const { fieldName, label, inputFormat = "DD/MM/YYYY", dateType, ref } = props;
 
   const { control } = useFormContext();
 
-  const [value, setValue] = useState(dayjs());
+  const [value, setValue] = useState(Date.now());
 
   return (
     <>
       <Controller
         name={fieldName}
         control={control}
-        render={({ field: { onChange } }) => {
+        render={({ field: { onChange }, fieldState: { error } }) => {
           const onChangeValue = (newValue) => {
             setValue(newValue);
             onChange(newValue.toString());
@@ -35,18 +35,24 @@ const FormInputTime = (props) => {
                 {dateType === "date_timer_picker" ? (
                   <DateTimePicker
                     label={label}
+                    onError={true}
                     onChange={onChangeValue}
                     value={value}
-                    renderInput={(params) => <TextField {...params} />}
+                    inputRef={ref}
+                    renderInput={(params) => (
+                      <TextField {...params} />
+                    )}
                   />
                 ) : (
                   <DesktopDatePicker
                     label={label}
                     inputFormat={inputFormat}
                     value={value}
+                    inputRef={ref}
                     onChange={onChangeValue}
-                    defaultCalendarMonth
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => (
+                      <TextField {...params} />
+                    )}
                   />
                 )}
               </LocalizationProvider>

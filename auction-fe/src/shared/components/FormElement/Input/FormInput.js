@@ -4,7 +4,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import "./FormInput.css";
 
 import {
-  formatCurrency,
+  formatCurrentUS,
   formatIdentityCard,
   formatPhoneNumber,
 } from "../../../format/format-input";
@@ -74,7 +74,7 @@ const FormInput = forwardRef((props, ref) => {
               value = formatPhoneNumber(e.target.value);
               onChange(value);
             } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
-              value = formatCurrency(e.target.value);
+              value = formatCurrentUS(e.target.value);
               onChange(value);
             } else if (
               format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
@@ -99,6 +99,7 @@ const FormInput = forwardRef((props, ref) => {
                     (!endAdornment && "text") ||
                     (isShowPassword && endAdornment ? "text" : "password")
                   }
+                  ref={ref}
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}
@@ -108,6 +109,7 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   className={className}
                   variant={variant}
+                  required={requiredForm}
                   InputProps={
                     ({ classes: inputClass },
                     endAdornment && {
@@ -138,6 +140,8 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   readOnly={readOnly}
                   onFocus={onFocus}
+                  formClass={formClass}
+                  inputClass={inputClass}
                 />
               )}
             </>

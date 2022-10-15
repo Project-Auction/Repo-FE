@@ -3,24 +3,24 @@ import "./Input.css";
 
 const CustomFormInput = forwardRef((props, ref) => {
   const {
-    formClass,
-    id,
     label,
     type,
+    defaultValue,
+    inputRef,
     placeholder,
+    onFocus,
     onChange,
     required,
     readOnly,
-    onFocus,
     value,
     error,
     fullWidth,
-    inputClass,
     noBorder,
-    defaultValue,
-    inputRef,
+    id,
+    formClass,
+    inputClass,
   } = props;
-  
+
   const handleOnFocus = () => {
     onFocus(true);
   };
