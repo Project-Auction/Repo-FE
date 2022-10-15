@@ -18,6 +18,7 @@ const CustomFormInput = forwardRef((props, ref) => {
     inputClass,
     noBorder,
     defaultValue,
+    inputRef,
   } = props;
 
   const handleOnFocus = () => {
@@ -36,7 +37,7 @@ const CustomFormInput = forwardRef((props, ref) => {
       <input
         className={classes}
         id={id}
-        ref={ref}
+        ref={inputRef}
         type={type}
         placeholder={placeholder}
         onChange={onChange}

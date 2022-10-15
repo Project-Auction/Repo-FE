@@ -45,6 +45,7 @@ const FormInputTime = (props) => {
                     inputFormat={inputFormat}
                     value={value}
                     onChange={onChangeValue}
+                    defaultCalendarMonth
                     renderInput={(params) => <TextField {...params} />}
                   />
                 )}
