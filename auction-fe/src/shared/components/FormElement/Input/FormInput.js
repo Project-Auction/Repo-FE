@@ -36,6 +36,8 @@ const FormInput = forwardRef((props, ref) => {
     requiredForm,
     endAdornment,
     onFocus,
+    inputClass,
+    formClass,
   } = props;
   const { control } = useFormContext();
 
@@ -107,6 +109,7 @@ const FormInput = forwardRef((props, ref) => {
                   className={className}
                   variant={variant}
                   InputProps={
+                    ({ classes: inputClass },
                     endAdornment && {
                       endAdornment: (
                         <IconButton
@@ -118,7 +121,7 @@ const FormInput = forwardRef((props, ref) => {
                           {!isShowPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       ),
-                    }
+                    })
                   }
                 />
               ) : (

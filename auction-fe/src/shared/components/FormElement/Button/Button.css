@@ -54,6 +54,15 @@
     background-color: var(--primary-color);
 }
 
+.button--dark {
+    background-color: var(--primary-dashboard-color);
+    color: #fff;
+}
+
+.button--dark:hover {
+    opacity: 0.9;
+}
+
 /*Size*/
 .button--small {
     height: 40px;

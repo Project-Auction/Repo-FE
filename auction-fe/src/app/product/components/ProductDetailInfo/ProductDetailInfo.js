@@ -10,6 +10,8 @@ import Modal from "../../../../shared/components/UIElement/Modal";
 import Table from "../../../../shared/components/UIElement/Table";
 
 import { HEADER_GRID, DUMMY_PRODUCTS } from "../../../home/page/home/Home";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGavel, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const ProductDetailInfo = (props) => {
   const methods = useForm();
@@ -53,61 +55,66 @@ const ProductDetailInfo = (props) => {
 
           <span className="sub-title">Code Product: ThinkpadT15NK02NO</span>
 
-          <h3 className="title">Thời gian đấu giá</h3>
+          <h3 className="title">Time For Auction</h3>
           <div className="product-detail__info-group">
             <span className="product-detail__info-item">
-              Ngày bắt đầu
+              Start Date
               <p>16h00 12/06/2001</p>
             </span>
 
             <span className="product-detail__info-item">
-              Ngày kết thúc
+              End Date
               <p>16h00 12/06/2001</p>
             </span>
 
             <span className="product-detail__info-item">
-              Thời gian còn lại
+              Remaining Time
               <p>2:00:00</p>
             </span>
           </div>
 
-          <h3 className="title">Tình trạng</h3>
+          <h3 className="title">Status</h3>
           <div className="product-detail__info-group">
             <span className="product-detail__info-item">
-              Giá gốc
+              Original Price
               <p>300.000 VND</p>
             </span>
 
             <span className="product-detail__info-item">
-              Giá hiện tại
+              Current Price
               <p>300.000 VND</p>
             </span>
 
             <span className="product-detail__info-item">
-              Mỗi lần tăng ít nhất
-              <p>300.000 VND</p>
+              Each increase at least<p>300.000 VND</p>
             </span>
           </div>
 
-          <h3 className="title">Giá của bạn</h3>
+          <h3 className="title">Your Price</h3>
 
           <CustomFormProvider {...methods}>
-            <form
-              className="product-detail__info-group"
-              onSubmit={methods.handleSubmit(onSubmit)}
-            >
-              <FormInput
-                isMui
-                fieldName="priceAuction"
-                element="input"
-                type="number"
-                placeholder="Nhập giá của bạn"
-                required
-                fullWidth
-                onFocus={() => {}}
-              />
-              <ButtonField type="submit" primary>
-                Đấu giá
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <div className="price__auction product-detail__info-group">
+                <button className="btn__jump-price">
+                  <FontAwesomeIcon className="icon" icon={faMinus} />
+                </button>
+                <FormInput
+                  fieldName="priceAuction"
+                  element="input"
+                  type="number"
+                  placeholder="Nhập giá của bạn"
+                  required
+                  fullWidth
+                  onFocus={() => {}}
+                />
+                <button className="btn__jump-price">
+                  <FontAwesomeIcon className="icon" icon={faPlus} />
+                </button>
+              </div>
+
+              <ButtonField type="submit" primary className="btn__auction">
+                <FontAwesomeIcon icon={faGavel} className="icon" />
+                Auction
               </ButtonField>
             </form>
           </CustomFormProvider>
@@ -116,7 +123,7 @@ const ProductDetailInfo = (props) => {
 
       <CardField className="product-detail__info-container footer">
         <ButtonField primary onClick={handleOpenModal} type="button">
-          DANH SÁCH ĐANG ĐẤU GIÁ
+          List Of Auction
         </ButtonField>
       </CardField>
     </>

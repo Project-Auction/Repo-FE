@@ -41,6 +41,13 @@ export const formatIdentityCard = (value) => {
   )} - ${phoneNumber.slice(6, 9)}`;
 };
 
+/* Format currency dollar */
+const formatCurrentUS = (value) => {
+  const number = parseFloat(value);
+
+  return "$" + number.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+};
+
 /* Format currency */
 const formatCurrency = (value) => {
   if (!value) {
@@ -81,4 +88,4 @@ const formatCurrency = (value) => {
   )} , ${currencyNumber.slice(6, 9)} VND`;
 };
 
-export { formatPhoneNumber, formatCurrency };
+export { formatPhoneNumber, formatCurrency, formatCurrentUS };

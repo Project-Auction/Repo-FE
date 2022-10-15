@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import "./Table.css";
 
 import { useForm } from "react-hook-form";
 
 import CheckboxField from "../../FormElement/Checkbox";
-import SelectFilter from "../Filter/SelectFilter";
-import { FormInput } from "../../FormElement/Input";
 import ButtonFiled from "../../FormElement/Button";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
-import SelectField from "../../FormElement/Select/SelectField";
+import Pagination from "../Pagination";
+import usePaginate from "../../../hook/usePaginate";
 
 export const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -22,25 +21,36 @@ const Table = (props) => {
   ? props.select to use Checkbox in table
   ? props.filter to use feature search with filter in table
   ? props.search to use search in table
+
+  ! header = [{id  , field}]
   */
   const {
     items,
     header,
-    filter,
     select,
     striped,
     bordered,
     thPrimary,
     thLight,
+    thDark,
+    colorCheckbox = "#fff",
+    colorCheckedCheckbox = "#ff3366",
   } = props;
 
   const methods = useForm();
 
-  const classes = `table 
+  /* Define to paginate */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [capacityPage, setCapacityPage] = useState(6);
+  const { paginate } = usePaginate();
+  const storage = paginate(items, currentPage, capacityPage);
+
+  const classes = `table
   ${bordered && "table-bordered"}  
   ${striped && "table-striped"}
   ${thPrimary && "thead-primary"}
-  ${thLight && "thead-light"}`;
+  ${thLight && "thead-light"}
+  ${thDark && "thead-dark"}`;
 
   /* Set state checked for Checkbox */
   const [checkedState, setCheckedState] = useState(
@@ -83,103 +93,82 @@ const Table = (props) => {
     console.log(itemsSelected);
   };
 
+  /* Handle redirect page */
+  const handleRedirectPage = useCallback((pageNumber) => {
+    setCurrentPage(pageNumber);
+  }, []);
+
   return (
-    <div className="table__container table-responsive">
+    <div className="table__container">
       <CustomFormProvider {...methods}>
         <form>
-          {filter && (
-            <div className="table__filter-container">
-              <div className="row align-items-center">
-                <div className="col-5">
-                  {/* Search Input */}
-                  <FormInput
-                    element="input"
-                    fieldName="searchInputTable"
-                    required
-                    placeholder="Nhập tên khách hàng"
-                    fullWidth
-                    className="table__filter-input"
-                    onFocus={() => {}}
-                  />
-                  {/* Search Input */}
-                </div>
-
-                <div className="col-7 d-flex align-items-center">
-                  <SelectField
-                    fieldName="selectInputTable"
-                    width="150px"
-                    items={options}
-                    defaultValue={options[0].value}
-                    label="Tìm kiếm"
-                    variant="outlined"
-                  />
-
-                  <SelectFilter
-                    options={options}
-                    isMulti
-                    autoFocus
-                    isSearchable
-                    className="search-filter"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-
-          <table className={classes}>
-            <thead className={classes}>
-              <tr>
-                {select && (
-                  <th scope="col" className="selecting">
-                    <CheckboxField
-                      fontSize={22}
-                      color="#000"
-                      checkedColor="#ff3366"
-                      onChange={(e) => handleCheckedAll(e)}
-                    />
-                  </th>
-                )}
-                {header.map((header, index) => (
-                  <th scope="col" key={index}>
-                    {header.field}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item, pos) => (
-                <tr key={pos}>
+          <div className="table-responsive">
+            <table className={classes}>
+              <thead className={classes}>
+                <tr>
                   {select && (
-                    <th>
+                    <th scope="col" className="selecting">
                       <CheckboxField
                         fontSize={22}
-                        color="#000"
-                        checkedColor="#ff3366"
-                        onChange={(e) => handleChange(item, pos, e)}
-                        checked={checkedState[pos]}
+                        color={colorCheckbox}
+                        checkedColor={colorCheckedCheckbox}
+                        onChange={(e) => handleCheckedAll(e)}
                       />
                     </th>
                   )}
-                  <th scope="row">{item.codeProduct}</th>
-                  <td>{item.name}</td>
-                  <td>{item.headerTitle}</td>
-                  <td>{item.initialPrice}</td>
+                  {header.map((header, index) => (
+                    <th scope="col" key={index}>
+                      {header.field}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {storage.map((item, pos) => (
+                  <tr key={pos}>
+                    {select && (
+                      <th>
+                        <CheckboxField
+                          fontSize={22}
+                          color={colorCheckbox}
+                          checkedColor={colorCheckedCheckbox}
+                          onChange={(e) => handleChange(item, pos, e)}
+                          checked={checkedState[pos]}
+                        />
+                      </th>
+                    )}
+                    <th scope="row">{item.codeProduct}</th>
+                    <td>{item.name}</td>
+                    <td>{item.headerTitle}</td>
+                    <td>{item.initialPrice}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           {props.select && (
-            <ButtonFiled
-              type="submit"
-              onClick={handleSubmit}
-              primary
-              size="small"
-            >
-              Xóa
-            </ButtonFiled>
+            <div className="d-flex justify-content-end">
+              <ButtonFiled
+                type="submit"
+                onClick={handleSubmit}
+                primary
+                size="small"
+              >
+                Xóa
+              </ButtonFiled>
+            </div>
           )}
         </form>
       </CustomFormProvider>
+
+      {/* Pagination */}
+      <Pagination
+        capacityPage={capacityPage}
+        totalData={items.length}
+        currentPage={currentPage}
+        onRedirect={handleRedirectPage}
+      />
+      {/* Pagination */}
     </div>
   );
 };
