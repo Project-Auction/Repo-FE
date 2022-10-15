@@ -11,34 +11,29 @@ import {
 import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import { validateEmail } from "../../../../utils/validate_form";
 import CustomFormInput from "./CustomFormInput";
 import Constants from "../../../../utils/Constants";
+import { validateForm } from "../../../../utils/Validator";
 
 const FormInput = forwardRef((props, ref) => {
   const {
-    isMui,
+    validators = [],
     fieldName,
     defaultValue,
     placeholder,
+    isMui = false,
     variant,
     format,
     label,
     helperText,
     autoComplete,
     margin,
-    readOnly,
+    readOnly = false,
     noBorder,
     type,
     fullWidth,
     className,
     requiredForm,
-    messageRequired,
-    minLengthForm,
-    minLengthMessage,
-    maxLengthForm,
-    maxLengthMessage,
-    emailRequired,
     endAdornment,
     onFocus,
     inputClass,
@@ -59,10 +54,19 @@ const FormInput = forwardRef((props, ref) => {
   return (
     <>
       <Controller
-        name={fieldName}
         control={control}
+        name={fieldName}
+        rules={{
+          validate: {
+            validate: (value) => {
+              if (validators.length >= 1) {
+                return validateForm(value, validators);
+              }
+            },
+          },
+        }}
         render={({
-          field: { onChange, value = "" },
+          field: { onChange, value = "", ref },
           fieldState: { error },
         }) => {
           const onChangeValue = (e) => {
@@ -88,14 +92,13 @@ const FormInput = forwardRef((props, ref) => {
               {isMui ? (
                 <TextField
                   label={label}
-                  variant={variant}
+                  inputRef={ref}
                   placeholder={placeholder}
                   defaultValue={defaultValue}
                   type={
                     (!endAdornment && "text") ||
                     (isShowPassword && endAdornment ? "text" : "password")
                   }
-                  ref={ref}
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}
@@ -104,6 +107,7 @@ const FormInput = forwardRef((props, ref) => {
                   margin={margin}
                   fullWidth={fullWidth}
                   className={className}
+                  variant={variant}
                   InputProps={
                     ({ classes: inputClass },
                     endAdornment && {
@@ -123,48 +127,21 @@ const FormInput = forwardRef((props, ref) => {
               ) : (
                 <CustomFormInput
                   label={label}
-                  readOnly={readOnly}
+                  inputRef={ref}
                   onChange={onChangeValue}
                   defaultValue={defaultValue}
+                  value={value}
                   error={error}
                   noBorder={noBorder}
                   required={requiredForm}
                   type={type}
-                  value={value}
                   fullWidth={fullWidth}
+                  readOnly={readOnly}
                   onFocus={onFocus}
-                  ref={ref}
-                  inputClass={inputClass}
-                  formClass={formClass}
-                  placeholder={placeholder}
                 />
               )}
             </>
           );
-        }}
-        rules={{
-          validate: {
-            validateRequired: (value) => {
-              if (!value) {
-                return requiredForm && messageRequired;
-              }
-            },
-            validateEmail: (value) => {
-              if (emailRequired) {
-                return validateEmail(value) || "Email is invalid";
-              }
-            },
-            validateMinlength: (value) => {
-              if (!!minLengthForm && value.length < minLengthForm) {
-                return minLengthMessage;
-              }
-            },
-            validateMaxLength: (value) => {
-              if (!!maxLengthForm && value.length < maxLengthForm) {
-                return maxLengthMessage;
-              }
-            },
-          },
         }}
       />
     </>

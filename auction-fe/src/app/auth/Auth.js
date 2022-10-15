@@ -4,33 +4,29 @@ import { Link } from "react-router-dom";
 
 import "./Auth.css";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
 import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
 import ButtonFiled from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MATCHING,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRED,
+} from "../../utils/Validator";
 
 const Auth = () => {
-  const formSchema = Yup.object().shape({
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Password not matching"
-    ),
-  });
-
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: true,
-    resolver: yupResolver(formSchema),
   });
 
-  const { errors } = methods.formState;
-
   const [isLoginMode, setIsLoginMode] = useState(false);
+
+  /* Get passwords to validate matching */
+  const password = methods.watch("password");
 
   const handleSwitchMode = () => {
     setIsLoginMode((prev) => !prev);
@@ -97,18 +93,22 @@ const Auth = () => {
                   <div className="form__auth-group">
                     <FormInput
                       isMui
-                      variant="outlined"
                       fieldName="username"
                       type="text"
                       fullWidth
                       onFocus={() => {}}
                       label="Full Name"
+                      requiredForm
                       noBorder
                       className="mr-4"
-                      requiredForm
-                      messageRequired="Username cannot be empty"
-                      minLengthForm={6}
-                      minLengthMessage="Username at least 6 characters"
+                      variant="outlined"
+                      validators={[
+                        VALIDATOR_REQUIRED("Full name cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Full name at least 9 characters"
+                        ),
+                      ]}
                     />
                     <FormInput
                       isMui
@@ -119,9 +119,13 @@ const Auth = () => {
                       required
                       label="Account Name"
                       requiredForm
-                      messageRequired="Account name cannot be empty"
-                      minLengthForm={6}
-                      minLengthMessage="Account name at least 6 characters"
+                      validators={[
+                        VALIDATOR_REQUIRED("Account name cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Account name at least 9 characters"
+                        ),
+                      ]}
                     />
                   </div>
                 )}
@@ -136,10 +140,11 @@ const Auth = () => {
                     className="mr-4"
                     label="Email"
                     requiredForm
-                    messageRequired="Email cannot be empty"
-                    minLengthForm={6}
-                    minLengthMessage="Email at least be 6 characters"
-                    emailRequired
+                    validators={[
+                      VALIDATOR_REQUIRED("Email cannot be empty"),
+                      VALIDATOR_MINLENGTH(9, "Email at least 9 characters"),
+                      VALIDATOR_EMAIL("Email is invalid"),
+                    ]}
                   />
 
                   {!isLoginMode && (
@@ -148,7 +153,9 @@ const Auth = () => {
                       dataType="date_timer_picker"
                       label="Date of birth"
                       requiredForm
-                      messageRequired="Date of birth cannot be empty"
+                      validators={[
+                        VALIDATOR_REQUIRED("Date of birth cannot be empty"),
+                      ]}
                     />
                   )}
                 </div>
@@ -165,9 +172,13 @@ const Auth = () => {
                       label="Phone Number"
                       format="phone_number"
                       requiredForm
-                      messageRequired="Phone number cannot be empty"
-                      minLengthForm={9}
-                      minLengthMessage="Phone number at least be 9 characters"
+                      validators={[
+                        VALIDATOR_REQUIRED("Phone number cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Phone number at least 9 characters"
+                        ),
+                      ]}
                     />
 
                     <FormInput
@@ -179,9 +190,13 @@ const Auth = () => {
                       label="Identity Number"
                       format="identity_card"
                       requiredForm
-                      messageRequired="Identity number cannot be empty"
-                      minLengthForm={9}
-                      minLengthMessage="Identity number at least be 9 characters"
+                      validators={[
+                        VALIDATOR_REQUIRED("Identity numbers cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Identity numbers at least 9 characters"
+                        ),
+                      ]}
                     />
                   </div>
                 )}
@@ -196,10 +211,11 @@ const Auth = () => {
                     className="mr-4"
                     label="Password"
                     requiredForm
-                    messageRequired="Password cannot be empty"
-                    minLengthForm={6}
-                    minLengthMessage="Password at least be 6 characters"
                     endAdornment
+                    validators={[
+                      VALIDATOR_REQUIRED("Password cannot be empty"),
+                      VALIDATOR_MINLENGTH(6, "Password at least 6 characters"),
+                    ]}
                   />
 
                   {!isLoginMode && (
@@ -211,10 +227,15 @@ const Auth = () => {
                       onFocus={() => {}}
                       label="Confirm Password"
                       requiredForm
-                      messageRequired="Password cannot be empty"
-                      minLengthForm={6}
-                      minLengthMessage="Password at least be 6 characters"
                       endAdornment
+                      validators={[
+                        VALIDATOR_REQUIRED("Confirm password cannot be empty"),
+                        VALIDATOR_MATCHING(password, "Password not matching"),
+                        VALIDATOR_MINLENGTH(
+                          6,
+                          "Password at least 6 characters"
+                        ),
+                      ]}
                     />
                   )}
                 </div>
@@ -231,7 +252,7 @@ const Auth = () => {
                 </div>
 
                 <div className="footer">
-                  <ButtonFiled green fullWidth disabled={!!errors}>
+                  <ButtonFiled type="submit" green fullWidth>
                     {!isLoginMode ? "Register" : "Login"}
                   </ButtonFiled>
 
