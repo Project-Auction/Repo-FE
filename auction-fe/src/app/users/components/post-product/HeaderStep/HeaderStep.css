@@ -9,7 +9,7 @@
 }
 
 .header__step-form-container.active {
-    background-color: var(--primary-dashboard-color-ver-2);
+    background-color: var(--dark-color);
 }
 
 .header__step-form-container.active .header__step-form-title ,
@@ -19,7 +19,7 @@
 
 .header__step-form-numbers {
     background-color: #fff;
-    color: var(--primary-dashboard-color-ver-2);
+    color: var(--dark-color);
     font-size: 2rem !important;
     font-weight: 700;
 }
