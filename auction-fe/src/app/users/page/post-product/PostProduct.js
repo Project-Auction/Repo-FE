@@ -1,5 +1,7 @@
 import { useState } from "react";
+import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
 import FormProductInfo from "../../components/post-product/FormProductInfo/FormProductInfo";
+import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInfo";
 import "./PostProduct.css";
 
 const PostProduct = (props) => {
@@ -11,13 +13,13 @@ const PostProduct = (props) => {
         return <FormProductInfo />;
 
       case 1:
-        return "1";
+        return <FormProductDetail />;
 
       case 2:
-        return "2";
+        return <FormUserInfo />;
 
       default:
-        return "hi";
+        return <FormProductInfo />;
     }
   };
 

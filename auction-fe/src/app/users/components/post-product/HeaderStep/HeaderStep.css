@@ -3,16 +3,25 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    background-color: var(--primary-color);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    background-color: #fff;
+}
+
+.header__step-form-container.active {
+    background-color: var(--primary-dashboard-color-ver-2);
+}
+
+.header__step-form-container.active .header__step-form-title ,
+.header__step-form-container.active .header__step-form-sub {
+    color: #fff;
 }
 
 .header__step-form-numbers {
     background-color: #fff;
-    color: var(--primary-color);
+    color: var(--primary-dashboard-color-ver-2);
     font-size: 2rem !important;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .header__step-form-numbers.circle {
@@ -22,14 +31,15 @@
 
 .header__step-form-container .title {
     margin-left: 12px;
-    color: #fff;
 }
 
 .header__step-form-title {
-    margin-bottom: 2px;
+    margin-bottom: -5px;
     font-weight: 600;
+    color: var(--font-color);
 }
 
 .header__step-form-sub {
+    color: #888;
     font-size: 1.4rem;
 }

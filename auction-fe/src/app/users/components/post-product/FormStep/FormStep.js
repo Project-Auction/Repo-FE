@@ -17,12 +17,14 @@ const FormStep = (props) => {
           </header>
 
           <CustomFormProvider {...methods}>
-            <div className="form__step-header">
-              <HeaderStep numberStep="01" subTitleStep={"Ad Information"} />
-              <HeaderStep numberStep="02" subTitleStep={"Ad details"} />
-              <HeaderStep numberStep="03" subTitleStep={"User Information"} />
+            <div className="form__step-form-body">
+              <div className="form__step-form-header">
+                <HeaderStep numberStep="01" isActive subTitleStep={"Ad Information"} />
+                <HeaderStep numberStep="02" subTitleStep={"Ad details"} />
+                <HeaderStep numberStep="03" subTitleStep={"User Information"} />
+              </div>
+              <form className="form__step-form">{props.children}</form>
             </div>
-            <form className="form__step-form">{props.children}</form>
           </CustomFormProvider>
         </div>
       </DashboardUser>

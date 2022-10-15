@@ -5,7 +5,7 @@ const FormProductInfo = (props) => {
   return (
     <FormStep>
       <div className="form__input-container">
-        <h1>Hello</h1>
+        <h1>FormProductInfo</h1>
       </div>
     </FormStep>
   );
