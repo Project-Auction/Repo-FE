@@ -12,6 +12,10 @@
     padding: 0px 20px 10px 20px;
 }
 
+.form__step-header .title {
+    font-size: 2rem;
+}
+
 /* Form step form */
 .form__step-form-header {
     display: flex;

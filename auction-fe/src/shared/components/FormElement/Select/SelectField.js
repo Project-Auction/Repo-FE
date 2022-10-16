@@ -6,8 +6,6 @@ import {
   Select,
 } from "@mui/material";
 
-import MenuItemOption from "@mui/material/MenuItem";
-
 import { Controller, useFormContext } from "react-hook-form";
 
 import "./Select.css";
@@ -35,7 +33,8 @@ function SelectField(props) {
 
   const { control } = useFormContext();
 
-  const classes = `form--select ${className}`;
+  const classes = `form--select ${className}
+  ${fullWidth && "full--width"}`;
 
   return (
     <Controller
@@ -84,18 +83,21 @@ function SelectField(props) {
                 </FormHelperText>
               </FormControl>
             ) : (
-              <select
-                onChange={onChangeValue}
-                className={classes}
-                onError={error}
-                defaultValue={defaultValue}
-              >
-                {items.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
+              <div className={classes}>
+                <label htmlFor={id}>{label}</label>
+                <select
+                  onChange={onChangeValue}
+                  onError={error}
+                  defaultValue={defaultValue}
+                  fullWidth={fullWidth}
+                >
+                  {items.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             )}
           </>
         );

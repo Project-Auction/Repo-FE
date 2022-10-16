@@ -15,6 +15,10 @@ const PostProduct = (props) => {
 
   const [steps, setSteps] = useState(0);
 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   const handleNextStep = () => {
     setSteps(steps + 1);
   };
@@ -66,7 +70,12 @@ const PostProduct = (props) => {
                   subTitleStep={"User Information"}
                 />
               </div>
-              <form className="form__step-form">{conditionalComponents()}</form>
+              <form
+                className="form__step-form"
+                onSubmit={methods.handleSubmit(onSubmit)}
+              >
+                {conditionalComponents()}
+              </form>
             </div>
 
             <div className="form__step-form-footer">
@@ -82,7 +91,7 @@ const PostProduct = (props) => {
 
               {steps < 2 && (
                 <ButtonFiled
-                  type="button"
+                  type={`${steps < 2 ? "button" : "submit"}`}
                   onClick={handleNextStep}
                   className="btn__redirect-form next"
                   dark

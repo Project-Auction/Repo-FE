@@ -10,7 +10,11 @@
     align-items: center;
 }
 
-.form--select {
+.form--select.full--width select {
+    width: 100%;
+}
+
+.form--select select {
     height: 50px;
     font-size: 1.6rem;
     display: flex;
@@ -19,4 +23,9 @@
     padding: 0 12px;
     border: 1px solid var(--border-color);
     outline: none;
+}
+
+label {
+    font-weight: 600;
+    font-size: 1.6rem;
 }
