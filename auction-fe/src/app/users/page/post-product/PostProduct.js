@@ -91,12 +91,23 @@ const PostProduct = (props) => {
 
               {steps < 2 && (
                 <ButtonFiled
-                  type={`${steps < 2 ? "button" : "submit"}`}
+                  type="button"
                   onClick={handleNextStep}
                   className="btn__redirect-form next"
                   dark
                 >
                   Next Step
+                </ButtonFiled>
+              )}
+
+              {steps === 2 && (
+                <ButtonFiled
+                  type="submit"
+                  // onClick={handleNextStep}
+                  className="btn__redirect-form next"
+                  dark
+                >
+                  Submit
                 </ButtonFiled>
               )}
             </div>
