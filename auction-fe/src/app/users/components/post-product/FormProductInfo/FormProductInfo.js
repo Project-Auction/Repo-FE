@@ -5,14 +5,14 @@ import "./FormProductInfo.css";
 
 const FormProductInfo = (props) => {
   return (
-    <div className="form__input-container">
+    <div className="form__input-post__product-container">
       <FormInput
         fieldName="codeProduct"
         label="Code Product (*)"
         fullWidth
         onFocus={() => {}}
         placeholder="Enter product's code"
-        formClass="form__input-form"
+        formClass="form__input-post__product-form"
       />
 
       <FormInput
@@ -21,7 +21,7 @@ const FormProductInfo = (props) => {
         fullWidth
         onFocus={() => {}}
         placeholder="Enter product's name"
-        formClass="form__input-form"
+        formClass="form__input-post__product-form"
       />
 
       <SelectField
@@ -29,7 +29,7 @@ const FormProductInfo = (props) => {
         label="Category (*)"
         items={options}
         fullWidth
-        className="form__input-form"
+        className="form__input-post__product-form"
       />
     </div>
   );
