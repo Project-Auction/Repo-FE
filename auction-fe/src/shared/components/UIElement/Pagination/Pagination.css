@@ -1,0 +1,25 @@
+.pagination__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination__wrapper .page-item {
+    margin: 0 6px;
+    color: var(--font-color);
+    transition: all 0.2s;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+.pagination__wrapper .page-item.active {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.pagination__wrapper .page-item:hover {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}

@@ -1,0 +1,62 @@
+:root {
+    --height-thead: 40px;
+}
+
+.table__container {
+    border-radius: 8px;
+}
+
+.table__container .table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.6rem;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.table__container .selecting {
+    width: 60px;
+}
+
+.table__container .thead-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.table__container thead.thead-dark {
+    background-color: var(--primary-dashboard-color);
+    color: #fff;
+}
+
+.table__container thead {
+    height: var(--height-thead);
+}
+
+.table__container thead th,
+.table__container td,
+.table__container th {
+    height: calc(var(--height-thead) + 2px);
+    line-height: var(--height-thead);
+}
+
+/* Filter */
+.table__filter-container {
+    padding: 18px;
+    margin: 24px 0;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.table__filter-container .table__filter-input {
+    flex: 1;
+}
+
+.search-filter {
+    flex: 1;
+}
+
+.css-1s2u09g-control {
+    height: 50px;
+}
