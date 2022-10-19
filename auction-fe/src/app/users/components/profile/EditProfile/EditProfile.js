@@ -38,7 +38,7 @@ const EditProfile = (props) => {
 
         <div className="form__edit-profile-body">
           <div className="form__edit-profile-body__avatar">
-            <UploadImage onInput={handleGetUrlImage} />
+            <UploadImage onInput={handleGetUrlImage} className="form__edit-profile-body__avatar-img" />
           </div>
 
           <CustomFormProvider {...methods}>
