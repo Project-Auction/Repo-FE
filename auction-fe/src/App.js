@@ -20,6 +20,7 @@ import TransactionsList from "./app/admin/components/transaction-management/Tran
 import ProfileUser from "./app/users/page/profile/ProfileUser";
 import EditProfile from "./app/users/components/profile/EditProfile";
 import PostProduct from "./app/users/page/post-product/PostProduct";
+import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -44,6 +45,7 @@ function App() {
               <Route path="/:userId/profile" element={<ProfileUser />} />
               <Route path="/:userId/edit" element={<EditProfile />} />
               <Route path="/:userId/post-product" element={<PostProduct />} />
+              <Route path="/:userId/invoices" element={<InvoiceUser />} />
             </Route>
             {/* Logged In page */}
 
