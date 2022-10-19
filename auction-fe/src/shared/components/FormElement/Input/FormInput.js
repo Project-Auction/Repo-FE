@@ -142,6 +142,7 @@ const FormInput = forwardRef((props, ref) => {
                   onFocus={onFocus}
                   formClass={formClass}
                   inputClass={inputClass}
+                  placeholder={placeholder}
                 />
               )}
             </>

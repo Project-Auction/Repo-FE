@@ -19,6 +19,7 @@ import ProductsList from "./app/admin/components/product-management/ProductsList
 import TransactionsList from "./app/admin/components/transaction-management/TransactionsList";
 import ProfileUser from "./app/users/page/profile/ProfileUser";
 import EditProfile from "./app/users/components/profile/EditProfile";
+import PostProduct from "./app/users/page/post-product/PostProduct";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -42,6 +43,7 @@ function App() {
               <Route path="/payment" element={<Payment />} />
               <Route path="/:userId/profile" element={<ProfileUser />} />
               <Route path="/:userId/edit" element={<EditProfile />} />
+              <Route path="/:userId/post-product" element={<PostProduct />} />
             </Route>
             {/* Logged In page */}
 

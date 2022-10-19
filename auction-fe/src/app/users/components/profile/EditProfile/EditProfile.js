@@ -11,7 +11,7 @@ import CustomFormProvider from "../../../../../shared/components/FormElement/Cus
 import { FormInput } from "../../../../../shared/components/FormElement/Input";
 import ButtonFiled from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
-import UploadImage from "../../../../../shared/components/FormElement/UploadImage";
+import { UploadImage } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
 
 const EditProfile = (props) => {
   const {} = props;
@@ -38,7 +38,7 @@ const EditProfile = (props) => {
 
         <div className="form__edit-profile-body">
           <div className="form__edit-profile-body__avatar">
-            <UploadImage onInput={handleGetUrlImage} />
+            <UploadImage onInput={handleGetUrlImage} className="form__edit-profile-body__avatar-img" />
           </div>
 
           <CustomFormProvider {...methods}>

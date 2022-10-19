@@ -43,6 +43,18 @@
     color: #333;
 }
 
+.form__edit-profile-body__avatar-img {
+    margin: auto;
+}
+
+.form__edit-profile-body__avatar-img .icon.circle {
+    height: 15px;
+    width: 15px;
+    padding: 5px;
+    background-color: var(--primary-dashboard-color);
+    color: #fff;
+}
+
 /* Form body */
 .form__edit-profile-body-form__group {
     display: flex;
