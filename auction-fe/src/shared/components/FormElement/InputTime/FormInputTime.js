@@ -5,14 +5,23 @@ import {
   DesktopDatePicker,
   LocalizationProvider,
 } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
 import { Controller, useFormContext } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import "../Input/FormInput.css";
 
 const FormInputTime = (props) => {
-  const { fieldName, label, inputFormat = "DD/MM/YYYY", dateType, ref } = props;
+  /*
+   * dateType to choose date or datetimepicker
+   */
+  const {
+    fieldName,
+    label,
+    inputFormat = "DD/MM/YYYY",
+    dateType,
+    ref,
+    className,
+  } = props;
 
   const { control } = useFormContext();
 
@@ -39,9 +48,8 @@ const FormInputTime = (props) => {
                     onChange={onChangeValue}
                     value={value}
                     inputRef={ref}
-                    renderInput={(params) => (
-                      <TextField {...params} />
-                    )}
+                    renderInput={(params) => <TextField {...params} />}
+                    className={className}
                   />
                 ) : (
                   <DesktopDatePicker
@@ -50,9 +58,8 @@ const FormInputTime = (props) => {
                     value={value}
                     inputRef={ref}
                     onChange={onChangeValue}
-                    renderInput={(params) => (
-                      <TextField {...params} />
-                    )}
+                    renderInput={(params) => <TextField {...params} />}
+                    className={className}
                   />
                 )}
               </LocalizationProvider>

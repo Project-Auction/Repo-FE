@@ -1,6 +1,9 @@
-import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
-import { UploadMultipleImages } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
 import "./FormProductDetail.css";
+
+import { UploadMultipleImages } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
+import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
+import TextareaField from "../../../../../shared/components/FormElement/TextareaField";
+import FormInputTime from "../../../../../shared/components/FormElement/InputTime/FormInputTime";
 
 const FormProductDetail = (props) => {
   return (
@@ -29,6 +32,30 @@ const FormProductDetail = (props) => {
         <UploadMultipleImages
           multipleImages
           className="form__input-post__product__image"
+        />
+      </div>
+
+      <div className="form__input-post__product-group">
+        <TextareaField
+          label="Product Description (*)"
+          row={5}
+          fieldName="description"
+          fullWidth
+        />
+      </div>
+
+      <div className="form__input-post__product-group">
+        <FormInputTime
+          label="Start Date (*)"
+          fieldName="startDate"
+          dateType="date_timer_picker"
+          className="form__input-post__product-form"
+        />
+        <FormInputTime
+          label="End Date (*)"
+          fieldName="endDate"
+          dateType="date_timer_picker"
+          className="form__input-post__product-form"
         />
       </div>
     </div>

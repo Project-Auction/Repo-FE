@@ -84,7 +84,7 @@ const UploadMultipleImages = (props) => {
   return (
     <div className="upload__image-container">
       <div className="row">
-        <div className="col-6 pr-0 pl-0">
+        <div className="col-6 pr-0">
           {/* Upload images */}
           <div className="upload__images-main-image">
             <div className="upload__images-main-image-group">
