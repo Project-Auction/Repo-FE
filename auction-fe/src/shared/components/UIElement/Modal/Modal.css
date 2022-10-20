@@ -1,0 +1,63 @@
+.modal__main {
+    z-index: 100;
+    position: fixed;
+    top: 22vh;
+    left: 10%;
+    min-width: 80%;
+    background-color: var(--white-color);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 60vh;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.modal__main-header {
+    width: 100%;
+    padding: 12px 16px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal__main-header h2 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.modal__main-content {
+    padding: 12px 16px;
+}
+
+.modal__main-footer {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.map-container {
+    height: 15rem;
+    width: 100%;
+}
+
+/* CSS for modal */
+.modal__main-enter {
+    transform: translateY(-10rem);
+    opacity: 0;
+}
+
+.modal__main-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 400ms;
+}
+
+.modal__main-exit {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal__main-exit-active {
+    transform: translateY(-10rem);
+    opacity: 0;
+    transition: all 400ms;
+}

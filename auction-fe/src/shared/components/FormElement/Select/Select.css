@@ -1,0 +1,31 @@
+.MuiFormLabel-root.MuiInputLabel-root,
+.MuiButtonBase-root.MuiMenuItem-root {
+    font-size: 1.6rem;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+    font-size: 1.6rem;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.form--select.full--width select {
+    width: 100%;
+}
+
+.form--select select {
+    height: 50px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 12px;
+    border: 1px solid var(--border-color);
+    outline: none;
+}
+
+label {
+    font-weight: 600;
+    font-size: 1.6rem;
+}

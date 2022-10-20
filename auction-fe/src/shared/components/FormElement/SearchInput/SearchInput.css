@@ -1,0 +1,62 @@
+.form-input__search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.close-icon,
+.spinner-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    font-size: 2.2rem;
+    color: var(--font-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+
+.form-input__search .close-icon {
+    height: 20px;
+    width: 20px;
+    transform: translateY(-50%);
+}
+
+/* CSS for spinner */
+.spinner-icon {
+    animation: spinner 0.8s linear infinite;
+}
+
+/* Popper Wrapper */
+.popper__search {
+    position: relative;
+    top: 0;
+    left: 24px;
+    padding: 12px;
+}
+
+/* Search result*/
+.search-result {
+    width: calc(var(--width-header-inner-search) - 24px);
+    max-height: 45vh;
+}
+
+/* Search no result */
+.popper__no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popper__no-result img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.popper__no-result .message {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 6px;
+}

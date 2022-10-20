@@ -1,0 +1,13 @@
+/* Right area */
+.dashboard__admin-right-area {
+    background-color: #f5f7fa;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.dashboard__admin-right-area .admin__content {
+    margin: 24px 39px 24px 24px;
+    padding-bottom: 24px;
+    /*background-color: #fff;
+    border-radius: 5px; */
+}

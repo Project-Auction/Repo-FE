@@ -1,0 +1,28 @@
+.header__admin-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: #fff;
+}
+
+.header__admin-container .left-area .title {
+    font-size: 2.6rem;
+    font-weight: 700;
+}
+
+.header__admin-container .left-area .sub-title {
+    font-size: 1.6rem;
+    color: #888;
+    font-weight: 400;
+}
+
+/* Notification */
+.header__admin-container .right-area .notification .ring {
+    color: var(--font-color);
+    cursor: pointer;
+}
+
+.header__admin-container .right-area .notification:hover .ring {
+    color: #fff;
+}

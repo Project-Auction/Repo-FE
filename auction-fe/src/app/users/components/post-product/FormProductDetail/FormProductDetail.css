@@ -1,0 +1,13 @@
+.form__input-post__product-group {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+}
+
+.form__input-post__product-form {
+    width: 100%;
+}
+
+.form__input-post__product-group .form__input-post__product-form:not(:last-child) {
+    margin-right: 24px;
+}

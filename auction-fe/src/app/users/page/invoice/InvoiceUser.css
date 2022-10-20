@@ -1,0 +1,12 @@
+.dashboard__right-area-container {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    padding: 20px 0;
+}
+
+.dashboard__title-user__header {
+    padding: 0 20px 20px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+}
