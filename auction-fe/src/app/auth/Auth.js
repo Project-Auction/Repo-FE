@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -16,12 +16,16 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRED,
 } from "../../utils/Validator";
+import { useHttpClient } from "../../shared/hook/http-client";
+import RegionDropdown from "./RegionDropdown";
 
 const Auth = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: true,
   });
+
+  const { sendRequest, error, isLoading, clearError } = useHttpClient();
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -239,6 +243,10 @@ const Auth = () => {
                     />
                   )}
                 </div>
+
+                {/* Region */}
+                <RegionDropdown />
+                {/* Region */}
 
                 <div className="forget-password">
                   <div className="d-flex align-items-center justify-content-center">

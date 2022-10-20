@@ -91,15 +91,23 @@ function NavLinks() {
 
           {!authContext.isLoggedIn && (
             <>
-              <li className="btn__header" onClick={authContext.login}>
+              <Link
+                to="/auth"
+                className="btn__header"
+                onClick={authContext.login}
+              >
                 <FontAwesomeIcon icon={faUser} />
                 <span>Register</span>
-              </li>
+              </Link>
 
-              <li className="btn__header" onClick={authContext.login}>
+              <Link
+                to="/auth"
+                className="btn__header"
+                onClick={authContext.login}
+              >
                 <FontAwesomeIcon icon={faRightToBracket} />
                 <span>Login</span>
-              </li>
+              </Link>
             </>
           )}
         </div>
