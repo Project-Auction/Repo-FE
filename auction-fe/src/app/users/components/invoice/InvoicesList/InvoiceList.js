@@ -1,8 +1,11 @@
 import "./InvoiceList.css";
-import InvoiceUser from "../../../page/invoice/InvoiceUser";
 
 const InvoiceList = (props) => {
-  return <InvoiceUser>HI</InvoiceUser>;
+  return (
+    <div className="invoice__list-user-container">
+      <h3 className="dashboard__title-user__header">Invoices</h3>
+    </div>
+  );
 };
 
 export default InvoiceList;

@@ -32,7 +32,7 @@ const EditProfile = (props) => {
   return (
     <ProfileUser>
       <div className="form__edit-profile-container">
-        <header className="form__edit-profile-header">
+        <header className="dashboard__title-user__header">
           <h3>Profile Settings</h3>
         </header>
 
