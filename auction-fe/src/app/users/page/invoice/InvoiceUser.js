@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import InvoiceList from "../../components/invoice/InvoicesList";
 import DashboardUser from "../user-dashboard/DashboardUser";
 import "./InvoiceUser.css";
 
@@ -9,7 +8,11 @@ const InvoiceUser = (props) => {
   return (
     <>
       <DashboardUser currentPage="Invoice">
-        <InvoiceList />
+        <div className="dashboard__right-area-container">
+          <h3 className="dashboard__title-user__header">Invoices</h3>
+
+          <div className="invoice__list-user-container"></div>
+        </div>
       </DashboardUser>
     </>
   );
