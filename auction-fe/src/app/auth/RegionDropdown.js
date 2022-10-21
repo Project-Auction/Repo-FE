@@ -1,6 +1,7 @@
 import { MenuItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import SelectField from "../../shared/components/FormElement/Select/SelectField";
+import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../shared/hook/http-client";
 import { VALIDATOR_REQUIRED } from "../../utils/Validator";
 
@@ -69,57 +70,70 @@ const RegionDropdown = (props) => {
   }, []);
 
   return (
-    <div className="form__auth-group">
-      <SelectField
-        fieldName="province"
-        isMui
-        label="Choose City"
-        className="mr-4"
-        validators={[VALIDATOR_REQUIRED("Must be choose your city")]}
-      >
-        {provinces.map((province) => (
-          <MenuItem
-            key={province.province_id}
-            value={province.province_id}
-            onClick={() => handleChooseCity(province.province_id)}
-          >
-            {province.province_name}
-          </MenuItem>
-        ))}
-      </SelectField>
-
-      <SelectField
-        fieldName="province"
-        isMui
-        label="Choose District"
-        className="mr-4"
-        validators={[VALIDATOR_REQUIRED("Must be choose your district")]}
-      >
-        {district.length > 0 &&
-          district.map((district) => (
+    <>
+      {isLoading && <LoadingSpinner asOverlay />}
+      <div className="form__auth-group">
+        <SelectField
+          fieldName="province"
+          isMui
+          label="Choose City"
+          className="mr-4"
+          validators={[VALIDATOR_REQUIRED("Must be choose your city")]}
+        >
+          {provinces.map((province) => (
             <MenuItem
-              key={district.district_id}
-              value={district.district_id}
-              onClick={() => handleChooseDistrict(district.district_id)}
+              key={province.province_id}
+              value={province.province_id}
+              onClick={() => handleChooseCity(province.province_id)}
             >
-              {district.district_name}
+              {province.province_name}
             </MenuItem>
           ))}
+        </SelectField>
 
-        {district.length === 0 && <MenuItem>Please choose your city</MenuItem>}
-      </SelectField>
+        <SelectField
+          fieldName="district"
+          isMui
+          label="Choose District"
+          className="mr-4"
+          validators={[VALIDATOR_REQUIRED("Must be choose your district")]}
+        >
+          {district.length > 0 &&
+            district.map((district) => (
+              <MenuItem
+                key={district.district_id}
+                value={district.district_id}
+                onClick={() => handleChooseDistrict(district.district_id)}
+              >
+                {district.district_name}
+              </MenuItem>
+            ))}
 
-      <SelectField fieldName="province" isMui label="Choose Ward">
-        {ward.length > 0 &&
-          ward.map((ward) => (
-            <MenuItem key={ward.ward_id} value={ward.ward_name}>
-              {ward.ward_name}
-            </MenuItem>
-          ))}
+          {district.length === 0 && (
+            <MenuItem>Please choose your city</MenuItem>
+          )}
+        </SelectField>
 
-        {ward.length === 0 && <MenuItem>Please choose your district</MenuItem>}
-      </SelectField>
-    </div>
+        <SelectField
+          fieldName="ward"
+          isMui
+          label="Choose Ward"
+          className="mr-4"
+          validators={[VALIDATOR_REQUIRED("Must be choose your ward")]}
+        >
+          {ward.length > 0 &&
+            ward.map((ward) => (
+              <MenuItem key={ward.ward_id} value={ward.ward_name}>
+                {ward.ward_name}
+              </MenuItem>
+            ))}
+
+          {ward.length === 0 && (
+            <MenuItem>Please choose your district</MenuItem>
+          )}
+        </SelectField>
+      </div>
+    </>
   );
 };
 
