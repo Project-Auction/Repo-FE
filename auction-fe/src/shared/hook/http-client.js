@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useCallback, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 export const useHttpClient = () => {
   const [error, setError] = useState("");
@@ -10,28 +10,36 @@ export const useHttpClient = () => {
   const activeHttpRequests = useRef([]);
 
   const sendRequest = useCallback(
-    async (url, method = "GET", data = null, headers = {}) => {
+    async (url, method = "GET", body = null, headers = {}) => {
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
+
       try {
-        const res = await axios({
-          url,
+        const response = await fetch(url, {
           method,
-          data,
+          body,
           headers,
+          signal: httpAbortCtrl.signal,
         });
+
+        const responseData = await response.json();
 
         /* Remove abort when request completed */
         activeHttpRequests.current = activeHttpRequests.current.filter(
           (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
 
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
         setIsLoading(false);
-        return res.data;
+        return responseData;
       } catch (err) {
+        setError(err.message);
+        toast(err.message, { type: "error" });
         setIsLoading(false);
-        setError(err.response.data.message);
         throw err;
       }
     },
@@ -42,5 +50,5 @@ export const useHttpClient = () => {
     setError(null);
   };
 
-  return { sendRequest, error, isLoading, clearError };
+  return { isLoading, error, sendRequest, clearError };
 };

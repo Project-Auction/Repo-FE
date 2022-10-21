@@ -6,7 +6,7 @@ import { useHttpClient } from "../../shared/hook/http-client";
 import { VALIDATOR_REQUIRED } from "../../utils/Validator";
 
 const RegionDropdown = (props) => {
-  const { sendRequest, error, isLoading, clearError } = useHttpClient();
+  const { sendRequest, isLoading } = useHttpClient();
 
   const [provinces, setProvinces] = useState([]);
   const [cityId, setCityId] = useState();
