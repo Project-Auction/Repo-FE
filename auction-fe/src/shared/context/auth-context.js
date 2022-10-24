@@ -2,11 +2,11 @@ import { createContext, useCallback, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
-const AuthProvider = (props) => {
-  const { children } = props;
-
   /* To store timeout expiration time */
   let logoutTimer;
+
+const AuthProvider = (props) => {
+  const { children } = props;
 
   const [user, setUser] = useState({});
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
@@ -27,6 +27,7 @@ const AuthProvider = (props) => {
         accountId: user.accountId,
         username: user.username,
         token: user.token,
+        expiration: expirationDate.toIOString(),
       })
     );
 
