@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -60,6 +60,7 @@ const Auth = () => {
         );
 
         toast("Register successfully!", { type: "success" });
+        methods.reset();
       } catch (err) {}
     }
   };
