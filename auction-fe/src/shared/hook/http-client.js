@@ -39,6 +39,7 @@ export const useHttpClient = () => {
         setIsLoading(false);
         setError(err.response.data.message);
         toast(err.response.data.message, { type: "error" });
+        throw err;
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

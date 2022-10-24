@@ -64,8 +64,6 @@ const RegionDropdown = (props) => {
         "GET"
       );
 
-      console.log(response);
-
       setProvinces(response.results);
     };
 
@@ -78,7 +76,7 @@ const RegionDropdown = (props) => {
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="form__auth-group">
         <SelectField
-          fieldName="province"
+          fieldName="city"
           isMui
           label="Choose City"
           className="mr-4"
@@ -88,7 +86,7 @@ const RegionDropdown = (props) => {
           {provinces.map((province) => (
             <MenuItem
               key={province.province_id}
-              value={province.province_id}
+              value={province.province_name}
               onClick={() => handleChooseCity(province.province_id)}
             >
               {province.province_name}
@@ -108,7 +106,7 @@ const RegionDropdown = (props) => {
             district.map((district) => (
               <MenuItem
                 key={district.district_id}
-                value={district.district_id}
+                value={district.district_name}
                 onClick={() => handleChooseDistrict(district.district_id)}
               >
                 {district.district_name}

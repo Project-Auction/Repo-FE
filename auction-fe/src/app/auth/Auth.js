@@ -42,22 +42,22 @@ const Auth = () => {
     if (!isLoginMode) {
       try {
         const formData = new FormData();
+
         formData.append("fullName", data.fullName);
         formData.append("email", data.email);
         formData.append("dateOfBirth", data.dateOfBirth);
         formData.append("phoneNumber", data.phoneNumber);
         formData.append("password", data.password);
         formData.append("identityNumber", data.identityNumber);
+        formData.append("ward", data.ward);
+        formData.append("city", data.city);
+        formData.append("district", data.district);
 
         const response = await sendRequest(
           "http://localhost:8080/auth/sign-up",
           "POST",
           formData
         );
-
-        if (!response) {
-          throw new Error("error");
-        }
 
         toast("Register successfully!", { type: "success" });
       } catch (err) {}
