@@ -1,9 +1,12 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 const AuthProvider = (props) => {
   const { children } = props;
+
+  /* To store timeout expiration time */
+  let logoutTimer;
 
   const [user, setUser] = useState({});
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
@@ -21,8 +24,8 @@ const AuthProvider = (props) => {
     localStorage.setItem(
       "userData",
       JSON.stringify({
-        userId: user.accountId,
-        userName: user.username,
+        accountId: user.accountId,
+        username: user.username,
         token: user.token,
       })
     );
