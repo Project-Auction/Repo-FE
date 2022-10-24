@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Auth.css";
 
@@ -19,7 +20,7 @@ import {
 import { useHttpClient } from "../../shared/hook/http-client";
 import RegionDropdown from "./RegionDropdown";
 import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
-import { toast } from "react-toastify";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const Auth = () => {
   const methods = useForm({
@@ -27,7 +28,11 @@ const Auth = () => {
     shouldUnregister: true,
   });
 
-  const { sendRequest, error, isLoading, clearError } = useHttpClient();
+  const authContext = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const { sendRequest, isLoading } = useHttpClient();
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -61,6 +66,23 @@ const Auth = () => {
 
         toast("Register successfully!", { type: "success" });
         methods.reset();
+      } catch (err) {}
+    } else {
+      try {
+        const formData = new FormData();
+
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+
+        const response = await sendRequest(
+          "http://localhost:8080/authenticate",
+          "POST",
+          formData
+        );
+
+        authContext.login(response);
+        toast("Login successfully!", { type: "success" });
+        navigate("/");
       } catch (err) {}
     }
   };
@@ -254,7 +276,7 @@ const Auth = () => {
                 </div>
 
                 {/* Region */}
-                <RegionDropdown />
+                {!isLoginMode && <RegionDropdown />}
                 {/* Region */}
 
                 <div className="forget-password">
