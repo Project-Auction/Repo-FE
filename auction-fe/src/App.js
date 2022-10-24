@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "swiper/css";
@@ -25,6 +25,15 @@ import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 function App() {
   const authContext = useContext(AuthContext);
 
+  /* Handle auto login when reload page */
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token) {
+      authContext.login(storedData);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="App">
       <Router>
@@ -40,7 +49,9 @@ function App() {
             {/* Public Page */}
 
             {/* Logged In page */}
-            <Route element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}>
+            <Route
+              element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}
+            >
               <Route path="/payment" element={<Payment />} />
               <Route path="/:userId/profile" element={<ProfileUser />} />
               <Route path="/:userId/edit" element={<EditProfile />} />
