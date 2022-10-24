@@ -7,18 +7,24 @@
     font-size: 1.6rem;
 }
 
-.form-input {
+.form-input ,
+.form-text-area {
     height: 50px;
     font-size: 1.6rem;
     display: flex;
     align-items: center;
     border-radius: 5px;
-    padding: 0 12px;
+    padding: 4px 12px;
     border: 1px solid var(--border-color);
     outline: none;
 }
 
-.form-input.full-width {
+.form-text-area {
+    min-height: 100px !important;
+}
+
+.form-input.full-width ,
+.form-text-area.full-width {
     width: 100%;
 }
 

@@ -79,11 +79,7 @@ export const validateForm = (value = "", validators) => {
     }
 
     if (validator.type === VALIDATOR_TYPE_EMAIL) {
-      isValid =
-        isValid &&
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-          value
-        );
+      isValid = isValid && /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
 
       message = validator.message;
     }

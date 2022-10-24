@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
+import Auth from "./app/auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { ScrollToTop } from "./shared/hook/scroll-to-top";
 import Admin from "./app/admin/page/Admin";
@@ -14,9 +15,12 @@ import ProtectRoutes from "./routes/ProtectRoutes";
 import AboutUs from "./app/home/page/about-us/about-us";
 import HomeCatalog from "./app/home/page/home/HomeCatalog";
 import ProductDetail from "./app/product/components/ProductDetail";
-import Auth from "./app/auth";
 import ProductsList from "./app/admin/components/product-management/ProductsList";
 import TransactionsList from "./app/admin/components/transaction-management/TransactionsList";
+import ProfileUser from "./app/users/page/profile/ProfileUser";
+import EditProfile from "./app/users/components/profile/EditProfile";
+import PostProduct from "./app/users/page/post-product/PostProduct";
+import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -38,6 +42,10 @@ function App() {
             {/* Logged In page */}
             <Route element={<ProtectRoutes isAllowed={!!authContext.user} />}>
               <Route path="/payment" element={<Payment />} />
+              <Route path="/:userId/profile" element={<ProfileUser />} />
+              <Route path="/:userId/edit" element={<EditProfile />} />
+              <Route path="/:userId/post-product" element={<PostProduct />} />
+              <Route path="/:userId/invoices" element={<InvoiceUser />} />
             </Route>
             {/* Logged In page */}
 
