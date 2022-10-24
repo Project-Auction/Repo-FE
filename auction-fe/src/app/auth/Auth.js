@@ -55,6 +55,10 @@ const Auth = () => {
           formData
         );
 
+        if (!response) {
+          throw new Error("error");
+        }
+
         toast("Register successfully!", { type: "success" });
       } catch (err) {}
     }
@@ -141,6 +145,7 @@ const Auth = () => {
                         fieldName="dateOfBirth"
                         dataType="date_timer_picker"
                         label="Date of birth"
+                        format="date"
                         requiredForm
                         validators={[
                           VALIDATOR_REQUIRED("Date of birth cannot be empty"),

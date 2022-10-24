@@ -70,20 +70,20 @@ const FormInput = forwardRef((props, ref) => {
           fieldState: { error },
         }) => {
           const onChangeValue = (e) => {
+            onChange(e.target.value);
+          };
+
+          const convertValue = (val) => {
             if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
-              value = formatPhoneNumber(e.target.value);
-              onChange(value);
+              return formatPhoneNumber(val);
             } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
-              value = formatCurrentUS(e.target.value);
-              onChange(value);
+              return formatCurrentUS(val);
             } else if (
               format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
             ) {
-              value = formatIdentityCard(e.target.value);
-              onChange(value);
+              return formatIdentityCard(val);
             } else {
-              value = e.target.value;
-              onChange(value);
+              return val;
             }
           };
 
@@ -103,7 +103,7 @@ const FormInput = forwardRef((props, ref) => {
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}
-                  value={value}
+                  value={convertValue(value)}
                   autoComplete={autoComplete}
                   margin={margin}
                   fullWidth={fullWidth}

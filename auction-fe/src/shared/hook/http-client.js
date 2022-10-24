@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useCallback, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -5,44 +6,40 @@ export const useHttpClient = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  /* Why here not use useState instead useRef 
+  /* Why here not use useState instead useRef
   => useRef will not change value when component re-render */
   const activeHttpRequests = useRef([]);
 
   const sendRequest = useCallback(
-    async (url, method = "GET", body = null, headers = {}) => {
-      setIsLoading(true);
+    async (url, method = "GET", data = null, headers = {}) => {
+      setIsLoading(false);
+
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
 
       try {
-        const response = await fetch(url, {
+        const response = await axios({
+          url,
           method,
-          body,
+          data,
           headers,
-          signal: httpAbortCtrl.signal,
         });
-
-        const responseData = await response.json();
 
         /* Remove abort when request completed */
         activeHttpRequests.current = activeHttpRequests.current.filter(
           (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
 
-        if (!response.ok) {
-          throw new Error(responseData.message);
+        if (response.status !== 200) {
+          throw new Error("error");
         }
 
-        setIsLoading(false);
-        return responseData;
+        return response.data;
       } catch (err) {
-        setError(err.message);
-        toast(err.message, { type: "error" });
-        setIsLoading(false);
-        throw err;
+        toast(err.response.data.message, {type: "error"});
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -50,5 +47,5 @@ export const useHttpClient = () => {
     setError(null);
   };
 
-  return { isLoading, error, sendRequest, clearError };
+  return { error, clearError, sendRequest, isLoading };
 };

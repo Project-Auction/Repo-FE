@@ -26,6 +26,8 @@ const RegionDropdown = (props) => {
 
   /* Get distinct */
   useEffect(() => {
+    setWard([]);
+    setDistrict([]);
     const fetchDistrict = async () => {
       const response = await sendRequest(
         `https://vapi.vnappmob.com/api/province/district/${cityId}`,
@@ -62,6 +64,8 @@ const RegionDropdown = (props) => {
         "GET"
       );
 
+      console.log(response);
+
       setProvinces(response.results);
     };
 
@@ -79,6 +83,7 @@ const RegionDropdown = (props) => {
           label="Choose City"
           className="mr-4"
           validators={[VALIDATOR_REQUIRED("Must be choose your city")]}
+          defaultValue=""
         >
           {provinces.map((province) => (
             <MenuItem
@@ -97,6 +102,7 @@ const RegionDropdown = (props) => {
           label="Choose District"
           className="mr-4"
           validators={[VALIDATOR_REQUIRED("Must be choose your district")]}
+          defaultValue=""
         >
           {district.length > 0 &&
             district.map((district) => (
@@ -120,6 +126,7 @@ const RegionDropdown = (props) => {
           label="Choose Ward"
           className="mr-4"
           validators={[VALIDATOR_REQUIRED("Must be choose your ward")]}
+          defaultValue=""
         >
           {ward.length > 0 &&
             ward.map((ward) => (

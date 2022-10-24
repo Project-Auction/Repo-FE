@@ -9,6 +9,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import "../Input/FormInput.css";
+import { formatDate } from "../../../format/format-input";
 
 const FormInputTime = (props) => {
   /*
@@ -32,10 +33,10 @@ const FormInputTime = (props) => {
       <Controller
         name={fieldName}
         control={control}
-        render={({ field: { onChange }, fieldState: { error } }) => {
+        render={({ field: { onChange } }) => {
           const onChangeValue = (newValue) => {
             setValue(newValue);
-            onChange(newValue.toString());
+            onChange(formatDate(newValue.toString()));
           };
 
           return (
@@ -48,7 +49,9 @@ const FormInputTime = (props) => {
                     onChange={onChangeValue}
                     value={value}
                     inputRef={ref}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => (
+                      <TextField {...params}  />
+                    )}
                     className={className}
                   />
                 ) : (
@@ -58,7 +61,9 @@ const FormInputTime = (props) => {
                     value={value}
                     inputRef={ref}
                     onChange={onChangeValue}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => (
+                      <TextField {...params}  />
+                    )}
                     className={className}
                   />
                 )}

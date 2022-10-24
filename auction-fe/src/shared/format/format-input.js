@@ -25,7 +25,7 @@ export const formatIdentityCard = (value) => {
     return value;
   }
 
-  const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumber = value.replace(/[^0-9]+/g, "");
   const phoneNumberLength = phoneNumber.length;
   if (phoneNumberLength < 4) {
     return phoneNumber;
@@ -39,6 +39,19 @@ export const formatIdentityCard = (value) => {
     3,
     6
   )} - ${phoneNumber.slice(6, 9)}`;
+};
+
+/* Format date */
+const formatDate = (date) => {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [day, month, year].join("/");
 };
 
 /* Format currency dollar */
@@ -88,4 +101,4 @@ const formatCurrency = (value) => {
   )} , ${currencyNumber.slice(6, 9)} VND`;
 };
 
-export { formatPhoneNumber, formatCurrency, formatCurrentUS };
+export { formatDate, formatPhoneNumber, formatCurrency, formatCurrentUS };
