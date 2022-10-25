@@ -24,9 +24,6 @@ import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 
 function App() {
   const authContext = useContext(AuthContext);
-  console.log(
-    authContext.isLoggedIn && authContext.roles.includes("ROLE_MANAGER")
-  );
 
   return (
     <div className="App">

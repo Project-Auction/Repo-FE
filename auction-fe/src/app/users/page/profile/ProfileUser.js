@@ -8,7 +8,9 @@ const ProfileUser = (props) => {
 
   return (
     <>
-      <DashboardUser currentPage="Profile User">{props.children}</DashboardUser>
+      <DashboardUser currentPage="Profile User" userId={userId}>
+        {props.children}
+      </DashboardUser>
     </>
   );
 };

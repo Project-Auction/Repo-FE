@@ -101,7 +101,7 @@ function NavLinks() {
                   )}
 
                 {authContext.isLoggedIn &&
-                  !authContext.roles.includes("ROLE_MANAGER") && (
+                  authContext.roles.includes("ROLE_MEMBER") && (
                     <li>
                       <Link to={`/${authContext.accountId}/profile`}>
                         <FontAwesomeIcon
