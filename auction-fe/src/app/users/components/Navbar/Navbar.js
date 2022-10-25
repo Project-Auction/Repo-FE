@@ -11,19 +11,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
+import { useContext } from "react";
+import { AuthContext } from "../../../../shared/context/auth-context";
 import ButtonFiled from "../../../../shared/components/FormElement/Button";
 import AccountItem from "../../../../shared/components/UIElement/AccountItem";
 import CardField from "../../../../shared/components/UIElement/Card/CardField";
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
+
   return (
     <div className="navbar__profile-user-container">
       <CardField className="navbar__profile-user-wrapper">
         <div className="navbar__profile-user__header">
           <AccountItem
-            src="https://demo.graygrids.com/themes/classigrids-demo/assets/images/dashboard/user-image.jpg"
-            userName="Steve Aldridge"
-            email="@username"
+            src=""
+            userName={authContext.username}
+            email={authContext.email}
           />
         </div>
 
@@ -69,7 +73,9 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <ButtonFiled danger>Logout</ButtonFiled>
+            <ButtonFiled danger onClick={authContext.logout}>
+              Logout
+            </ButtonFiled>
           </li>
         </ul>
       </CardField>

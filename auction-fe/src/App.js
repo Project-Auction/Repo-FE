@@ -40,7 +40,9 @@ function App() {
             {/* Public Page */}
 
             {/* Logged In page */}
-            <Route element={<ProtectRoutes isAllowed={!!authContext.user} />}>
+            <Route
+              element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}
+            >
               <Route path="/payment" element={<Payment />} />
               <Route path="/:userId/profile" element={<ProfileUser />} />
               <Route path="/:userId/edit" element={<EditProfile />} />
@@ -55,7 +57,7 @@ function App() {
                 <ProtectRoutes
                   isAllowed={
                     !!authContext.user &&
-                    authContext.user.roles.includes("admin")
+                    authContext.roles.includes("ROLE_MANAGER")
                   }
                 />
               }
