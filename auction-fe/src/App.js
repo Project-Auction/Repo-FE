@@ -25,19 +25,6 @@ import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 function App() {
   const authContext = useContext(AuthContext);
 
-  /* Handle auto login when reload page */
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userData"));
-    if (
-      storedData &&
-      storedData.token &&
-      new Date(storedData.expiration) > new Date()
-    ) {
-      authContext.login(storedData, new Date(storedData.expiration));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="App">
       <Router>
