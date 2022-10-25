@@ -97,7 +97,7 @@
     margin-right: 24px;
 }
 
-.right .info__user a {
+.right .info__user .main {
     display: flex;
     align-items: center;
 }
@@ -153,6 +153,71 @@
 
 .nav-links__list .right .btn__header span {
     margin-left: 8px;
+}
+
+/* Sub info user */
+.nav-links__list .right .info__user:hover .sub__info-user__list {
+    display: block;
+}
+
+.sub__info-user__list {
+    position: absolute;
+    top: 120%;
+    right: -15px;
+    width: 100%;
+    z-index: 20;
+    animation: growth 0.3s , fadeIn 0.4s;
+    transform-origin: top right;
+    transform: all 0.2s;
+    display: none;
+}
+
+.sub__info-user__list::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 28px;
+    top: -26px;
+    cursor: pointer;
+}
+
+.sub__info-user__wrapper {
+    background-color: var(--dark-color);
+    padding: 12px;
+}
+
+.sub__info-user__list li a,
+.sub__info-user__list li button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fff;
+    background-color: transparent;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 12px;
+    max-height: 45px;
+}
+
+.sub__info-user__list li {
+    border-radius: 6px;
+    transition: all 0.15s;
+}
+
+.sub__info-user__list li:not(:first-child) {
+    margin-top: 6px;
+}
+
+.sub__info-user__list li .icon.circle {
+    height: 18px;
+    width: 18px;
+    padding: 8px;
+    margin-right: 8px;
+}
+
+.sub__info-user__list li:hover {
+    opacity: 0.9;
+    background-color: #65676B;
 }
 
 /* Notification */

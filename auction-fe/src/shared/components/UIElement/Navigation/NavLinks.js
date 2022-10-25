@@ -1,17 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowRightFromBracket,
   faChevronDown,
+  faHome,
   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
 
-import PopperWrapper from "../PopperWrapper";
-import Image from "../Image";
-
 import "./NavLinks.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth-context";
+import PopperWrapper from "../PopperWrapper";
+import Image from "../Image";
+import ButtonFiled from "../../FormElement/Button/ButtonField";
 
 function NavLinks() {
   const authContext = useContext(AuthContext);
@@ -76,10 +78,52 @@ function NavLinks() {
         )}
         <div className="info__user">
           {authContext.isLoggedIn && (
-            <Link to={`/${authContext.userId}/profile`}>
+            <div className="main">
               <Image className="avatar" alt="avatar" circle />
               <span className="name">{authContext.username}</span>
-            </Link>
+            </div>
+          )}
+
+          {authContext.isLoggedIn && (
+            <ul className="sub__info-user__list">
+              <PopperWrapper className="sub__info-user__wrapper">
+                {authContext.isLoggedIn &&
+                  authContext.roles.includes("ROLE_MANAGER") && (
+                    <li>
+                      <Link to="/admin">
+                        <FontAwesomeIcon
+                          className="icon circle"
+                          icon={faHome}
+                        />
+                        Dashboard Admin
+                      </Link>
+                    </li>
+                  )}
+
+                {authContext.isLoggedIn &&
+                  !authContext.roles.includes("ROLE_MANAGER") && (
+                    <li>
+                      <Link to={`/${authContext.accountId}/profile`}>
+                        <FontAwesomeIcon
+                          className="icon circle"
+                          icon={faHome}
+                        />
+                        Dashboard User
+                      </Link>
+                    </li>
+                  )}
+
+                <li>
+                  <ButtonFiled onClick={authContext.logout}>
+                    <FontAwesomeIcon
+                      className="icon circle"
+                      icon={faArrowRightFromBracket}
+                    />
+                    Logout
+                  </ButtonFiled>
+                </li>
+              </PopperWrapper>
+            </ul>
           )}
 
           {!authContext.isLoggedIn && (

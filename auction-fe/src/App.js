@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "swiper/css";
@@ -24,6 +24,9 @@ import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 
 function App() {
   const authContext = useContext(AuthContext);
+  console.log(
+    authContext.isLoggedIn && authContext.roles.includes("ROLE_MANAGER")
+  );
 
   return (
     <div className="App">
@@ -56,7 +59,7 @@ function App() {
               element={
                 <ProtectRoutes
                   isAllowed={
-                    !!authContext.user &&
+                    authContext.isLoggedIn &&
                     authContext.roles.includes("ROLE_MANAGER")
                   }
                 />
