@@ -25,9 +25,9 @@ const Navbar = () => {
       <CardField className="navbar__profile-user-wrapper">
         <div className="navbar__profile-user__header">
           <AccountItem
-            src="https://demo.graygrids.com/themes/classigrids-demo/assets/images/dashboard/user-image.jpg"
-            userName="Steve Aldridge"
-            email="@username"
+            src=""
+            userName={authContext.username}
+            email={authContext.email}
           />
         </div>
 

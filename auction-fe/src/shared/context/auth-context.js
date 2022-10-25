@@ -26,6 +26,7 @@ const AuthProvider = (props) => {
       JSON.stringify({
         accountId: user.accountId,
         username: user.username,
+        email: user.email,
         token: user.token,
         expiration: tokenExpirationTime.toISOString(),
       })
@@ -48,6 +49,7 @@ const AuthProvider = (props) => {
     userId: user.accountId,
     username: user.username,
     roles: user.roles,
+    email: user.email,
     login: handleLogin,
     logout: handleLogout,
   };

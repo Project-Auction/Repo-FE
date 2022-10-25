@@ -76,7 +76,7 @@ function NavLinks() {
         )}
         <div className="info__user">
           {authContext.isLoggedIn && (
-            <Link to={`/3/profile`}>
+            <Link to={`/${authContext.userId}/profile`}>
               <Image className="avatar" alt="avatar" circle />
               <span className="name">{authContext.username}</span>
             </Link>

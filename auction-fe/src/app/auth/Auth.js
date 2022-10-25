@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "./Auth.css";
 
+import { useHttpClient } from "../../shared/hook/http-client";
+import { AuthContext } from "../../shared/context/auth-context";
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
 import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
@@ -17,10 +19,8 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRED,
 } from "../../utils/Validator";
-import { useHttpClient } from "../../shared/hook/http-client";
 import RegionDropdown from "./RegionDropdown";
 import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
-import { AuthContext } from "../../shared/context/auth-context";
 
 const Auth = () => {
   const methods = useForm({
