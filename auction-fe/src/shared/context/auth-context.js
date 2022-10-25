@@ -2,8 +2,8 @@ import { createContext, useCallback, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
-  /* To store timeout expiration time */
-  let logoutTimer;
+/* To store timeout expiration time */
+let logoutTimer;
 
 const AuthProvider = (props) => {
   const { children } = props;
@@ -27,7 +27,7 @@ const AuthProvider = (props) => {
         accountId: user.accountId,
         username: user.username,
         token: user.token,
-        expiration: expirationDate.toIOString(),
+        expiration: tokenExpirationTime.toISOString(),
       })
     );
 
@@ -51,6 +51,30 @@ const AuthProvider = (props) => {
     login: handleLogin,
     logout: handleLogout,
   };
+
+  /* Check expire time and auto logout */
+  useEffect(() => {
+    if (user.token && tokenExpirationDate) {
+      const remainingTime =
+        tokenExpirationDate.getTime() - new Date().getTime();
+
+      logoutTimer = setTimeout(handleLogout, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [user.token, handleLogout, tokenExpirationDate]);
+
+  /* Handle auto login when reload page */
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (
+      storedData &&
+      storedData.token &&
+      new Date(storedData.expiration) > new Date()
+    ) {
+      handleLogin(storedData, new Date(storedData.expiration));
+    }
+  }, [handleLogin]);
 
   return (
     <AuthContext.Provider value={containValues}>
