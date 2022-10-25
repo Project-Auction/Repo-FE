@@ -7,7 +7,7 @@ const InvoiceUser = (props) => {
 
   return (
     <>
-      <DashboardUser currentPage="Invoice">
+      <DashboardUser currentPage="Invoice" userId={userId}>
         <div className="dashboard__right-area-container">
           <h3 className="dashboard__title-user__header">Invoices</h3>
 

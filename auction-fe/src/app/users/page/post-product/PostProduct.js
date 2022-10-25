@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 import "./PostProduct.css";
 import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
@@ -11,6 +12,8 @@ import CustomFormProvider from "../../../../shared/components/FormElement/Custom
 import HeaderStep from "../../components/post-product/HeaderStep";
 
 const PostProduct = (props) => {
+  const userId = useParams().userId;
+
   const methods = useForm();
 
   const [steps, setSteps] = useState(0);
@@ -45,7 +48,7 @@ const PostProduct = (props) => {
 
   return (
     <>
-      <DashboardUser currentPage="Post Product">
+      <DashboardUser userId={userId} currentPage="Post Product">
         <div className="form__step-container">
           <header className="form__step-header">
             <h3 className="title">Post Product</h3>

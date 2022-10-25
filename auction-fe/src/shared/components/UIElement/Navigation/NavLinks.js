@@ -88,6 +88,7 @@ function NavLinks() {
             <ul className="sub__info-user__list">
               <PopperWrapper className="sub__info-user__wrapper">
                 {authContext.isLoggedIn &&
+                  !authContext.roles.includes("ROLE_MEMBER") &&
                   authContext.roles.includes("ROLE_MANAGER") && (
                     <li>
                       <Link to="/admin">
@@ -101,6 +102,7 @@ function NavLinks() {
                   )}
 
                 {authContext.isLoggedIn &&
+                  !authContext.roles.includes("ROLE_MANAGER") &&
                   authContext.roles.includes("ROLE_MEMBER") && (
                     <li>
                       <Link to={`/${authContext.accountId}/profile`}>

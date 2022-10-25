@@ -12,7 +12,6 @@ function SelectField(props) {
     children,
     isMui,
     defaultValue,
-    items,
     id,
     fullWidth,
     width,
@@ -91,11 +90,7 @@ function SelectField(props) {
                   onError={error}
                   defaultValue={defaultValue}
                 >
-                  {items.map((item) => (
-                    <option key={item.value} value={item.value}>
-                      {item.label}
-                    </option>
-                  ))}
+                  {children}
                 </select>
               </div>
             )}
