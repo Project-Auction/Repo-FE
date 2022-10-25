@@ -6,7 +6,7 @@ import "./PostProduct.css";
 import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
 import FormProductInfo from "../../components/post-product/FormProductInfo/FormProductInfo";
 import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInfo";
-import ButtonFiled from "../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../shared/components/FormElement/Button";
 import DashboardUser from "../user-dashboard/DashboardUser";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
 import HeaderStep from "../../components/post-product/HeaderStep";
@@ -83,35 +83,35 @@ const PostProduct = (props) => {
 
             <div className="form__step-form-footer">
               {steps > 0 && (
-                <ButtonFiled
+                <ButtonField
                   type="button"
                   onClick={handlePrevStep}
                   className="btn__redirect-form prev"
                 >
                   Prev Step
-                </ButtonFiled>
+                </ButtonField>
               )}
 
               {steps < 2 && (
-                <ButtonFiled
+                <ButtonField
                   type="button"
                   onClick={handleNextStep}
                   className="btn__redirect-form next"
                   dark
                 >
                   Next Step
-                </ButtonFiled>
+                </ButtonField>
               )}
 
               {steps === 2 && (
-                <ButtonFiled
+                <ButtonField
                   type="submit"
                   // onClick={handleNextStep}
                   className="btn__redirect-form next"
                   dark
                 >
                   Submit
-                </ButtonFiled>
+                </ButtonField>
               )}
             </div>
           </CustomFormProvider>

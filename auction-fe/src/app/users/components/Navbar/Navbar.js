@@ -13,7 +13,7 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
 import { useContext } from "react";
 import { AuthContext } from "../../../../shared/context/auth-context";
-import ButtonFiled from "../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../shared/components/FormElement/Button";
 import AccountItem from "../../../../shared/components/UIElement/AccountItem";
 import CardField from "../../../../shared/components/UIElement/Card/CardField";
 
@@ -73,9 +73,9 @@ const Navbar = ({ userId }) => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <ButtonFiled danger onClick={authContext.logout}>
+            <ButtonField danger onClick={authContext.logout}>
               Logout
-            </ButtonFiled>
+            </ButtonField>
           </li>
         </ul>
       </CardField>

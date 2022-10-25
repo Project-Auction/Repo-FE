@@ -10,7 +10,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
 import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
-import ButtonFiled from "../../shared/components/FormElement/Button";
+import ButtonField from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
 import {
@@ -291,9 +291,9 @@ const Auth = () => {
                 </div>
 
                 <div className="footer">
-                  <ButtonFiled type="submit" green fullWidth>
+                  <ButtonField type="submit" green fullWidth>
                     {!isLoginMode ? "Register" : "Login"}
-                  </ButtonFiled>
+                  </ButtonField>
 
                   <p>
                     Already have an account?

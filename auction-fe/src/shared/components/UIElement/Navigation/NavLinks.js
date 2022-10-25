@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/auth-context";
 import PopperWrapper from "../PopperWrapper";
 import Image from "../Image";
-import ButtonFiled from "../../FormElement/Button/ButtonField";
+import ButtonField from "../../FormElement/Button/ButtonField";
 
 function NavLinks() {
   const authContext = useContext(AuthContext);
@@ -116,13 +116,13 @@ function NavLinks() {
                   )}
 
                 <li>
-                  <ButtonFiled onClick={authContext.logout}>
+                  <ButtonField onClick={authContext.logout}>
                     <FontAwesomeIcon
                       className="icon circle"
                       icon={faArrowRightFromBracket}
                     />
                     Logout
-                  </ButtonFiled>
+                  </ButtonField>
                 </li>
               </PopperWrapper>
             </ul>
