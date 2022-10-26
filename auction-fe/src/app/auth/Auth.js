@@ -61,7 +61,8 @@ const Auth = () => {
         const response = await sendRequest(
           "http://localhost:8080/auth/sign-up",
           "POST",
-          formData
+          formData,
+          { "Content-Type": "application/json" }
         );
 
         toast("Register successfully!", { type: "success" });
@@ -77,7 +78,8 @@ const Auth = () => {
         const response = await sendRequest(
           "http://localhost:8080/authenticate",
           "POST",
-          formData
+          formData,
+          { "Content-Type": "application/json" }
         );
 
         authContext.login(response);

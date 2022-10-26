@@ -1,7 +1,5 @@
-import { Modal } from "@mui/material";
-import "./ErrorModal.css";
-
 import ButtonField from "../../FormElement/Button/ButtonField";
+import Modal from "../Modal";
 
 const ErrorModal = ({ onClear, error, children }) => {
   return (

@@ -17,6 +17,7 @@ import ButtonField from "../../FormElement/Button/ButtonField";
 
 function NavLinks() {
   const authContext = useContext(AuthContext);
+  console.log(authContext.roles);
 
   return (
     <div className="nav-links__list">
@@ -88,7 +89,6 @@ function NavLinks() {
             <ul className="sub__info-user__list">
               <PopperWrapper className="sub__info-user__wrapper">
                 {authContext.isLoggedIn &&
-                  !authContext.roles.includes("ROLE_MEMBER") &&
                   authContext.roles.includes("ROLE_MANAGER") && (
                     <li>
                       <Link to="/admin">

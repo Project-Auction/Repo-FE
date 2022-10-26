@@ -71,10 +71,11 @@ const AuthProvider = (props) => {
   // /*  Check roles */
   useEffect(() => {
     if (!!user.roles && user.token) {
+      setRoles([]);
       user.roles.map((role) => setRoles((prev) => [...prev, role.name]));
     }
   }, [user.token, user.roles]);
-  
+
   /* To send context */
   const containValues = {
     isLoggedIn: !!user.token,

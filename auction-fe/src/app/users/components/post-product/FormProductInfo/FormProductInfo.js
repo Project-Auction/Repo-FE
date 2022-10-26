@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
 import SelectField from "../../../../../shared/components/FormElement/Select/SelectField";
+import ErrorModal from "../../../../../shared/components/UIElement/ErrorModal";
 import LoadingSpinner from "../../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../../../../shared/hook/http-client";
 import "./FormProductInfo.css";
@@ -31,41 +32,45 @@ const FormProductInfo = (props) => {
     <>
       {isLoading && <LoadingSpinner asOverlay />}
 
-      <div className="form__input-post__product-container">
-        <FormInput
-          fieldName="codeProduct"
-          label="Code Product (*)"
-          fullWidth
-          onFocus={() => {}}
-          placeholder="Enter product's code"
-          formClass="form__input-post__product-form"
-        />
+      {!isLoading && <ErrorModal error={error} onClear={clearError} />}
 
-        <FormInput
-          fieldName="productName"
-          label="Product Name (*)"
-          fullWidth
-          onFocus={() => {}}
-          placeholder="Enter product's name"
-          formClass="form__input-post__product-form"
-        />
-
-        {!isLoading && categories.length > 0 && (
-          <SelectField
-            fieldName="category"
-            label="Category (*)"
+      {!error && !isLoading && (
+        <div className="form__input-post__product-container">
+          <FormInput
+            fieldName="codeProduct"
+            label="Code Product (*)"
             fullWidth
-            className="form__input-post__product-form"
-            defaultValue={categories[0].id}
-          >
-            {categories.map((category) => (
-              <option key={category.id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </SelectField>
-        )}
-      </div>
+            onFocus={() => {}}
+            placeholder="Enter product's code"
+            formClass="form__input-post__product-form"
+          />
+
+          <FormInput
+            fieldName="productName"
+            label="Product Name (*)"
+            fullWidth
+            onFocus={() => {}}
+            placeholder="Enter product's name"
+            formClass="form__input-post__product-form"
+          />
+
+          {!isLoading && categories.length > 0 && (
+            <SelectField
+              fieldName="category"
+              label="Category (*)"
+              fullWidth
+              className="form__input-post__product-form"
+              defaultValue={categories[0].id}
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </SelectField>
+          )}
+        </div>
+      )}
     </>
   );
 };
