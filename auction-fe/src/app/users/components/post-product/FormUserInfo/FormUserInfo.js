@@ -15,6 +15,8 @@ const FormUserInfo = () => {
           fullWidth
           label="Full Name (*)"
           placeholder="Enter Name"
+          onFocus={() => {}}
+          readOnly
         />
 
         <FormInput
@@ -24,6 +26,8 @@ const FormUserInfo = () => {
           fullWidth
           label="Phone Number (*)"
           placeholder="Enter Phone Number"
+          onFocus={() => {}}
+          readOnly
         />
       </div>
 
@@ -47,7 +51,9 @@ const FormUserInfo = () => {
 
       <div className="form__input-post__product-group">
         <CheckboxField checkedColor="#1c1d1f" />
-        <span style={{fontSize: "1.5rem", color: "#888"}}>I agree to all Terms of Use & Posting Rules</span>
+        <span style={{ fontSize: "1.5rem", color: "#888" }}>
+          I agree to all Terms of Use & Posting Rules
+        </span>
       </div>
     </div>
   );

@@ -45,13 +45,11 @@ const FormInputTime = (props) => {
                 {dateType === "date_timer_picker" ? (
                   <DateTimePicker
                     label={label}
-                    onError={true}
+                    onError={() => {}}
                     onChange={onChangeValue}
                     value={value}
                     inputRef={ref}
-                    renderInput={(params) => (
-                      <TextField {...params}  />
-                    )}
+                    renderInput={(params) => <TextField {...params} />}
                     className={className}
                   />
                 ) : (
@@ -60,10 +58,9 @@ const FormInputTime = (props) => {
                     inputFormat={inputFormat}
                     value={value}
                     inputRef={ref}
+                    onError={() => {}}
                     onChange={onChangeValue}
-                    renderInput={(params) => (
-                      <TextField {...params}  />
-                    )}
+                    renderInput={(params) => <TextField {...params} />}
                     className={className}
                   />
                 )}
