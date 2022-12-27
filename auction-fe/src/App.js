@@ -21,6 +21,7 @@ import ProfileUser from "./app/users/page/profile/ProfileUser";
 import EditProfile from "./app/users/components/profile/EditProfile";
 import PostProduct from "./app/users/page/post-product/PostProduct";
 import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
+import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -36,6 +37,7 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/home-catalog" element={<HomeCatalog />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/forget-password" element={<ConfirmEmail />} />
             <Route path="/:productId/detail" element={<ProductDetail />} />
             {/* Public Page */}
 

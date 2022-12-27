@@ -1,0 +1,52 @@
+:root {
+  --width-form-email-confirm: 500px;
+}
+
+.confirm__email-user-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.confirm__email-user-form {
+  width: var(--width-form-email-confirm);
+  margin: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+/* Header */
+.confirm__email-user-form__header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px;
+}
+
+.confirm__email-user-form__header h3 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+/* Body */
+.confirm__email-user-form__body {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.confirm__email-user-form__body .title {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Footer */
+.confirm__email-user-form__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px 15px 12px 12px;
+}
+
+.confirm__email-user-form__footer .button {
+    height: 45px;
+    margin-left: 12px;
+}
