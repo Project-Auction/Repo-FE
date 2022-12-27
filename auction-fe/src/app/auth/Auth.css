@@ -1,191 +1,194 @@
 .form__auth-container {
-    background-color: var(--background-color);
-    margin-top: calc(var(--height-main-header));
-    padding: 32px 0;
+  background-color: var(--background-color);
+  margin-top: calc(var(--height-main-header));
+  padding: 32px 0;
+  background-image: url("https://livedemo00.template-help.com/wt_64509/images/bg-03.jpg");
 }
 
 /* Header */
 .title {
-    font-size: 2.6rem;
+  font-size: 2.6rem;
 }
 
 span.sub-title {
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: #888;
-    display: block;
-    margin: 6px 0 0 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #888;
+  display: block;
+  margin: 6px 0 0 0;
 }
 
 /* Socials */
 .form__auth-socials {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
 }
 
 .form__auth-socials .item {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    font-size: 1.5rem;
-    padding: 0 12px;
-    border-radius: 5px;
-    transition: all 0.3s;
-    cursor: pointer;
-    border: 1px solid transparent;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0 12px;
+  border-radius: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .form__auth-socials .item.facebook:hover {
-    background-color: #4267B2;
-    color: #fff;
+  background-color: #4267b2;
+  color: #fff;
 }
 
-.form__auth-socials .item.facebook:hover>.icon,
-.form__auth-socials .item.facebook:hover>span {
-    color: #fff !important;
-    border: #fff;
+.form__auth-socials .item.facebook:hover > .icon,
+.form__auth-socials .item.facebook:hover > span {
+  color: #fff !important;
+  border: #fff;
 }
 
 .form__auth-socials .item.item.facebook span,
 .form__auth-socials .item.facebook i {
-    color: #4267B2;
-    font-weight: 600;
+  color: #4267b2;
+  font-weight: 600;
 }
 
 .form__auth-socials .item.item.google span,
 .form__auth-socials .item.google i {
-    color: #DB4437;
-    font-weight: 600;
+  color: #db4437;
+  font-weight: 600;
 }
 
 .form__auth-socials .item.item.google:hover {
-    background-color: #DB4437;
+  background-color: #db4437;
 }
 
-.form__auth-socials .item.google:hover>.icon,
-.form__auth-socials .item.google:hover>span {
-    color: #fff !important;
+.form__auth-socials .item.google:hover > .icon,
+.form__auth-socials .item.google:hover > span {
+  color: #fff !important;
 }
 
 .form__auth-socials .item i {
-    font-size: 2rem;
-    margin-right: 12px;
+  font-size: 2rem;
+  margin-right: 12px;
 }
 
 .form__auth-socials .item.facebook {
-    border: 1px solid #4267B2;
-    margin-right: 12px;
+  border: 1px solid #4267b2;
+  margin-right: 12px;
 }
 
 .form__auth-socials .item.google {
-    border: 1px solid #DB4437;
+  border: 1px solid #db4437;
 }
 
 span.option {
-    font-size: 1.6rem;
-    color: #c5c1c1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 12px 0;
+  font-size: 1.6rem;
+  color: #c5c1c1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
 }
 
 /* Right area*/
 .form__auth-right-area {
-    display: flex;
-    flex-direction: column;
-    width: 650px;
-    margin: auto;
-    border: 1px solid var(--border-color);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  margin: auto;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .form__auth-group {
-    display: flex;
-    align-items: center;
-    margin: 12px 0;
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
 }
 
 /* Left area */
 .form__auth-left-area {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form__auth-img-group {
+.form__auth-left-area .message {
     position: relative;
+    top: 20px;
 }
 
-.form__auth-img-group .message {
-    position: absolute;
-    top: 40%;
-    left: 20%;
+.form__auth-left-area .message h3 {
+  color: var(--primary-color);
+  font-size: 3.4rem;
+  margin-bottom: 12px;
 }
 
-.form__auth-img-group .message h3 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: var(--primary-color);
+.form__auth-left-area .message p {
+  color: var(--white-color);
+  font-size: 1.8rem;
 }
 
-.form__auth-img-group .message p {
-    font-size: 1.6rem;
-    margin: 4px 0;
-    color: var(--font-color);
+.form__auth-left-area .message p span {
+  color: var(--green-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.form__auth-img-group .message span {
-    color: var(--green-color);
-    font-weight: 600;
-    cursor: pointer;
+.form__auth-left-area .message p span:hover {
+  color: var(--primary-color);
 }
 
 /* Forget password */
 .forget-password {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
 }
 
 .forget-password span,
 .forget-password a {
-    font-size: 1.4rem;
-    color: var(--font-color);
-    margin-left: 6px;
-    transition: all 0.2s;
+  font-size: 1.4rem;
+  color: var(--font-color);
+  margin-left: 6px;
+  transition: all 0.2s;
 }
 
 .forget-password a:hover {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* Footer */
 .form__auth-right-area .footer {
-    margin-top: 24px;
+  margin-top: 24px;
 }
 
 .form__auth-right-area .footer button {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
 
 .form__auth-right-area .footer p {
-    font-size: 1.6rem;
-    text-align: center;
-    margin-top: 12px;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 12px;
 }
 
 .form__auth-right-area .footer span {
-    color: var(--primary-color);
-    cursor: pointer;
-    margin-left: 8px;
-    font-weight: 600;
-    cursor: pointer;
+  color: var(--primary-color);
+  cursor: pointer;
+  margin-left: 8px;
+  font-weight: 600;
+  cursor: pointer;
 }
