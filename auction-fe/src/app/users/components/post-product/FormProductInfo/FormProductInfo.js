@@ -8,6 +8,7 @@ import "./FormProductInfo.css";
 
 const FormProductInfo = (props) => {
   const [categories, setCategories] = useState([]);
+  const [codeProduct, setCodeProduct] = useState(0);
 
   const { sendRequest, error, clearError, isLoading } = useHttpClient();
 
@@ -28,6 +29,22 @@ const FormProductInfo = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendRequest]);
 
+  /* Get code product */
+  useEffect(() => {
+    try {
+      const fetchCodeProduct = async () => {
+        const response = await sendRequest(
+          "http://localhost:8080/user/post-product",
+          "GET"
+        );
+
+        setCodeProduct(response);
+      };
+
+      fetchCodeProduct();
+    } catch (err) {}
+  }, [sendRequest]);
+
   return (
     <>
       {isLoading && <LoadingSpinner asOverlay />}
@@ -43,6 +60,9 @@ const FormProductInfo = (props) => {
             onFocus={() => {}}
             placeholder="Enter product's code"
             formClass="form__input-post__product-form"
+            defaultValue={`PR ${codeProduct > 0 ? "" : 0}${codeProduct + 1}`}
+            readOnly
+            inputClass="no-select"
           />
 
           <FormInput

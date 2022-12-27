@@ -17,7 +17,6 @@ import ButtonField from "../../FormElement/Button/ButtonField";
 
 function NavLinks() {
   const authContext = useContext(AuthContext);
-  console.log(authContext.roles);
 
   return (
     <div className="nav-links__list">

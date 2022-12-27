@@ -70,15 +70,18 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
-        const formData = new FormData();
+        // const formData = new FormData();
 
-        formData.append("email", data.email);
-        formData.append("password", data.password);
+        // formData.append("email", data.email);
+        // formData.append("password", data.password);
 
         const response = await sendRequest(
           "http://localhost:8080/authenticate",
           "POST",
-          formData,
+          JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
           { "Content-Type": "application/json" }
         );
 

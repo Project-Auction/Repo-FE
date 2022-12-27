@@ -14,7 +14,7 @@ import HeaderStep from "../../components/post-product/HeaderStep";
 const PostProduct = (props) => {
   const userId = useParams().userId;
 
-  const methods = useForm();
+  const methods = useForm({});
 
   const [steps, setSteps] = useState(0);
 
