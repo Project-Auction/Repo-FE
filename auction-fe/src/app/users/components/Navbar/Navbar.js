@@ -13,11 +13,11 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
 import { useContext } from "react";
 import { AuthContext } from "../../../../shared/context/auth-context";
-import ButtonFiled from "../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../shared/components/FormElement/Button";
 import AccountItem from "../../../../shared/components/UIElement/AccountItem";
 import CardField from "../../../../shared/components/UIElement/Card/CardField";
 
-const Navbar = () => {
+const Navbar = ({ userId }) => {
   const authContext = useContext(AuthContext);
 
   return (
@@ -33,7 +33,7 @@ const Navbar = () => {
 
         <ul className="navbar__profile-user__body">
           <li className="navbar__profile-user__item">
-            <NavLink end to={`/${3}/profile`}>
+            <NavLink end to={`/${userId}/profile`}>
               <FontAwesomeIcon icon={faHouse} className="icon" />
               Dashboard
               <div className="separate-hover"></div>
@@ -41,7 +41,7 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <NavLink end to={`/${3}/edit`}>
+            <NavLink end to={`/${userId}/edit`}>
               <FontAwesomeIcon icon={faEdit} className="icon" />
               Edit Profile
               <div className="separate-hover"></div>
@@ -49,7 +49,7 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <NavLink end to={`/${3}/myAds`}>
+            <NavLink end to={`/${userId}/myAds`}>
               <FontAwesomeIcon icon={faBolt} className="icon" />
               My Products
               <div className="separate-hover"></div>
@@ -57,7 +57,7 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <NavLink end to={`/${3}/invoices`}>
+            <NavLink end to={`/${userId}/invoices`}>
               <FontAwesomeIcon icon={faReceipt} className="icon" />
               Invoice
               <div className="separate-hover"></div>
@@ -65,7 +65,7 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <NavLink end to={`/${3}/post-product`}>
+            <NavLink end to={`/${userId}/post-product`}>
               <FontAwesomeIcon icon={faPlusCircle} className="icon" />
               Post Product
               <div className="separate-hover"></div>
@@ -73,9 +73,9 @@ const Navbar = () => {
           </li>
 
           <li className="navbar__profile-user__item">
-            <ButtonFiled danger onClick={authContext.logout}>
+            <ButtonField danger onClick={authContext.logout}>
               Logout
-            </ButtonFiled>
+            </ButtonField>
           </li>
         </ul>
       </CardField>

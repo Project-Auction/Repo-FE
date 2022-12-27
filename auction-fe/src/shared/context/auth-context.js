@@ -9,6 +9,7 @@ const AuthProvider = (props) => {
   const { children } = props;
 
   const [user, setUser] = useState({});
+  const [roles, setRoles] = useState([]);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
   const handleLogin = useCallback((user, expirationDate) => {
@@ -24,10 +25,11 @@ const AuthProvider = (props) => {
     localStorage.setItem(
       "userData",
       JSON.stringify({
+        token: user.token,
         accountId: user.accountId,
         username: user.username,
+        roles: user.roles,
         email: user.email,
-        token: user.token,
         expiration: tokenExpirationTime.toISOString(),
       })
     );
@@ -41,18 +43,6 @@ const AuthProvider = (props) => {
     setTokenExpirationDate(null);
     localStorage.removeItem("userData");
   }, []);
-
-  /* To send context */
-  const containValues = {
-    isLoggedIn: !!user.token,
-    token: user.token,
-    userId: user.accountId,
-    username: user.username,
-    roles: user.roles,
-    email: user.email,
-    login: handleLogin,
-    logout: handleLogout,
-  };
 
   /* Check expire time and auto logout */
   useEffect(() => {
@@ -77,6 +67,26 @@ const AuthProvider = (props) => {
       handleLogin(storedData, new Date(storedData.expiration));
     }
   }, [handleLogin]);
+
+  // /*  Check roles */
+  useEffect(() => {
+    if (!!user.roles && user.token) {
+      setRoles([]);
+      user.roles.map((role) => setRoles((prev) => [...prev, role.name]));
+    }
+  }, [user.token, user.roles]);
+
+  /* To send context */
+  const containValues = {
+    isLoggedIn: !!user.token,
+    token: user.token,
+    accountId: user.accountId,
+    username: user.username,
+    roles: roles,
+    email: user.email,
+    login: handleLogin,
+    logout: handleLogout,
+  };
 
   return (
     <AuthContext.Provider value={containValues}>

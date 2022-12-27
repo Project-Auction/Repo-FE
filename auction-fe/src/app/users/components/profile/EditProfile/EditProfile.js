@@ -9,7 +9,7 @@ import {
 import ProfileUser from "../../../page/profile/ProfileUser";
 import CustomFormProvider from "../../../../../shared/components/FormElement/CustomFormProvider";
 import { FormInput } from "../../../../../shared/components/FormElement/Input";
-import ButtonFiled from "../../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
 import { UploadImage } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
 
@@ -151,9 +151,9 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <ButtonFiled type="submit" primary className="btn__submit">
+              <ButtonField type="submit" primary className="btn__submit">
                 Update Profile
-              </ButtonFiled>
+              </ButtonField>
             </form>
           </CustomFormProvider>
         </div>

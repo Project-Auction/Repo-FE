@@ -10,7 +10,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
 import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
-import ButtonFiled from "../../shared/components/FormElement/Button";
+import ButtonField from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
 import {
@@ -61,7 +61,8 @@ const Auth = () => {
         const response = await sendRequest(
           "http://localhost:8080/auth/sign-up",
           "POST",
-          formData
+          formData,
+          { "Content-Type": "application/json" }
         );
 
         toast("Register successfully!", { type: "success" });
@@ -69,15 +70,14 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
-        const formData = new FormData();
-
-        formData.append("email", data.email);
-        formData.append("password", data.password);
-
         const response = await sendRequest(
           "http://localhost:8080/authenticate",
           "POST",
-          formData
+          JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+          { "Content-Type": "application/json" }
         );
 
         authContext.login(response);
@@ -93,23 +93,16 @@ const Auth = () => {
       <MainNavigation noHeaderInner />
 
       <div className="form__auth-container">
-        <div className="row align-items-center">
+        <div className="row">
           <div className="col-5">
             <div className="form__auth-left-area">
-              <div className="form__auth-img-group">
-                <img
-                  src="https://www.chilindo.com/assets/svgIcon/orangeLandingHeader.svg"
-                  alt=""
-                />
-
-                <div className="message">
-                  <h3>DTU AUCTION</h3>
-                  <p>This is website auction reputable currently</p>
-                  <p>Register to join with us</p>
-                  <p>
-                    If you have any questions. <span>Click here</span>
-                  </p>
-                </div>
+              <div className="message">
+                <h3>DTU AUCTION</h3>
+                <p>This is website auction reputable currently</p>
+                <p>Register to join with us</p>
+                <p>
+                  If you have any questions. <span>Click here</span>
+                </p>
               </div>
             </div>
           </div>
@@ -291,9 +284,9 @@ const Auth = () => {
                 </div>
 
                 <div className="footer">
-                  <ButtonFiled type="submit" green fullWidth>
+                  <ButtonField type="submit" green fullWidth>
                     {!isLoginMode ? "Register" : "Login"}
-                  </ButtonFiled>
+                  </ButtonField>
 
                   <p>
                     Already have an account?

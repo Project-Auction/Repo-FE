@@ -5,7 +5,7 @@ import "./Table.css";
 import { useForm } from "react-hook-form";
 
 import CheckboxField from "../../FormElement/Checkbox";
-import ButtonFiled from "../../FormElement/Button";
+import ButtonField from "../../FormElement/Button";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
 import Pagination from "../Pagination";
 import usePaginate from "../../../hook/usePaginate";
@@ -148,14 +148,14 @@ const Table = (props) => {
           </div>
           {props.select && (
             <div className="d-flex justify-content-end">
-              <ButtonFiled
+              <ButtonField
                 type="submit"
                 onClick={handleSubmit}
                 primary
                 size="small"
               >
                 Xóa
-              </ButtonFiled>
+              </ButtonField>
             </div>
           )}
         </form>

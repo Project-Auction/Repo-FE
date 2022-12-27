@@ -3,11 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import "./FormInput.css";
 
-import {
-  formatCurrentUS,
-  formatIdentityCard,
-  formatPhoneNumber,
-} from "../../../format/format-input";
+import { formatCurrentUS } from "../../../format/format-input";
 import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -66,24 +62,14 @@ const FormInput = forwardRef((props, ref) => {
           },
         }}
         render={({
-          field: { onChange, value = "", ref },
+          field: { onChange, value = defaultValue || "", ref },
           fieldState: { error },
         }) => {
           const onChangeValue = (e) => {
-            onChange(e.target.value);
-          };
-
-          const convertValue = (val) => {
-            if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
-              return formatPhoneNumber(val);
-            } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
-              return formatCurrentUS(val);
-            } else if (
-              format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
-            ) {
-              return formatIdentityCard(val);
+            if (format === Constants.FormInputFormat.MONEY.VALUE) {
+              onChange(formatCurrentUS(e.target.value));
             } else {
-              return val;
+              onChange(e.target.value);
             }
           };
 
@@ -103,7 +89,7 @@ const FormInput = forwardRef((props, ref) => {
                   onChange={onChangeValue}
                   helperText={helperText || (!!error && error.message)}
                   error={!!error}
-                  value={convertValue(value)}
+                  value={value}
                   autoComplete={autoComplete}
                   margin={margin}
                   fullWidth={fullWidth}
@@ -131,7 +117,6 @@ const FormInput = forwardRef((props, ref) => {
                   label={label}
                   inputRef={ref}
                   onChange={onChangeValue}
-                  defaultValue={defaultValue}
                   value={value}
                   error={error}
                   noBorder={noBorder}

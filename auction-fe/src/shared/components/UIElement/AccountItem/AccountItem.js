@@ -14,8 +14,8 @@ const AccountItem = (props) => {
       />
 
       <div className={`account__item-info ${bodyClass}`}>
-        <h3 className="name">{userName}</h3>
-        <span className="email">{email}</span>
+        <h3 className="name content-wrapper">{userName}</h3>
+        <span className="email content-wrapper">{email}</span>
       </div>
     </div>
   );

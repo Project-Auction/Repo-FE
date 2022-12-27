@@ -3,20 +3,20 @@ import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBre
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import NavbarUser from "../../components/Navbar";
 
-const DashboardUser = (props) => {
+const DashboardUser = ({currentPage , userId , children}) => {
   return (
     <>
       <MainNavigation />
 
-      <HeaderBreadcrumbs currentPage={props.currentPage} />
+      <HeaderBreadcrumbs currentPage={currentPage} />
 
       <div className="profile__user-container section">
         <div className="container">
           <div className="row">
             <div className="col-3">
-              <NavbarUser />
+              <NavbarUser userId={userId} />
             </div>
-            <div className="col-9">{props.children}</div>
+            <div className="col-9">{children}</div>
           </div>
         </div>
       </div>
