@@ -70,11 +70,6 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
-        // const formData = new FormData();
-
-        // formData.append("email", data.email);
-        // formData.append("password", data.password);
-
         const response = await sendRequest(
           "http://localhost:8080/authenticate",
           "POST",
@@ -98,23 +93,16 @@ const Auth = () => {
       <MainNavigation noHeaderInner />
 
       <div className="form__auth-container">
-        <div className="row align-items-center">
+        <div className="row">
           <div className="col-5">
             <div className="form__auth-left-area">
-              <div className="form__auth-img-group">
-                <img
-                  src="https://www.chilindo.com/assets/svgIcon/orangeLandingHeader.svg"
-                  alt=""
-                />
-
-                <div className="message">
-                  <h3>DTU AUCTION</h3>
-                  <p>This is website auction reputable currently</p>
-                  <p>Register to join with us</p>
-                  <p>
-                    If you have any questions. <span>Click here</span>
-                  </p>
-                </div>
+              <div className="message">
+                <h3>DTU AUCTION</h3>
+                <p>This is website auction reputable currently</p>
+                <p>Register to join with us</p>
+                <p>
+                  If you have any questions. <span>Click here</span>
+                </p>
               </div>
             </div>
           </div>
