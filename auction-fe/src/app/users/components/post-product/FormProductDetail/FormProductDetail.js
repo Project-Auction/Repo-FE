@@ -16,6 +16,8 @@ const FormProductDetail = (props) => {
           fullWidth
           label="Initial Price (*)"
           placeholder="Enter Price"
+          format="money"
+          onFocus={() => {}}
         />
 
         <FormInput
@@ -25,6 +27,7 @@ const FormProductDetail = (props) => {
           fullWidth
           label="Increment At Least (*)"
           placeholder="Enter Increment Price"
+          onFocus={() => {}}
         />
       </div>
 

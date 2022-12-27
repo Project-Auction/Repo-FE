@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useCallback, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 export const useHttpClient = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  /* Why here not use useState instead useRef 
+  /* Why here not use useState instead useRef
   => useRef will not change value when component re-render */
   const activeHttpRequests = useRef([]);
 
@@ -14,8 +15,9 @@ export const useHttpClient = () => {
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
+
       try {
-        const res = await axios({
+        const response = await axios({
           url,
           method,
           data,
@@ -27,14 +29,20 @@ export const useHttpClient = () => {
           (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
 
+        if (response.status !== 200) {
+          throw new Error("error");
+        }
+
         setIsLoading(false);
-        return res.data;
+        return response.data;
       } catch (err) {
         setIsLoading(false);
         setError(err.response.data.message);
+        toast(err.response.data.message, { type: "error" });
         throw err;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -42,5 +50,5 @@ export const useHttpClient = () => {
     setError(null);
   };
 
-  return { sendRequest, error, isLoading, clearError };
+  return { error, clearError, sendRequest, isLoading };
 };

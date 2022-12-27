@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
-import ButtonFiled from "../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../shared/components/FormElement/Button";
 import ProductList from "../../../product/components/ProductList";
 
 export const HEADER_GRID = [
@@ -129,9 +129,9 @@ function Home() {
                       give, while discovering variety and affordability
                     </p>
 
-                    <ButtonFiled primary size="big" className="btn-register">
+                    <ButtonField primary size="big" className="btn-register">
                       REGISTER NOW
-                    </ButtonFiled>
+                    </ButtonField>
                   </div>
                 </div>
               </div>
@@ -148,7 +148,7 @@ function Home() {
                     </div>
 
                     <div className="btn-bid">
-                      <ButtonFiled primary>SUBMIT A BID</ButtonFiled>
+                      <ButtonField primary>SUBMIT A BID</ButtonField>
                     </div>
 
                     <img
@@ -175,7 +175,7 @@ function Home() {
                     </div>
 
                     <div className="btn-bid">
-                      <ButtonFiled primary>SUBMIT A BID</ButtonFiled>
+                      <ButtonField primary>SUBMIT A BID</ButtonField>
                     </div>
                   </div>
                 </div>
@@ -261,14 +261,14 @@ function Home() {
               </div>
             </div>
 
-            <ButtonFiled
+            <ButtonField
               to="/home-catalog"
               primary
               size="big"
               className="view-all"
             >
               VIEW ALL AUCTION
-            </ButtonFiled>
+            </ButtonField>
           </div>
           {/* CURRENT AUCTIONS*/}
         </div>

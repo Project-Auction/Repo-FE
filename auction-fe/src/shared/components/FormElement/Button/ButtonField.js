@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Button.css";
 
-function ButtonFiled(props) {
+function ButtonField(props) {
   const classes = `button button--${props.size || "default"} 
     ${props.danger && "button--danger"}
     ${props.primary && "button--primary"}
@@ -40,4 +40,4 @@ function ButtonFiled(props) {
   );
 }
 
-export default ButtonFiled;
+export default ButtonField;

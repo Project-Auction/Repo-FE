@@ -5,14 +5,13 @@ const CustomFormInput = forwardRef((props, ref) => {
   const {
     label,
     type,
-    defaultValue,
+    value,
     inputRef,
     placeholder,
     onFocus,
     onChange,
     required,
     readOnly,
-    value,
     error,
     fullWidth,
     noBorder,
@@ -45,7 +44,6 @@ const CustomFormInput = forwardRef((props, ref) => {
         onFocus={handleOnFocus}
         value={value}
         readOnly={readOnly}
-        defaultValue={defaultValue}
       />
       {!!error && <p className="error">{error.message}</p>}
     </div>

@@ -3,17 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
   faChevronDown,
-  faRightLeft,
+  faHome,
   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
 
-import PopperWrapper from "../PopperWrapper";
-import Image from "../Image";
-
 import "./NavLinks.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth-context";
+import PopperWrapper from "../PopperWrapper";
+import Image from "../Image";
+import ButtonField from "../../FormElement/Button/ButtonField";
 
 function NavLinks() {
   const authContext = useContext(AuthContext);
@@ -78,28 +78,66 @@ function NavLinks() {
         )}
         <div className="info__user">
           {authContext.isLoggedIn && (
-            <Link to={`/3/profile`}>
-              <Image
-                src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-1/272959223_1371248186637583_4113757049488479156_n.jpg?stp=dst-jpg_p160x160&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=e1sjKhWMFTsAX_B6jKc&_nc_ht=scontent.fhan2-4.fna&oh=00_AT8w6-xBfM2TMv0-FWgwVtA-EUkEwnlDA1xQgV0szUBpiQ&oe=6349394E"
-                className="avatar"
-                alt="avatar"
-                circle
-              />
-              <span className="name">Nguyễn Hoàng Anh Tuấn</span>
-            </Link>
+            <div className="main">
+              <Image className="avatar" alt="avatar" circle />
+              <span className="name">{authContext.username}</span>
+            </div>
+          )}
+
+          {authContext.isLoggedIn && (
+            <ul className="sub__info-user__list">
+              <PopperWrapper className="sub__info-user__wrapper">
+                {authContext.isLoggedIn &&
+                  authContext.roles.includes("ROLE_MANAGER") && (
+                    <li>
+                      <Link to="/admin">
+                        <FontAwesomeIcon
+                          className="icon circle"
+                          icon={faHome}
+                        />
+                        Dashboard Admin
+                      </Link>
+                    </li>
+                  )}
+
+                {authContext.isLoggedIn &&
+                  !authContext.roles.includes("ROLE_MANAGER") &&
+                  authContext.roles.includes("ROLE_MEMBER") && (
+                    <li>
+                      <Link to={`/${authContext.accountId}/profile`}>
+                        <FontAwesomeIcon
+                          className="icon circle"
+                          icon={faHome}
+                        />
+                        Dashboard User
+                      </Link>
+                    </li>
+                  )}
+
+                <li>
+                  <ButtonField onClick={authContext.logout}>
+                    <FontAwesomeIcon
+                      className="icon circle"
+                      icon={faArrowRightFromBracket}
+                    />
+                    Logout
+                  </ButtonField>
+                </li>
+              </PopperWrapper>
+            </ul>
           )}
 
           {!authContext.isLoggedIn && (
             <>
-              <li className="btn__header" onClick={authContext.login}>
+              <Link to="/auth" className="btn__header">
                 <FontAwesomeIcon icon={faUser} />
                 <span>Register</span>
-              </li>
+              </Link>
 
-              <li className="btn__header" onClick={authContext.login}>
+              <Link to="/auth" className="btn__header">
                 <FontAwesomeIcon icon={faRightToBracket} />
                 <span>Login</span>
-              </li>
+              </Link>
             </>
           )}
         </div>

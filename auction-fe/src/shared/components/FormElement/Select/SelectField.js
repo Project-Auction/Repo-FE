@@ -1,20 +1,17 @@
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
 
 import { Controller, useFormContext } from "react-hook-form";
+import { validateForm } from "../../../../utils/Validator";
 
 import "./Select.css";
 
 function SelectField(props) {
   const {
-    isMui,
-    items,
     fieldName,
+    validators = [],
+    children,
+    isMui,
+    defaultValue,
     id,
     fullWidth,
     width,
@@ -25,8 +22,6 @@ function SelectField(props) {
     disabled,
     variant,
     label,
-    value,
-    defaultValue,
     helperText,
     className,
   } = props;
@@ -40,6 +35,15 @@ function SelectField(props) {
     <Controller
       name={fieldName}
       control={control}
+      rules={{
+        validate: {
+          validate: (value) => {
+            if (validators.length >= 1) {
+              return validateForm(value, validators);
+            }
+          },
+        },
+      }}
       render={({ field: { onChange }, fieldState: { error } }) => {
         const onChangeValue = (event) => {
           onChange(event.target.value);
@@ -50,6 +54,7 @@ function SelectField(props) {
             {isMui ? (
               <FormControl
                 fullWidth={fullWidth}
+                className={className}
                 sx={{
                   width: width,
                   minWidth: minWidth,
@@ -66,17 +71,12 @@ function SelectField(props) {
                 <Select
                   id={id}
                   label={label}
-                  value={value}
                   onChange={onChangeValue}
                   variant={variant}
                   error={error}
                   defaultValue={defaultValue}
                 >
-                  {items.map((item) => (
-                    <MenuItem key={item.value} value={item.value}>
-                      {item.label}
-                    </MenuItem>
-                  ))}
+                  {children}
                 </Select>
                 <FormHelperText>
                   {helperText || (error && error.message)}
@@ -89,13 +89,8 @@ function SelectField(props) {
                   onChange={onChangeValue}
                   onError={error}
                   defaultValue={defaultValue}
-                  fullWidth={fullWidth}
                 >
-                  {items.map((item) => (
-                    <option key={item.value} value={item.value}>
-                      {item.label}
-                    </option>
-                  ))}
+                  {children}
                 </select>
               </div>
             )}

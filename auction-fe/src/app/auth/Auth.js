@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Auth.css";
 
+import { useHttpClient } from "../../shared/hook/http-client";
+import { AuthContext } from "../../shared/context/auth-context";
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
 import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
-import ButtonFiled from "../../shared/components/FormElement/Button";
+import ButtonField from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
 import {
@@ -16,12 +19,20 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRED,
 } from "../../utils/Validator";
+import RegionDropdown from "./RegionDropdown";
+import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 
 const Auth = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: true,
   });
+
+  const authContext = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const { sendRequest, isLoading } = useHttpClient();
 
   const [isLoginMode, setIsLoginMode] = useState(false);
 
@@ -32,12 +43,58 @@ const Auth = () => {
     setIsLoginMode((prev) => !prev);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    if (!isLoginMode) {
+      try {
+        const formData = new FormData();
+
+        formData.append("fullName", data.fullName);
+        formData.append("email", data.email);
+        formData.append("dateOfBirth", data.dateOfBirth);
+        formData.append("phoneNumber", data.phoneNumber);
+        formData.append("password", data.password);
+        formData.append("identityNumber", data.identityNumber);
+        formData.append("ward", data.ward);
+        formData.append("city", data.city);
+        formData.append("district", data.district);
+
+        const response = await sendRequest(
+          "http://localhost:8080/auth/sign-up",
+          "POST",
+          formData,
+          { "Content-Type": "application/json" }
+        );
+
+        toast("Register successfully!", { type: "success" });
+        methods.reset();
+      } catch (err) {}
+    } else {
+      try {
+        // const formData = new FormData();
+
+        // formData.append("email", data.email);
+        // formData.append("password", data.password);
+
+        const response = await sendRequest(
+          "http://localhost:8080/authenticate",
+          "POST",
+          JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+          { "Content-Type": "application/json" }
+        );
+
+        authContext.login(response);
+        toast("Login successfully!", { type: "success" });
+        navigate("/");
+      } catch (err) {}
+    }
   };
 
   return (
     <>
+      {isLoading && <LoadingSpinner asOverlay />}
       <MainNavigation noHeaderInner />
 
       <div className="form__auth-container">
@@ -93,7 +150,7 @@ const Auth = () => {
                   <div className="form__auth-group">
                     <FormInput
                       isMui
-                      fieldName="username"
+                      fieldName="fullName"
                       type="text"
                       fullWidth
                       onFocus={() => {}}
@@ -110,23 +167,19 @@ const Auth = () => {
                         ),
                       ]}
                     />
-                    <FormInput
-                      isMui
-                      fieldName="accountName"
-                      type="text"
-                      fullWidth
-                      onFocus={() => {}}
-                      required
-                      label="Account Name"
-                      requiredForm
-                      validators={[
-                        VALIDATOR_REQUIRED("Account name cannot be empty"),
-                        VALIDATOR_MINLENGTH(
-                          9,
-                          "Account name at least 9 characters"
-                        ),
-                      ]}
-                    />
+
+                    {!isLoginMode && (
+                      <FormInputTime
+                        fieldName="dateOfBirth"
+                        dataType="date_timer_picker"
+                        label="Date of birth"
+                        format="date"
+                        requiredForm
+                        validators={[
+                          VALIDATOR_REQUIRED("Date of birth cannot be empty"),
+                        ]}
+                      />
+                    )}
                   </div>
                 )}
 
@@ -137,7 +190,6 @@ const Auth = () => {
                     type="email"
                     fullWidth
                     onFocus={() => {}}
-                    className="mr-4"
                     label="Email"
                     requiredForm
                     validators={[
@@ -146,18 +198,6 @@ const Auth = () => {
                       VALIDATOR_EMAIL("Email is invalid"),
                     ]}
                   />
-
-                  {!isLoginMode && (
-                    <FormInputTime
-                      fieldName="dateOfBirth"
-                      dataType="date_timer_picker"
-                      label="Date of birth"
-                      requiredForm
-                      validators={[
-                        VALIDATOR_REQUIRED("Date of birth cannot be empty"),
-                      ]}
-                    />
-                  )}
                 </div>
 
                 {!isLoginMode && (
@@ -240,6 +280,10 @@ const Auth = () => {
                   )}
                 </div>
 
+                {/* Region */}
+                {!isLoginMode && <RegionDropdown />}
+                {/* Region */}
+
                 <div className="forget-password">
                   <div className="d-flex align-items-center justify-content-center">
                     <input type="checkbox" />
@@ -252,9 +296,9 @@ const Auth = () => {
                 </div>
 
                 <div className="footer">
-                  <ButtonFiled type="submit" green fullWidth>
+                  <ButtonField type="submit" green fullWidth>
                     {!isLoginMode ? "Register" : "Login"}
-                  </ButtonFiled>
+                  </ButtonField>
 
                   <p>
                     Already have an account?

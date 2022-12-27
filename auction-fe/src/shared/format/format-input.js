@@ -25,7 +25,7 @@ export const formatIdentityCard = (value) => {
     return value;
   }
 
-  const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumber = value.replace(/[^0-9]+/g, "");
   const phoneNumberLength = phoneNumber.length;
   if (phoneNumberLength < 4) {
     return phoneNumber;
@@ -41,11 +41,22 @@ export const formatIdentityCard = (value) => {
   )} - ${phoneNumber.slice(6, 9)}`;
 };
 
-/* Format currency dollar */
-const formatCurrentUS = (value) => {
-  const number = parseFloat(value);
+/* Format date */
+const formatDate = (date) => {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
 
-  return "$" + number.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [day, month, year].join("/");
+};
+
+/* Format currency dollar */
+const formatCurrentUS = (value, suffix) => {
+  return suffix + parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
 };
 
 /* Format currency */
@@ -88,4 +99,4 @@ const formatCurrency = (value) => {
   )} , ${currencyNumber.slice(6, 9)} VND`;
 };
 
-export { formatPhoneNumber, formatCurrency, formatCurrentUS };
+export { formatDate, formatPhoneNumber, formatCurrency, formatCurrentUS };
