@@ -41,6 +41,9 @@ function App() {
             <Route path="/:productId/detail" element={<ProductDetail />} />
             {/* Public Page */}
 
+            {/* Require token */}
+            {/* Require token */}
+
             {/* Logged In page */}
             <Route
               element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}

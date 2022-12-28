@@ -1,1 +1,2 @@
-export { default } from "./ConfirmEmail";
+export { default as ConfirmEmail } from "./ConfirmEmail";
+export { default as ChangePassword } from "./ChangePassword";

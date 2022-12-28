@@ -6,13 +6,30 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  background-color: #f9f9f9;
 }
 
 .confirm__email-user-form {
+  background-color: #fff;
   width: var(--width-form-email-confirm);
   margin: auto;
   border: 1px solid var(--border-color);
   border-radius: 8px;
+}
+
+.confirm__email-user-form .text {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.confirm__email-user-form .text a {
+  display: block;
+  margin-left: 8px;
+  color: var(--green-color);
+  font-weight: 600;
 }
 
 /* Header */
@@ -47,6 +64,6 @@
 }
 
 .confirm__email-user-form__footer .button {
-    height: 45px;
+    height: 40px;
     margin-left: 12px;
 }
