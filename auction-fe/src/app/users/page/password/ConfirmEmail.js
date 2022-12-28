@@ -1,6 +1,8 @@
-import { useForm } from "react-hook-form";
-
 import "./FormPassword.css";
+
+import { useForm } from "react-hook-form";
+import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 import { useHttpClient } from "../../../../shared/hook/http-client";
@@ -12,11 +14,34 @@ import Footer from "../../../../shared/components/Layouts/Footer";
 import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
-import { Link } from "react-router-dom";
 
 const ConfirmEmail = () => {
+  /* Token to reset password */
+  const token = useParams().token;
+
   const methods = useForm();
   const { sendRequest, isLoading } = useHttpClient();
+
+  useEffect(() => {
+    /* Check token existing! */
+    try {
+      const checkToken = async () => {
+        const response = await sendRequest(
+          `http://localhost:8080/auth/check-token-password/${token}`,
+          "GET",
+          {},
+          {},
+          "/"
+        );
+        console.log(response);
+      };
+
+      checkToken();
+    } catch (err) {
+      console.error(err);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSendRequest = async (data) => {
     try {

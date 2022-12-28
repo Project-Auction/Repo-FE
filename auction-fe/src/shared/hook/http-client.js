@@ -1,17 +1,20 @@
 import axios from "axios";
 import { useCallback, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const useHttpClient = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   /* Why here not use useState instead useRef
   => useRef will not change value when component re-render */
   const activeHttpRequests = useRef([]);
 
   const sendRequest = useCallback(
-    async (url, method = "GET", data = null, headers = {}) => {
+    async (url, method = "GET", data = null, headers = {}, urlRedirect) => {
+      console.log(urlRedirect);
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
@@ -39,6 +42,11 @@ export const useHttpClient = () => {
         setIsLoading(false);
         setError(err.response.data.message);
         toast(err.response.data.message, { type: "error" });
+
+        if (urlRedirect) {
+          navigate(urlRedirect);
+        }
+
         throw err;
       }
     },

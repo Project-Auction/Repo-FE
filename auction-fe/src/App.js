@@ -39,11 +39,11 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/home-catalog" element={<HomeCatalog />} />
             <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/forget-password" element={<ConfirmEmail />} />
             <Route path="/:productId/detail" element={<ProductDetail />} />
             {/* Public Page */}
 
             {/* Require token */}
+            <Route path="/reset-password/:token" element={<ConfirmEmail />} />
             <Route
               path="/change-password/:token"
               element={<ChangePassword />}
