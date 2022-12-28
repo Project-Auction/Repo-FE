@@ -24,7 +24,7 @@ const ConfirmEmail = () => {
       formData.append("email", data.emailConfirm);
 
       const response = await sendRequest(
-        "http://localhost:8080/auth/forgot-password",
+        "http://localhost:8080/api/auth/forgot-password",
         "POST",
         formData
       );

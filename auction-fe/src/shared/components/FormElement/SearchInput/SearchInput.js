@@ -53,7 +53,7 @@ const SearchInput = ({ inputClass, placeholder }) => {
     const fetchSearch = async () => {
       try {
         const res = await sendRequest(
-          `http://localhost:8080/api/users/search=${debounceValue}`,
+          `http://localhost:8080/api/api/users/search=${debounceValue}`,
           "GET"
         );
 

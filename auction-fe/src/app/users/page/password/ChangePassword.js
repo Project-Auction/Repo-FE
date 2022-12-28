@@ -33,7 +33,7 @@ const ChangePassword = () => {
     try {
       const checkToken = async () => {
         const response = await sendRequest(
-          `http://localhost:8080/auth/check-token-password/${token}`,
+          `http://localhost:8080/api/auth/check-token-password/${token}`,
           "GET",
           {},
           {},
@@ -55,7 +55,7 @@ const ChangePassword = () => {
 
     try {
       const response = await sendRequest(
-        "http://localhost:8080/auth/reset-password",
+        "http://localhost:8080/api/auth/reset-password",
         "PATCH",
         formData,
         {

@@ -17,7 +17,7 @@ const FormProductInfo = (props) => {
     try {
       const fetchCategories = async () => {
         const response = await sendRequest(
-          "http://localhost:8080/request-common/categories",
+          "http://localhost:8080/api/request-common/categories",
           "GET"
         );
 
@@ -34,7 +34,7 @@ const FormProductInfo = (props) => {
     try {
       const fetchCodeProduct = async () => {
         const response = await sendRequest(
-          "http://localhost:8080/user/post-product",
+          "http://localhost:8080/api/user/post-product",
           "GET"
         );
 
