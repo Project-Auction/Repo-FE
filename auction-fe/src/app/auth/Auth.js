@@ -279,7 +279,7 @@ const Auth = () => {
                   </div>
 
                   <div className="d-flex align-items-center justify-content-center">
-                    <Link to="/forget-password">Forgot password?</Link>
+                    <Link to="/confirm-email">Forgot password?</Link>
                   </div>
                 </div>
 

@@ -40,12 +40,12 @@ function App() {
             <Route path="/home-catalog" element={<HomeCatalog />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/:productId/detail" element={<ProductDetail />} />
+            <Route path="/confirm-email" element={<ConfirmEmail />} />
             {/* Public Page */}
 
             {/* Require token */}
-            <Route path="/reset-password/:token" element={<ConfirmEmail />} />
             <Route
-              path="/change-password/:token"
+              path="/reset-password/:token"
               element={<ChangePassword />}
             />
             {/* Require token */}

@@ -14,7 +14,6 @@ export const useHttpClient = () => {
 
   const sendRequest = useCallback(
     async (url, method = "GET", data = null, headers = {}, urlRedirect) => {
-      console.log(urlRedirect);
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);

@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 import "./FormPassword.css";
+
+import { useHttpClient } from "../../../../shared/hook/http-client";
 import { FormInput } from "../../../../shared/components/FormElement/Input";
 import ButtonField from "../../../../shared/components/FormElement/Button/ButtonField";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
@@ -12,17 +15,59 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRED,
 } from "../../../../utils/Validator";
+import { toast } from "react-toastify";
 
 const ChangePassword = () => {
   /* Token from server to change password */
   const token = useParams().token;
 
   const methods = useForm();
+  const navigate = useNavigate();
+  const { sendRequest } = useHttpClient();
 
   /* Get passwords to validate matching */
   const password = methods.watch("passwordNew");
 
-  const handleSendRequest = () => {};
+  useEffect(() => {
+    /* Check token existing! */
+    try {
+      const checkToken = async () => {
+        const response = await sendRequest(
+          `http://localhost:8080/auth/check-token-password/${token}`,
+          "GET",
+          {},
+          {},
+          "/"
+        );
+      };
+
+      checkToken();
+    } catch (err) {
+      console.error(err);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSendRequest = async (data) => {
+    const formData = new FormData();
+    formData.append("password", data.passwordNew);
+    formData.append("token", token);
+
+    try {
+      const response = await sendRequest(
+        "http://localhost:8080/auth/reset-password",
+        "PATCH",
+        formData,
+        {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Methods": "PATCH",
+        }
+      );
+
+      toast("Update successfully!", { type: "success" });
+      navigate("/");
+    } catch (err) {}
+  };
 
   return (
     <>
