@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+import "./FormPassword.css";
+import { FormInput } from "../../../../shared/components/FormElement/Input";
 import ButtonField from "../../../../shared/components/FormElement/Button/ButtonField";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
-import { FormInput } from "../../../../shared/components/FormElement/Input";
 import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import {
@@ -10,9 +12,11 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRED,
 } from "../../../../utils/Validator";
-import "./FormPassword.css";
 
 const ChangePassword = () => {
+  /* Token from server to change password */
+  const token = useParams().token;
+
   const methods = useForm();
 
   /* Get passwords to validate matching */

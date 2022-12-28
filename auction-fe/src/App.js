@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import Auth from "./app/auth";
+import { ChangePassword } from "./app/users/page/password";
 import { AuthContext } from "./shared/context/auth-context";
 import { ScrollToTop } from "./shared/hook/scroll-to-top";
 import Admin from "./app/admin/page/Admin";
@@ -22,7 +23,7 @@ import EditProfile from "./app/users/components/profile/EditProfile";
 import PostProduct from "./app/users/page/post-product/PostProduct";
 import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
-import { ChangePassword } from "./app/users/page/password";
+import NotFound from "./shared/components/UIElement/ErrorPage/NotFound";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -43,8 +44,10 @@ function App() {
             {/* Public Page */}
 
             {/* Require token */}
-            <Route path="/change-password" element={<ChangePassword />} />
-
+            <Route
+              path="/change-password/:token"
+              element={<ChangePassword />}
+            />
             {/* Require token */}
 
             {/* Logged In page */}
@@ -75,6 +78,10 @@ function App() {
               <Route path="/admin/transition" element={<TransactionsList />} />
             </Route>
             {/* Admin page */}
+
+            {/* Error Page */}
+            <Route path="*" element={<NotFound />} />
+            {/* Error Page */}
           </Routes>
         </ScrollToTop>
       </Router>
