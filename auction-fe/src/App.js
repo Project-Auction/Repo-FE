@@ -22,6 +22,7 @@ import EditProfile from "./app/users/components/profile/EditProfile";
 import PostProduct from "./app/users/page/post-product/PostProduct";
 import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
+import { ChangePassword } from "./app/users/page/password";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -42,6 +43,8 @@ function App() {
             {/* Public Page */}
 
             {/* Require token */}
+            <Route path="/change-password" element={<ChangePassword />} />
+
             {/* Require token */}
 
             {/* Logged In page */}

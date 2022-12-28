@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import "./ConfirmEmail.css";
+import "./FormPassword.css";
 import { toast } from "react-toastify";
 
 import { useHttpClient } from "../../../../shared/hook/http-client";
@@ -42,17 +42,17 @@ const ConfirmEmail = () => {
       <MainNavigation noHeaderInner />
       <HeaderBreadcrumbs currentPage="Confirm Email" />
 
-      <div className="confirm__email-user-container section">
+      <div className="form__password-user-container section">
         <CustomFormProvider {...methods}>
           <form
-            className="confirm__email-user-form"
+            className="form__password-user-form"
             onSubmit={methods.handleSubmit(handleSendRequest)}
           >
-            <div className="confirm__email-user-form__header">
+            <div className="form__password-user-form__header">
               <h3>Find Your Account</h3>
             </div>
 
-            <div className="confirm__email-user-form__body">
+            <div className="form__password-user-form__body">
               <span className="title">
                 Enter the email associated with your account and we'll send you
                 to link reset password.
@@ -69,7 +69,7 @@ const ConfirmEmail = () => {
               />
             </div>
 
-            <div className="confirm__email-user-form__footer">
+            <div className="form__password-user-form__footer">
               <ButtonField type="submit" primary fullWidth>
                 Confirm
               </ButtonField>
