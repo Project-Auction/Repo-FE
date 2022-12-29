@@ -59,7 +59,7 @@ const Auth = () => {
         formData.append("district", data.district);
 
         const response = await sendRequest(
-          "http://localhost:8080/auth/sign-up",
+          "http://localhost:8080/api/auth/sign-up",
           "POST",
           formData,
           { "Content-Type": "application/json" }
@@ -71,7 +71,7 @@ const Auth = () => {
     } else {
       try {
         const response = await sendRequest(
-          "http://localhost:8080/authenticate",
+          "http://localhost:8080/api/authenticate",
           "POST",
           JSON.stringify({
             email: data.email,
@@ -279,7 +279,7 @@ const Auth = () => {
                   </div>
 
                   <div className="d-flex align-items-center justify-content-center">
-                    <Link>Forgot password?</Link>
+                    <Link to="/confirm-email">Forgot password?</Link>
                   </div>
                 </div>
 

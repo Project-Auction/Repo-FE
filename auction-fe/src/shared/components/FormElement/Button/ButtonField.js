@@ -10,6 +10,7 @@ function ButtonField(props) {
     ${props.fullWidth && "button--fullWidth"}
     ${props.green && "button--green"}
     ${props.border && "button--border"}
+    ${props.none && "button--none"}
   `;
 
   if (props.to) {

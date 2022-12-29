@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "swiper/css";
@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import Auth from "./app/auth";
+import { ChangePassword } from "./app/users/page/password";
 import { AuthContext } from "./shared/context/auth-context";
 import { ScrollToTop } from "./shared/hook/scroll-to-top";
 import Admin from "./app/admin/page/Admin";
@@ -21,6 +22,9 @@ import ProfileUser from "./app/users/page/profile/ProfileUser";
 import EditProfile from "./app/users/components/profile/EditProfile";
 import PostProduct from "./app/users/page/post-product/PostProduct";
 import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
+import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
+import NotFound from "./shared/components/UIElement/ErrorPage/NotFound";
+import FormChangePassword from "./app/users/components/password-auth/FormChangePassword";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -37,14 +41,23 @@ function App() {
             <Route path="/home-catalog" element={<HomeCatalog />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/:productId/detail" element={<ProductDetail />} />
+            <Route path="/confirm-email" element={<ConfirmEmail />} />
             {/* Public Page */}
+
+            {/* Require token */}
+            <Route path="/reset-password/:token" element={<ChangePassword />} />
+            {/* Require token */}
 
             {/* Logged In page */}
             <Route
               element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}
             >
-              <Route path="/payment" element={<Payment />} />
+              <Route path="/:userId/payment" element={<Payment />} />
               <Route path="/:userId/profile" element={<ProfileUser />} />
+              <Route
+                path="/:userId/change-password"
+                element={<FormChangePassword />}
+              />
               <Route path="/:userId/edit" element={<EditProfile />} />
               <Route path="/:userId/post-product" element={<PostProduct />} />
               <Route path="/:userId/invoices" element={<InvoiceUser />} />
@@ -67,6 +80,10 @@ function App() {
               <Route path="/admin/transition" element={<TransactionsList />} />
             </Route>
             {/* Admin page */}
+
+            {/* Error Page */}
+            <Route path="*" element={<NotFound />} />
+            {/* Error Page */}
           </Routes>
         </ScrollToTop>
       </Router>

@@ -22,7 +22,8 @@ const FormInput = forwardRef((props, ref) => {
     format,
     label,
     helperText,
-    autoComplete,
+    autoComplete = "true",
+    alertDanger,
     margin,
     readOnly = false,
     noBorder,
@@ -76,42 +77,51 @@ const FormInput = forwardRef((props, ref) => {
           return (
             <>
               {isMui ? (
-                <TextField
-                  label={label}
-                  inputRef={ref}
-                  placeholder={placeholder}
-                  defaultValue={defaultValue}
-                  type={
-                    (!endAdornment && "text") ||
-                    (isShowPassword && endAdornment ? "text" : "password")
-                  }
-                  ref={ref}
-                  onChange={onChangeValue}
-                  helperText={helperText || (!!error && error.message)}
-                  error={!!error}
-                  value={value}
-                  autoComplete={autoComplete}
-                  margin={margin}
-                  fullWidth={fullWidth}
-                  className={className}
-                  variant={variant}
-                  required={requiredForm}
-                  InputProps={
-                    ({ classes: inputClass },
-                    endAdornment && {
-                      endAdornment: (
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {!isShowPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      ),
-                    })
-                  }
-                />
+                <>
+                  <TextField
+                    label={label}
+                    inputRef={ref}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+                    type={
+                      (!endAdornment && "text") ||
+                      (isShowPassword && endAdornment ? "text" : "password")
+                    }
+                    ref={ref}
+                    onChange={onChangeValue}
+                    helperText={helperText || (!!error && error.message)}
+                    error={!!error}
+                    value={value}
+                    autoComplete={autoComplete}
+                    margin={margin}
+                    fullWidth={fullWidth}
+                    className={className}
+                    variant={variant}
+                    required={requiredForm}
+                    InputProps={
+                      ({ classes: inputClass },
+                      endAdornment && {
+                        endAdornment: (
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {!isShowPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        ),
+                      })
+                    }
+                  />
+                  {!!alertDanger && (
+                    <div className="alert alert-danger">{alertDanger}</div>
+                  )}
+                </>
               ) : (
                 <CustomFormInput
                   label={label}
@@ -128,6 +138,8 @@ const FormInput = forwardRef((props, ref) => {
                   formClass={formClass}
                   inputClass={inputClass}
                   placeholder={placeholder}
+                  alertDanger={alertDanger}
+                  hiddenPassword={endAdornment}
                 />
               )}
             </>
