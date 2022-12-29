@@ -45,7 +45,7 @@ const EditProfile = (props) => {
               className="form__edit-profile-body-form"
               onSubmit={methods.handleSubmit(onSubmit)}
             >
-              <div className="form__user-group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   isMui
                   variant="outlined"
@@ -82,7 +82,7 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <div className="form__user-group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   defaultValue="heelo"
                   isMui
@@ -111,7 +111,7 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <div className="form__user-group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   isMui
                   fieldName="phoneNumber"

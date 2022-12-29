@@ -96,6 +96,7 @@ const ChangePassword = () => {
                   requiredForm
                   onFocus={() => {}}
                   label="New Password"
+                  autoComplete="false"
                   validators={[
                     VALIDATOR_REQUIRED("Confirm password cannot be empty"),
                     VALIDATOR_MINLENGTH(6, "Password at least 6 characters"),
@@ -113,6 +114,7 @@ const ChangePassword = () => {
                   label="Confirm Password"
                   requiredForm
                   endAdornment
+                  autoComplete="false"
                   validators={[
                     VALIDATOR_REQUIRED("Confirm password cannot be empty"),
                     VALIDATOR_MATCHING(password, "Password not matching"),

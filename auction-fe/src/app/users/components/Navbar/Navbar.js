@@ -8,7 +8,7 @@ import {
   faHouse,
   faPlusCircle,
   faReceipt,
-  faShieldAlt,
+  faShield,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
@@ -75,7 +75,7 @@ const Navbar = ({ userId }) => {
 
           <li className="navbar__profile-user__item">
             <NavLink end to={`/${userId}/change-password`}>
-              <FontAwesomeIcon icon={faShieldAlt} className="icon" />
+              <FontAwesomeIcon icon={faShield} className="icon" />
               Password
               <div className="separate-hover"></div>
             </NavLink>

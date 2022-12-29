@@ -9,7 +9,7 @@ import FormInputTime from "../../../../../shared/components/FormElement/InputTim
 const FormProductDetail = (props) => {
   return (
     <div className="form__input-post__product-container">
-      <div className="form__user-group">
+      <div className="form__user-group d-flex align-items-center">
         <FormInput
           fieldName="initialPrice"
           formClass="form__input-post__product-form"
@@ -32,14 +32,14 @@ const FormProductDetail = (props) => {
         />
       </div>
 
-      <div className="form__user-group">
+      <div className="form__user-group d-flex align-items-center">
         <UploadMultipleImages
           multipleImages
           className="form__input-post__product__image"
         />
       </div>
 
-      <div className="form__user-group">
+      <div className="form__user-group d-flex align-items-center">
         <TextareaField
           label="Product Description (*)"
           row={5}
@@ -48,7 +48,7 @@ const FormProductDetail = (props) => {
         />
       </div>
 
-      <div className="form__user-group">
+      <div className="form__user-group d-flex align-items-center">
         <FormInputTime
           label="Start Date (*)"
           fieldName="startDate"

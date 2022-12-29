@@ -24,7 +24,6 @@ import PostProduct from "./app/users/page/post-product/PostProduct";
 import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
 import NotFound from "./shared/components/UIElement/ErrorPage/NotFound";
-import ChangePasswordPage from "./app/users/page/password-auth/ChangePasswordPage";
 import FormChangePassword from "./app/users/components/password-auth/FormChangePassword";
 
 function App() {
@@ -49,14 +48,16 @@ function App() {
             <Route path="/reset-password/:token" element={<ChangePassword />} />
             {/* Require token */}
 
-            <Route path="/:userId/change-password" element={<FormChangePassword />} />
             {/* Logged In page */}
             <Route
               element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}
             >
-              <Route path="/payment" element={<Payment />} />
+              <Route path="/:userId/payment" element={<Payment />} />
               <Route path="/:userId/profile" element={<ProfileUser />} />
-              {/* <Route path="/:userId/profile" element={<ChangePasswordPage />} /> */}
+              <Route
+                path="/:userId/change-password"
+                element={<FormChangePassword />}
+              />
               <Route path="/:userId/edit" element={<EditProfile />} />
               <Route path="/:userId/post-product" element={<PostProduct />} />
               <Route path="/:userId/invoices" element={<InvoiceUser />} />

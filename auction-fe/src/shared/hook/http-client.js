@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export const useHttpClient = () => {
+export const useHttpClient = (showToast = true) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ export const useHttpClient = () => {
       } catch (err) {
         setIsLoading(false);
         setError(err.response.data.message);
-        toast(err.response.data.message, { type: "error" });
+        if (showToast) {
+          toast(err.response.data.message, { type: "error" });
+        }
 
         if (urlRedirect) {
           navigate(urlRedirect);
