@@ -1,0 +1,24 @@
+:root {
+  --width-form-user-group-small: 65%;
+  --width-form-user-group-medium: 80%;
+}
+
+.form__user-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.form__user-group.small {
+  width: var(--width-form-user-group-small);
+}
+
+.form__user-group.medium {
+  width: var(--width-form-user-group-medium);
+}
+
+/* Body */
+.form__user-body {
+  padding: 20px;
+}

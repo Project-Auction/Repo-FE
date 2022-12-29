@@ -31,6 +31,11 @@
   color: #000;
 }
 
+.button--none {
+  background-color: transparent;
+  color: #000;
+}
+
 .button--primary {
   color: var(--white-color);
   background-color: var(--primary-color);

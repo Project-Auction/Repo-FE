@@ -22,7 +22,7 @@ const FormInput = forwardRef((props, ref) => {
     format,
     label,
     helperText,
-    autoComplete,
+    autoComplete="true",
     margin,
     readOnly = false,
     noBorder,
@@ -95,7 +95,7 @@ const FormInput = forwardRef((props, ref) => {
                   fullWidth={fullWidth}
                   className={className}
                   variant={variant}
-                  required={requiredForm}
+                  required={requiredForm} 
                   InputProps={
                     ({ classes: inputClass },
                     endAdornment && {

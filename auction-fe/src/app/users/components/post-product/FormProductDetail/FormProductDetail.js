@@ -1,4 +1,5 @@
 import "./FormProductDetail.css";
+import "../../MainUserStyles.css";
 
 import { UploadMultipleImages } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
@@ -8,7 +9,7 @@ import FormInputTime from "../../../../../shared/components/FormElement/InputTim
 const FormProductDetail = (props) => {
   return (
     <div className="form__input-post__product-container">
-      <div className="form__input-post__product-group">
+      <div className="form__user-group">
         <FormInput
           fieldName="initialPrice"
           formClass="form__input-post__product-form"
@@ -31,14 +32,14 @@ const FormProductDetail = (props) => {
         />
       </div>
 
-      <div className="form__input-post__product-group">
+      <div className="form__user-group">
         <UploadMultipleImages
           multipleImages
           className="form__input-post__product__image"
         />
       </div>
 
-      <div className="form__input-post__product-group">
+      <div className="form__user-group">
         <TextareaField
           label="Product Description (*)"
           row={5}
@@ -47,7 +48,7 @@ const FormProductDetail = (props) => {
         />
       </div>
 
-      <div className="form__input-post__product-group">
+      <div className="form__user-group">
         <FormInputTime
           label="Start Date (*)"
           fieldName="startDate"

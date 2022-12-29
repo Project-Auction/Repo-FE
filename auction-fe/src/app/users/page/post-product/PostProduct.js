@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 import "./PostProduct.css";
+import "../../components/MainUserStyles.css";
 import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
 import FormProductInfo from "../../components/post-product/FormProductInfo/FormProductInfo";
 import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInfo";
@@ -55,7 +56,7 @@ const PostProduct = (props) => {
           </header>
 
           <CustomFormProvider {...methods}>
-            <div className="form__step-form-body">
+            <div className="form__user-body">
               <div className="form__step-form-header">
                 <HeaderStep
                   isActive={steps + 1 === 1}
