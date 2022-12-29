@@ -55,10 +55,8 @@ const formatDate = (date) => {
 };
 
 /* Format currency dollar */
-const formatCurrentUS = (value) => {
-  const number = parseFloat(value);
-
-  return "$" + number.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+const formatCurrentUS = (value, suffix) => {
+  return suffix + parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
 };
 
 /* Format currency */

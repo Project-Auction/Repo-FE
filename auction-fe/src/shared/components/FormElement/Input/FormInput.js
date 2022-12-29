@@ -3,11 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import "./FormInput.css";
 
-import {
-  formatCurrentUS,
-  formatIdentityCard,
-  formatPhoneNumber,
-} from "../../../format/format-input";
+import { formatCurrentUS } from "../../../format/format-input";
 import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -26,7 +22,8 @@ const FormInput = forwardRef((props, ref) => {
     format,
     label,
     helperText,
-    autoComplete,
+    autoComplete = "true",
+    alertDanger,
     margin,
     readOnly = false,
     noBorder,
@@ -66,72 +63,70 @@ const FormInput = forwardRef((props, ref) => {
           },
         }}
         render={({
-          field: { onChange, value = "", ref },
+          field: { onChange, value = defaultValue || "", ref },
           fieldState: { error },
         }) => {
           const onChangeValue = (e) => {
-            onChange(e.target.value);
-          };
-
-          const convertValue = (val) => {
-            if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
-              return formatPhoneNumber(val);
-            } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
-              return formatCurrentUS(val);
-            } else if (
-              format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
-            ) {
-              return formatIdentityCard(val);
+            if (format === Constants.FormInputFormat.MONEY.VALUE) {
+              onChange(formatCurrentUS(e.target.value));
             } else {
-              return val;
+              onChange(e.target.value);
             }
           };
 
           return (
             <>
               {isMui ? (
-                <TextField
-                  label={label}
-                  inputRef={ref}
-                  placeholder={placeholder}
-                  defaultValue={defaultValue}
-                  type={
-                    (!endAdornment && "text") ||
-                    (isShowPassword && endAdornment ? "text" : "password")
-                  }
-                  ref={ref}
-                  onChange={onChangeValue}
-                  helperText={helperText || (!!error && error.message)}
-                  error={!!error}
-                  value={convertValue(value)}
-                  autoComplete={autoComplete}
-                  margin={margin}
-                  fullWidth={fullWidth}
-                  className={className}
-                  variant={variant}
-                  required={requiredForm}
-                  InputProps={
-                    ({ classes: inputClass },
-                    endAdornment && {
-                      endAdornment: (
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {!isShowPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      ),
-                    })
-                  }
-                />
+                <>
+                  <TextField
+                    label={label}
+                    inputRef={ref}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+                    type={
+                      (!endAdornment && "text") ||
+                      (isShowPassword && endAdornment ? "text" : "password")
+                    }
+                    ref={ref}
+                    onChange={onChangeValue}
+                    helperText={helperText || (!!error && error.message)}
+                    error={!!error}
+                    value={value}
+                    autoComplete={autoComplete}
+                    margin={margin}
+                    fullWidth={fullWidth}
+                    className={className}
+                    variant={variant}
+                    required={requiredForm}
+                    InputProps={
+                      ({ classes: inputClass },
+                      endAdornment && {
+                        endAdornment: (
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {!isShowPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        ),
+                      })
+                    }
+                  />
+                  {!!alertDanger && (
+                    <div className="alert alert-danger">{alertDanger}</div>
+                  )}
+                </>
               ) : (
                 <CustomFormInput
                   label={label}
                   inputRef={ref}
                   onChange={onChangeValue}
-                  defaultValue={defaultValue}
                   value={value}
                   error={error}
                   noBorder={noBorder}
@@ -143,6 +138,8 @@ const FormInput = forwardRef((props, ref) => {
                   formClass={formClass}
                   inputClass={inputClass}
                   placeholder={placeholder}
+                  alertDanger={alertDanger}
+                  hiddenPassword={endAdornment}
                 />
               )}
             </>

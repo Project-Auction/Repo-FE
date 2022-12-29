@@ -1,18 +1,18 @@
 import { useParams } from "react-router";
-import "./ProfileUser.css";
+import "./ChangePasswordPage.css";
 
 import DashboardUser from "../user-dashboard/DashboardUser";
 
-const ProfileUser = (props) => {
+const ChangePasswordPage = (props) => {
   const userId = useParams().userId;
 
   return (
     <>
-      <DashboardUser currentPage="Profile User" userId={userId}>
+      <DashboardUser currentPage="Update Password" userId={userId}>
         {props.children}
       </DashboardUser>
     </>
   );
 };
 
-export default ProfileUser;
+export default ChangePasswordPage;

@@ -9,13 +9,11 @@ import {
 import ProfileUser from "../../../page/profile/ProfileUser";
 import CustomFormProvider from "../../../../../shared/components/FormElement/CustomFormProvider";
 import { FormInput } from "../../../../../shared/components/FormElement/Input";
-import ButtonFiled from "../../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
 import { UploadImage } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
 
 const EditProfile = (props) => {
-  const {} = props;
-
   const methods = useForm({
     mode: "onChange",
     defaultValues: {},
@@ -31,14 +29,15 @@ const EditProfile = (props) => {
 
   return (
     <ProfileUser>
-      <div className="form__edit-profile-container">
-        <header className="dashboard__title-user__header">
-          <h3>Profile Settings</h3>
-        </header>
+      <div className="dashboard__right-area-container">
+        <h3 className="dashboard__title-user__header">Profile Settings</h3>
 
         <div className="form__edit-profile-body">
           <div className="form__edit-profile-body__avatar">
-            <UploadImage onInput={handleGetUrlImage} className="form__edit-profile-body__avatar-img" />
+            <UploadImage
+              onInput={handleGetUrlImage}
+              className="form__edit-profile-body__avatar-img"
+            />
           </div>
 
           <CustomFormProvider {...methods}>
@@ -46,7 +45,7 @@ const EditProfile = (props) => {
               className="form__edit-profile-body-form"
               onSubmit={methods.handleSubmit(onSubmit)}
             >
-              <div className="form__edit-profile-body-form__group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   isMui
                   variant="outlined"
@@ -83,7 +82,7 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <div className="form__edit-profile-body-form__group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   defaultValue="heelo"
                   isMui
@@ -112,7 +111,7 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <div className="form__edit-profile-body-form__group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   isMui
                   fieldName="phoneNumber"
@@ -151,9 +150,9 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <ButtonFiled type="submit" primary className="btn__submit">
+              <ButtonField type="submit" primary className="btn__submit">
                 Update Profile
-              </ButtonFiled>
+              </ButtonField>
             </form>
           </CustomFormProvider>
         </div>
