@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
+import "./FormProductInfo.css";
+
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
 import SelectField from "../../../../../shared/components/FormElement/Select/SelectField";
 import ErrorModal from "../../../../../shared/components/UIElement/ErrorModal";
 import LoadingSpinner from "../../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../../../../shared/hook/http-client";
-import "./FormProductInfo.css";
+import { options } from "../../../../../shared/components/UIElement/Table/Table";
 
 const FormProductInfo = (props) => {
   const [categories, setCategories] = useState([]);
-  const [codeProduct, setCodeProduct] = useState(0);
 
-  const { sendRequest, error, clearError, isLoading } = useHttpClient();
+  const { sendRequest, error, clearError, isLoading } = useHttpClient(false);
 
   /* Get categories */
   useEffect(() => {
     try {
       const fetchCategories = async () => {
         const response = await sendRequest(
-          "http://localhost:8080/api/request-common/categories",
+          "http://localhost:8080/api/home/categories",
           "GET"
         );
 
@@ -29,22 +30,6 @@ const FormProductInfo = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendRequest]);
 
-  /* Get code product */
-  useEffect(() => {
-    try {
-      const fetchCodeProduct = async () => {
-        const response = await sendRequest(
-          "http://localhost:8080/api/user/post-product",
-          "GET"
-        );
-
-        setCodeProduct(response);
-      };
-
-      fetchCodeProduct();
-    } catch (err) {}
-  }, [sendRequest]);
-
   return (
     <>
       {isLoading && <LoadingSpinner asOverlay />}
@@ -53,18 +38,6 @@ const FormProductInfo = (props) => {
 
       {!error && !isLoading && (
         <div className="form__input-post__product-container">
-          <FormInput
-            fieldName="codeProduct"
-            label="Code Product (*)"
-            fullWidth
-            onFocus={() => {}}
-            placeholder="Enter product's code"
-            formClass="form__input-post__product-form"
-            defaultValue={`PR ${codeProduct > 0 ? "" : 0}${codeProduct + 1}`}
-            readOnly
-            inputClass="no-select"
-          />
-
           <FormInput
             fieldName="productName"
             label="Product Name (*)"

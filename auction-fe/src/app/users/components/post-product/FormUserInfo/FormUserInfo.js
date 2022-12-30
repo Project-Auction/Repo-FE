@@ -1,6 +1,5 @@
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
 import SelectField from "../../../../../shared/components/FormElement/Select/SelectField";
-import { options } from "../../../../../shared/components/UIElement/Table/Table";
 import CheckboxField from "../../../../../shared/components/FormElement/Checkbox";
 import "./FormUserInfo.css";
 
@@ -28,24 +27,6 @@ const FormUserInfo = () => {
           placeholder="Enter Phone Number"
           onFocus={() => {}}
           readOnly
-        />
-      </div>
-
-      <div className="form__input-post__product-group">
-        <SelectField
-          fieldName="category"
-          label="Category (*)"
-          items={options}
-          fullWidth
-          className="form__input-post__product-form"
-        />
-
-        <SelectField
-          fieldName="category"
-          label="Category (*)"
-          items={options}
-          fullWidth
-          className="form__input-post__product-form"
         />
       </div>
 
