@@ -74,24 +74,6 @@ const UploadImage = (props) => {
 
 const UploadMultipleImages = ({ fieldName }) => {
   const { control } = useFormContext();
-  const [previewUrls, setPreviewUrls] = useState([]);
-
-  const handlePickerFile = (e) => {
-    setPreviewUrls(Array.from(e.target.files));
-    // const fileInput = document.createElement("input");
-    // fileInput.type = "file";
-    // fileInput.multiple = true;
-    // fileInput.accept = "image/*";
-    // fileInput.click();
-
-    // fileInput.onchange = (e) => {
-    //   setPreviewUrls(Array.from(e.target.files));
-    // };
-  };
-
-  const handleRemoveImage = (input) => {
-    setPreviewUrls((urls) => urls.filter((url) => url !== input));
-  };
 
   const storedImagesMap = new Map();
 
@@ -109,6 +91,12 @@ const UploadMultipleImages = ({ fieldName }) => {
           });
           const values = Array.from(storedImagesMap.values());
           onChange(values);
+        };
+
+        const handleRemoveImage = (file) => {
+          const updatedImages = value.filter((f) => f !== file);
+          storedImagesMap.delete(file.name);
+          onChange(updatedImages);
         };
 
         return (
