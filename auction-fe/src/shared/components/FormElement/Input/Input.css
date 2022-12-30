@@ -11,6 +11,10 @@
   padding: 0 0 0 12px;
 }
 
+.form-input__group.no-border .form-input {
+  border: none;
+}
+
 .form-wrapper label {
   font-weight: 600;
   font-size: 1.6rem;
@@ -24,7 +28,18 @@
   align-items: center;
   outline: none;
   padding: 4px 12px 4px 0px;
+  width: 100%;
+}
+
+.form-input {
   border: none;
+}
+
+.form-text-area {
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  height: max-content;
 }
 
 .form-input.full-width {
