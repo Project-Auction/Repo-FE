@@ -1,1 +1,1 @@
-export { default } from "./PostProduct";
+export { default as PostProduct } from "./PostProduct";

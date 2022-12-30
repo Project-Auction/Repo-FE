@@ -46,22 +46,22 @@ const Auth = () => {
   const onSubmit = async (data) => {
     if (!isLoginMode) {
       try {
-        const formData = new FormData();
-
-        formData.append("fullName", data.fullName);
-        formData.append("email", data.email);
-        formData.append("dateOfBirth", data.dateOfBirth);
-        formData.append("phoneNumber", data.phoneNumber);
-        formData.append("password", data.password);
-        formData.append("identityNumber", data.identityNumber);
-        formData.append("ward", data.ward);
-        formData.append("city", data.city);
-        formData.append("district", data.district);
+        const requestBody = {
+          fullName: data.fullName,
+          email: data.email,
+          dateOfBirth: data.dateOfBirth,
+          phoneNumber: data.phoneNumber,
+          password: data.password,
+          identityNumber: data.identityNumber,
+          ward: data.ward,
+          city: data.city,
+          district: data.district,
+        };
 
         const response = await sendRequest(
           "http://localhost:8080/api/auth/sign-up",
           "POST",
-          formData,
+          JSON.stringify(requestBody),
           { "Content-Type": "application/json" }
         );
 

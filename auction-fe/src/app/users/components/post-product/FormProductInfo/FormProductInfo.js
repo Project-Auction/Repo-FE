@@ -6,9 +6,8 @@ import SelectField from "../../../../../shared/components/FormElement/Select/Sel
 import ErrorModal from "../../../../../shared/components/UIElement/ErrorModal";
 import LoadingSpinner from "../../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../../../../shared/hook/http-client";
-import { options } from "../../../../../shared/components/UIElement/Table/Table";
 
-const FormProductInfo = (props) => {
+const FormProductInfo = ({ children }) => {
   const [categories, setCategories] = useState([]);
 
   const { sendRequest, error, clearError, isLoading } = useHttpClient(false);
@@ -32,7 +31,7 @@ const FormProductInfo = (props) => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay />}
+      {/* {isLoading && <LoadingSpinner asOverlay />} */}
 
       {!isLoading && <ErrorModal error={error} onClear={clearError} />}
 
@@ -64,6 +63,8 @@ const FormProductInfo = (props) => {
           )}
         </div>
       )}
+
+      {children}
     </>
   );
 };

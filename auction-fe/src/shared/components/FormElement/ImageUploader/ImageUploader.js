@@ -13,6 +13,8 @@ import { useFormContext } from "react-hook-form";
 const UploadImage = (props) => {
   const { className } = props;
 
+  const { register } = useFormContext();
+
   const classes = `upload__image-display ${className}`;
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
@@ -53,6 +55,7 @@ const UploadImage = (props) => {
     <div className="upload__image-container">
       <div className="upload__image-input">
         <input
+          {...register("images")}
           type="file"
           style={{ display: "none" }}
           accept=".jpg,.png,.jpeg"
@@ -70,15 +73,23 @@ const UploadImage = (props) => {
 };
 
 const UploadMultipleImages = (props) => {
-  const { control } = useFormContext();
-  const [files, setFiles] = useState([]);
+  const { register } = useFormContext();
   const [previewUrls, setPreviewUrls] = useState([]);
-  const [storeFile, setStoreFile] = useState([]);
-
-  const fileRef = useRef();
 
   const handlePickerFile = () => {
-    fileRef.current.click();
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.multiple = true;
+    fileInput.accept = "image/*";
+    fileInput.click();
+
+    fileInput.onchange = (e) => {
+      setPreviewUrls(Array.from(e.target.files));
+    };
+  };
+
+  const handleRemoveImage = (input) => {
+    setPreviewUrls((urls) => urls.filter((url) => url !== input));
   };
 
   return (
@@ -89,7 +100,7 @@ const UploadMultipleImages = (props) => {
           <div className="upload__images-main-image">
             <div className="upload__images-main-image-group">
               <p>Drop files anywhere to Upload</p>
-              <div className="icon-group">
+              <div className="icon-group" onClick={handlePickerFile}>
                 <FontAwesomeIcon icon={faCloudArrowUp} className="icon" />
               </div>
 
@@ -102,65 +113,31 @@ const UploadMultipleImages = (props) => {
         <div className="col-6 pr-0">
           {/* Sub images */}
           <ul className="display__list-images-list">
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
+            {previewUrls.length > 0 &&
+              previewUrls.map((url, index) => (
+                <li key={index} className="display__list-images-item">
+                  <div className="display__list-images-item__info d-flex">
+                    <Image src={URL.createObjectURL(url)} alt="Images" />
+                    <span>{url.name}</span>
+                  </div>
 
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
+                  <FontAwesomeIcon
+                    icon={faClose}
+                    className="icon circle"
+                    onClick={() => handleRemoveImage(url)}
+                  />
+                </li>
+              ))}
 
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
+            {/* This input to receive data images */}
+            <input
+              {...register("imagesProduct", {
+                required: true,
+              })}
+              type="hidden"
+              value={previewUrls}
+            />
+            {/* This input to receive data images */}
           </ul>
           {/* Sub images */}
         </div>

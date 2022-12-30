@@ -47,6 +47,7 @@ function App() {
             {/* Require token */}
             <Route path="/reset-password/:token" element={<ChangePassword />} />
             {/* Require token */}
+            <Route path="/:userId/post-product" element={<PostProduct />} />
 
             {/* Logged In page */}
             <Route
@@ -59,7 +60,7 @@ function App() {
                 element={<FormChangePassword />}
               />
               <Route path="/:userId/edit" element={<EditProfile />} />
-              <Route path="/:userId/post-product" element={<PostProduct />} />
+              {/* <Route path="/:userId/post-product" element={<PostProduct />} /> */}
               <Route path="/:userId/invoices" element={<InvoiceUser />} />
             </Route>
             {/* Logged In page */}

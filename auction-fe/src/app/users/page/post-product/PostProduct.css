@@ -1,49 +1,49 @@
 /* Form step */
 .form__step-container {
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
-    padding: 20px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  padding: 20px 0;
 }
 
 .form__step-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0px 20px 10px 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0px 20px 10px 20px;
 }
 
 .form__step-header .title {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 /* Form step form */
 .form__step-form-header {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .form__step-form-body {
-    padding: 20px;
+  padding: 20px;
 }
 
 .form__step-form-footer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .btn__redirect-form {
-    margin: 0px 12px 0px 20px;
-    padding: 0 24px;
-    font-size: 1.4rem;
+  margin: 0px 12px 0 0;
+  padding: 0 24px;
+  font-size: 1.4rem;
 }
 
 .btn__redirect-form.prev {
-    border: 1px solid var(--border-color);
-    background-color: transparent;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
 }
 
 .btn__redirect-form.prev:hover {
-    background-color: var(--dark-color);
-    color: #fff;
+  background-color: var(--dark-color);
+  color: #fff;
 }

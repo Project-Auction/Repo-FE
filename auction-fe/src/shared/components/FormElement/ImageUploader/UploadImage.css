@@ -60,6 +60,10 @@
     font-size: 1.6rem;
     margin-left: 8px;
     color: #5830E0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 270px;
 }
 
 .display__list-images-item__info img {

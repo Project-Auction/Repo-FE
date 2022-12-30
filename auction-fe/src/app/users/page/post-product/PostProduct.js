@@ -7,10 +7,10 @@ import "../../components/MainUserStyles.css";
 import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
 import FormProductInfo from "../../components/post-product/FormProductInfo/FormProductInfo";
 import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInfo";
-import ButtonField from "../../../../shared/components/FormElement/Button";
 import DashboardUser from "../user-dashboard/DashboardUser";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
 import HeaderStep from "../../components/post-product/HeaderStep";
+import FooterPostProduct from "./FooterPostProduct";
 
 const PostProduct = (props) => {
   const userId = useParams().userId;
@@ -20,6 +20,7 @@ const PostProduct = (props) => {
   const [steps, setSteps] = useState(0);
 
   const onSubmit = (data) => {
+    console.log("click");
     console.log(data);
   };
 
@@ -31,16 +32,26 @@ const PostProduct = (props) => {
     setSteps(steps - 1);
   };
 
+  const renderFooter = () => {
+    return (
+      <FooterPostProduct
+        steps={steps}
+        handleNextStep={handleNextStep}
+        handlePrevStep={handlePrevStep}
+      />
+    );
+  };
+
   const conditionalComponents = () => {
     switch (steps) {
       case 0:
-        return <FormProductInfo />;
+        return <FormProductInfo>{renderFooter()}</FormProductInfo>;
 
       case 1:
-        return <FormProductDetail />;
+        return <FormProductDetail>{renderFooter()}</FormProductDetail>;
 
       case 2:
-        return <FormUserInfo />;
+        return <FormUserInfo>{renderFooter()}</FormUserInfo>;
 
       default:
         return <FormProductInfo />;
@@ -80,40 +91,6 @@ const PostProduct = (props) => {
               >
                 {conditionalComponents()}
               </form>
-            </div>
-
-            <div className="form__step-form-footer">
-              {steps > 0 && (
-                <ButtonField
-                  type="button"
-                  onClick={handlePrevStep}
-                  className="btn__redirect-form prev"
-                >
-                  Prev Step
-                </ButtonField>
-              )}
-
-              {steps < 2 && (
-                <ButtonField
-                  type="button"
-                  onClick={handleNextStep}
-                  className="btn__redirect-form next"
-                  dark
-                >
-                  Next Step
-                </ButtonField>
-              )}
-
-              {steps === 2 && (
-                <ButtonField
-                  type="submit"
-                  // onClick={handleNextStep}
-                  className="btn__redirect-form next"
-                  dark
-                >
-                  Submit
-                </ButtonField>
-              )}
             </div>
           </CustomFormProvider>
         </div>
