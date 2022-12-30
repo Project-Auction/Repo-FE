@@ -8,7 +8,7 @@ import {
 
 import "./UploadImage.css";
 import Image from "../../UIElement/Image";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 const UploadImage = (props) => {
   const { className } = props;
@@ -72,77 +72,105 @@ const UploadImage = (props) => {
   );
 };
 
-const UploadMultipleImages = (props) => {
-  const { register } = useFormContext();
+const UploadMultipleImages = ({ fieldName }) => {
+  const { control } = useFormContext();
   const [previewUrls, setPreviewUrls] = useState([]);
 
-  const handlePickerFile = () => {
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.multiple = true;
-    fileInput.accept = "image/*";
-    fileInput.click();
+  const handlePickerFile = (e) => {
+    setPreviewUrls(Array.from(e.target.files));
+    // const fileInput = document.createElement("input");
+    // fileInput.type = "file";
+    // fileInput.multiple = true;
+    // fileInput.accept = "image/*";
+    // fileInput.click();
 
-    fileInput.onchange = (e) => {
-      setPreviewUrls(Array.from(e.target.files));
-    };
+    // fileInput.onchange = (e) => {
+    //   setPreviewUrls(Array.from(e.target.files));
+    // };
   };
 
   const handleRemoveImage = (input) => {
     setPreviewUrls((urls) => urls.filter((url) => url !== input));
   };
 
-  return (
-    <div className="upload__image-container">
-      <div className="row">
-        <div className="col-6 pr-0">
-          {/* Upload images */}
-          <div className="upload__images-main-image">
-            <div className="upload__images-main-image-group">
-              <p>Drop files anywhere to Upload</p>
-              <div className="icon-group" onClick={handlePickerFile}>
-                <FontAwesomeIcon icon={faCloudArrowUp} className="icon" />
-              </div>
+  const storedImagesMap = new Map();
 
-              <p>Select File</p>
-              <p>At least 5 images for product</p>
+  return (
+    <Controller
+      name={fieldName}
+      control={control}
+      render={({ field: { onChange, value = [] } }) => {
+        const onChangePicker = (e) => {
+          const input = Array.from(e.target.files);
+          input.forEach((url) => {
+            if (!storedImagesMap.has(url.name)) {
+              storedImagesMap.set(url.name, url);
+            }
+          });
+          const values = Array.from(storedImagesMap.values());
+          onChange(values);
+        };
+
+        return (
+          <div className="upload__image-container">
+            <div className="row">
+              <div className="col-6 pr-0">
+                {/* Upload images */}
+                <div className="upload__images-main-image">
+                  <div className="upload__images-main-image-group">
+                    <p>Drop files anywhere to Upload</p>
+                    <label htmlFor="file-input">
+                      <input
+                        type="file"
+                        id="file-input"
+                        style={{ display: "none" }}
+                        onChange={onChangePicker}
+                        multiple
+                        accept="image/*"
+                      />
+                      <div className="icon-group">
+                        <FontAwesomeIcon
+                          icon={faCloudArrowUp}
+                          className="icon"
+                        />
+                      </div>
+                    </label>
+
+                    <p>Select File</p>
+                    <p>At least 5 images for product</p>
+                  </div>
+                </div>
+                {/* Upload images */}
+              </div>
+              <div className="col-6 pr-0">
+                {/* Sub images */}
+                <ul className="display__list-images-list">
+                  {value.length > 0 &&
+                    value.map((url, index) => {
+                      const objectUrl = URL.createObjectURL(url);
+                      return (
+                        <li key={index} className="display__list-images-item">
+                          <div className="display__list-images-item__info d-flex">
+                            <img src={objectUrl} alt="Images" />
+                            <span>{url.name}</span>
+                          </div>
+
+                          <FontAwesomeIcon
+                            icon={faClose}
+                            className="icon circle"
+                            onClick={() => handleRemoveImage(url)}
+                          />
+                        </li>
+                      );
+                    })}
+                </ul>
+                {/* Sub images */}
+              </div>
             </div>
           </div>
-          {/* Upload images */}
-        </div>
-        <div className="col-6 pr-0">
-          {/* Sub images */}
-          <ul className="display__list-images-list">
-            {previewUrls.length > 0 &&
-              previewUrls.map((url, index) => (
-                <li key={index} className="display__list-images-item">
-                  <div className="display__list-images-item__info d-flex">
-                    <Image src={URL.createObjectURL(url)} alt="Images" />
-                    <span>{url.name}</span>
-                  </div>
-
-                  <FontAwesomeIcon
-                    icon={faClose}
-                    className="icon circle"
-                    onClick={() => handleRemoveImage(url)}
-                  />
-                </li>
-              ))}
-
-            {/* This input to receive data images */}
-            <input
-              {...register("imagesProduct", {
-                required: true,
-              })}
-              type="hidden"
-              value={previewUrls}
-            />
-            {/* This input to receive data images */}
-          </ul>
-          {/* Sub images */}
-        </div>
-      </div>
-    </div>
+        );
+      }}
+    />
   );
 };
 

@@ -35,6 +35,7 @@ const FormProductDetail = ({ children }) => {
 
         <div className="form__user-group d-flex align-items-center">
           <UploadMultipleImages
+            fieldName="images"
             multipleImages
             className="form__input-post__product__image"
           />
