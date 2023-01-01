@@ -109,7 +109,7 @@ const UploadMultipleImages = ({ fieldName }) => {
                     <p>Drop files anywhere to Upload</p>
                     <label htmlFor="file-input">
                       <input
-                        type="file"
+                        type={value.length === 5 ? "hidden" : "file"}
                         id="file-input"
                         style={{ display: "none" }}
                         onChange={onChangePicker}
@@ -124,8 +124,17 @@ const UploadMultipleImages = ({ fieldName }) => {
                       </div>
                     </label>
 
-                    <p>Select File</p>
-                    <p>At least 5 images for product</p>
+                    {value.length !== 5 && (
+                      <>
+                        <p>Select File Here</p>
+                        <p>At least 5 images for product</p>
+                      </>
+                    )}
+                    <p>
+                      {value.length === 5
+                        ? "You selected enough"
+                        : `You selected ${value.length} images`}
+                    </p>
                   </div>
                 </div>
                 {/* Upload images */}

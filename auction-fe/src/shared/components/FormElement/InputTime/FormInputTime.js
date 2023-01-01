@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { TextField } from "@mui/material";
 import {
   DateTimePicker,
@@ -11,7 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "../Input/FormInput.css";
 import { formatDate } from "../../../format/format-input";
 
-const FormInputTime = (props) => {
+const FormInputTime = forwardRef((props, ref) => {
   /*
    * dateType to choose date or datetimepicker
    */
@@ -20,7 +20,6 @@ const FormInputTime = (props) => {
     label,
     inputFormat = "DD/MM/YYYY",
     dateType,
-    ref,
     className,
   } = props;
 
@@ -33,7 +32,7 @@ const FormInputTime = (props) => {
       <Controller
         name={fieldName}
         control={control}
-        render={({ field: { onChange } }) => {
+        render={({ field: { onChange }, fieldState }) => {
           const onChangeValue = (newValue) => {
             setValue(newValue);
             onChange(formatDate(newValue.toString()));
@@ -45,12 +44,13 @@ const FormInputTime = (props) => {
                 {dateType === "date_timer_picker" ? (
                   <DateTimePicker
                     label={label}
-                    onError={() => {}}
+                    onError={(error) => console.error(error.message)}
                     onChange={onChangeValue}
                     value={value}
                     inputRef={ref}
                     renderInput={(params) => <TextField {...params} />}
                     className={className}
+                    {...fieldState}
                   />
                 ) : (
                   <DesktopDatePicker
@@ -58,10 +58,11 @@ const FormInputTime = (props) => {
                     inputFormat={inputFormat}
                     value={value}
                     inputRef={ref}
-                    onError={() => {}}
+                    onError={(error) => console.error(error.message)}
                     onChange={onChangeValue}
                     renderInput={(params) => <TextField {...params} />}
                     className={className}
+                    {...fieldState}
                   />
                 )}
               </LocalizationProvider>
@@ -71,6 +72,6 @@ const FormInputTime = (props) => {
       />
     </>
   );
-};
+});
 
 export default FormInputTime;

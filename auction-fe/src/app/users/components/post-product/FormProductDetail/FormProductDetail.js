@@ -14,22 +14,21 @@ const FormProductDetail = ({ children }) => {
           <FormInput
             fieldName="initialPrice"
             formClass="form__input-post__product-form"
-            type="number"
             fullWidth
             label="Initial Price (*)"
-            placeholder="Enter Price"
-            format="money"
+            placeholder="Enter Initial Price"
             onFocus={() => {}}
+            format="money"
           />
 
           <FormInput
             fieldName="incrementPrice"
             formClass="form__input-post__product-form"
-            type="number"
             fullWidth
             label="Increment At Least (*)"
             placeholder="Enter Increment Price"
             onFocus={() => {}}
+            format="money"
           />
         </div>
 

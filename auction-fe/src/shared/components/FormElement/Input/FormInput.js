@@ -3,13 +3,18 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import "./FormInput.css";
 
-import { formatCurrentUS } from "../../../format/format-input";
 import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import CustomFormInput from "./CustomFormInput";
-import Constants from "../../../../utils/Constants";
 import { validateForm } from "../../../../utils/Validator";
+import {
+  formatCurrency,
+  formatDate,
+  formatIdentityCard,
+  formatPhoneNumber,
+} from "../../../format/format-input";
+import Constants from "../../../../utils/Constants";
 
 const FormInput = forwardRef((props, ref) => {
   const {
@@ -67,10 +72,33 @@ const FormInput = forwardRef((props, ref) => {
           fieldState: { error },
         }) => {
           const onChangeValue = (e) => {
+            switch (format) {
+              case Constants.FormInputFormat.MONEY.VALUE:
+              case Constants.FormInputFormat.PHONE_NUMBER.VALUE:
+              case Constants.FormInputFormat.IDENTITY_CARD.VALUE:
+                onChange(e.target.value.replace(/[$,.0]/g, ""));
+                break;
+              default:
+                onChange(e.target.value);
+                break;
+            }
+          };
+
+          const convertValue = (val) => {
             if (format === Constants.FormInputFormat.MONEY.VALUE) {
-              onChange(formatCurrentUS(e.target.value));
+              return formatCurrency(val);
+            } else if (format === Constants.FormInputFormat.DATE.VALUE) {
+              return formatDate(val);
+            } else if (
+              format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
+            ) {
+              return formatIdentityCard(val);
+            } else if (
+              format === Constants.FormInputFormat.PHONE_NUMBER.VALUE
+            ) {
+              return formatPhoneNumber(val);
             } else {
-              onChange(e.target.value);
+              return val;
             }
           };
 
@@ -91,7 +119,7 @@ const FormInput = forwardRef((props, ref) => {
                     onChange={onChangeValue}
                     helperText={helperText || (!!error && error.message)}
                     error={!!error}
-                    value={value}
+                    value={convertValue(value)}
                     autoComplete={autoComplete}
                     margin={margin}
                     fullWidth={fullWidth}
@@ -127,7 +155,7 @@ const FormInput = forwardRef((props, ref) => {
                   label={label}
                   inputRef={ref}
                   onChange={onChangeValue}
-                  value={value}
+                  value={convertValue(value)}
                   error={error}
                   noBorder={noBorder}
                   required={requiredForm}

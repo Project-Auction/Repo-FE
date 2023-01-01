@@ -20,7 +20,6 @@ const PostProduct = (props) => {
   const [steps, setSteps] = useState(0);
 
   const onSubmit = (data) => {
-    console.log("click");
     console.log(data);
   };
 
