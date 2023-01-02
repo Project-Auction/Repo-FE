@@ -11,6 +11,10 @@ class Constants {
     MONEY: {
       VALUE: "money",
     },
+
+    DATE: {
+      VALUE: "date",
+    },
   };
 }
 

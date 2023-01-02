@@ -3,42 +3,39 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import "./FormInput.css";
 
-import {
-  formatCurrency,
-  formatIdentityCard,
-  formatPhoneNumber,
-} from "../../../format/format-input";
 import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-import { validateEmail } from "../../../../utils/validate_form";
 import CustomFormInput from "./CustomFormInput";
+import { validateForm } from "../../../../utils/Validator";
+import {
+  formatCurrency,
+  formatDate,
+  formatIdentityCard,
+  formatPhoneNumber,
+} from "../../../format/format-input";
 import Constants from "../../../../utils/Constants";
 
 const FormInput = forwardRef((props, ref) => {
   const {
-    isMui,
+    validators = [],
     fieldName,
     defaultValue,
     placeholder,
+    isMui = false,
     variant,
-    format,
+    format = "",
     label,
     helperText,
-    autoComplete,
+    autoComplete = "true",
+    alertDanger,
     margin,
-    readOnly,
+    readOnly = false,
     noBorder,
     type,
     fullWidth,
     className,
     requiredForm,
-    messageRequired,
-    minLengthForm,
-    minLengthMessage,
-    maxLengthForm,
-    maxLengthMessage,
-    emailRequired,
     endAdornment,
     onFocus,
     inputClass,
@@ -59,112 +56,122 @@ const FormInput = forwardRef((props, ref) => {
   return (
     <>
       <Controller
-        name={fieldName}
         control={control}
+        name={fieldName}
+        rules={{
+          validate: {
+            validate: (value) => {
+              if (validators.length >= 1) {
+                return validateForm(value, validators);
+              }
+            },
+          },
+        }}
         render={({
-          field: { onChange, value = "" },
+          field: { onChange, value = defaultValue || "", ref },
           fieldState: { error },
         }) => {
           const onChangeValue = (e) => {
-            if (format === Constants.FormInputFormat.PHONE_NUMBER.VALUE) {
-              value = formatPhoneNumber(e.target.value);
-              onChange(value);
-            } else if (format === Constants.FormInputFormat.MONEY.VALUE) {
-              value = formatCurrency(e.target.value);
-              onChange(value);
+            switch (format) {
+              case Constants.FormInputFormat.MONEY.VALUE:
+              case Constants.FormInputFormat.PHONE_NUMBER.VALUE:
+              case Constants.FormInputFormat.IDENTITY_CARD.VALUE:
+                onChange(e.target.value.replace(/[$,.0]/g, ""));
+                break;
+              default:
+                onChange(e.target.value);
+                break;
+            }
+          };
+
+          const convertValue = (val) => {
+            if (format === Constants.FormInputFormat.MONEY.VALUE) {
+              return formatCurrency(val);
+            } else if (format === Constants.FormInputFormat.DATE.VALUE) {
+              return formatDate(val);
             } else if (
               format === Constants.FormInputFormat.IDENTITY_CARD.VALUE
             ) {
-              value = formatIdentityCard(e.target.value);
-              onChange(value);
+              return formatIdentityCard(val);
+            } else if (
+              format === Constants.FormInputFormat.PHONE_NUMBER.VALUE
+            ) {
+              return formatPhoneNumber(val);
             } else {
-              value = e.target.value;
-              onChange(value);
+              return val;
             }
           };
 
           return (
             <>
               {isMui ? (
-                <TextField
-                  label={label}
-                  variant={variant}
-                  placeholder={placeholder}
-                  defaultValue={defaultValue}
-                  type={
-                    (!endAdornment && "text") ||
-                    (isShowPassword && endAdornment ? "text" : "password")
-                  }
-                  ref={ref}
-                  onChange={onChangeValue}
-                  helperText={helperText || (!!error && error.message)}
-                  error={!!error}
-                  value={value}
-                  autoComplete={autoComplete}
-                  margin={margin}
-                  fullWidth={fullWidth}
-                  className={className}
-                  InputProps={
-                    ({ classes: inputClass },
-                    endAdornment && {
-                      endAdornment: (
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {!isShowPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      ),
-                    })
-                  }
-                />
+                <>
+                  <TextField
+                    label={label}
+                    inputRef={ref}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+                    type={
+                      (!endAdornment && "text") ||
+                      (isShowPassword && endAdornment ? "text" : "password")
+                    }
+                    ref={ref}
+                    onChange={onChangeValue}
+                    helperText={helperText || (!!error && error.message)}
+                    error={!!error}
+                    value={convertValue(value)}
+                    autoComplete={autoComplete}
+                    margin={margin}
+                    fullWidth={fullWidth}
+                    className={className}
+                    variant={variant}
+                    required={requiredForm}
+                    InputProps={
+                      ({ classes: inputClass },
+                      endAdornment && {
+                        endAdornment: (
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {!isShowPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        ),
+                      })
+                    }
+                  />
+                  {!!alertDanger && (
+                    <div className="alert alert-danger">{alertDanger}</div>
+                  )}
+                </>
               ) : (
                 <CustomFormInput
                   label={label}
-                  readOnly={readOnly}
+                  inputRef={ref}
                   onChange={onChangeValue}
-                  defaultValue={defaultValue}
+                  value={convertValue(value)}
                   error={error}
                   noBorder={noBorder}
                   required={requiredForm}
                   type={type}
-                  value={value}
                   fullWidth={fullWidth}
+                  readOnly={readOnly}
                   onFocus={onFocus}
-                  ref={ref}
-                  inputClass={inputClass}
                   formClass={formClass}
+                  inputClass={inputClass}
                   placeholder={placeholder}
+                  alertDanger={alertDanger}
+                  hiddenPassword={endAdornment}
                 />
               )}
             </>
           );
-        }}
-        rules={{
-          validate: {
-            validateRequired: (value) => {
-              if (!value) {
-                return requiredForm && messageRequired;
-              }
-            },
-            validateEmail: (value) => {
-              if (emailRequired) {
-                return validateEmail(value) || "Email is invalid";
-              }
-            },
-            validateMinlength: (value) => {
-              if (!!minLengthForm && value.length < minLengthForm) {
-                return minLengthMessage;
-              }
-            },
-            validateMaxLength: (value) => {
-              if (!!maxLengthForm && value.length < maxLengthForm) {
-                return maxLengthMessage;
-              }
-            },
-          },
         }}
       />
     </>

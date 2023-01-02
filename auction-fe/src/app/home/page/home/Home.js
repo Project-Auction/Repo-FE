@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
-import ButtonFiled from "../../../../shared/components/FormElement/Button";
+import ButtonField from "../../../../shared/components/FormElement/Button";
 import ProductList from "../../../product/components/ProductList";
 
 export const HEADER_GRID = [
@@ -17,71 +17,85 @@ export const DUMMY_PRODUCTS = [
   {
     codeProduct: 1,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
-    initialPrice: "20000",
-    currentPrice: "20000",
+    initialPrice: "2000",
+    currentPrice: "2000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/15/2022 22:12:21",
   },
 
   {
     codeProduct: 2,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/13/2022 22:12:21",
   },
 
   {
     codeProduct: 3,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/13/2022 22:12:21",
   },
 
   {
     codeProduct: 5,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/13/2022 22:12:21",
   },
 
   {
     codeProduct: 6,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/13/2022 22:12:21",
   },
 
   {
     codeProduct: 7,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/13/2022 22:12:21",
   },
 
   {
     codeProduct: 4,
     name: "Macbook Air",
-    headerTitle: "COUNTDOWN FINISHED",
+    headerTitle: "FINISHED",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=726&q=80",
     initialPrice: "20000",
     currentPrice: "20000",
+    startDate: "13-10-2022 15:12:21",
+    endDate: "10/13/2022 7:12:21",
   },
 ];
 
@@ -115,9 +129,9 @@ function Home() {
                       give, while discovering variety and affordability
                     </p>
 
-                    <ButtonFiled primary size="big" className="btn-register">
+                    <ButtonField primary size="big" className="btn-register">
                       REGISTER NOW
-                    </ButtonFiled>
+                    </ButtonField>
                   </div>
                 </div>
               </div>
@@ -134,7 +148,7 @@ function Home() {
                     </div>
 
                     <div className="btn-bid">
-                      <ButtonFiled primary>SUBMIT A BID</ButtonFiled>
+                      <ButtonField primary>SUBMIT A BID</ButtonField>
                     </div>
 
                     <img
@@ -161,7 +175,7 @@ function Home() {
                     </div>
 
                     <div className="btn-bid">
-                      <ButtonFiled primary>SUBMIT A BID</ButtonFiled>
+                      <ButtonField primary>SUBMIT A BID</ButtonField>
                     </div>
                   </div>
                 </div>
@@ -242,19 +256,19 @@ function Home() {
               <div className="row">
                 <ProductList
                   items={DUMMY_PRODUCTS}
-                  className="col-3 home__page-current-action-list"
+                  className="col-4 home__page-current-action-list"
                 />
               </div>
             </div>
 
-            <ButtonFiled
+            <ButtonField
               to="/home-catalog"
               primary
               size="big"
               className="view-all"
             >
               VIEW ALL AUCTION
-            </ButtonFiled>
+            </ButtonField>
           </div>
           {/* CURRENT AUCTIONS*/}
         </div>

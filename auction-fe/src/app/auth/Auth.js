@@ -1,67 +1,109 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Auth.css";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
+import { useHttpClient } from "../../shared/hook/http-client";
+import { AuthContext } from "../../shared/context/auth-context";
 import { FormInput } from "../../shared/components/FormElement/Input";
 import FormInputTime from "../../shared/components/FormElement/InputTime";
 import CustomFormProvider from "../../shared/components/FormElement/CustomFormProvider";
-import ButtonFiled from "../../shared/components/FormElement/Button";
+import ButtonField from "../../shared/components/FormElement/Button";
 import MainNavigation from "../../shared/components/UIElement/Navigation/MainNavigation";
 import Footer from "../../shared/components/Layouts/Footer";
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MATCHING,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRED,
+} from "../../utils/Validator";
+import RegionDropdown from "./RegionDropdown";
+import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
+import Constants from "../../utils/Constants";
 
 const Auth = () => {
-  const formSchema = Yup.object().shape({
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Password not matching"
-    ),
-  });
-
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: true,
-    resolver: yupResolver(formSchema),
   });
 
-  const { errors } = methods.formState;
+  const authContext = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const { sendRequest, isLoading } = useHttpClient();
 
   const [isLoginMode, setIsLoginMode] = useState(false);
+
+  /* Get passwords to validate matching */
+  const password = methods.watch("password");
 
   const handleSwitchMode = () => {
     setIsLoginMode((prev) => !prev);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    if (!isLoginMode) {
+      try {
+        const requestBody = {
+          fullName: data.fullName,
+          email: data.email,
+          dateOfBirth: data.dateOfBirth,
+          phoneNumber: data.phoneNumber,
+          password: data.password,
+          identityNumber: data.identityNumber,
+          ward: data.ward,
+          city: data.city,
+          district: data.district,
+        };
+
+        const response = await sendRequest(
+          "http://localhost:8080/api/auth/sign-up",
+          "POST",
+          JSON.stringify(requestBody),
+          { "Content-Type": "application/json" }
+        );
+
+        toast("Register successfully!", { type: "success" });
+        methods.reset();
+      } catch (err) {}
+    } else {
+      try {
+        const response = await sendRequest(
+          "http://localhost:8080/api/authenticate",
+          "POST",
+          JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+          { "Content-Type": "application/json" }
+        );
+
+        authContext.login(response);
+        toast("Login successfully!", { type: "success" });
+        navigate("/");
+      } catch (err) {}
+    }
   };
 
   return (
     <>
+      {isLoading && <LoadingSpinner asOverlay />}
       <MainNavigation noHeaderInner />
 
       <div className="form__auth-container">
-        <div className="row align-items-center">
+        <div className="row">
           <div className="col-5">
             <div className="form__auth-left-area">
-              <div className="form__auth-img-group">
-                <img
-                  src="https://www.chilindo.com/assets/svgIcon/orangeLandingHeader.svg"
-                  alt=""
-                />
-
-                <div className="message">
-                  <h3>DTU AUCTION</h3>
-                  <p>This is website auction reputable currently</p>
-                  <p>Register to join with us</p>
-                  <p>
-                    If you have any questions. <span>Click here</span>
-                  </p>
-                </div>
+              <div className="message">
+                <h3>DTU AUCTION</h3>
+                <p>This is website auction reputable currently</p>
+                <p>Register to join with us</p>
+                <p>
+                  If you have any questions. <span>Click here</span>
+                </p>
               </div>
             </div>
           </div>
@@ -97,32 +139,36 @@ const Auth = () => {
                   <div className="form__auth-group">
                     <FormInput
                       isMui
-                      variant="outlined"
-                      fieldName="username"
+                      fieldName="fullName"
                       type="text"
                       fullWidth
                       onFocus={() => {}}
                       label="Full Name"
+                      requiredForm
                       noBorder
                       className="mr-4"
-                      requiredForm
-                      messageRequired="Username cannot be empty"
-                      minLengthForm={6}
-                      minLengthMessage="Username at least 6 characters"
+                      variant="outlined"
+                      validators={[
+                        VALIDATOR_REQUIRED("Full name cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Full name at least 9 characters"
+                        ),
+                      ]}
                     />
-                    <FormInput
-                      isMui
-                      fieldName="accountName"
-                      type="text"
-                      fullWidth
-                      onFocus={() => {}}
-                      required
-                      label="Account Name"
-                      requiredForm
-                      messageRequired="Account name cannot be empty"
-                      minLengthForm={6}
-                      minLengthMessage="Account name at least 6 characters"
-                    />
+
+                    {!isLoginMode && (
+                      <FormInputTime
+                        fieldName="dateOfBirth"
+                        dataType="date_timer_picker"
+                        label="Date of birth"
+                        format={Constants.FormInputFormat.DATE.VALUE}
+                        requiredForm
+                        validators={[
+                          VALIDATOR_REQUIRED("Date of birth cannot be empty"),
+                        ]}
+                      />
+                    )}
                   </div>
                 )}
 
@@ -133,24 +179,14 @@ const Auth = () => {
                     type="email"
                     fullWidth
                     onFocus={() => {}}
-                    className="mr-4"
                     label="Email"
                     requiredForm
-                    messageRequired="Email cannot be empty"
-                    minLengthForm={6}
-                    minLengthMessage="Email at least be 6 characters"
-                    emailRequired
+                    validators={[
+                      VALIDATOR_REQUIRED("Email cannot be empty"),
+                      VALIDATOR_MINLENGTH(9, "Email at least 9 characters"),
+                      VALIDATOR_EMAIL("Email is invalid"),
+                    ]}
                   />
-
-                  {!isLoginMode && (
-                    <FormInputTime
-                      fieldName="dateOfBirth"
-                      dataType="date_timer_picker"
-                      label="Date of birth"
-                      requiredForm
-                      messageRequired="Date of birth cannot be empty"
-                    />
-                  )}
                 </div>
 
                 {!isLoginMode && (
@@ -163,11 +199,15 @@ const Auth = () => {
                       onFocus={() => {}}
                       className="mr-4"
                       label="Phone Number"
-                      format="phone_number"
+                      format={Constants.FormInputFormat.PHONE_NUMBER.VALUE}
                       requiredForm
-                      messageRequired="Phone number cannot be empty"
-                      minLengthForm={9}
-                      minLengthMessage="Phone number at least be 9 characters"
+                      validators={[
+                        VALIDATOR_REQUIRED("Phone number cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Phone number at least 9 characters"
+                        ),
+                      ]}
                     />
 
                     <FormInput
@@ -177,11 +217,15 @@ const Auth = () => {
                       fullWidth
                       onFocus={() => {}}
                       label="Identity Number"
-                      format="identity_card"
+                      format={Constants.FormInputFormat.IDENTITY_CARD.VALUE}
                       requiredForm
-                      messageRequired="Identity number cannot be empty"
-                      minLengthForm={9}
-                      minLengthMessage="Identity number at least be 9 characters"
+                      validators={[
+                        VALIDATOR_REQUIRED("Identity numbers cannot be empty"),
+                        VALIDATOR_MINLENGTH(
+                          9,
+                          "Identity numbers at least 9 characters"
+                        ),
+                      ]}
                     />
                   </div>
                 )}
@@ -196,10 +240,11 @@ const Auth = () => {
                     className="mr-4"
                     label="Password"
                     requiredForm
-                    messageRequired="Password cannot be empty"
-                    minLengthForm={6}
-                    minLengthMessage="Password at least be 6 characters"
                     endAdornment
+                    validators={[
+                      VALIDATOR_REQUIRED("Password cannot be empty"),
+                      VALIDATOR_MINLENGTH(6, "Password at least 6 characters"),
+                    ]}
                   />
 
                   {!isLoginMode && (
@@ -211,13 +256,22 @@ const Auth = () => {
                       onFocus={() => {}}
                       label="Confirm Password"
                       requiredForm
-                      messageRequired="Password cannot be empty"
-                      minLengthForm={6}
-                      minLengthMessage="Password at least be 6 characters"
                       endAdornment
+                      validators={[
+                        VALIDATOR_REQUIRED("Confirm password cannot be empty"),
+                        VALIDATOR_MATCHING(password, "Password not matching"),
+                        VALIDATOR_MINLENGTH(
+                          6,
+                          "Password at least 6 characters"
+                        ),
+                      ]}
                     />
                   )}
                 </div>
+
+                {/* Region */}
+                {!isLoginMode && <RegionDropdown />}
+                {/* Region */}
 
                 <div className="forget-password">
                   <div className="d-flex align-items-center justify-content-center">
@@ -226,14 +280,14 @@ const Auth = () => {
                   </div>
 
                   <div className="d-flex align-items-center justify-content-center">
-                    <Link>Forgot password?</Link>
+                    <Link to="/confirm-email">Forgot password?</Link>
                   </div>
                 </div>
 
                 <div className="footer">
-                  <ButtonFiled green fullWidth disabled={!!errors}>
+                  <ButtonField type="submit" green fullWidth>
                     {!isLoginMode ? "Register" : "Login"}
-                  </ButtonFiled>
+                  </ButtonField>
 
                   <p>
                     Already have an account?

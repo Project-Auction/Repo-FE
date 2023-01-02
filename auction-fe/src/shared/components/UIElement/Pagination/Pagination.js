@@ -8,8 +8,8 @@ import "./Pagination.css";
 
 function Pagination({ capacityPage, totalData, onRedirect, currentPage }) {
   /*
-   * capacityPage là số lượng muốn hiển thị trong 1 trang
-   * total là tổng số lượng từ BE gửi vào
+   * capacityPage is quantity want to show in a page
+   * total is total quantity sent from BE
    */
 
   const pageNumbers = [];

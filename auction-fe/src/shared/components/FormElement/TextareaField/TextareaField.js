@@ -1,4 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
+import { validateForm } from "../../../../utils/Validator";
 import "../Input/Input.css";
 
 const TextareaField = (props) => {
@@ -7,48 +8,63 @@ const TextareaField = (props) => {
     fullWidth,
     inputClass,
     noBorder,
-    onFocus,
     placeholder,
     id,
-    type,
     required,
-    messageRequired,
     rows,
     formClass,
     label,
-    format,
     readOnly,
+    validators = [],
+    alertDanger,
   } = props;
 
   const { control } = useFormContext();
 
-  const classes = `form-input 
+  const classes = `form-text-area 
   ${fullWidth && "full-width"}
   ${inputClass} 
   ${noBorder && "no-border"}`;
+
   const elementType = (
     <Controller
       name={fieldName}
       control={control}
+      rules={{
+        validate: {
+          validate: (value) => {
+            console.log(value);
+            if (validators.length >= 1) {
+              return validateForm(value, validators);
+            }
+          },
+        },
+      }}
       render={({ field: { onChange, value }, fieldState: { error } }) => {
         const onChangeValue = (e) => {
           onChange(e.target.value);
         };
 
-        <>
-          <textarea
-            className={classes}
-            id={id}
-            rows={rows || 3}
-            onChange={onChangeValue}
-            required={required}
-            onFocus={() => {}}
-            value={value}
-            placeholder={placeholder}
-            readOnly={readOnly}
-          />
-          {!!error && <p className="error">{error.message}</p>}
-        </>;
+        return (
+          <>
+            <textarea
+              className={classes}
+              id={id}
+              rows={rows || 3}
+              onChange={onChangeValue}
+              required={required}
+              onFocus={() => {}}
+              value={value}
+              placeholder={placeholder}
+              readOnly={readOnly}
+            />
+            {(alertDanger || error) && (
+              <div className="alert alert-danger">
+                {alertDanger || error.message}
+              </div>
+            )}
+          </>
+        );
       }}
     />
   );

@@ -1,60 +1,88 @@
-import { useState } from "react";
-import { TextField } from "@mui/material";
-import {
-  DateTimePicker,
-  DesktopDatePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
+import { forwardRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { validateForm } from "../../../../utils/Validator";
 
 import "../Input/FormInput.css";
 
-const FormInputTime = (props) => {
-  const { fieldName, label, inputFormat = "DD/MM/YYYY", dateType } = props;
-
+const FormInputTime = forwardRef((props, ref) => {
+  /*
+   * dateType to choose date or datetimepicker
+   */
+  const {
+    fieldName,
+    label,
+    dateType,
+    inputRef,
+    placeholder,
+    required,
+    readOnly,
+    error,
+    fullWidth,
+    noBorder,
+    id,
+    formClass,
+    inputClass,
+    alertDanger,
+    validators = [],
+  } = props;
   const { control } = useFormContext();
 
-  const [value, setValue] = useState(dayjs());
+  const classes = `form-input__group
+  ${noBorder && "no-border"}
+  ${(!!error || !!alertDanger) && "error"}`;
+
+  const classesInput = `form-input 
+  ${fullWidth && "full-width"}
+  ${inputClass}`;
 
   return (
     <>
       <Controller
         name={fieldName}
         control={control}
-        render={({ field: { onChange } }) => {
-          const onChangeValue = (newValue) => {
-            setValue(newValue);
-            onChange(newValue.toString());
-          };
-
+        render={({
+          field: { onChange, value = "" },
+          fieldState: { error },
+        }) => {
           return (
             <>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                {dateType === "date_timer_picker" ? (
-                  <DateTimePicker
-                    label={label}
-                    onChange={onChangeValue}
+              <div className={`form-wrapper ${formClass}`}>
+                {label && <label htmlFor={id}>{label}</label>}
+
+                <div className={`${error && "error"} ${classes}`}>
+                  <input
+                    className={classesInput}
+                    id={id}
+                    ref={inputRef}
+                    type={dateType === "date" ? "date" : "datetime-local"}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    required={required}
                     value={value}
-                    renderInput={(params) => <TextField {...params} />}
+                    readOnly={readOnly}
                   />
-                ) : (
-                  <DesktopDatePicker
-                    label={label}
-                    inputFormat={inputFormat}
-                    value={value}
-                    onChange={onChangeValue}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
+                </div>
+                {(alertDanger || error) && (
+                  <div className="alert alert-danger">
+                    {alertDanger || error.message}
+                  </div>
                 )}
-              </LocalizationProvider>
+              </div>
             </>
           );
+        }}
+        rules={{
+          validate: {
+            validate: (value) => {
+              if (validators.length >= 1) {
+                return validateForm(value, validators);
+              }
+            },
+          },
         }}
       />
     </>
   );
-};
+});
 
 export default FormInputTime;

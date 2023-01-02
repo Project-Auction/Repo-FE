@@ -1,34 +1,70 @@
 .form-wrapper {
-    width: 100%;
+  width: 100%;
+}
+
+.form-input__group {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  padding: 0 0 0 12px;
+}
+
+.form-input__group.no-border {
+  border: none;
+}
+
+.form-input__group.no-border .form-input {
+  border: none;
 }
 
 .form-wrapper label {
-    font-weight: 600;
-    font-size: 1.6rem;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.form-input,
+.form-text-area {
+  height: 50px;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  outline: none;
+  padding: 4px 12px 4px 0px;
+  width: 100%;
 }
 
 .form-input {
-    height: 50px;
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    padding: 0 12px;
-    border: 1px solid var(--border-color);
-    outline: none;
+  border: none;
+}
+
+.form-text-area {
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  height: max-content;
 }
 
 .form-input.full-width {
-    width: 100%;
+  width: 100%;
 }
 
-.form-input.no-border,
-.form-input.no-border:focus,
-.form-input.no-border:active {
-    border: none;
+/* Error */
+.form-input__group.error {
+  border: 1px solid var(--danger-color);
 }
 
-.form-input:focus {
-    border: 1px solid #4267B2;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+/* Password */
+.form-input__group .icon-password {
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px;
+  background-color: #f0f0f0;
+}
+
+.form-input__group .icon-password:hover {
+  opacity: 0.8;
 }

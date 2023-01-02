@@ -1,0 +1,36 @@
+.header__breadcrums-container {
+    margin-top: calc(var(--height-main-header) + 2px);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header__breadcrums-title {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.header__breadcrums-right-area {
+    display: flex;
+    align-items: center;
+}
+
+.header__breadcrums-right-area p,
+.header__breadcrums-right-area a {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--font-color);
+    transition: all 0.3s;
+}
+
+.header__breadcrums-right-area a:hover {
+    color: var(--primary-color);
+}
+
+.header__breadcrums-right-area .icon {
+    font-size: 1.7rem;
+    margin: 0 14px;
+    transform: translateY(1px);
+}

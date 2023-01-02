@@ -1,69 +1,96 @@
 .button {
-    height: 50px;
-    min-width: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    letter-spacing: 1.2px;
-    font-weight: 500;
-    padding: 12px;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border-radius: 5px;
+  height: 50px;
+  min-width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+  padding: 12px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .button--fullWidth {
-    width: 100%;
+  width: 100%;
 }
 
 .button--border {
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #f0f0f0;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #f0f0f0;
+}
+
+.button--default {
+  background-color: #e4e6eb;
+  color: #000;
+}
+
+.button--none {
+  background-color: transparent;
+  color: #000;
 }
 
 .button--primary {
-    color: var(--white-color);
-    background-color: var(--primary-color);
+  color: var(--white-color);
+  background-color: var(--primary-color);
 }
 
 .button--primary:hover {
-    background-color: var(--green-color);
+  background-color: var(--green-color);
 }
 
 .button--danger {
-    color: var(--white-color);
-    background-color: var(--danger-color);
+  color: var(--white-color);
+  background-color: var(--danger-color);
 }
 
 .button--danger:hover,
 .button--border:hover {
-    background-color: #f34343;
+  background-color: #f34343;
 }
 
 .button--green {
-    color: #fff;
-    background-color: var(--green-color);
+  color: #fff;
+  background-color: var(--green-color);
 }
 
 .button--green:hover {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.button--dark {
+  background-color: var(--primary-dashboard-color);
+  color: #fff;
+}
+
+.button--dark:hover {
+  background-color: var(--primary-color);
 }
 
 /*Size*/
 .button--small {
-    height: 40px;
-    min-width: 80px;
-    font-size: 1.4rem;
+  height: 40px;
+  min-width: 80px;
+  font-size: 1.4rem;
 }
 
 .button--big {
-    min-width: 110px;
-    height: 60px;
-    padding: 16px;
-    font-size: 1.8rem;
+  min-width: 110px;
+  height: 60px;
+  padding: 16px;
+  font-size: 1.8rem;
+}
+
+/* Disabled */
+button[disabled] {
+  /* Style the button when it's disabled */
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
 }

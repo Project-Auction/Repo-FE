@@ -1,0 +1,28 @@
+/* Form step */
+.form__step-container {
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  padding: 20px 0;
+}
+
+.form__step-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0px 20px 10px 20px;
+}
+
+.form__step-header .title {
+  font-size: 2rem;
+}
+
+/* Form step form */
+.form__step-form-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.form__step-form-body {
+  padding: 20px;
+}

@@ -7,7 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 
 import "./HeaderNavInner.css";
-import ButtonFiled from "../../FormElement/Button";
+import ButtonField from "../../FormElement/Button";
 import PopperWrapper from "../../UIElement/PopperWrapper";
 import SearchInput from "../../FormElement/SearchInput";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
@@ -33,13 +33,13 @@ function HeaderNavInner() {
             inputClass="header__inner-search-input"
             placeholder="Search..."
           />
-          <ButtonFiled
+          <ButtonField
             type="submit"
             primary
             className="header__inner-search-button"
           >
             SEARCH
-          </ButtonFiled>
+          </ButtonField>
         </CustomFormProvider>
       </div>
 
@@ -123,9 +123,9 @@ function HeaderNavInner() {
                 <p>120.000 VND</p>
               </div>
 
-              <ButtonFiled primary fullWidth className="checkout">
+              <ButtonField primary fullWidth className="checkout">
                 Checkout
-              </ButtonFiled>
+              </ButtonField>
             </div> */}
             {/* Has cart */}
           </PopperWrapper>

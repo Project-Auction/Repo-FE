@@ -3,17 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
   faChevronDown,
-  faRightLeft,
+  faHome,
+  faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
-
-import PopperWrapper from "../PopperWrapper";
-import Image from "../Image";
 
 import "./NavLinks.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth-context";
-import ButtonFiled from "../../FormElement/Button";
+import PopperWrapper from "../PopperWrapper";
+import Image from "../Image";
+import ButtonField from "../../FormElement/Button/ButtonField";
 
 function NavLinks() {
   const authContext = useContext(AuthContext);
@@ -78,41 +78,66 @@ function NavLinks() {
         )}
         <div className="info__user">
           {authContext.isLoggedIn && (
-            <>
-              <Image
-                src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-1/272959223_1371248186637583_4113757049488479156_n.jpg?stp=dst-jpg_p160x160&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=e1sjKhWMFTsAX_B6jKc&_nc_ht=scontent.fhan2-4.fna&oh=00_AT8w6-xBfM2TMv0-FWgwVtA-EUkEwnlDA1xQgV0szUBpiQ&oe=6349394E"
-                className="avatar"
-                alt="avatar"
-                circle
-              />
-              <span className="name">Nguyễn Hoàng Anh Tuấn</span>
+            <div className="main">
+              <Image className="avatar" alt="avatar" circle />
+              <span className="name">{authContext.username}</span>
+            </div>
+          )}
 
-              <div className="sub-list__info">
-                <PopperWrapper className="popper__sub-list">
-                  <li>
-                    <FontAwesomeIcon icon={faUser} />
-                    <span>Personal Information</span>
-                  </li>
-                  <li>
-                    <FontAwesomeIcon icon={faRightLeft} />
-                    <span>Transaction History</span>
-                  </li>
-                  {authContext.isLoggedIn && (
-                    <li onClick={authContext.logout} size="small">
-                      <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                      <span>Sign Out</span>
+          {authContext.isLoggedIn && (
+            <ul className="sub__info-user__list">
+              <PopperWrapper className="sub__info-user__wrapper">
+                {authContext.isLoggedIn &&
+                  authContext.roles.includes("ROLE_MANAGER") && (
+                    <li>
+                      <Link to="/admin">
+                        <FontAwesomeIcon
+                          className="icon circle"
+                          icon={faHome}
+                        />
+                        Dashboard Admin
+                      </Link>
                     </li>
                   )}
-                </PopperWrapper>
-              </div>
-            </>
+
+                {authContext.isLoggedIn &&
+                  !authContext.roles.includes("ROLE_MANAGER") &&
+                  authContext.roles.includes("ROLE_MEMBER") && (
+                    <li>
+                      <Link to={`/${authContext.accountId}/profile`}>
+                        <FontAwesomeIcon
+                          className="icon circle"
+                          icon={faHome}
+                        />
+                        Dashboard User
+                      </Link>
+                    </li>
+                  )}
+
+                <li>
+                  <ButtonField onClick={authContext.logout}>
+                    <FontAwesomeIcon
+                      className="icon circle"
+                      icon={faArrowRightFromBracket}
+                    />
+                    Logout
+                  </ButtonField>
+                </li>
+              </PopperWrapper>
+            </ul>
           )}
 
           {!authContext.isLoggedIn && (
             <>
-              <ButtonFiled primary onClick={authContext.login}>
-                LOGIN
-              </ButtonFiled>
+              <Link to="/auth" className="btn__header">
+                <FontAwesomeIcon icon={faUser} />
+                <span>Register</span>
+              </Link>
+
+              <Link to="/auth" className="btn__header">
+                <FontAwesomeIcon icon={faRightToBracket} />
+                <span>Login</span>
+              </Link>
             </>
           )}
         </div>

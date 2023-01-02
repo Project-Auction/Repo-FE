@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import "./Button.css";
 
-function ButtonFiled(props) {
+function ButtonField(props) {
   const classes = `button button--${props.size || "default"} 
     ${props.danger && "button--danger"}
     ${props.primary && "button--primary"}
+    ${props.dark && "button--dark"}
     ${props.className}
     ${props.fullWidth && "button--fullWidth"}
     ${props.green && "button--green"}
     ${props.border && "button--border"}
+    ${props.none && "button--none"}
+    ${props.disabled && "button--disabled"} 
   `;
 
   if (props.to) {
@@ -39,4 +42,4 @@ function ButtonFiled(props) {
   );
 }
 
-export default ButtonFiled;
+export default ButtonField;

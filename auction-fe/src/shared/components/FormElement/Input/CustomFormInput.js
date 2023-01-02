@@ -1,52 +1,83 @@
-import { forwardRef } from "react";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { forwardRef, useState } from "react";
 import "./Input.css";
 
 const CustomFormInput = forwardRef((props, ref) => {
   const {
-    formClass,
-    id,
     label,
     type,
+    value,
+    inputRef,
     placeholder,
+    onFocus,
     onChange,
     required,
     readOnly,
-    onFocus,
-    value,
     error,
     fullWidth,
-    inputClass,
     noBorder,
-    defaultValue,
+    id,
+    formClass,
+    inputClass,
+    alertDanger,
+    hiddenPassword,
   } = props;
-  
+
   const handleOnFocus = () => {
     onFocus(true);
   };
 
-  const classes = `form-input 
+  /* Set status for hidden password */
+  const [isHidden, setIsHidden] = useState(true);
+
+  const handleChangeStatus = () => {
+    setIsHidden((status) => !status);
+  };
+
+  const classes = `form-input__group
+  ${noBorder && "no-border"}
+  ${(!!error || !!alertDanger) && "error"}`;
+
+  const classesInput = `form-input 
   ${fullWidth && "full-width"}
-  ${inputClass} 
-  ${noBorder && "no-border"}`;
+  ${inputClass}`;
 
   return (
     <div className={`form-wrapper ${formClass}`}>
       {label && <label htmlFor={id}>{label}</label>}
 
-      <input
-        className={classes}
-        id={id}
-        ref={ref}
-        type={type}
-        placeholder={placeholder}
-        onChange={onChange}
-        required={required}
-        onFocus={handleOnFocus}
-        value={value}
-        readOnly={readOnly}
-        defaultValue={defaultValue}
-      />
-      {!!error && <p className="error">{error.message}</p>}
+      <div className={`${classes}`}>
+        <input
+          className={classesInput}
+          id={id}
+          ref={inputRef}
+          type={hiddenPassword ? (isHidden ? "password" : "text") : type}
+          placeholder={placeholder}
+          onChange={onChange}
+          required={required}
+          onFocus={handleOnFocus}
+          value={value}
+          readOnly={readOnly}
+        />
+        {hiddenPassword && isHidden && (
+          <FontAwesomeIcon
+            icon={faEye}
+            className="icon-password"
+            onClick={handleChangeStatus}
+          />
+        )}
+        {hiddenPassword && !isHidden && (
+          <FontAwesomeIcon
+            icon={faEyeSlash}
+            className="icon-password"
+            onClick={handleChangeStatus}
+          />
+        )}
+      </div>
+      {(alertDanger || error) && (
+        <div className="alert alert-danger">{alertDanger || error.message}</div>
+      )}
     </div>
   );
 });

@@ -1,0 +1,32 @@
+.account__item-container {
+    display: flex;
+}
+
+.account__item-container .image {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.account__item-container .image.circle {
+    border-radius: 50%;
+}
+
+.account__item-info {
+    margin-left: 16px;
+}
+
+.account__item-info .name {
+    font-size: 1.8rem;
+}
+
+.account__item-info .name.content-wrapper,
+.account__item-info .email.content-wrapper {
+    width: 158px;
+}
+
+.account__item-info .email {
+    color: #888;
+    font-weight: 300;
+    font-size: 1.4rem;
+}
