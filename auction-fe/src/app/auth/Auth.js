@@ -160,8 +160,8 @@ const Auth = () => {
                     {!isLoginMode && (
                       <FormInputTime
                         fieldName="dateOfBirth"
-                        dataType="date_timer_picker"
-                        label="Date of birth"
+                        dateType="date"
+                        formGroupClass="form-auth"
                         format={Constants.FormInputFormat.DATE.VALUE}
                         requiredForm
                         validators={[

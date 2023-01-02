@@ -150,6 +150,11 @@ span.option {
   color: var(--primary-color);
 }
 
+.form-auth {
+  height: 56px;
+  border: 1px solid #c4c4c4;
+}
+
 /* Forget password */
 .forget-password {
   display: flex;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import "./PostProduct.css";
 import "../../components/MainUserStyles.css";
@@ -17,13 +18,30 @@ import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinn
 
 const PostProduct = (props) => {
   const userId = useParams().userId;
+  const userData = JSON.parse(localStorage.getItem("userData"));
 
   const navigate = useNavigate();
 
-  const { isLoading, sendRequest } = useHttpClient();
+  const {
+    isLoading: isLoadingSubmitForm,
+    sendRequest: sendRequestPostProduct,
+  } = useHttpClient();
+  const { isLoading: isLoadingUserInfo, sendRequest: sendRequestUserInfo } =
+    useHttpClient();
+
+  /* Used to check login */
+  useEffect(() => {
+    if (!userData) {
+      navigate("/auth");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  /* Used to check login */
+
+  /* Get user info */
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await sendRequest(
+      const response = await sendRequestUserInfo(
         `http://localhost:8080/api/home/user/${userId}`,
         "GET"
       );
@@ -34,17 +52,8 @@ const PostProduct = (props) => {
 
     fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sendRequest, userId]);
-
-  /* Used to check login */
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
-
-    if (!userData) {
-      navigate("/auth");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sendRequestUserInfo, userId]);
+  /* Get user info */
 
   /* Set default value for form */
   const methods = useForm({
@@ -53,9 +62,34 @@ const PostProduct = (props) => {
 
   const [steps, setSteps] = useState(0);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  /* Send request post product */
+  const onSubmit = async (data) => {
+    console.log(
+      "data",
+      JSON.stringify({
+        ...data,
+        category: data.category.id,
+      })
+    );
+    try {
+      const res = await sendRequestPostProduct(
+        `http://localhost:8080/api/auth/post-product/${userData.accountId}`,
+        "POST",
+        JSON.stringify({
+          ...data,
+          category: data.category.id,
+        }),
+        {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Methods": "POST",
+        }
+      );
+      toast("Post Product successfully!", { type: "success" });
+    } catch (err) {
+      console.err(err);
+    }
   };
+  /* Send request post product */
 
   const handleNextStep = () => {
     setSteps(steps + 1);
@@ -83,8 +117,8 @@ const PostProduct = (props) => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay />}
-      {!isLoading && (
+      {isLoadingUserInfo && <LoadingSpinner asOverlay />}
+      {!isLoadingUserInfo && (
         <DashboardUser userId={userId} currentPage="Post Product">
           <div className="form__step-container">
             <header className="form__step-header">

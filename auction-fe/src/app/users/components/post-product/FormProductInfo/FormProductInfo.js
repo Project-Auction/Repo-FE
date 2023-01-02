@@ -43,7 +43,7 @@ const FormProductInfo = () => {
       {!error && !isLoading && (
         <div className="form__input-post__product-container">
           <FormInput
-            fieldName="productName"
+            fieldName="nameProduct"
             label="Product Name (*)"
             fullWidth
             onFocus={() => {}}
@@ -51,8 +51,8 @@ const FormProductInfo = () => {
             formClass="form__input-post__product-form"
             validators={[
               VALIDATOR_REQUIRED("This field cannot be empty"),
-              VALIDATOR_MINLENGTH(9, "This field between 9 and 50 characters"),
-              VALIDATOR_MAXLENGTH(50, "This field between 9 and 50 characters"),
+              VALIDATOR_MINLENGTH(3, "This field between 3 and 50 characters"),
+              VALIDATOR_MAXLENGTH(50, "This field between 3 and 50 characters"),
             ]}
           />
 
@@ -62,12 +62,12 @@ const FormProductInfo = () => {
               label="Category (*)"
               fullWidth
               className="form__input-post__product-form"
-              value={categories[0].id}
+              value={categories[0]}
               validators={[VALIDATOR_REQUIRED("This field cannot be empty")]}
             >
               <option>----Please choose category for your product---</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option key={category.id} value={JSON.stringify(category)}>
                   {category.name}
                 </option>
               ))}
