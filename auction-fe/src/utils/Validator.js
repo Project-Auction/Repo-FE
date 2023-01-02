@@ -78,14 +78,12 @@ export const validateForm = (value = "", validators) => {
     }
 
     if (validator.type === VALIDATOR_TYPE_MINLENGTH) {
-      console.log(value.trim().length >= validator.val);
       isValid = isValid && value.trim().length >= validator.val;
       message = validator.message;
     }
 
     if (validator.type === VALIDATOR_TYPE_MAXLENGTH) {
       isValid = isValid && value.trim().length <= validator.val;
-      console.log(isValid);
       message = validator.message;
     }
 

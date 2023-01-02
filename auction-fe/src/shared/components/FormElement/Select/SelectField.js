@@ -24,7 +24,6 @@ function SelectField(props) {
     label,
     helperText,
     className,
-    alertDanger
   } = props;
 
   const { control } = useFormContext();
@@ -45,7 +44,10 @@ function SelectField(props) {
           },
         },
       }}
-      render={({ field: { onChange }, fieldState: { error } }) => {
+      render={({
+        field: { onChange, value = defaultValue || "" },
+        fieldState: { error },
+      }) => {
         const onChangeValue = (event) => {
           onChange(event.target.value);
         };
@@ -75,7 +77,7 @@ function SelectField(props) {
                   onChange={onChangeValue}
                   variant={variant}
                   error={error}
-                  defaultValue={defaultValue}
+                  value={value || defaultValue}
                 >
                   {children}
                 </Select>
@@ -89,14 +91,12 @@ function SelectField(props) {
                 <select
                   onChange={onChangeValue}
                   onError={error}
-                  defaultValue={defaultValue}
+                  value={value || defaultValue}
                 >
                   {children}
                 </select>
-                {(alertDanger || error) && (
-                  <div className="alert alert-danger">
-                    {alertDanger || error.message}
-                  </div>
+                {error && (
+                  <div className="alert alert-danger">{error.message}</div>
                 )}
               </div>
             )}

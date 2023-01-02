@@ -3,14 +3,14 @@ import { useState } from "react";
 import "./FormUserInfo.css";
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
 import CheckboxField from "../../../../../shared/components/FormElement/Checkbox";
+import Constants from "../../../../../utils/Constants";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRED,
 } from "../../../../../utils/Validator";
-import Constants from "../../../../../utils/Constants";
 
 const FormUserInfo = () => {
-  const [isChecked, setIsChecked] = useState();
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
@@ -28,7 +28,6 @@ const FormUserInfo = () => {
             label="Full Name (*)"
             placeholder="Enter Name"
             onFocus={() => {}}
-            readOnly
             validators={[
               VALIDATOR_REQUIRED("Full name cannot be empty"),
               VALIDATOR_MINLENGTH(9, "Full name at least 9 characters"),
@@ -45,7 +44,6 @@ const FormUserInfo = () => {
             onFocus={() => {}}
             format={Constants.FormInputFormat.PHONE_NUMBER.VALUE}
             requiredForm
-            readOnly
             validators={[
               VALIDATOR_REQUIRED("Phone number cannot be empty"),
               VALIDATOR_MINLENGTH(9, "Phone number at least 9 characters"),
@@ -56,7 +54,7 @@ const FormUserInfo = () => {
         <div className="form__input-post__product-group">
           <CheckboxField
             onChange={handleCheckboxChange}
-            defaultValue={false}
+            defaultChecked={false}
             checkedColor="#1c1d1f"
           />
           <span style={{ fontSize: "1.5rem", color: "#888" }}>

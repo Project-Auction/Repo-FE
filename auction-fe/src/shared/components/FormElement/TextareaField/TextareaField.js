@@ -33,7 +33,6 @@ const TextareaField = (props) => {
       rules={{
         validate: {
           validate: (value) => {
-            console.log(value);
             if (validators.length >= 1) {
               return validateForm(value, validators);
             }

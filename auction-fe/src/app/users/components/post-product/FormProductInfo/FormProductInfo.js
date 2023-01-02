@@ -62,11 +62,12 @@ const FormProductInfo = () => {
               label="Category (*)"
               fullWidth
               className="form__input-post__product-form"
-              defaultValue={categories[0].id}
-              validators={[VALIDATOR_REQUIRED("Category cannot be empty")]}
+              value={categories[0].id}
+              validators={[VALIDATOR_REQUIRED("This field cannot be empty")]}
             >
+              <option>----Please choose category for your product---</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.name}>
+                <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
               ))}

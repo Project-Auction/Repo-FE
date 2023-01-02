@@ -74,9 +74,11 @@ const FormInput = forwardRef((props, ref) => {
           const onChangeValue = (e) => {
             switch (format) {
               case Constants.FormInputFormat.MONEY.VALUE:
+                onChange(e.target.value.replace(/[$,0.]/g, ""));
+                break;
               case Constants.FormInputFormat.PHONE_NUMBER.VALUE:
               case Constants.FormInputFormat.IDENTITY_CARD.VALUE:
-                onChange(e.target.value.replace(/[$,.0]/g, ""));
+                onChange(e.target.value.replace(/[$,.]/g, ""));
                 break;
               default:
                 onChange(e.target.value);
