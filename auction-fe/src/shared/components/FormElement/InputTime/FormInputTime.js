@@ -22,6 +22,7 @@ const FormInputTime = forwardRef((props, ref) => {
     id,
     formClass,
     inputClass,
+    formGroupClass,
     alertDanger,
     validators = [],
   } = props;
@@ -29,7 +30,7 @@ const FormInputTime = forwardRef((props, ref) => {
 
   const classes = `form-input__group
   ${noBorder && "no-border"}
-  ${(!!error || !!alertDanger) && "error"}`;
+  ${(!!error || !!alertDanger) && "error"} ${formGroupClass}`;
 
   const classesInput = `form-input 
   ${fullWidth && "full-width"}
