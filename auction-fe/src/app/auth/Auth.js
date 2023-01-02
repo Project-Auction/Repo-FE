@@ -21,6 +21,7 @@ import {
 } from "../../utils/Validator";
 import RegionDropdown from "./RegionDropdown";
 import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
+import Constants from "../../utils/Constants";
 
 const Auth = () => {
   const methods = useForm({
@@ -161,7 +162,7 @@ const Auth = () => {
                         fieldName="dateOfBirth"
                         dataType="date_timer_picker"
                         label="Date of birth"
-                        format="date"
+                        format={Constants.FormInputFormat.DATE.VALUE}
                         requiredForm
                         validators={[
                           VALIDATOR_REQUIRED("Date of birth cannot be empty"),
@@ -198,7 +199,7 @@ const Auth = () => {
                       onFocus={() => {}}
                       className="mr-4"
                       label="Phone Number"
-                      format="phone_number"
+                      format={Constants.FormInputFormat.PHONE_NUMBER.VALUE}
                       requiredForm
                       validators={[
                         VALIDATOR_REQUIRED("Phone number cannot be empty"),
@@ -216,7 +217,7 @@ const Auth = () => {
                       fullWidth
                       onFocus={() => {}}
                       label="Identity Number"
-                      format="identity_card"
+                      format={Constants.FormInputFormat.IDENTITY_CARD.VALUE}
                       requiredForm
                       validators={[
                         VALIDATOR_REQUIRED("Identity numbers cannot be empty"),

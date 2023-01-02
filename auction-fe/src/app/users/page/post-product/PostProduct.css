@@ -26,24 +26,3 @@
 .form__step-form-body {
   padding: 20px;
 }
-
-.form__step-form-footer {
-  display: flex;
-  align-items: center;
-}
-
-.btn__redirect-form {
-  margin: 0px 12px 0 0;
-  padding: 0 24px;
-  font-size: 1.4rem;
-}
-
-.btn__redirect-form.prev {
-  border: 1px solid var(--border-color);
-  background-color: transparent;
-}
-
-.btn__redirect-form.prev:hover {
-  background-color: var(--dark-color);
-  color: #fff;
-}

@@ -6,8 +6,13 @@ import SelectField from "../../../../../shared/components/FormElement/Select/Sel
 import ErrorModal from "../../../../../shared/components/UIElement/ErrorModal";
 import LoadingSpinner from "../../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../../../../shared/hook/http-client";
+import {
+  VALIDATOR_MAXLENGTH,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRED,
+} from "../../../../../utils/Validator";
 
-const FormProductInfo = ({ children }) => {
+const FormProductInfo = () => {
   const [categories, setCategories] = useState([]);
 
   const { sendRequest, error, clearError, isLoading } = useHttpClient(false);
@@ -31,7 +36,7 @@ const FormProductInfo = ({ children }) => {
 
   return (
     <>
-      {/* {isLoading && <LoadingSpinner asOverlay />} */}
+      {isLoading && <LoadingSpinner asOverlay />}
 
       {!isLoading && <ErrorModal error={error} onClear={clearError} />}
 
@@ -44,6 +49,11 @@ const FormProductInfo = ({ children }) => {
             onFocus={() => {}}
             placeholder="Enter product's name"
             formClass="form__input-post__product-form"
+            validators={[
+              VALIDATOR_REQUIRED("This field cannot be empty"),
+              VALIDATOR_MINLENGTH(9, "This field between 9 and 50 characters"),
+              VALIDATOR_MAXLENGTH(50, "This field between 9 and 50 characters"),
+            ]}
           />
 
           {!isLoading && categories.length > 0 && (
@@ -53,6 +63,7 @@ const FormProductInfo = ({ children }) => {
               fullWidth
               className="form__input-post__product-form"
               defaultValue={categories[0].id}
+              validators={[VALIDATOR_REQUIRED("Category cannot be empty")]}
             >
               {categories.map((category) => (
                 <option key={category.id} value={category.name}>
@@ -63,8 +74,6 @@ const FormProductInfo = ({ children }) => {
           )}
         </div>
       )}
-
-      {children}
     </>
   );
 };

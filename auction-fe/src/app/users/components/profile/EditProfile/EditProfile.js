@@ -12,6 +12,7 @@ import { FormInput } from "../../../../../shared/components/FormElement/Input";
 import ButtonField from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
 import { UploadImage } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
+import Constants from "../../../../../utils/Constants";
 
 const EditProfile = (props) => {
   const methods = useForm({
@@ -120,7 +121,7 @@ const EditProfile = (props) => {
                   onFocus={() => {}}
                   className="mr-4"
                   label="Phone Number"
-                  format="phone_number"
+                  format={Constants.FormInputFormat.PHONE_NUMBER.VALUE}
                   requiredForm
                   validators={[
                     VALIDATOR_REQUIRED("Phone number cannot be empty"),
@@ -138,7 +139,7 @@ const EditProfile = (props) => {
                   fullWidth
                   onFocus={() => {}}
                   label="Identity Number"
-                  format="identity_card"
+                  format={Constants.FormInputFormat.IDENTITY_CARD.VALUE}
                   requiredForm
                   validators={[
                     VALIDATOR_REQUIRED("Identity numbers cannot be empty"),

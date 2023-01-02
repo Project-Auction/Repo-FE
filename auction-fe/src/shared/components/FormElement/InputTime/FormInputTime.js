@@ -1,15 +1,8 @@
-import { forwardRef, useState } from "react";
-import { TextField } from "@mui/material";
-import {
-  DateTimePicker,
-  DesktopDatePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
+import { forwardRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { validateForm } from "../../../../utils/Validator";
 
 import "../Input/FormInput.css";
-import { formatDate } from "../../../format/format-input";
 
 const FormInputTime = forwardRef((props, ref) => {
   /*
@@ -18,56 +11,74 @@ const FormInputTime = forwardRef((props, ref) => {
   const {
     fieldName,
     label,
-    inputFormat = "DD/MM/YYYY",
     dateType,
-    className,
+    inputRef,
+    placeholder,
+    required,
+    readOnly,
+    error,
+    fullWidth,
+    noBorder,
+    id,
+    formClass,
+    inputClass,
+    alertDanger,
+    validators = [],
   } = props;
-
   const { control } = useFormContext();
 
-  const [value, setValue] = useState(Date.now());
+  const classes = `form-input__group
+  ${noBorder && "no-border"}
+  ${(!!error || !!alertDanger) && "error"}`;
+
+  const classesInput = `form-input 
+  ${fullWidth && "full-width"}
+  ${inputClass}`;
 
   return (
     <>
       <Controller
         name={fieldName}
         control={control}
-        render={({ field: { onChange }, fieldState }) => {
-          const onChangeValue = (newValue) => {
-            setValue(newValue);
-            onChange(formatDate(newValue.toString()));
-          };
-
+        render={({
+          field: { onChange, value = "" },
+          fieldState: { error },
+        }) => {
           return (
             <>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                {dateType === "date_timer_picker" ? (
-                  <DateTimePicker
-                    label={label}
-                    onError={(error) => console.error(error.message)}
-                    onChange={onChangeValue}
+              <div className={`form-wrapper ${formClass}`}>
+                {label && <label htmlFor={id}>{label}</label>}
+
+                <div className={`${error && "error"} ${classes}`}>
+                  <input
+                    className={classesInput}
+                    id={id}
+                    ref={inputRef}
+                    type={dateType === "date" ? "date" : "datetime-local"}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    required={required}
                     value={value}
-                    inputRef={ref}
-                    renderInput={(params) => <TextField {...params} />}
-                    className={className}
-                    {...fieldState}
+                    readOnly={readOnly}
                   />
-                ) : (
-                  <DesktopDatePicker
-                    label={label}
-                    inputFormat={inputFormat}
-                    value={value}
-                    inputRef={ref}
-                    onError={(error) => console.error(error.message)}
-                    onChange={onChangeValue}
-                    renderInput={(params) => <TextField {...params} />}
-                    className={className}
-                    {...fieldState}
-                  />
+                </div>
+                {(alertDanger || error) && (
+                  <div className="alert alert-danger">
+                    {alertDanger || error.message}
+                  </div>
                 )}
-              </LocalizationProvider>
+              </div>
             </>
           );
+        }}
+        rules={{
+          validate: {
+            validate: (value) => {
+              if (validators.length >= 1) {
+                return validateForm(value, validators);
+              }
+            },
+          },
         }}
       />
     </>

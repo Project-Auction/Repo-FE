@@ -11,6 +11,7 @@ function ButtonField(props) {
     ${props.green && "button--green"}
     ${props.border && "button--border"}
     ${props.none && "button--none"}
+    ${props.disabled && "button--disabled"} 
   `;
 
   if (props.to) {

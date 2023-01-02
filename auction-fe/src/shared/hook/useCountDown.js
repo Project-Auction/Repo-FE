@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FormatDateTime } from "../format/format-datetime";
 
 const useCountDown = (dateTime) => {
   /* Convert time input to Date */

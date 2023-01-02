@@ -10,12 +10,14 @@ import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInf
 import DashboardUser from "../user-dashboard/DashboardUser";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
 import HeaderStep from "../../components/post-product/HeaderStep";
-import FooterPostProduct from "./FooterPostProduct";
+import ButtonField from "../../../../shared/components/FormElement/Button/ButtonField";
 
 const PostProduct = (props) => {
   const userId = useParams().userId;
 
-  const methods = useForm({});
+  const methods = useForm({
+    mode: "onChange",
+  });
 
   const [steps, setSteps] = useState(0);
 
@@ -31,26 +33,16 @@ const PostProduct = (props) => {
     setSteps(steps - 1);
   };
 
-  const renderFooter = () => {
-    return (
-      <FooterPostProduct
-        steps={steps}
-        handleNextStep={handleNextStep}
-        handlePrevStep={handlePrevStep}
-      />
-    );
-  };
-
   const conditionalComponents = () => {
     switch (steps) {
       case 0:
-        return <FormProductInfo>{renderFooter()}</FormProductInfo>;
+        return <FormProductInfo />;
 
       case 1:
-        return <FormProductDetail>{renderFooter()}</FormProductDetail>;
+        return <FormProductDetail />;
 
       case 2:
-        return <FormUserInfo>{renderFooter()}</FormUserInfo>;
+        return <FormUserInfo />;
 
       default:
         return <FormProductInfo />;
@@ -89,6 +81,42 @@ const PostProduct = (props) => {
                 onSubmit={methods.handleSubmit(onSubmit)}
               >
                 {conditionalComponents()}
+
+                {/* Footer */}
+                <div className="form__step-form-footer">
+                  {steps > 0 && (
+                    <ButtonField
+                      type="button"
+                      onClick={handlePrevStep}
+                      className="btn__redirect-form prev"
+                    >
+                      Prev Step
+                    </ButtonField>
+                  )}
+
+                  {steps < 2 && (
+                    <ButtonField
+                      disabled={!methods.formState.isValid}
+                      type="button"
+                      onClick={handleNextStep}
+                      className="btn__redirect-form next"
+                      dark
+                    >
+                      Next Step
+                    </ButtonField>
+                  )}
+                  {steps === 2 && (
+                    <ButtonField
+                      disabled={!methods.formState.isValid}
+                      type="submit"
+                      className="btn__redirect-form next"
+                      dark
+                    >
+                      Submit
+                    </ButtonField>
+                  )}
+                </div>
+                {/* Footer */}
               </form>
             </div>
           </CustomFormProvider>

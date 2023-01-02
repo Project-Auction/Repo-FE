@@ -24,7 +24,7 @@ const FormInput = forwardRef((props, ref) => {
     placeholder,
     isMui = false,
     variant,
-    format,
+    format = "",
     label,
     helperText,
     autoComplete = "true",

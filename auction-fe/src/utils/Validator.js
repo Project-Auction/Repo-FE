@@ -5,6 +5,7 @@ const VALIDATOR_TYPE_MIN = "MIN";
 const VALIDATOR_TYPE_MAX = "MAX";
 const VALIDATOR_TYPE_EMAIL = "EMAIL";
 const VALIDATOR_TYPE_MATCHING = "MATCHING";
+const VALIDATOR_TYPE_COMPARE_DATE = "COMPARE_DATE";
 const VALIDATOR_TYPE_FROM_API = "API";
 const VALIDATOR_TYPE_FILE = "FILE";
 
@@ -54,6 +55,12 @@ export const VALIDATOR_MATCHING = (val, message) => ({
   message,
 });
 
+export const VALIDATOR_COMPARE_DATE = (val, message) => ({
+  type: VALIDATOR_TYPE_COMPARE_DATE,
+  val: val,
+  message,
+});
+
 /* Validate */
 export const validateForm = (value = "", validators) => {
   let isValid = true;
@@ -71,12 +78,14 @@ export const validateForm = (value = "", validators) => {
     }
 
     if (validator.type === VALIDATOR_TYPE_MINLENGTH) {
+      console.log(value.trim().length >= validator.val);
       isValid = isValid && value.trim().length >= validator.val;
       message = validator.message;
     }
 
     if (validator.type === VALIDATOR_TYPE_MAXLENGTH) {
       isValid = isValid && value.trim().length <= validator.val;
+      console.log(isValid);
       message = validator.message;
     }
 
@@ -97,6 +106,16 @@ export const validateForm = (value = "", validators) => {
 
     if (validator.type === VALIDATOR_TYPE_MATCHING) {
       isValid = isValid && validator.val === value;
+      message = validator.message;
+    }
+
+    if (validator.type === VALIDATOR_TYPE_COMPARE_DATE) {
+      const startDate = new Date(validator.val);
+      const endDate = new Date(value);
+      const startDateTime = startDate.getTime();
+      const endDateTime = endDate.getTime();
+
+      isValid = startDateTime < endDateTime;
       message = validator.message;
     }
 

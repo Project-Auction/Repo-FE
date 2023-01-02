@@ -9,6 +9,7 @@ import {
 import "./UploadImage.css";
 import Image from "../../UIElement/Image";
 import { Controller, useFormContext } from "react-hook-form";
+import { validateForm } from "../../../../utils/Validator";
 
 const UploadImage = (props) => {
   const { className } = props;
@@ -72,7 +73,7 @@ const UploadImage = (props) => {
   );
 };
 
-const UploadMultipleImages = ({ fieldName }) => {
+const UploadMultipleImages = ({ fieldName, className, validators = [] }) => {
   const { control } = useFormContext();
 
   const storedImagesMap = new Map();
@@ -81,6 +82,15 @@ const UploadMultipleImages = ({ fieldName }) => {
     <Controller
       name={fieldName}
       control={control}
+      rules={{
+        validate: {
+          validate: (value) => {
+            if (validators.length > 0) {
+              return validateForm(value, validators);
+            }
+          },
+        },
+      }}
       render={({ field: { onChange, value = [] } }) => {
         const onChangePicker = (e) => {
           const input = Array.from(e.target.files);
@@ -100,7 +110,7 @@ const UploadMultipleImages = ({ fieldName }) => {
         };
 
         return (
-          <div className="upload__image-container">
+          <div className={`upload__image-container ${className}`}>
             <div className="row">
               <div className="col-6 pr-0">
                 {/* Upload images */}

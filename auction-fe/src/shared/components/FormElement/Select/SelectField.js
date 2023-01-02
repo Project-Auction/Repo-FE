@@ -24,6 +24,7 @@ function SelectField(props) {
     label,
     helperText,
     className,
+    alertDanger
   } = props;
 
   const { control } = useFormContext();
@@ -92,6 +93,11 @@ function SelectField(props) {
                 >
                   {children}
                 </select>
+                {(alertDanger || error) && (
+                  <div className="alert alert-danger">
+                    {alertDanger || error.message}
+                  </div>
+                )}
               </div>
             )}
           </>
