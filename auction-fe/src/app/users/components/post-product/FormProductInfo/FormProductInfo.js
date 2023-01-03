@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./FormProductInfo.css";
 
+import { getCategories } from "../../../../../apis/categories";
+import { useHttpClient } from "../../../../../shared/hook/http-client";
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
 import SelectField from "../../../../../shared/components/FormElement/Select/SelectField";
-import ErrorModal from "../../../../../shared/components/UIElement/ErrorModal";
 import LoadingSpinner from "../../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
-import { useHttpClient } from "../../../../../shared/hook/http-client";
 import {
   VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
@@ -15,32 +15,25 @@ import {
 const FormProductInfo = () => {
   const [categories, setCategories] = useState([]);
 
-  const { sendRequest, error, clearError, isLoading } = useHttpClient(false);
+  const { sendRequest, isLoading } = useHttpClient();
 
   /* Get categories */
   useEffect(() => {
     try {
       const fetchCategories = async () => {
-        const response = await sendRequest(
-          "http://localhost:8080/api/home/categories",
-          "GET"
-        );
-
-        setCategories(response);
+        const retrievedCategories = await getCategories(sendRequest);
+        setCategories(retrievedCategories);
       };
-
       fetchCategories();
     } catch (err) {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sendRequest]);
+  }, []);
 
   return (
     <>
       {isLoading && <LoadingSpinner asOverlay />}
 
-      {!isLoading && <ErrorModal error={error} onClear={clearError} />}
-
-      {!error && !isLoading && (
+      {!isLoading && (
         <div className="form__input-post__product-container">
           <FormInput
             fieldName="nameProduct"
@@ -56,23 +49,23 @@ const FormProductInfo = () => {
             ]}
           />
 
-          {/* {!isLoading && categories.length > 0 && (
+          {!isLoading && categories.length > 0 && (
             <SelectField
               fieldName="category"
               label="Category (*)"
               fullWidth
               className="form__input-post__product-form"
-              value={categories[0]}
+              value={categories[0].id}
               validators={[VALIDATOR_REQUIRED("This field cannot be empty")]}
             >
               <option>----Please choose category for your product---</option>
               {categories.map((category) => (
-                <option key={category.id} value={JSON.stringify(category)}>
+                <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
               ))}
             </SelectField>
-          )} */}
+          )}
         </div>
       )}
     </>

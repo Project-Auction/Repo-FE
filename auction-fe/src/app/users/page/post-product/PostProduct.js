@@ -8,6 +8,7 @@ import "../../components/MainUserStyles.css";
 
 import { useStorageFile } from "../../../../firebase/service-firebase";
 import { useHttpClient } from "../../../../shared/hook/http-client";
+import { getCategoriesById } from "../../../../apis/categories";
 import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
 import FormProductInfo from "../../components/post-product/FormProductInfo/FormProductInfo";
 import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInfo";
@@ -23,38 +24,42 @@ const PostProduct = (props) => {
 
   const navigate = useNavigate();
 
-  const { handleStorageFiles, progress, urls, clearImages } = useStorageFile();
+  const { handleStorageFiles, progress } = useStorageFile();
 
-  const {
-    isLoading: isLoadingSubmitForm,
-    sendRequest: sendRequestPostProduct,
-  } = useHttpClient();
+  const { sendRequest: sendRequestPostProduct } = useHttpClient();
+
+  const { sendRequest: sendRequestCategory, isLoading: isLoadingCategory } =
+    useHttpClient();
 
   const { isLoading: isLoadingUserInfo, sendRequest: sendRequestUserInfo } =
     useHttpClient();
 
   //! Used to check login */
-  // useEffect(() => {
-  //   if (!userData) {
-  //     navigate("/auth");
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    if (!userData) {
+      navigate("/auth");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   //! Used to check login */
 
   /* Get user info */
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await sendRequestUserInfo(
-        `http://localhost:8080/api/home/user/${userId}`,
-        "GET"
-      );
+    try {
+      const fetchUser = async () => {
+        const response = await sendRequestUserInfo(
+          `http://localhost:8080/api/home/user/${userId}`,
+          "GET"
+        );
 
-      methods.setValue("userName", response.name);
-      methods.setValue("phoneNumber", response.phoneNumber);
-    };
+        methods.setValue("userName", response.name);
+        methods.setValue("phoneNumber", response.phoneNumber);
+      };
 
-    fetchUser();
+      fetchUser();
+    } catch (err) {
+      navigate("/auth");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendRequestUserInfo, userId]);
   /* Get user info */
@@ -68,17 +73,21 @@ const PostProduct = (props) => {
 
   /* Send request post product */
   const onSubmit = async (data) => {
+    /* Find and get category */
+    const categorySelected = await getCategoriesById(
+      sendRequestCategory,
+      data.category
+    );
+
     /* Adding images to Firebase */
     data.images.map((file) => handleStorageFiles(file, data.nameProduct));
-    clearImages();
     try {
       const res = await sendRequestPostProduct(
         `http://localhost:8080/api/auth/post-product/${userData.accountId}`,
         "POST",
         JSON.stringify({
           ...data,
-          category: data.category.id,
-          images: urls,
+          category: categorySelected,
         }),
         {
           "Content-Type": "application/json",

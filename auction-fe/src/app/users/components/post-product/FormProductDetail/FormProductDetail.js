@@ -66,7 +66,7 @@ const FormProductDetail = () => {
           <TextareaField
             label="Product Description (*)"
             row={5}
-            fieldName="description"
+            fieldName="productDescription"
             fullWidth
             validators={[VALIDATOR_REQUIRED("This field cannot be empty")]}
           />
