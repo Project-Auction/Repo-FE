@@ -56,7 +56,7 @@ const FormProductInfo = () => {
             ]}
           />
 
-          {!isLoading && categories.length > 0 && (
+          {/* {!isLoading && categories.length > 0 && (
             <SelectField
               fieldName="category"
               label="Category (*)"
@@ -72,7 +72,7 @@ const FormProductInfo = () => {
                 </option>
               ))}
             </SelectField>
-          )}
+          )} */}
         </div>
       )}
     </>

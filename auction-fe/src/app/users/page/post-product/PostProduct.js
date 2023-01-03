@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import "./PostProduct.css";
 import "../../components/MainUserStyles.css";
 
+import { useStorageFile } from "../../../../firebase/service-firebase";
+import { useHttpClient } from "../../../../shared/hook/http-client";
 import FormProductDetail from "../../components/post-product/FormProductDetail/FormProductDetail";
 import FormProductInfo from "../../components/post-product/FormProductInfo/FormProductInfo";
 import FormUserInfo from "../../components/post-product/FormUserInfo/FormUserInfo";
@@ -13,7 +15,6 @@ import DashboardUser from "../user-dashboard/DashboardUser";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
 import HeaderStep from "../../components/post-product/HeaderStep";
 import ButtonField from "../../../../shared/components/FormElement/Button/ButtonField";
-import { useHttpClient } from "../../../../shared/hook/http-client";
 import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 
 const PostProduct = (props) => {
@@ -22,21 +23,24 @@ const PostProduct = (props) => {
 
   const navigate = useNavigate();
 
+  const { handleStorageFiles, progress, urls, clearImages } = useStorageFile();
+
   const {
     isLoading: isLoadingSubmitForm,
     sendRequest: sendRequestPostProduct,
   } = useHttpClient();
+
   const { isLoading: isLoadingUserInfo, sendRequest: sendRequestUserInfo } =
     useHttpClient();
 
-  /* Used to check login */
-  useEffect(() => {
-    if (!userData) {
-      navigate("/auth");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  /* Used to check login */
+  //! Used to check login */
+  // useEffect(() => {
+  //   if (!userData) {
+  //     navigate("/auth");
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  //! Used to check login */
 
   /* Get user info */
   useEffect(() => {
@@ -64,13 +68,9 @@ const PostProduct = (props) => {
 
   /* Send request post product */
   const onSubmit = async (data) => {
-    console.log(
-      "data",
-      JSON.stringify({
-        ...data,
-        category: data.category.id,
-      })
-    );
+    /* Adding images to Firebase */
+    data.images.map((file) => handleStorageFiles(file, data.nameProduct));
+    clearImages();
     try {
       const res = await sendRequestPostProduct(
         `http://localhost:8080/api/auth/post-product/${userData.accountId}`,
@@ -78,6 +78,7 @@ const PostProduct = (props) => {
         JSON.stringify({
           ...data,
           category: data.category.id,
+          images: urls,
         }),
         {
           "Content-Type": "application/json",
@@ -117,7 +118,7 @@ const PostProduct = (props) => {
 
   return (
     <>
-      {isLoadingUserInfo && <LoadingSpinner asOverlay />}
+      {isLoadingUserInfo && progress !== 100 && <LoadingSpinner asOverlay />}
       {!isLoadingUserInfo && (
         <DashboardUser userId={userId} currentPage="Post Product">
           <div className="form__step-container">

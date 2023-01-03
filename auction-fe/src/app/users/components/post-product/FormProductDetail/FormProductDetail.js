@@ -59,7 +59,6 @@ const FormProductDetail = () => {
           <UploadMultipleImages
             fieldName="images"
             className="form__input-post__product__image"
-            // validators={[VALIDATOR_REQUIRED("This field cannot be empty")]}
           />
         </div>
 
