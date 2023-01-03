@@ -1,21 +1,30 @@
+:root {
+  --width-select-filter-transaction-table: 200px;
+}
+
 .transaction__header-search-form {
-    margin-right: 24px;
+  margin-right: 24px;
 }
 
 .transaction__header-search-input {
-    height: 40px;
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 .header__search-filter {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    background-color: #fff;
-    padding: 12px 18px;
-    border-radius: 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 12px 18px;
+  border-radius: 5px;
 }
 
 .content__table {
-    margin-top: 32px;
+  margin-top: 32px;
+}
+
+/* Transaction search filter */
+.transaction__header-search-filter__input,
+.transaction__header-search-filter__input select {
+  width: var(--width-select-filter-transaction-table);
 }

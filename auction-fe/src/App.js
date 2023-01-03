@@ -25,6 +25,7 @@ import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
 import NotFound from "./shared/components/UIElement/ErrorPage/NotFound";
 import FormChangePassword from "./app/users/components/password-auth/FormChangePassword";
+import ListProductPosted from "./app/users/page/list-product-posted/ListProductPosted";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -49,6 +50,11 @@ function App() {
             {/* Require token */}
             <Route path="/:userId/post-product" element={<PostProduct />} />
 
+            <Route
+              path="/:userId/myAds"
+              element={<ListProductPosted />}
+            />
+
             {/* Logged In page */}
             <Route
               element={<ProtectRoutes isAllowed={!!authContext.isLoggedIn} />}
@@ -59,6 +65,10 @@ function App() {
                 path="/:userId/change-password"
                 element={<FormChangePassword />}
               />
+              {/* <Route
+                path="/:userId/myAds"
+                element={<ListProductPosted />}
+              /> */}
               <Route path="/:userId/edit" element={<EditProfile />} />
               {/* <Route path="/:userId/post-product" element={<PostProduct />} /> */}
               <Route path="/:userId/invoices" element={<InvoiceUser />} />

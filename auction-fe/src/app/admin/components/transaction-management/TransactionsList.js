@@ -52,7 +52,7 @@ const TransactionsList = () => {
               fieldName="filter"
               items={selectOptionsDefault}
               width={340}
-              className="transaction__header-search-input"
+              className="transaction__header-search-input transaction__header-search-filter__input"
             />
           </CustomFormProvider>
         </div>
