@@ -8,6 +8,7 @@ import {
   faHouse,
   faPlusCircle,
   faReceipt,
+  faShield,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
@@ -68,6 +69,14 @@ const Navbar = ({ userId }) => {
             <NavLink end to={`/${userId}/post-product`}>
               <FontAwesomeIcon icon={faPlusCircle} className="icon" />
               Post Product
+              <div className="separate-hover"></div>
+            </NavLink>
+          </li>
+
+          <li className="navbar__profile-user__item">
+            <NavLink end to={`/${userId}/change-password`}>
+              <FontAwesomeIcon icon={faShield} className="icon" />
+              Password
               <div className="separate-hover"></div>
             </NavLink>
           </li>

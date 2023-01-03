@@ -44,7 +44,10 @@ function SelectField(props) {
           },
         },
       }}
-      render={({ field: { onChange }, fieldState: { error } }) => {
+      render={({
+        field: { onChange, value = defaultValue || "" },
+        fieldState: { error },
+      }) => {
         const onChangeValue = (event) => {
           onChange(event.target.value);
         };
@@ -74,7 +77,7 @@ function SelectField(props) {
                   onChange={onChangeValue}
                   variant={variant}
                   error={error}
-                  defaultValue={defaultValue}
+                  value={value || defaultValue}
                 >
                   {children}
                 </Select>
@@ -88,10 +91,13 @@ function SelectField(props) {
                 <select
                   onChange={onChangeValue}
                   onError={error}
-                  defaultValue={defaultValue}
+                  value={value || defaultValue}
                 >
                   {children}
                 </select>
+                {error && (
+                  <div className="alert alert-danger">{error.message}</div>
+                )}
               </div>
             )}
           </>

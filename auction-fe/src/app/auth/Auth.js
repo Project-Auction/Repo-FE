@@ -21,6 +21,7 @@ import {
 } from "../../utils/Validator";
 import RegionDropdown from "./RegionDropdown";
 import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
+import Constants from "../../utils/Constants";
 
 const Auth = () => {
   const methods = useForm({
@@ -46,22 +47,22 @@ const Auth = () => {
   const onSubmit = async (data) => {
     if (!isLoginMode) {
       try {
-        const formData = new FormData();
-
-        formData.append("fullName", data.fullName);
-        formData.append("email", data.email);
-        formData.append("dateOfBirth", data.dateOfBirth);
-        formData.append("phoneNumber", data.phoneNumber);
-        formData.append("password", data.password);
-        formData.append("identityNumber", data.identityNumber);
-        formData.append("ward", data.ward);
-        formData.append("city", data.city);
-        formData.append("district", data.district);
+        const requestBody = {
+          fullName: data.fullName,
+          email: data.email,
+          dateOfBirth: data.dateOfBirth,
+          phoneNumber: data.phoneNumber,
+          password: data.password,
+          identityNumber: data.identityNumber,
+          ward: data.ward,
+          city: data.city,
+          district: data.district,
+        };
 
         const response = await sendRequest(
-          "http://localhost:8080/auth/sign-up",
+          "http://localhost:8080/api/auth/sign-up",
           "POST",
-          formData,
+          JSON.stringify(requestBody),
           { "Content-Type": "application/json" }
         );
 
@@ -71,7 +72,7 @@ const Auth = () => {
     } else {
       try {
         const response = await sendRequest(
-          "http://localhost:8080/authenticate",
+          "http://localhost:8080/api/authenticate",
           "POST",
           JSON.stringify({
             email: data.email,
@@ -159,9 +160,9 @@ const Auth = () => {
                     {!isLoginMode && (
                       <FormInputTime
                         fieldName="dateOfBirth"
-                        dataType="date_timer_picker"
-                        label="Date of birth"
-                        format="date"
+                        dateType="date"
+                        formGroupClass="form-auth"
+                        format={Constants.FormInputFormat.DATE.VALUE}
                         requiredForm
                         validators={[
                           VALIDATOR_REQUIRED("Date of birth cannot be empty"),
@@ -198,7 +199,7 @@ const Auth = () => {
                       onFocus={() => {}}
                       className="mr-4"
                       label="Phone Number"
-                      format="phone_number"
+                      format={Constants.FormInputFormat.PHONE_NUMBER.VALUE}
                       requiredForm
                       validators={[
                         VALIDATOR_REQUIRED("Phone number cannot be empty"),
@@ -216,7 +217,7 @@ const Auth = () => {
                       fullWidth
                       onFocus={() => {}}
                       label="Identity Number"
-                      format="identity_card"
+                      format={Constants.FormInputFormat.IDENTITY_CARD.VALUE}
                       requiredForm
                       validators={[
                         VALIDATOR_REQUIRED("Identity numbers cannot be empty"),
@@ -279,7 +280,7 @@ const Auth = () => {
                   </div>
 
                   <div className="d-flex align-items-center justify-content-center">
-                    <Link>Forgot password?</Link>
+                    <Link to="/confirm-email">Forgot password?</Link>
                   </div>
                 </div>
 

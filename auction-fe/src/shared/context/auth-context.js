@@ -68,7 +68,7 @@ const AuthProvider = (props) => {
     }
   }, [handleLogin]);
 
-  // /*  Check roles */
+  /*  Check roles */
   useEffect(() => {
     if (!!user.roles && user.token) {
       setRoles([]);

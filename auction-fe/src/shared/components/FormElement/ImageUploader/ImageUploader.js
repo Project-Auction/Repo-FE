@@ -8,10 +8,13 @@ import {
 
 import "./UploadImage.css";
 import Image from "../../UIElement/Image";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
+import { validateForm } from "../../../../utils/Validator";
 
 const UploadImage = (props) => {
   const { className } = props;
+
+  const { register } = useFormContext();
 
   const classes = `upload__image-display ${className}`;
   const [file, setFile] = useState();
@@ -53,6 +56,7 @@ const UploadImage = (props) => {
     <div className="upload__image-container">
       <div className="upload__image-input">
         <input
+          {...register("images")}
           type="file"
           style={{ display: "none" }}
           accept=".jpg,.png,.jpeg"
@@ -69,103 +73,111 @@ const UploadImage = (props) => {
   );
 };
 
-const UploadMultipleImages = (props) => {
+const UploadMultipleImages = ({ fieldName, className, validators = [] }) => {
   const { control } = useFormContext();
-  const [files, setFiles] = useState([]);
-  const [previewUrls, setPreviewUrls] = useState([]);
-  const [storeFile, setStoreFile] = useState([]);
 
-  const fileRef = useRef();
-
-  const handlePickerFile = () => {
-    fileRef.current.click();
-  };
+  const storedImagesMap = new Map();
 
   return (
-    <div className="upload__image-container">
-      <div className="row">
-        <div className="col-6 pr-0">
-          {/* Upload images */}
-          <div className="upload__images-main-image">
-            <div className="upload__images-main-image-group">
-              <p>Drop files anywhere to Upload</p>
-              <div className="icon-group">
-                <FontAwesomeIcon icon={faCloudArrowUp} className="icon" />
-              </div>
+    <Controller
+      name={fieldName}
+      control={control}
+      rules={{
+        validate: {
+          validate: (value) => {
+            if (validators.length > 0) {
+              return validateForm(value, validators);
+            }
+          },
+        },
+      }}
+      render={({ field: { onChange, value = [] } }) => {
+        const onChangePicker = (e) => {
+          const input = Array.from(e.target.files);
+          input.forEach((url) => {
+            if (!storedImagesMap.has(url.name)) {
+              storedImagesMap.set(url.name, url);
+            }
+          });
+          const values = Array.from(storedImagesMap.values());
+          onChange(values);
+        };
 
-              <p>Select File</p>
-              <p>At least 5 images for product</p>
+        const handleRemoveImage = (file) => {
+          const updatedImages = value.filter((f) => f !== file);
+          storedImagesMap.delete(file.name);
+          onChange(updatedImages);
+        };
+
+        return (
+          <div className={`upload__image-container ${className}`}>
+            <div className="row">
+              <div className="col-6 pr-0">
+                {/* Upload images */}
+                <div className="upload__images-main-image">
+                  <div className="upload__images-main-image-group">
+                    <p>Drop files anywhere to Upload</p>
+                    <label htmlFor="file-input">
+                      <input
+                        type={value.length === 5 ? "hidden" : "file"}
+                        id="file-input"
+                        style={{ display: "none" }}
+                        onChange={onChangePicker}
+                        multiple
+                        accept=".jpg,.png,.jpeg"
+                      />
+                      <div className="icon-group">
+                        <FontAwesomeIcon
+                          icon={faCloudArrowUp}
+                          className="icon"
+                        />
+                      </div>
+                    </label>
+
+                    {value.length !== 5 && (
+                      <>
+                        <p>Select File Here</p>
+                        <p>At least 5 images for product</p>
+                      </>
+                    )}
+                    <p>
+                      {value.length === 5
+                        ? "You selected enough"
+                        : `You selected ${value.length} images`}
+                    </p>
+                  </div>
+                </div>
+                {/* Upload images */}
+              </div>
+              <div className="col-6 pr-0">
+                {/* Sub images */}
+                <ul className="display__list-images-list">
+                  {value.length > 0 &&
+                    value.map((url, index) => {
+                      const objectUrl = URL.createObjectURL(url);
+                      return (
+                        <li key={index} className="display__list-images-item">
+                          <div className="display__list-images-item__info d-flex">
+                            <img src={objectUrl} alt="Images" />
+                            <span>{url.name}</span>
+                          </div>
+
+                          <FontAwesomeIcon
+                            icon={faClose}
+                            className="icon circle"
+                            onClick={() => handleRemoveImage(url)}
+                          />
+                        </li>
+                      );
+                    })}
+                </ul>
+                {/* Sub images */}
+              </div>
             </div>
           </div>
-          {/* Upload images */}
-        </div>
-        <div className="col-6 pr-0">
-          {/* Sub images */}
-          <ul className="display__list-images-list">
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-
-            <li className="display__list-images-item">
-              <div className="display__list-images-item__info d-flex">
-                <Image
-                  src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                  alt="Images"
-                />
-                <span>Name</span>
-              </div>
-
-              <FontAwesomeIcon icon={faClose} className="icon circle" />
-            </li>
-          </ul>
-          {/* Sub images */}
-        </div>
-      </div>
-    </div>
+        );
+      }}
+    />
   );
 };
 

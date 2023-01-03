@@ -12,10 +12,9 @@ import { FormInput } from "../../../../../shared/components/FormElement/Input";
 import ButtonField from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
 import { UploadImage } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
+import Constants from "../../../../../utils/Constants";
 
 const EditProfile = (props) => {
-  const {} = props;
-
   const methods = useForm({
     mode: "onChange",
     defaultValues: {},
@@ -31,14 +30,15 @@ const EditProfile = (props) => {
 
   return (
     <ProfileUser>
-      <div className="form__edit-profile-container">
-        <header className="dashboard__title-user__header">
-          <h3>Profile Settings</h3>
-        </header>
+      <div className="dashboard__right-area-container">
+        <h3 className="dashboard__title-user__header">Profile Settings</h3>
 
         <div className="form__edit-profile-body">
           <div className="form__edit-profile-body__avatar">
-            <UploadImage onInput={handleGetUrlImage} className="form__edit-profile-body__avatar-img" />
+            <UploadImage
+              onInput={handleGetUrlImage}
+              className="form__edit-profile-body__avatar-img"
+            />
           </div>
 
           <CustomFormProvider {...methods}>
@@ -46,7 +46,7 @@ const EditProfile = (props) => {
               className="form__edit-profile-body-form"
               onSubmit={methods.handleSubmit(onSubmit)}
             >
-              <div className="form__edit-profile-body-form__group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   isMui
                   variant="outlined"
@@ -83,7 +83,7 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <div className="form__edit-profile-body-form__group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   defaultValue="heelo"
                   isMui
@@ -112,7 +112,7 @@ const EditProfile = (props) => {
                 />
               </div>
 
-              <div className="form__edit-profile-body-form__group">
+              <div className="form__user-group d-flex-align-items-center">
                 <FormInput
                   isMui
                   fieldName="phoneNumber"
@@ -121,7 +121,7 @@ const EditProfile = (props) => {
                   onFocus={() => {}}
                   className="mr-4"
                   label="Phone Number"
-                  format="phone_number"
+                  format={Constants.FormInputFormat.PHONE_NUMBER.VALUE}
                   requiredForm
                   validators={[
                     VALIDATOR_REQUIRED("Phone number cannot be empty"),
@@ -139,7 +139,7 @@ const EditProfile = (props) => {
                   fullWidth
                   onFocus={() => {}}
                   label="Identity Number"
-                  format="identity_card"
+                  format={Constants.FormInputFormat.IDENTITY_CARD.VALUE}
                   requiredForm
                   validators={[
                     VALIDATOR_REQUIRED("Identity numbers cannot be empty"),

@@ -1,0 +1,27 @@
+.error-page__container {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    flex-direction: column;
+}
+
+.error-page__container .error-page {
+    width: 122px;
+    height: 122px;
+}
+
+.error-page__body .title {
+    font-size: 3.2rem;
+}
+
+.error-page__body p {
+    font-size: 1.6rem;
+    text-align: center;
+    color: #888;
+}
+
+.error-page__container a:hover {
+    color: #fff;
+}
