@@ -95,6 +95,7 @@ const PostProduct = (props) => {
         }
       );
       toast("Post Product successfully!", { type: "success" });
+      navigate(`${userId}/myAds`);
     } catch (err) {
       console.err(err);
     }

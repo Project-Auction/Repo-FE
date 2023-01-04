@@ -1,1 +1,1 @@
-export { default } from "./ListProductPosted";
+export { default as MyAdsPage } from "./MyAdsPage";

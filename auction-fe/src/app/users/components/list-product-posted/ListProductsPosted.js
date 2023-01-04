@@ -1,6 +1,6 @@
-import ListProductPosted from "../../page/list-product-posted/ListProductPosted";
+import MyAdsPage from "../../page/list-product-posted/MyAdsPage";
 
-import "./ProductPostedDetail.css";
+import "./ListProductsPosted.css";
 import "../../components/MainUserStyles.css";
 import Table from "../../../../shared/components/UIElement/Table/Table";
 import { DUMMY_TRANSACTIONS_PRODUCTS } from "../../../../dummy_data/DummyData";
@@ -22,9 +22,9 @@ const items = DUMMY_TRANSACTIONS_PRODUCTS;
 /* Context checkbox */
 export const CheckboxTableContext = createContext();
 
-const ProductPostedDetail = () => {
+const ListProductsPosted = () => {
   return (
-    <ListProductPosted>
+    <MyAdsPage>
       <div className="dashboard__right-area-container">
         <h3 className="dashboard__title-user__header">Products Posted</h3>
         <form className="product-posted__detail-container">
@@ -37,8 +37,8 @@ const ProductPostedDetail = () => {
           />
         </form>
       </div>
-    </ListProductPosted>
+    </MyAdsPage>
   );
 };
 
-export default ProductPostedDetail;
+export default ListProductsPosted;

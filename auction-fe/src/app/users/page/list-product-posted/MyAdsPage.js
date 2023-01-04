@@ -1,6 +1,6 @@
 import DashboardUser from "../user-dashboard/DashboardUser";
 
-const ListProductPosted = (props) => {
+const MyAdsPage = (props) => {
   return (
     <>
       <DashboardUser userId={1} currentPage="History Posted">
@@ -10,4 +10,4 @@ const ListProductPosted = (props) => {
   );
 };
 
-export default ListProductPosted;
+export default MyAdsPage;
