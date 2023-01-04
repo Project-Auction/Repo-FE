@@ -4,15 +4,20 @@
 
 .table__container {
     border-radius: 8px;
+    overflow: hidden;
 }
 
 .table__container .table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     border: 1px solid var(--border-color);
     background-color: #fff;
     border-radius: 10px;
+}
+
+.table__container .table.no-border {
+    border: 1px solid transparent;
 }
 
 .table__container .selecting {

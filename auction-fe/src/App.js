@@ -25,7 +25,7 @@ import InvoiceUser from "./app/users/page/invoice/InvoiceUser";
 import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
 import NotFound from "./shared/components/UIElement/ErrorPage/NotFound";
 import FormChangePassword from "./app/users/components/password-auth/FormChangePassword";
-import ListProductPosted from "./app/users/page/list-product-posted/ListProductPosted";
+import ProductPostedDetail from "./app/users/components/list-product-posted/ProductPostedDetail";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -52,7 +52,7 @@ function App() {
 
             <Route
               path="/:userId/myAds"
-              element={<ListProductPosted />}
+              element={<ProductPostedDetail />}
             />
 
             {/* Logged In page */}

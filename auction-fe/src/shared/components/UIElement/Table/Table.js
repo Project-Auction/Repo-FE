@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import "./Table.css";
 
@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 
 import CheckboxField from "../../FormElement/Checkbox";
 import ButtonField from "../../FormElement/Button";
-import CustomFormProvider from "../../FormElement/CustomFormProvider";
 import Pagination from "../Pagination";
 import usePaginate from "../../../hook/usePaginate";
 
@@ -25,146 +24,140 @@ const Table = (props) => {
   ! header = [{id  , field}]
   */
   const {
-    items,
-    header,
+    data = [],
+    columns = [],
     select,
     striped,
     bordered,
     thPrimary,
     thLight,
     thDark,
+    noBorder,
     colorCheckbox = "#fff",
     colorCheckedCheckbox = "#ff3366",
   } = props;
-
-  const methods = useForm();
-
-  /* Define to paginate */
-  const [currentPage, setCurrentPage] = useState(1);
-  const [capacityPage, setCapacityPage] = useState(6);
-  const { paginate } = usePaginate();
-  const storage = paginate(items, currentPage, capacityPage);
-
   const classes = `table
   ${bordered && "table-bordered"}  
   ${striped && "table-striped"}
   ${thPrimary && "thead-primary"}
   ${thLight && "thead-light"}
-  ${thDark && "thead-dark"}`;
+  ${thDark && "thead-dark"}
+  ${noBorder && "no-border"}`;
 
-  /* Set state checked for Checkbox */
-  const [checkedState, setCheckedState] = useState(
-    new Array(items.length).fill(false)
-  );
-
-  /* To store items selected */
-  const [itemsSelected, setItemsSelected] = useState([]);
-
-  /* Handle select all */
-  const handleCheckedAll = (event) => {
-    if (event.target.checked) {
-      setItemsSelected(items);
-    } else {
-      setItemsSelected([]);
-    }
-    const updateCheckedState = checkedState.fill(event.target.checked);
-    setCheckedState(updateCheckedState.map((state) => state));
-  };
-
-  /* Handle select each elements */
-  const handleChange = (item, pos, event) => {
-    const updateCheckedState = checkedState.map((state, index) =>
-      pos === index ? !state : state
-    );
-
-    setCheckedState(updateCheckedState);
-
-    setItemsSelected((prev) => [...prev, item]);
-
-    /* Remove elements when unchecked */
-    if (!event.target.checked) {
-      setItemsSelected((prev) => prev.filter((val) => val !== item));
-    }
-  };
-
-  /* Handle Submit */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(itemsSelected);
-  };
+  /* Define to paginate */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [capacityPage, setCapacityPage] = useState(6);
+  const { paginate } = usePaginate();
+  const storage = paginate(data, currentPage, capacityPage);
 
   /* Handle redirect page */
   const handleRedirectPage = useCallback((pageNumber) => {
     setCurrentPage(pageNumber);
   }, []);
 
+  /* Set state checked for Checkbox */
+  const [checkedAllState, setCheckedAllState] = useState(false);
+
+  /* To store items selected */
+  const [itemsSelected, setItemsSelected] = useState(
+    storage.map((item) => ({ ...item, checked: false }))
+  );
+
+  //** Used to when Redirect page */
+  useEffect(() => {
+    setItemsSelected(storage.map((items) => ({ ...items, checked: false })));
+    setCheckedAllState(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+  //** Used to when Redirect page */
+
+  const handleCheckedAll = (e) => {
+    const isChecked = e.target.checked;
+    setItemsSelected(
+      itemsSelected.map((items) => ({ ...items, checked: isChecked }))
+    );
+    setCheckedAllState(isChecked);
+  };
+
+  const handleCheckedItem = (val, e) => {
+    /* Handle unchecked */
+    const isChecked = e.target.checked;
+    setItemsSelected(
+      itemsSelected.map((item) =>
+        item.id === val.id ? { ...item, checked: isChecked } : item
+      )
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(itemsSelected.filter((state) => state.checked));
+  };
+
   return (
     <div className="table__container">
-      <CustomFormProvider {...methods}>
-        <form>
-          <div className="table-responsive">
-            <table className={classes}>
-              <thead className={classes}>
-                <tr>
+      <div className="table-responsive">
+        <table className={classes}>
+          <thead className={classes}>
+            <tr>
+              {select && (
+                <th scope="col" className="selecting">
+                  <CheckboxField
+                    fontSize={22}
+                    color={colorCheckbox}
+                    checkedColor={colorCheckedCheckbox}
+                    onChange={handleCheckedAll}
+                    checked={checkedAllState}
+                  />
+                </th>
+              )}
+              {columns.map((header, index) => (
+                <th scope="col" key={index}>
+                  {header.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {itemsSelected.length === storage.length &&
+              storage.map((item, pos) => (
+                <tr key={pos} className="selecting">
                   {select && (
-                    <th scope="col" className="selecting">
+                    <th>
                       <CheckboxField
                         fontSize={22}
                         color={colorCheckbox}
                         checkedColor={colorCheckedCheckbox}
-                        onChange={(e) => handleCheckedAll(e)}
+                        onChange={(e) => handleCheckedItem(item, e)}
+                        checked={itemsSelected[pos].checked}
                       />
                     </th>
                   )}
-                  {header.map((header, index) => (
-                    <th scope="col" key={index}>
-                      {header.field}
-                    </th>
+                  {columns.map((column, index) => (
+                    <td key={index}>{item[column.key]}</td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {storage.map((item, pos) => (
-                  <tr key={pos}>
-                    {select && (
-                      <th>
-                        <CheckboxField
-                          fontSize={22}
-                          color={colorCheckbox}
-                          checkedColor={colorCheckedCheckbox}
-                          onChange={(e) => handleChange(item, pos, e)}
-                          checked={checkedState[pos]}
-                        />
-                      </th>
-                    )}
-                    <th scope="row">{item.codeProduct}</th>
-                    <td>{item.name}</td>
-                    <td>{item.headerTitle}</td>
-                    <td>{item.initialPrice}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {props.select && (
-            <div className="d-flex justify-content-end">
-              <ButtonField
-                type="submit"
-                onClick={handleSubmit}
-                primary
-                size="small"
-              >
-                Xóa
-              </ButtonField>
-            </div>
-          )}
-        </form>
-      </CustomFormProvider>
+              ))}
+          </tbody>
+        </table>
+      </div>
+      {select && checkedAllState && (
+        <div className="d-flex justify-content-end">
+          <ButtonField
+            type="submit"
+            onClick={handleSubmit}
+            primary
+            size="small"
+          >
+            DELETE ALL
+          </ButtonField>
+        </div>
+      )}
 
       {/* Pagination */}
       <Pagination
         capacityPage={capacityPage}
-        totalData={items.length}
+        totalData={data.length}
         currentPage={currentPage}
         onRedirect={handleRedirectPage}
       />
