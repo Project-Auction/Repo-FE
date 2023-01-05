@@ -63,7 +63,7 @@ const RegionDropdown = (props) => {
         "https://vapi.vnappmob.com/api/province/",
         "GET"
       );
-
+      
       setProvinces(response.results);
     };
 

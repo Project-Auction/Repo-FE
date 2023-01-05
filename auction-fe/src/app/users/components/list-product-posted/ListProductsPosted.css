@@ -1,3 +1,23 @@
 .product-posted__detail-container {
   padding: 20px;
 }
+
+.product-posted__detail-container .icon {
+  height: 16px;
+  width: 16px;
+  transition: all 0.2s;
+}
+
+.product-posted__detail-container .icon:hover {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.product-posted__detail-container .icon:first-child {
+  margin-right: 8px;
+}
+
+.product-posted__detail-container .icon.circle {
+  padding: 6px;
+}

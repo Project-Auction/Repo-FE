@@ -1,26 +1,27 @@
-import MyAdsPage from "../../page/list-product-posted/MyAdsPage";
+import "./ListProductsPosted.css";
 
+import { createContext, memo, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+
+import MyAdsPage from "../../page/list-product-posted/MyAdsPage";
+import Table from "../../../../shared/components/UIElement/Table/Table";
 import "./ListProductsPosted.css";
 import "../../components/MainUserStyles.css";
-import Table from "../../../../shared/components/UIElement/Table/Table";
-import { DUMMY_TRANSACTIONS_PRODUCTS } from "../../../../dummy_data/DummyData";
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useHttpClient } from "../../../../shared/hook/http-client";
 import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 
 /* Set header grid*/
 const columns = [
-  { key: "date", label: "Date" },
-  { key: "orderId", label: "Order Id" },
-  { key: "productName", label: "Product Name" },
-  { key: "userRegistration", label: "User Registration" },
-  { key: "price", label: "Product Price" },
-  { key: "status", label: "Status" },
+  { key: "createDate", label: "Date Request" },
+  { key: "productId", label: "Product ID" },
+  { key: "nameProduct", label: "Product Name" },
+  { key: "initialPrice", label: "Product Price" },
+  { key: "biddingStatus", label: "Status" },
 ];
-
-/* Set items for table */
-const items = DUMMY_TRANSACTIONS_PRODUCTS;
 
 /* Context checkbox */
 export const CheckboxTableContext = createContext();
@@ -32,7 +33,10 @@ const ListProductsPosted = () => {
 
   const [products, setProducts] = useState([]);
 
-  const { isLoading, sendRequest } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient({
+    showToast: true,
+    isAuthor: true,
+  });
 
   useEffect(() => {
     if (!userData) {
@@ -62,6 +66,8 @@ const ListProductsPosted = () => {
   }, []);
   /* Fetch data */
 
+  console.log(products);
+
   return (
     <>
       {isLoading && <LoadingSpinner asOverlay />}
@@ -73,10 +79,19 @@ const ListProductsPosted = () => {
             <form className="product-posted__detail-container">
               <Table
                 columns={columns}
-                data={items}
+                data={products}
                 select
                 noBorder
                 colorCheckbox="#1c1d1f"
+                action={
+                  <>
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      className="icon circle"
+                    />
+                    <FontAwesomeIcon icon={faTrash} className="icon circle" />
+                  </>
+                }
               />
             </form>
           </div>
@@ -86,4 +101,4 @@ const ListProductsPosted = () => {
   );
 };
 
-export default ListProductsPosted;
+export default memo(ListProductsPosted);

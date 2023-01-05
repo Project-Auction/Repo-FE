@@ -2,8 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 
 import "./Table.css";
 
-import { useForm } from "react-hook-form";
-
 import CheckboxField from "../../FormElement/Checkbox";
 import ButtonField from "../../FormElement/Button";
 import Pagination from "../Pagination";
@@ -20,6 +18,7 @@ const Table = (props) => {
   ? props.select to use Checkbox in table
   ? props.filter to use feature search with filter in table
   ? props.search to use search in table
+  ? actionPortion to use Action like button,...
 
   ! header = [{id  , field}]
   */
@@ -33,6 +32,7 @@ const Table = (props) => {
     thLight,
     thDark,
     noBorder,
+    action,
     colorCheckbox = "#fff",
     colorCheckedCheckbox = "#ff3366",
   } = props;
@@ -116,6 +116,7 @@ const Table = (props) => {
                   {header.label}
                 </th>
               ))}
+              {action && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -133,9 +134,24 @@ const Table = (props) => {
                       />
                     </th>
                   )}
-                  {columns.map((column, index) => (
-                    <td key={index}>{item[column.key]}</td>
-                  ))}
+                  {columns.map((column, index) => {
+                    return (
+                      <td key={index} className="content-wrapper">
+                        {typeof item[column.key] !== "boolean" ? (
+                          item[column.key]
+                        ) : item[column.key] ? (
+                          <span className="font-weight-bold text-success">
+                            Approval
+                          </span>
+                        ) : (
+                          <span className="font-weight-bold text-danger">
+                            Not approved yet
+                          </span>
+                        )}
+                      </td>
+                    );
+                  })}
+                  {action && <td className="d-flex align-items-center">{action}</td>}
                 </tr>
               ))}
           </tbody>

@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export const useHttpClient = (showToast = true) => {
+export const useHttpClient = ({ showToast = true, isAuthor = false } = {}) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -13,12 +13,14 @@ export const useHttpClient = (showToast = true) => {
   const activeHttpRequests = useRef([]);
 
   // Add request header Authorization to out code
-  axios.interceptors.request.use(function (config) {
-    const token = JSON.parse(localStorage.getItem("userData")).token;
-    config.headers.Authorization = token ? `Bearer ${token}` : "";
+  if (isAuthor) {
+    axios.interceptors.request.use(function (config) {
+      const token = JSON.parse(localStorage.getItem("userData")).token;
+      config.headers.Authorization = token ? `Bearer ${token}` : "";
 
-    return config;
-  });
+      return config;
+    });
+  }
 
   const sendRequest = useCallback(
     async (url, method = "GET", data = null, headers = {}, urlRedirect) => {
