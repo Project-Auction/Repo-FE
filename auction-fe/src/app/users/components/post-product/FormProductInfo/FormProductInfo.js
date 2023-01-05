@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import "./FormProductInfo.css";
 
 import { getCategories } from "../../../../../apis/categories";
@@ -19,13 +19,14 @@ const FormProductInfo = () => {
 
   /* Get categories */
   useEffect(() => {
-    try {
-      const fetchCategories = async () => {
+    const fetchCategories = async () => {
+      try {
         const retrievedCategories = await getCategories(sendRequest);
         setCategories(retrievedCategories);
-      };
-      fetchCategories();
-    } catch (err) {}
+      } catch (err) {}
+    };
+
+    fetchCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -72,4 +73,4 @@ const FormProductInfo = () => {
   );
 };
 
-export default FormProductInfo;
+export default memo(FormProductInfo);

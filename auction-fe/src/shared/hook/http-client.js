@@ -12,6 +12,14 @@ export const useHttpClient = (showToast = true) => {
   => useRef will not change value when component re-render */
   const activeHttpRequests = useRef([]);
 
+  // Add request header Authorization to out code
+  axios.interceptors.request.use(function (config) {
+    const token = JSON.parse(localStorage.getItem("userData")).token;
+    config.headers.Authorization = token ? `Bearer ${token}` : "";
+
+    return config;
+  });
+
   const sendRequest = useCallback(
     async (url, method = "GET", data = null, headers = {}, urlRedirect) => {
       setIsLoading(true);

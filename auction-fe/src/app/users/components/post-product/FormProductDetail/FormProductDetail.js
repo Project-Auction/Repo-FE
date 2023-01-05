@@ -14,6 +14,7 @@ import {
   VALIDATOR_MIN,
   VALIDATOR_REQUIRED,
 } from "../../../../../utils/Validator";
+import { memo } from "react";
 
 const FormProductDetail = () => {
   const startDateValue = useWatch({
@@ -100,4 +101,4 @@ const FormProductDetail = () => {
   );
 };
 
-export default FormProductDetail;
+export default memo(FormProductDetail);

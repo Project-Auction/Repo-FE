@@ -124,7 +124,7 @@ const UploadMultipleImages = ({ fieldName, className, validators = [] }) => {
                         style={{ display: "none" }}
                         onChange={onChangePicker}
                         multiple
-                        accept=".jpg,.png,.jpeg"
+                        accept=".jpg,.png,.jpeg,.avif"
                       />
                       <div className="icon-group">
                         <FontAwesomeIcon

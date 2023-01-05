@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 
 import "./FormUserInfo.css";
 import FormInput from "../../../../../shared/components/FormElement/Input/FormInput";
@@ -71,4 +71,4 @@ const FormUserInfo = () => {
   );
 };
 
-export default FormUserInfo;
+export default memo(FormUserInfo);

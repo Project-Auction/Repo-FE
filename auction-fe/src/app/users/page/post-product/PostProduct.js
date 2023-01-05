@@ -79,8 +79,6 @@ const PostProduct = (props) => {
       data.category
     );
 
-    /* Adding images to Firebase */
-    data.images.map((file) => handleStorageFiles(file, data.nameProduct));
     try {
       const res = await sendRequestPostProduct(
         `http://localhost:8080/api/auth/post-product/${userData.accountId}`,
@@ -92,9 +90,13 @@ const PostProduct = (props) => {
         {
           "Content-Type": "application/json",
           "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Origin": "*",
         }
       );
       toast("Post Product successfully!", { type: "success" });
+      /* Adding images to Firebase just add it after product created successfully */
+      data.images.map((file) => handleStorageFiles(file, data.nameProduct));
+
       navigate(`${userId}/myAds`);
     } catch (err) {
       console.err(err);
