@@ -1,144 +1,146 @@
-import HeadlessTippy from "@tippyjs/react/headless";
-
-import React, { useEffect, useRef, useState } from "react";
-
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toast } from "react-toastify";
-
 import "./SearchInput.css";
 
-import { useHttpClient } from "../../../hook/http-client";
-import PopperWrapper from "../../UIElement/PopperWrapper";
-import useDebounce from "../../../hook/useDebounce";
-import ProductItem from "../../UIElement/ProductItem";
+import { memo, useState } from "react";
+import { Controller, useForm, useFormContext } from "react-hook-form";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCaretDown,
+  faClose,
+  faFilter,
+  faSearch,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { FormInput } from "../Input";
+import ButtonField from "../Button/ButtonField";
+import PopperWrapper from "../../UIElement/PopperWrapper";
 
-const SearchInput = ({ inputClass, placeholder }) => {
-  const inputRef = useRef();
+const SearchInput = (props) => {
+  /**
+   * ! API in BE must be use with @RequestParam
+   *? key used to get value in filter
+   *? filter to bring filter search
+   *? dataFilter used to button filter
+   */
 
-  const [searchInput, setSearchInput] = useState("");
+  const {
+    filter,
+    dataFilter = [],
+    className,
+    onSubmit,
+    placeholder,
+    searchInputValue,
+    isLoading,
+    firstFilter,
+  } = props;
 
-  const debounceValue = useDebounce(searchInput, 600);
+  /* Check status click filter */
+  const [isFilter, setIsFilter] = useState(false);
 
-  const [searchResult, setSearchResult] = useState([]);
+  const [valueFilter, setValueFilter] = useState("All Category");
 
-  const [isShowResult, setIsShowResult] = useState(false);
+  const { setValue } = useFormContext();
 
-  const { sendRequest, isLoading } = useHttpClient();
-
-  const handleOnChange = (value) => {
-    setSearchInput(value);
-  };
-
-  const handleClickOutside = () => {
-    setIsShowResult(false);
-  };
-
-  const handleClearResult = () => {
-    setIsShowResult(false);
-    setSearchResult([]);
-    setSearchInput("");
-    inputRef.current.value = "";
-    inputRef.current.focus();
-  };
-
-  useEffect(() => {
-    if (!debounceValue.trim()) {
-      setSearchResult([]);
-      return;
-    }
-
-    const fetchSearch = async () => {
-      try {
-        const res = await sendRequest(
-          `http://localhost:8080/api/api/users/search=${debounceValue}`,
-          "GET"
-        );
-
-        setSearchResult(res);
-      } catch (err) {
-        toast(err.response.data.message, { type: "error" });
-      }
-    };
-    fetchSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounceValue]);
+  const { control } = useForm();
 
   return (
-    <HeadlessTippy
-      appendTo={() => document.body}
-      visible={isShowResult}
-      interactive
-      placement="bottom"
-      onClickOutside={handleClickOutside}
-      render={(attrs) => (
-        <div className="search-result" tabIndex="-1" {...attrs}>
-          <PopperWrapper className="popper__search">
-            {searchResult.length > 0 && (
-              <>
-                <ProductItem
-                  image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-                  name="Macbook"
-                  price="50000"
-                />
-
-                <ProductItem
-                  image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-                  name="Macbook"
-                  price="50000"
-                />
-
-                <ProductItem
-                  image="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80"
-                  name="Macbook"
-                  price="50000"
-                />
-              </>
-            )}
-            {searchResult.length === 0 && (
-              <div className="popper__no-result">
-                <img
-                  src="https://raw.githubusercontent.com/nguyenhoanganhtuan1206/SE397/main/se397/src/main/resources/static/assets/img/product/no_cart.png"
-                  alt="No product"
-                />
-
-                <p className="message">No Product Available</p>
-              </div>
-            )}
-          </PopperWrapper>
-        </div>
-      )}
-    >
-      <div className="form-input__search">
+    <form className={`search-input__form ${className}`} onSubmit={onSubmit}>
+      <div className="search-input__form-group col-8">
+        <FontAwesomeIcon
+          icon={faSearch}
+          className="search-input__icon search__icon"
+        />
         <FormInput
           fieldName="searchInput"
-          element="input"
           type="text"
-          onChange={handleOnChange}
-          inputClass={inputClass}
+          requiredForm
           placeholder={placeholder}
-          onFocus={(isFocused) => {
-            setIsShowResult(isFocused);
-          }}
-          fullWidth
-          ref={inputRef}
+          inputClass="search-input__form-input"
           noBorder
+          onFocus={() => {}}
         />
-        {!isLoading && !!searchInput && (
-          <FontAwesomeIcon
-            className="close-icon circle"
-            icon={faXmarkCircle}
-            onClick={handleClearResult}
-          />
-        )}
+
         {isLoading && (
           <FontAwesomeIcon className="spinner-icon" icon={faSpinner} />
         )}
+        {!isLoading && !!searchInputValue && (
+          <FontAwesomeIcon
+            icon={faClose}
+            className="search-input__icon close__icon"
+            onClick={() => setValue("searchInput", "")}
+          />
+        )}
       </div>
-    </HeadlessTippy>
+
+      {filter && (
+        <div className="col-4 d-flex justify-content-end">
+          <div className="search-input__form-right-area">
+            <ButtonField
+              type="button"
+              className="search-input__form-filter"
+              onClick={() => setIsFilter(!isFilter)}
+            >
+              <FontAwesomeIcon
+                icon={faFilter}
+                className="search-input__form-filter-icon"
+              />
+              <span>Filter</span>
+            </ButtonField>
+
+            {isFilter && dataFilter.length > 0 && (
+              <div className="popper__search-filter__container">
+                <PopperWrapper className="popper__search-filter-wrapper">
+                  <header className="popper__search-filter-header">
+                    <span>{valueFilter}</span>
+                    <FontAwesomeIcon
+                      icon={faCaretDown}
+                      className="popper__search-filter-header-icon-down"
+                    />
+                  </header>
+
+                  <Controller
+                    name="filterSelect"
+                    control={control}
+                    render={({ field: { onChange } }) => {
+                      const onChangeValue = (e, data) => {
+                        const valueSelected =
+                          dataFilter[e.target.dataset.index];
+                        setValue("filterSelect", valueSelected);
+                        onChange(valueSelected);
+                        setValueFilter(data.name);
+                      };
+
+                      const handleSelectAll = () => {
+                        setValue("filterSelect", 0);
+                        onChange(0);
+                        setValueFilter(firstFilter);
+                      };
+
+                      return (
+                        <ul className="popper__search-filter-body">
+                          <li onClick={handleSelectAll}>{firstFilter}</li>
+                          {dataFilter.map((data, index) => (
+                            <li
+                              key={index}
+                              onClick={(e) => onChangeValue(e, data)}
+                              data-index={index}
+                            >
+                              {data.name}
+                            </li>
+                          ))}
+                        </ul>
+                      );
+                    }}
+                  />
+                </PopperWrapper>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </form>
   );
 };
 
-export default SearchInput;
+export default memo(SearchInput);

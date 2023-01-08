@@ -34,7 +34,6 @@ export const useStorageFile = () => {
       (success) => {
         getDownloadURL(uploadImage.snapshot.ref).then((url) => {
           /* There are using for convert become url and save on database */
-          /* Firebase database It depends on your specific needs and requirements. If you want to store information about the images in a structured way, such as the image URL, file name, size, or other metadata, then using a database like Firestore to store this information could be a good option. This would allow you to query the database to retrieve information about the images, as well as update or delete this information as needed. */
           setUrls((prevUrl) => [...prevUrl, url]);
         });
       }

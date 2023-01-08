@@ -2,6 +2,10 @@
   padding: 20px;
 }
 
+.product-posted__detail-form {
+  margin: 24px 0;
+}
+
 .product-posted__detail-container .icon {
   height: 16px;
   width: 16px;
@@ -20,4 +24,9 @@
 
 .product-posted__detail-container .icon.circle {
   padding: 6px;
+}
+
+.table-product__posted td:last-child {
+  transform: translateY(-1px);
+  justify-content: center;
 }

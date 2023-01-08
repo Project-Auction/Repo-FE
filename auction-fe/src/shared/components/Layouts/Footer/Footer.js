@@ -112,6 +112,7 @@ function Footer() {
                         type="email"
                         required
                         placeholder="Enter your email"
+                        noBorder
                       />
                       <ButtonField type="submit" primary small>
                         Subscribe

@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import "./HeaderNavInner.css";
 import ButtonField from "../../FormElement/Button";
 import PopperWrapper from "../../UIElement/PopperWrapper";
-import SearchInput from "../../FormElement/SearchInput";
+import { NavSearchInput } from "../../FormElement/SearchInput";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
 
 function HeaderNavInner() {
@@ -27,7 +27,7 @@ function HeaderNavInner() {
       <div className="header__inner-search">
         <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
         <CustomFormProvider {...methods}>
-          <SearchInput
+          <NavSearchInput
             control={methods.control}
             name="searchInput"
             inputClass="header__inner-search-input"

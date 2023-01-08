@@ -1,1 +1,2 @@
-export { default } from "./SearchInput";
+export { default as NavSearchInput } from "./NavSearchInput";
+export { default as SearchInput } from "./SearchInput";

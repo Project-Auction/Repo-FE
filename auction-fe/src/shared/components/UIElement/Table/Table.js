@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 
 import "./Table.css";
 
@@ -30,13 +30,15 @@ const Table = (props) => {
     bordered,
     thPrimary,
     thLight,
+    className,
     thDark,
     noBorder,
     action,
     colorCheckbox = "#fff",
     colorCheckedCheckbox = "#ff3366",
   } = props;
-  const classes = `table
+
+  const classes = `table ${className}
   ${bordered && "table-bordered"}  
   ${striped && "table-striped"}
   ${thPrimary && "thead-primary"}
@@ -62,6 +64,13 @@ const Table = (props) => {
   const [itemsSelected, setItemsSelected] = useState(
     storage.map((item) => ({ ...item, checked: false }))
   );
+
+  //* Used to when update props data */
+  useEffect(() => {
+    setItemsSelected(storage.map((item) => ({ ...item, checked: false })));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  //* Used to when update props data */
 
   //** Used to when Redirect page */
   useEffect(() => {
@@ -151,7 +160,9 @@ const Table = (props) => {
                       </td>
                     );
                   })}
-                  {action && <td className="d-flex align-items-center">{action}</td>}
+                  {action && (
+                    <td className="d-flex align-items-center">{action}</td>
+                  )}
                 </tr>
               ))}
           </tbody>
@@ -182,4 +193,4 @@ const Table = (props) => {
   );
 };
 
-export default Table;
+export default memo(Table);
