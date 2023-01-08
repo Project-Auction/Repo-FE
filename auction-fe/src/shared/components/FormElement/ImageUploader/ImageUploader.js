@@ -73,7 +73,12 @@ const UploadImage = (props) => {
   );
 };
 
-const UploadMultipleImages = ({ fieldName, className, validators = [] }) => {
+const UploadMultipleImages = ({
+  fieldName,
+  className,
+  validators = [],
+  data = [],
+}) => {
   const { control } = useFormContext();
 
   const storedImagesMap = new Map();
@@ -91,7 +96,7 @@ const UploadMultipleImages = ({ fieldName, className, validators = [] }) => {
           },
         },
       }}
-      render={({ field: { onChange, value = [] } }) => {
+      render={({ field: { onChange, value = data || [] } }) => {
         const onChangePicker = (e) => {
           const input = Array.from(e.target.files);
           input.forEach((url) => {
@@ -154,11 +159,16 @@ const UploadMultipleImages = ({ fieldName, className, validators = [] }) => {
                 <ul className="display__list-images-list">
                   {value.length > 0 &&
                     value.map((url, index) => {
-                      const objectUrl = URL.createObjectURL(url);
+                      const objectUrl =
+                        data.length > 0 ? url.url : URL.createObjectURL(url);
                       return (
                         <li key={index} className="display__list-images-item">
                           <div className="display__list-images-item__info d-flex">
-                            <img src={objectUrl} alt="Images" />
+                            <img
+                              src={objectUrl}
+                              alt="Images"
+                              onClick={() => window.open(objectUrl)}
+                            />
                             <span>{url.name}</span>
                           </div>
 

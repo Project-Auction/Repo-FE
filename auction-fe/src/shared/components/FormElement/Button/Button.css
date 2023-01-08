@@ -36,6 +36,15 @@
   color: #000;
 }
 
+.button-border--dark {
+  border: 1px solid var(--primary-dashboard-color);
+}
+
+.button-border--dark:hover {
+  background-color: var(--primary-dashboard-color);
+  color: #fff;
+}
+
 .button--primary {
   color: var(--white-color);
   background-color: var(--primary-color);

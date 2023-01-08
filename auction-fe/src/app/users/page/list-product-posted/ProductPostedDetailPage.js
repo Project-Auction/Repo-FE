@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { AuthContext } from "../../../../shared/context/auth-context";
 import DashboardUser from "../user-dashboard/DashboardUser";
 
@@ -26,4 +26,4 @@ const ProductPostedDetailPage = (props) => {
   );
 };
 
-export default ProductPostedDetailPage;
+export default memo(ProductPostedDetailPage);

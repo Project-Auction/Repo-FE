@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import Footer from "../../../../shared/components/Layouts/Footer";
 import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
@@ -30,4 +30,4 @@ const DashboardUser = ({ currentPage, children, prevPageHeader = [] }) => {
   );
 };
 
-export default DashboardUser;
+export default memo(DashboardUser);

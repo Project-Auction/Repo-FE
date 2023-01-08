@@ -82,7 +82,7 @@ const FormProductDetail = () => {
             validators={[VALIDATOR_REQUIRED("This field cannot be empty")]}
           />
           <FormInputTime
-            label="Start Date (*)"
+            label="End Date (*)"
             fieldName="endDate"
             dateType="date_timer_picker"
             formClass="ml-4"

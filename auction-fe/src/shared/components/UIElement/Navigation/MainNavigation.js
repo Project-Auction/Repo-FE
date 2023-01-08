@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Header from "../../Layouts/Header";
 import HeaderNavInner from "../../Layouts/HeaderNavInner";
 import NavLinks from "./NavLinks";
@@ -16,4 +17,4 @@ function MainNavigation({ headerInner }) {
   );
 }
 
-export default MainNavigation;
+export default memo(MainNavigation);

@@ -2,7 +2,13 @@ import { useCallback } from "react";
 import { useState } from "react";
 
 import { toast } from "react-toastify";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  getDownloadURL,
+  getMetadata,
+  listAll,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { storage } from "../config/firebaseConfig";
 
 export const useStorageFile = () => {
@@ -13,7 +19,6 @@ export const useStorageFile = () => {
 
   const handleStorageFiles = useCallback((fileUpload, fileNamePath) => {
     const fileName = `imagesProduct/${fileNamePath}/${fileUpload.name}`;
-
     const storageRef = ref(storage, fileName);
 
     /* Save image to database firebase */
@@ -48,4 +53,42 @@ export const useStorageFile = () => {
   };
 
   return { urls, progress, handleStorageFiles, clearImages };
+};
+
+/* Used to get files from cloud storage */
+export const useStorageListFiles = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [urls, setUrls] = useState([]);
+
+  const handleFetchFiles = useCallback(async ({ nameProduct }) => {
+    const fileName = `imagesProduct/${nameProduct}`;
+
+    const listRef = ref(storage, fileName);
+
+    try {
+      const res = await listAll(listRef);
+      setIsLoading(false);
+      // Transform the 'res.items' array into an array of objects with 'url' and 'name' properties
+      const urls = await Promise.all(
+        res.items.map(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          const metadata = await getMetadata(ref(storage, url));
+          return { url: url, name: metadata.name };
+        })
+      );
+
+      setUrls(urls);
+    } catch (error) {
+      setIsLoading(false);
+      toast("Error: " + error, { type: "error" });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const clearUrls = useCallback(() => {
+    setUrls([]);
+  }, []);
+
+  return { handleFetchFiles, urls, clearUrls, isLoading };
 };
