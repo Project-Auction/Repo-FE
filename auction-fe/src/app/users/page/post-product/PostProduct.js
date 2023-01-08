@@ -47,10 +47,10 @@ const PostProduct = (props) => {
   useEffect(() => {
     try {
       const fetchUser = async () => {
-        const response = await sendRequestUserInfo(
-          `http://localhost:8080/api/home/user/${userId}`,
-          "GET"
-        );
+        const response = await sendRequestUserInfo({
+          url: `http://localhost:8080/api/home/user/${userId}`,
+          method: "GET",
+        });
 
         methods.setValue("userName", response.name);
         methods.setValue("phoneNumber", response.phoneNumber);
@@ -80,19 +80,19 @@ const PostProduct = (props) => {
     );
 
     try {
-      const res = await sendRequestPostProduct(
-        `http://localhost:8080/api/auth/post-product/${userData.accountId}`,
-        "POST",
-        JSON.stringify({
+      const res = await sendRequestPostProduct({
+        url: `http://localhost:8080/api/auth/post-product/${userData.accountId}`,
+        method: "POST",
+        data: JSON.stringify({
           ...data,
           category: categorySelected,
         }),
-        {
+        headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Methods": "POST",
           "Access-Control-Allow-Origin": "*",
-        }
-      );
+        },
+      });
       toast("Post Product successfully!", { type: "success" });
       /* Adding images to Firebase just add it after product created successfully */
       data.images.map((file) => handleStorageFiles(file, data.nameProduct));

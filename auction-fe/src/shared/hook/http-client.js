@@ -23,7 +23,7 @@ export const useHttpClient = ({ showToast = true, isAuthor = false } = {}) => {
   }
 
   const sendRequest = useCallback(
-    async (url, method = "GET", data = null, headers = {}, urlRedirect) => {
+    async ({ url, method = "GET", data = null, headers = {}, urlRedirect }) => {
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);

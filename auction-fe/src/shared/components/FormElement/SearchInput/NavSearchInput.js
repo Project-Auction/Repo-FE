@@ -52,10 +52,10 @@ const NavSearchInput = ({ inputClass, placeholder }) => {
 
     const fetchSearch = async () => {
       try {
-        const res = await sendRequest(
-          `http://localhost:8080/api/api/users/search=${debounceValue}`,
-          "GET"
-        );
+        const res = await sendRequest({
+          url: `http://localhost:8080/api/api/users/search=${debounceValue}`,
+          method: "GET",
+        });
 
         setSearchResult(res);
       } catch (err) {

@@ -59,27 +59,27 @@ const Auth = () => {
           district: data.district,
         };
 
-        const response = await sendRequest(
-          "http://localhost:8080/api/auth/sign-up",
-          "POST",
-          JSON.stringify(requestBody),
-          { "Content-Type": "application/json" }
-        );
+        const response = await sendRequest({
+          url: "http://localhost:8080/api/auth/sign-up",
+          methods: "POST",
+          data: JSON.stringify(requestBody),
+          headers: { "Content-Type": "application/json" },
+        });
 
         toast("Register successfully!", { type: "success" });
         methods.reset();
       } catch (err) {}
     } else {
       try {
-        const response = await sendRequest(
-          "http://localhost:8080/api/authenticate",
-          "POST",
-          JSON.stringify({
+        const response = await sendRequest({
+          url: "http://localhost:8080/api/authenticate",
+          methods: "POST",
+          data: JSON.stringify({
             email: data.email,
             password: data.password,
           }),
-          { "Content-Type": "application/json" }
-        );
+          headers: { "Content-Type": "application/json" },
+        });
 
         authContext.login(response);
         toast("Login successfully!", { type: "success" });

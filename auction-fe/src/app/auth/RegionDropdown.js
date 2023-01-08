@@ -30,10 +30,10 @@ const RegionDropdown = (props) => {
   /* Get provinces */
   useEffect(() => {
     const fetchProvinces = async () => {
-      const response = await sendRequest(
-        "https://vapi.vnappmob.com/api/province/",
-        "GET"
-      );
+      const response = await sendRequest({
+        url: "https://vapi.vnappmob.com/api/province/",
+        method: "GET",
+      });
 
       setProvinces(response.results);
     };
@@ -46,10 +46,10 @@ const RegionDropdown = (props) => {
     setWard([]);
     setDistrict([]);
     const fetchDistrict = async () => {
-      const response = await sendRequest(
-        `https://vapi.vnappmob.com/api/province/district/${cityId}`,
-        "GET"
-      );
+      const response = await sendRequest({
+        url: `https://vapi.vnappmob.com/api/province/district/${cityId}`,
+        method: "GET",
+      });
 
       setDistrict(response.results);
     };
@@ -61,10 +61,10 @@ const RegionDropdown = (props) => {
   /* Get ward */
   useEffect(() => {
     const fetchDistrict = async () => {
-      const response = await sendRequest(
-        `https://vapi.vnappmob.com/api/province/ward/${districtId}`,
-        "GET"
-      );
+      const response = await sendRequest({
+        url: `https://vapi.vnappmob.com/api/province/ward/${districtId}`,
+        method: "GET",
+      });
 
       setWard(response.results);
     };

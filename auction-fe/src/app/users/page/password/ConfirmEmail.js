@@ -23,11 +23,11 @@ const ConfirmEmail = () => {
       const formData = new FormData();
       formData.append("email", data.emailConfirm);
 
-      const response = await sendRequest(
-        "http://localhost:8080/api/auth/forgot-password",
-        "POST",
-        formData
-      );
+      const response = await sendRequest({
+        url: "http://localhost:8080/api/auth/forgot-password",
+        method: "POST",
+        data: formData,
+      });
 
       toast(
         "We have sent the link to reset password. Please check your email!",

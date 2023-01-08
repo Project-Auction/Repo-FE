@@ -88,17 +88,16 @@ const ListProductsPosted = () => {
   //*Search and filter
   const fetchData = useCallback(
     async () => {
-      const response = await sendRequestSearch(
-        `http://localhost:8080/api/user/product/search?q=${searchInputValue}&categoryId=${
+      const response = await sendRequestSearch({
+        url: `http://localhost:8080/api/user/product/search?q=${searchInputValue}&categoryId=${
           filterSelectValue === undefined ? 0 : parseInt(filterSelectValue)
         }`,
-        "GET",
-        {},
-        {
+        method: "GET",
+        headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET",
-        }
-      );
+        },
+      });
 
       setProducts(response);
     },
@@ -122,13 +121,14 @@ const ListProductsPosted = () => {
   useEffect(() => {
     try {
       const fetchProducts = async () => {
-        const response = await sendRequestGetProducts(
-          `http://localhost:8080/api/user/product/products-posted/${userData.accountId}`,
-          "GET",
-          {
+        const response = await sendRequestGetProducts({
+          url: `http://localhost:8080/api/user/product/products-posted/${userData.accountId}`,
+          method: "GET",
+          headers: {
             "Access-Control-Allow-Origin": "*",
-          }
-        );
+          },
+          urlRedirect: "/",
+        });
 
         setProducts(response);
       };

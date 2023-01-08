@@ -32,13 +32,11 @@ const ChangePassword = () => {
     /* Check token existing! */
     try {
       const checkToken = async () => {
-        const response = await sendRequest(
-          `http://localhost:8080/api/auth/check-token-password/${token}`,
-          "GET",
-          {},
-          {},
-          "/"
-        );
+        const response = await sendRequest({
+          url: `http://localhost:8080/api/auth/check-token-password/${token}`,
+          method: "GET",
+          urlRedirect: "/",
+        });
       };
 
       checkToken();
@@ -54,15 +52,15 @@ const ChangePassword = () => {
     formData.append("token", token);
 
     try {
-      const response = await sendRequest(
-        "http://localhost:8080/api/auth/reset-password",
-        "PATCH",
-        formData,
-        {
+      const response = await sendRequest({
+        url: "http://localhost:8080/api/auth/reset-password",
+        method: "PATCH",
+        data: formData,
+        headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Methods": "PATCH",
-        }
-      );
+        },
+      });
 
       toast("Update successfully!", { type: "success" });
       navigate("/");

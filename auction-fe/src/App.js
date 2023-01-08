@@ -50,11 +50,6 @@ function App() {
             <Route path="/reset-password/:token" element={<ChangePassword />} />
             {/* Require token */}
 
-            <Route
-              path="/:productId/posted-detail"
-              element={<ProductPostedDetail />}
-            />
-
             {/* Logged In page */}
             <Route
               element={<ProtectRoutes isAllowed={authContext.isLoggedIn} />}
@@ -69,6 +64,11 @@ function App() {
               <Route path="/:userId/edit" element={<EditProfile />} />
               <Route path="/:userId/post-product" element={<PostProduct />} />
               <Route path="/:userId/invoices" element={<InvoiceUser />} />
+
+              <Route
+                path="/:productId/posted-detail"
+                element={<ProductPostedDetail />}
+              />
             </Route>
             {/* Logged In page */}
 

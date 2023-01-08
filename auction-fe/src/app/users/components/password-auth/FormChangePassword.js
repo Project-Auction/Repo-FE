@@ -46,24 +46,24 @@ const FormChangePassword = (props) => {
 
     try {
       const [response1, response2] = await Promise.all([
-        sendRequestMatchingPwd(
-          `http://localhost:8080/api/auth/matching-password/${userId}`,
-          "POST",
-          formDataMatchPwd,
-          {
+        sendRequestMatchingPwd({
+          url: `http://localhost:8080/api/auth/matching-password/${userId}`,
+          method: "POST",
+          data: formDataMatchPwd,
+          headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Methods": "POST",
-          }
-        ),
-        sendRequestSubmit(
-          `http://localhost:8080/api/auth/update-password/${userId}`,
-          "PATCH",
-          formDataSubmit,
-          {
+          },
+        }),
+        sendRequestSubmit({
+          url: `http://localhost:8080/api/auth/update-password/${userId}`,
+          method: "PATCH",
+          data: formDataSubmit,
+          headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Methods": "PATCH",
-          }
-        ),
+          },
+        }),
       ]);
       methods.reset();
       toast("Change password successfully!", { type: "success" });
