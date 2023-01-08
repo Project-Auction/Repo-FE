@@ -8,4 +8,15 @@ const FormatDateTime = ({ date }) => {
   return [days, hours, minutes, seconds];
 };
 
-export { FormatDateTime };
+const FormatDateTimeUS = ({ value }) => {
+  const date = new Date(value);
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  return formatter.format(date);
+};
+
+export { FormatDateTime, FormatDateTimeUS };

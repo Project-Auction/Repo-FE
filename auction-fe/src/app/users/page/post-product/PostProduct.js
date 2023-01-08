@@ -132,7 +132,7 @@ const PostProduct = (props) => {
     <>
       {isLoadingUserInfo && progress !== 100 && <LoadingSpinner asOverlay />}
       {!isLoadingUserInfo && (
-        <DashboardUser userId={userId} currentPage="Post Product">
+        <DashboardUser currentPage="Post Product">
           <div className="form__step-container">
             <header className="form__step-header">
               <h3 className="title">Post Product</h3>

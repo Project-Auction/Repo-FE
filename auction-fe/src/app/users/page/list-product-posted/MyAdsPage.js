@@ -3,7 +3,7 @@ import DashboardUser from "../user-dashboard/DashboardUser";
 const MyAdsPage = (props) => {
   return (
     <>
-      <DashboardUser userId={1} currentPage="History Posted">
+      <DashboardUser currentPage="History Posted">
         {props.children}
       </DashboardUser>
     </>

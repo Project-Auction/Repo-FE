@@ -21,7 +21,7 @@ import CustomFormProvider from "../../../../shared/components/FormElement/Custom
 
 /* Set header grid*/
 const columns = [
-  { key: "createDate", label: "Date Request" },
+  { key: "createdDay", label: "Date Request" },
   { key: "productId", label: "Product ID" },
   { key: "nameProduct", label: "Product Name" },
   { key: "initialPrice", label: "Product Price" },
@@ -182,6 +182,9 @@ const ListProductsPosted = () => {
                       <FontAwesomeIcon
                         icon={faPenToSquare}
                         className="icon circle"
+                        onClick={() => {
+                          navigate(`/1/posted-detail`);
+                        }}
                       />
                       <FontAwesomeIcon icon={faTrash} className="icon circle" />
                     </>

@@ -26,6 +26,7 @@ import ConfirmEmail from "./app/users/page/password/ConfirmEmail";
 import NotFound from "./shared/components/UIElement/ErrorPage/NotFound";
 import FormChangePassword from "./app/users/components/password-auth/FormChangePassword";
 import ListProductsPosted from "./app/users/components/list-product-posted/ListProductsPosted";
+import { ProductPostedDetail } from "./app/users/components/list-product-posted";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -48,6 +49,11 @@ function App() {
             {/* Require token */}
             <Route path="/reset-password/:token" element={<ChangePassword />} />
             {/* Require token */}
+
+            <Route
+              path="/:productId/posted-detail"
+              element={<ProductPostedDetail />}
+            />
 
             {/* Logged In page */}
             <Route

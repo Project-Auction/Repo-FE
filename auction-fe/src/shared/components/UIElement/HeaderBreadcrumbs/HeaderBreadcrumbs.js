@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import "./HeaderBreadcrumbs.css";
 
 const HeaderBreadcrumbs = (props) => {
-  const { currentPage, prevPage = "Home" } = props;
+  const { currentPage, prevPage = [{ name: "Home", redirectPath: "/" }] } =
+    props;
 
   return (
     <div className="header__breadcrums-container">
@@ -12,8 +13,12 @@ const HeaderBreadcrumbs = (props) => {
         <h3 className="header__breadcrums-title">{currentPage}</h3>
 
         <div className="header__breadcrums-right-area">
-          <Link to="/">{prevPage}</Link>
-          <FontAwesomeIcon className="icon" icon={faAngleRight} />
+          {prevPage.map((page) => (
+            <>
+              <Link to={page.redirectPath}>{page.name}</Link>
+              <FontAwesomeIcon className="icon" icon={faAngleRight} />
+            </>
+          ))}
           <p>{currentPage}</p>
         </div>
       </div>

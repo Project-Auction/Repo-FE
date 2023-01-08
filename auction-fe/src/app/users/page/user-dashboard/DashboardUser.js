@@ -5,14 +5,14 @@ import MainNavigation from "../../../../shared/components/UIElement/Navigation/M
 import { AuthContext } from "../../../../shared/context/auth-context";
 import NavbarUser from "../../components/Navbar";
 
-const DashboardUser = ({ currentPage, children }) => {
+const DashboardUser = ({ currentPage, children, prevPageHeader = [] }) => {
   const authContext = useContext(AuthContext);
 
   return (
     <>
       <MainNavigation />
 
-      <HeaderBreadcrumbs currentPage={currentPage} />
+      <HeaderBreadcrumbs currentPage={currentPage} prevPage={prevPageHeader} />
 
       <div className="profile__user-container section">
         <div className="container">
