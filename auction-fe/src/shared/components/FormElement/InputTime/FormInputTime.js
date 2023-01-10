@@ -25,6 +25,7 @@ const FormInputTime = forwardRef((props, ref) => {
     formGroupClass,
     alertDanger,
     validators = [],
+    defaultValue,
   } = props;
   const { control } = useFormContext();
 
@@ -42,7 +43,7 @@ const FormInputTime = forwardRef((props, ref) => {
         name={fieldName}
         control={control}
         render={({
-          field: { onChange, value = "" },
+          field: { onChange, value = defaultValue || "" },
           fieldState: { error },
         }) => {
           return (

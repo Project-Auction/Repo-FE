@@ -1,3 +1,8 @@
+import moment from "moment";
+
+export const TYPE_DATE_MONTH = "TYPE_DATE_MONTH";
+export const TYPE_DATE_TIME_MONTH = "TYPE_DATE_TIME_MONTH";
+
 const FormatDateTime = ({ date }) => {
   // calculate time left
   const days = Math.floor(date / (1000 * 60 * 60 * 24));
@@ -8,15 +13,16 @@ const FormatDateTime = ({ date }) => {
   return [days, hours, minutes, seconds];
 };
 
-const FormatDateTimeUS = ({ value }) => {
-  const date = new Date(value);
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
 
-  return formatter.format(date);
+const FormatDateTimeLocal = ({ value, format }) => {
+  switch (format) {
+    case TYPE_DATE_MONTH:
+      return moment(value).format("YYYY-MM-DD");
+    case TYPE_DATE_TIME_MONTH:
+      return moment(value).format("YYYY-MM-DDTHH:mm");
+    default:
+      return value;
+  }
 };
 
-export { FormatDateTime, FormatDateTimeUS };
+export { FormatDateTime, FormatDateTimeLocal };

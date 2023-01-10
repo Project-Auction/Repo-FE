@@ -11,6 +11,10 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { useHttpClient } from "../../../../shared/hook/http-client";
 import { SearchInput } from "../../../../shared/components/FormElement/SearchInput";
 import { getCategories } from "../../../../apis/categories";
+import {
+  FormatDateTimeLocal,
+  TYPE_DATE_MONTH,
+} from "../../../../shared/format/format-datetime";
 import useDebounce from "../../../../shared/hook/useDebounce";
 import MyAdsPage from "../../page/list-product-posted/MyAdsPage";
 import Table from "../../../../shared/components/UIElement/Table/Table";
@@ -25,11 +29,11 @@ import Pagination from "../../../../shared/components/UIElement/Pagination/Pagin
 
 /* Set header grid*/
 const columns = [
-  { key: "createdDay", label: "Date Request" },
-  { key: "productId", label: "Product ID" },
-  { key: "nameProduct", label: "Product Name" },
-  { key: "initialPrice", label: "Product Price" },
-  { key: "biddingStatus", label: "Status" },
+  { label: "Date Request" },
+  { label: "Product ID" },
+  { label: "Product Name" },
+  { label: "Product Price" },
+  { label: "Status" },
 ];
 
 /* Context checkbox */
@@ -241,23 +245,26 @@ const ListProductsPosted = () => {
                           />
                         </th>
 
-                        {columns.map((column, index) => {
-                          return (
-                            <td key={index} className="content-wrapper">
-                              {typeof item[column.key] !== "boolean" ? (
-                                item[column.key]
-                              ) : item[column.key] ? (
-                                <span className="font-weight-bold text-success">
-                                  Approval
-                                </span>
-                              ) : (
-                                <span className="font-weight-bold text-danger">
-                                  Not approved yet
-                                </span>
-                              )}
-                            </td>
-                          );
-                        })}
+                        <td>
+                          {FormatDateTimeLocal({
+                            value: item.createdDay,
+                            format: TYPE_DATE_MONTH,
+                          })}
+                        </td>
+                        <td>{item.productId}</td>
+                        <td>{item.nameProduct}</td>
+                        <td>{item.initialPrice}</td>
+                        <td>
+                          {item.biddingStatus ? (
+                            <span className="font-weight-bold text-success">
+                              Approval
+                            </span>
+                          ) : (
+                            <span className="font-weight-bold text-danger">
+                              Not approved yet
+                            </span>
+                          )}
+                        </td>
                         <td className="d-flex align-items-center">
                           <>
                             <FontAwesomeIcon

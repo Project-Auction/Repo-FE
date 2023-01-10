@@ -91,8 +91,7 @@ function SelectField(props) {
                 <label htmlFor={id}>{label}</label>
                 <select
                   onChange={onChangeValue}
-                  onError={error}
-                  value={value || defaultValue}
+                  defaultValue={defaultValue}
                 >
                   {children}
                 </select>

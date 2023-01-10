@@ -18,6 +18,7 @@ const TextareaField = (props) => {
     readOnly,
     validators = [],
     alertDanger,
+    defaultValue,
   } = props;
 
   const { control } = useFormContext();
@@ -40,7 +41,7 @@ const TextareaField = (props) => {
           },
         },
       }}
-      render={({ field: { onChange, value }, fieldState: { error } }) => {
+      render={({ field: { onChange, value = defaultValue || "" }, fieldState: { error } }) => {
         const onChangeValue = (e) => {
           onChange(e.target.value);
         };
