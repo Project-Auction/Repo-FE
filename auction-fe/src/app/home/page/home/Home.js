@@ -5,6 +5,7 @@ import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import ButtonField from "../../../../shared/components/FormElement/Button";
 import ProductList from "../../../product/components/ProductList";
+import { memo } from "react";
 
 export const HEADER_GRID = [
   { field: "STT" },
@@ -282,4 +283,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default memo(Home);

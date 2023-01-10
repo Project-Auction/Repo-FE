@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -61,7 +61,7 @@ const Auth = () => {
 
         const response = await sendRequest({
           url: "http://localhost:8080/api/auth/sign-up",
-          methods: "POST",
+          method: "POST",
           data: JSON.stringify(requestBody),
           headers: { "Content-Type": "application/json" },
         });
@@ -73,12 +73,14 @@ const Auth = () => {
       try {
         const response = await sendRequest({
           url: "http://localhost:8080/api/authenticate",
-          methods: "POST",
+          method: "POST",
           data: JSON.stringify({
             email: data.email,
             password: data.password,
           }),
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         authContext.login(response);
@@ -307,4 +309,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default memo(Auth);

@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import "./ProfileUser.css";
 
 import DashboardUser from "../user-dashboard/DashboardUser";
+import { memo } from "react";
 
 const ProfileUser = (props) => {
   const userId = useParams().userId;
@@ -15,4 +16,4 @@ const ProfileUser = (props) => {
   );
 };
 
-export default ProfileUser;
+export default memo(ProfileUser);

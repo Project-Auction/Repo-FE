@@ -1,6 +1,6 @@
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import "./SwiperSlider.css";
 
@@ -80,4 +80,4 @@ const SwiperSlider = ({ images = [] }) => {
   );
 };
 
-export default SwiperSlider;
+export default memo(SwiperSlider);

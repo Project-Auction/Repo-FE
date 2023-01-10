@@ -1,3 +1,4 @@
+import { memo } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import Backdrop from "../Backdrop/Backdrop";
@@ -48,4 +49,4 @@ function Modal(props) {
   );
 }
 
-export default Modal;
+export default memo(Modal);

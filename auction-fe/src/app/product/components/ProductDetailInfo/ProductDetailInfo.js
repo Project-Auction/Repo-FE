@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import "./ProductDetailInfo.css";
@@ -130,4 +130,4 @@ const ProductDetailInfo = (props) => {
   );
 };
 
-export default ProductDetailInfo;
+export default memo(ProductDetailInfo);

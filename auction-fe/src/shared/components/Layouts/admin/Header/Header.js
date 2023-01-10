@@ -1,5 +1,6 @@
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { memo } from "react";
 import "./Header.css";
 
 const Header = (props) => {
@@ -24,4 +25,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default memo(Header);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import ReactDOM from "react-dom";
 
 import './Backdrop.css'
@@ -10,4 +11,4 @@ function Backdrop(props) {
   );
 }
 
-export default Backdrop;
+export default memo(Backdrop);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "./Card.css";
 
 /*
@@ -10,4 +11,4 @@ function CardField(props) {
   );
 }
 
-export default CardField;
+export default memo(CardField);

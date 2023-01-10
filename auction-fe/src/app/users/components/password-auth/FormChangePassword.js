@@ -14,6 +14,7 @@ import {
   VALIDATOR_REQUIRED,
 } from "../../../../utils/Validator";
 import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
+import { memo } from "react";
 
 const FormChangePassword = (props) => {
   /* Get user id to change password */
@@ -154,4 +155,4 @@ const FormChangePassword = (props) => {
   );
 };
 
-export default FormChangePassword;
+export default memo(FormChangePassword);

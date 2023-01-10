@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import "./ProductItem.css";
 
@@ -23,4 +24,4 @@ const ProductItem = (props) => {
   );
 };
 
-export default ProductItem;
+export default memo(ProductItem);

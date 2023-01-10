@@ -5,6 +5,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { memo } from "react";
 
 function RadioField(props) {
   /*
@@ -60,4 +61,4 @@ function RadioField(props) {
   );
 }
 
-export default RadioField;
+export default memo(RadioField);

@@ -7,6 +7,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
@@ -72,4 +73,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

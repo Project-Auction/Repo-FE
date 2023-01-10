@@ -1,5 +1,6 @@
 import { faChevronRight, faRightLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { memo } from "react";
 import RadioField from "../../../../shared/components/FormElement/Radio";
 
 import "./HomeSideLeft.css";
@@ -73,4 +74,4 @@ const HomeSideLeft = (props) => {
   );
 };
 
-export default HomeSideLeft;
+export default memo(HomeSideLeft);

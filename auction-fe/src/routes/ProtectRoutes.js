@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectRoutes = ({ isAllowed, redirectPath = "/", children }) => {
@@ -8,4 +9,4 @@ const ProtectRoutes = ({ isAllowed, redirectPath = "/", children }) => {
   return children ? children : <Outlet />;
 };
 
-export default ProtectRoutes;
+export default memo(ProtectRoutes);

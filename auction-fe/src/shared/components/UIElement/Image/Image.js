@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, memo, useState } from "react";
 import "./Image.css";
 import noImage from "../../../../assets/img/no-img.webp";
 
@@ -26,4 +26,4 @@ const Image = forwardRef((props, ref) => {
   );
 });
 
-export default Image;
+export default memo(Image);

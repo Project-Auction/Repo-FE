@@ -15,6 +15,7 @@ import {
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
 import { FormInput } from "../../FormElement/Input";
 import ButtonField from "../../FormElement/Button";
+import { memo } from "react";
 
 function Footer() {
   const methods = useForm();
@@ -143,4 +144,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default memo(Footer);

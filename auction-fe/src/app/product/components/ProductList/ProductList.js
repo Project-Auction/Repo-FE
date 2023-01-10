@@ -1,3 +1,4 @@
+import { memo } from "react";
 import CardProduct from "../../../../shared/components/UIElement/Card/CardProduct";
 import "./ProductList.css";
 
@@ -24,4 +25,4 @@ const ProductList = ({ items = [], className, classCard }) => {
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

@@ -9,7 +9,7 @@ import {
 import { faBell, faUser } from "@fortawesome/free-regular-svg-icons";
 
 import "./NavLinks.css";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { AuthContext } from "../../../context/auth-context";
 import PopperWrapper from "../PopperWrapper";
 import Image from "../Image";
@@ -146,4 +146,4 @@ function NavLinks() {
   );
 }
 
-export default NavLinks;
+export default memo(NavLinks);

@@ -11,6 +11,7 @@ import ButtonField from "../../FormElement/Button";
 import PopperWrapper from "../../UIElement/PopperWrapper";
 import { NavSearchInput } from "../../FormElement/SearchInput";
 import CustomFormProvider from "../../FormElement/CustomFormProvider";
+import { memo } from "react";
 
 function HeaderNavInner() {
   const methods = useForm();
@@ -136,4 +137,4 @@ function HeaderNavInner() {
   );
 }
 
-export default HeaderNavInner;
+export default memo(HeaderNavInner);

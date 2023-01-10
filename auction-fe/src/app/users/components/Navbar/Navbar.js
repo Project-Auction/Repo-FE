@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { AuthContext } from "../../../../shared/context/auth-context";
 import ButtonField from "../../../../shared/components/FormElement/Button";
 import AccountItem from "../../../../shared/components/UIElement/AccountItem";
@@ -92,4 +92,4 @@ const Navbar = ({ userId }) => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

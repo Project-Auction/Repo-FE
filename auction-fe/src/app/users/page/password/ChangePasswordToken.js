@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
 import "./FormPassword.css";
 
@@ -134,4 +134,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default memo(ChangePassword);

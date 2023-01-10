@@ -2,7 +2,7 @@ import "./ListProductsPosted.css";
 
 import { createContext, memo, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,10 @@ import "./ListProductsPosted.css";
 import "../../components/MainUserStyles.css";
 import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
+import CheckboxField from "../../../../shared/components/FormElement/Checkbox/CheckboxField";
+import usePaginate from "../../../../shared/hook/usePaginate";
+import useCheckbox from "../../../../shared/hook/useCheckbox";
+import Pagination from "../../../../shared/components/UIElement/Pagination/Pagination";
 
 /* Set header grid*/
 const columns = [
@@ -52,6 +56,21 @@ const ListProductsPosted = () => {
   const [categories, setCategories] = useState([]);
 
   const {
+    checkedAllState,
+    itemsSelected,
+    setItemsSelected,
+    setCheckedAllState,
+    handleCheckedAll,
+    handleCheckedItem,
+  } = useCheckbox({ data: products, keyCompare: "productId" });
+
+  /* Define to paginate */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [capacityPage, setCapacityPage] = useState(6);
+  const { paginate } = usePaginate();
+  const storage = paginate(products, currentPage, capacityPage);
+
+  const {
     isLoading: isLoadingGetProducts,
     sendRequest: sendRequestGetProducts,
   } = useHttpClient({
@@ -66,24 +85,34 @@ const ListProductsPosted = () => {
     });
 
   const { sendRequest: sendRequestCategories, isLoading: isLoadingCategories } =
-    useHttpClient();
+    useHttpClient({ showToast: true });
 
-  /* Get categories */
-  useEffect(() => {
-    if (!userData) {
-      navigate("/auth");
-    }
-
-    const fetchCategories = async () => {
-      try {
-        const retrievedCategories = await getCategories(sendRequestCategories);
-        setCategories(retrievedCategories);
-      } catch (err) {}
-    };
-
-    fetchCategories();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  /* Handle redirect page */
+  const handleRedirectPage = useCallback((pageNumber) => {
+    setCurrentPage(pageNumber);
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const retrievedCategories = await getCategories(sendRequestCategories);
+      setCategories(retrievedCategories);
+    } catch (err) {}
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await sendRequestGetProducts({
+        url: `http://localhost:8080/api/user/product/products-posted/${userData.accountId}`,
+        method: "GET",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        urlRedirect: "/",
+      });
+
+      setProducts(response);
+    } catch (err) {}
+  };
 
   //*Search and filter
   const fetchData = useCallback(
@@ -104,6 +133,7 @@ const ListProductsPosted = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [filterSelectValue, debounceValue]
   );
+  //*Search and filter
 
   useEffect(() => {
     if (
@@ -117,27 +147,32 @@ const ListProductsPosted = () => {
   }, [debounceValue, filterSelectValue]);
   //*Search and filter
 
-  /* Fetch data */
+  //* Used to when update props data */
   useEffect(() => {
-    try {
-      const fetchProducts = async () => {
-        const response = await sendRequestGetProducts({
-          url: `http://localhost:8080/api/user/product/products-posted/${userData.accountId}`,
-          method: "GET",
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-          urlRedirect: "/",
-        });
+    setItemsSelected(storage.map((item) => ({ ...item, checked: false })));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products]);
+  //* Used to when update props data */
 
-        setProducts(response);
-      };
+  //** Used to when Redirect page */
+  useEffect(() => {
+    setItemsSelected(storage.map((items) => ({ ...items, checked: false })));
+    setCheckedAllState(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+  //** Used to when Redirect page */
 
-      fetchProducts();
-    } catch (err) {}
+  //* Fetch data*/
+  useEffect(() => {
+    if (!userData && products.length === 0) {
+      navigate("/auth");
+    }
+
+    fetchCategories();
+    fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  /* Fetch data */
+  //* Fetch data*/
 
   const onSubmit = (data) => {
     console.log(data);
@@ -149,52 +184,109 @@ const ListProductsPosted = () => {
         <LoadingSpinner asOverlay />
       )}
 
-      {(!isLoadingGetProducts || !isLoadingCategories) && (
-        <MyAdsPage>
-          <div className="dashboard__right-area-container">
-            <h3 className="dashboard__title-user__header">Products Posted</h3>
+      <MyAdsPage>
+        <div className="dashboard__right-area-container">
+          <h3 className="dashboard__title-user__header">Products Posted</h3>
 
-            <div className="product-posted__detail-container">
-              {/* Search Input */}
-              <CustomFormProvider {...methods}>
-                <SearchInput
-                  filter
-                  dataFilter={categories}
-                  onSubmit={methods.handleSubmit(onSubmit)}
-                  placeholder="Enter Product Name"
-                  isLoading={isLoadingSearch}
-                  searchInputValue={debounceValue}
-                  firstFilter="All Category"
-                />
-              </CustomFormProvider>
-              {/* Search Input */}
-
-              <form className="product-posted__detail-form">
-                <Table
-                  columns={columns}
-                  data={products}
-                  select
-                  noBorder
-                  className="table-product__posted"
-                  colorCheckbox="#1c1d1f"
-                  action={
-                    <>
-                      <FontAwesomeIcon
-                        icon={faPenToSquare}
-                        className="icon circle"
-                        onClick={() => {
-                          navigate(`/1/posted-detail`);
-                        }}
+          <div className="product-posted__detail-container">
+            {/* Search Input */}
+            <CustomFormProvider {...methods}>
+              <SearchInput
+                filter
+                dataFilter={categories}
+                onSubmit={methods.handleSubmit(onSubmit)}
+                placeholder="Enter Product Name"
+                isLoading={isLoadingSearch}
+                searchInputValue={debounceValue}
+                firstFilter="All Category"
+              />
+            </CustomFormProvider>
+            <form className="product-posted__detail-form">
+              <Table
+                select
+                noBorder
+                className="table-product__posted"
+                colorCheckbox="#1c1d1f"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col" className="selecting">
+                      <CheckboxField
+                        fontSize={22}
+                        color="#1c1d1f"
+                        checkedColor="#ff3366"
+                        onChange={handleCheckedAll}
+                        checked={checkedAllState}
                       />
-                      <FontAwesomeIcon icon={faTrash} className="icon circle" />
-                    </>
-                  }
-                />
-              </form>
-            </div>
+                    </th>
+                    {columns.map((header, index) => (
+                      <th scope="col" key={index}>
+                        {header.label}
+                      </th>
+                    ))}
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {itemsSelected.length === storage.length &&
+                    storage.map((item, pos) => (
+                      <tr key={pos} className="selecting">
+                        <th>
+                          <CheckboxField
+                            fontSize={22}
+                            color="#1c1d1f"
+                            checkedColor="#ff3366"
+                            onChange={(e) => handleCheckedItem(item, e)}
+                            checked={itemsSelected[pos].checked}
+                          />
+                        </th>
+
+                        {columns.map((column, index) => {
+                          return (
+                            <td key={index} className="content-wrapper">
+                              {typeof item[column.key] !== "boolean" ? (
+                                item[column.key]
+                              ) : item[column.key] ? (
+                                <span className="font-weight-bold text-success">
+                                  Approval
+                                </span>
+                              ) : (
+                                <span className="font-weight-bold text-danger">
+                                  Not approved yet
+                                </span>
+                              )}
+                            </td>
+                          );
+                        })}
+                        <td className="d-flex align-items-center">
+                          <>
+                            <FontAwesomeIcon
+                              icon={faPenToSquare}
+                              className="icon circle"
+                              onClick={() =>
+                                navigate(`/${item.productId}/posted-detail`)
+                              }
+                            />
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              className="icon circle"
+                            />
+                          </>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+              <Pagination
+                capacityPage={capacityPage}
+                totalData={products.length}
+                currentPage={currentPage}
+                onRedirect={handleRedirectPage}
+              />
+            </form>
           </div>
-        </MyAdsPage>
-      )}
+        </div>
+      </MyAdsPage>
     </>
   );
 };

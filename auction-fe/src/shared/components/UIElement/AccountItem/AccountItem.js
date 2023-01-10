@@ -1,5 +1,6 @@
 import "./AccountItem.css";
 import Image from "../Image";
+import { memo } from "react";
 
 const AccountItem = (props) => {
   const { src, userName, className, imageClass, email, bodyClass, circle } =
@@ -21,4 +22,4 @@ const AccountItem = (props) => {
   );
 };
 
-export default AccountItem;
+export default memo(AccountItem);

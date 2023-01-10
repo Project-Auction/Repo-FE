@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Header from "../../../shared/components/Layouts/admin/Header";
 import Navbar from "../../../shared/components/Layouts/admin/Navbar";
 
@@ -26,4 +27,4 @@ const Admin = (props) => {
   );
 };
 
-export default Admin;
+export default memo(Admin);

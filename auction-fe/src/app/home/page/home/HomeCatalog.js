@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 
 import Footer from "../../../../shared/components/Layouts/Footer";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
@@ -58,4 +58,4 @@ const HomeCatalog = () => {
   );
 };
 
-export default HomeCatalog;
+export default memo(HomeCatalog);

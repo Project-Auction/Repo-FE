@@ -3,7 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import "./FormInput.css";
 
-import { forwardRef, useState } from "react";
+import { forwardRef, memo, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import CustomFormInput from "./CustomFormInput";
@@ -180,4 +180,4 @@ const FormInput = forwardRef((props, ref) => {
   );
 });
 
-export default FormInput;
+export default memo(FormInput);

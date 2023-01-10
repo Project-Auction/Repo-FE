@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import "./Button.css";
 
@@ -43,4 +44,4 @@ function ButtonField(props) {
   );
 }
 
-export default ButtonField;
+export default memo(ButtonField);

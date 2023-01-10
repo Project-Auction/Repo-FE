@@ -13,6 +13,7 @@ import Footer from "../../../../shared/components/Layouts/Footer";
 import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
 import MainNavigation from "../../../../shared/components/UIElement/Navigation/MainNavigation";
 import LoadingSpinner from "../../../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
+import { memo } from "react";
 
 const ConfirmEmail = () => {
   const methods = useForm();
@@ -87,4 +88,4 @@ const ConfirmEmail = () => {
   );
 };
 
-export default ConfirmEmail;
+export default memo(ConfirmEmail);

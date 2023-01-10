@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useParams } from "react-router-dom";
 import DashboardUser from "../user-dashboard/DashboardUser";
 import "./InvoiceUser.css";
@@ -18,4 +19,4 @@ const InvoiceUser = (props) => {
   );
 };
 
-export default InvoiceUser;
+export default memo(InvoiceUser);

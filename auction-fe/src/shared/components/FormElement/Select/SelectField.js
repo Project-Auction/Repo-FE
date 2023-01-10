@@ -1,4 +1,5 @@
 import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
+import { memo } from "react";
 
 import { Controller, useFormContext } from "react-hook-form";
 import { validateForm } from "../../../../utils/Validator";
@@ -107,4 +108,4 @@ function SelectField(props) {
   );
 }
 
-export default SelectField;
+export default memo(SelectField);

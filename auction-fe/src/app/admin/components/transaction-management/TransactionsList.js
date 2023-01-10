@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useForm } from "react-hook-form";
 
 import CustomFormProvider from "../../../../shared/components/FormElement/CustomFormProvider";
@@ -72,4 +73,4 @@ const TransactionsList = () => {
   );
 };
 
-export default TransactionsList;
+export default memo(TransactionsList);

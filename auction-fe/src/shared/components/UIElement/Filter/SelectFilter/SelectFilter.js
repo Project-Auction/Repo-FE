@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Select from "react-select";
 
 import './SelectFilter.css'
@@ -34,4 +35,4 @@ const SelectFilter = ({
   );
 };
 
-export default SelectFilter;
+export default memo(SelectFilter);

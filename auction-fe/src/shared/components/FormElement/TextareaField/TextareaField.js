@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { validateForm } from "../../../../utils/Validator";
 import "../Input/Input.css";
@@ -76,4 +77,4 @@ const TextareaField = (props) => {
   );
 };
 
-export default TextareaField;
+export default memo(TextareaField);

@@ -13,6 +13,7 @@ import ButtonField from "../../../../../shared/components/FormElement/Button";
 import FormInputTime from "../../../../../shared/components/FormElement/InputTime";
 import { UploadImage } from "../../../../../shared/components/FormElement/ImageUploader/ImageUploader";
 import Constants from "../../../../../utils/Constants";
+import { memo } from "react";
 
 const EditProfile = (props) => {
   const methods = useForm({
@@ -162,4 +163,4 @@ const EditProfile = (props) => {
   );
 };
 
-export default EditProfile;
+export default memo(EditProfile);

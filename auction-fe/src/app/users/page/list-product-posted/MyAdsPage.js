@@ -1,3 +1,4 @@
+import { memo } from "react";
 import DashboardUser from "../user-dashboard/DashboardUser";
 
 const MyAdsPage = (props) => {
@@ -10,4 +11,4 @@ const MyAdsPage = (props) => {
   );
 };
 
-export default MyAdsPage;
+export default memo(MyAdsPage);

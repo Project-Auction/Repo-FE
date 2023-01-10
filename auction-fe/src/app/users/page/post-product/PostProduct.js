@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -208,4 +208,4 @@ const PostProduct = (props) => {
   );
 };
 
-export default PostProduct;
+export default memo(PostProduct);

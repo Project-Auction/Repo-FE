@@ -1,5 +1,6 @@
 import "./LoadingSpinner.css";
 import ReactDOM from "react-dom";
+import { memo } from "react";
 
 const LoadingSpinner = (props) => {
   const content = (
@@ -14,4 +15,4 @@ const LoadingSpinner = (props) => {
   );
 };
 
-export default LoadingSpinner;
+export default memo(LoadingSpinner);

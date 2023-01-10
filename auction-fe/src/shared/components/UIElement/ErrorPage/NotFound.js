@@ -3,6 +3,7 @@ import "./NotFound.css";
 import Footer from "../../Layouts/Footer";
 import MainNavigation from "../Navigation/MainNavigation";
 import ButtonField from "../../FormElement/Button/ButtonField";
+import { memo } from "react";
 
 const NotFound = () => {
   return (
@@ -31,4 +32,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default memo(NotFound);

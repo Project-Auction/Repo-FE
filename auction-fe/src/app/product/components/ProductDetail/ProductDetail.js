@@ -7,6 +7,7 @@ import MainNavigation from "../../../../shared/components/UIElement/Navigation/M
 import SwiperSlider from "../../../../shared/components/UIElement/SwiperSlider";
 import ProductDetailInfo from "../ProductDetailInfo";
 import HeaderBreadcrumbs from "../../../../shared/components/UIElement/HeaderBreadcrumbs";
+import { memo } from "react";
 
 const ProductDetail = (props) => {
   const productId = useParams().productId;
@@ -39,4 +40,4 @@ const ProductDetail = (props) => {
   );
 };
 
-export default ProductDetail;
+export default memo(ProductDetail);

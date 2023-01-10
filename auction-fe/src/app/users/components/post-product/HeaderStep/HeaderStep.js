@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "./HeaderStep.css";
 
 const HeaderStep = ({
@@ -18,4 +19,4 @@ const HeaderStep = ({
   );
 };
 
-export default HeaderStep;
+export default memo(HeaderStep);

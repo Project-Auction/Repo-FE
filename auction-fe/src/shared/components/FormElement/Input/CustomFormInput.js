@@ -1,6 +1,6 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forwardRef, useState } from "react";
+import { forwardRef, memo, useState } from "react";
 import "./Input.css";
 
 const CustomFormInput = forwardRef((props, ref) => {
@@ -82,4 +82,4 @@ const CustomFormInput = forwardRef((props, ref) => {
   );
 });
 
-export default CustomFormInput;
+export default memo(CustomFormInput);

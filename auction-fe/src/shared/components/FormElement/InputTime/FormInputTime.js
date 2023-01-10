@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { validateForm } from "../../../../utils/Validator";
 
@@ -86,4 +86,4 @@ const FormInputTime = forwardRef((props, ref) => {
   );
 });
 
-export default FormInputTime;
+export default memo(FormInputTime);

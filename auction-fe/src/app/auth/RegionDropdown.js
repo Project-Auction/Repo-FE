@@ -1,5 +1,5 @@
 import { MenuItem } from "@mui/material";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import SelectField from "../../shared/components/FormElement/Select/SelectField";
 import LoadingSpinner from "../../shared/components/UIElement/LoadingSpinner/LoadingSpinner";
 import { useHttpClient } from "../../shared/hook/http-client";
@@ -146,4 +146,4 @@ const RegionDropdown = (props) => {
   );
 };
 
-export default RegionDropdown;
+export default memo(RegionDropdown);

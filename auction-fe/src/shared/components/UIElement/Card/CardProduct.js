@@ -4,6 +4,7 @@ import "./Card.css";
 import ButtonField from "../../FormElement/Button";
 import useCountDown from "../../../hook/useCountDown";
 import { formatCurrency } from "../../../format/format-input";
+import { memo } from "react";
 
 /*
   ? Show on Home to "SUBMIT A BID" 
@@ -102,4 +103,4 @@ function CardProduct(props) {
   }
 }
 
-export default CardProduct;
+export default memo(CardProduct);

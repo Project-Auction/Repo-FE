@@ -1,10 +1,10 @@
 import { Checkbox } from "@mui/material";
+import { memo } from "react";
 import "./CheckboxField.css";
 
 const CheckboxField = ({
   onChange,
   fontSize,
-  defaultChecked,
   disabled,
   color,
   checkedColor,
@@ -27,10 +27,9 @@ const CheckboxField = ({
         icon={icon}
         checkedIcon={checkedIcon}
         checked={checked}
-        defaultChecked={defaultChecked}
       />
     </>
   );
 };
 
-export default CheckboxField;
+export default memo(CheckboxField);

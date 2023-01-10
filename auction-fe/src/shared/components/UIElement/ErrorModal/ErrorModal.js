@@ -1,3 +1,4 @@
+import { memo } from "react";
 import ButtonField from "../../FormElement/Button/ButtonField";
 import Modal from "../Modal";
 
@@ -18,4 +19,4 @@ const ErrorModal = ({ onClear, error, children }) => {
   );
 };
 
-export default ErrorModal;
+export default memo(ErrorModal);

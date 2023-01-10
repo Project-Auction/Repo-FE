@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "./PopperWrapper.css";
 
 function PopperWrapper(props) {
@@ -8,4 +9,4 @@ function PopperWrapper(props) {
   );
 }
 
-export default PopperWrapper;
+export default memo(PopperWrapper);

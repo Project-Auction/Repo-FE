@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Admin from "../../../page/Admin";
 import "./ProductsList.css";
 
@@ -15,4 +16,4 @@ const ProductsList = () => {
   );
 };
 
-export default ProductsList;
+export default memo(ProductsList);

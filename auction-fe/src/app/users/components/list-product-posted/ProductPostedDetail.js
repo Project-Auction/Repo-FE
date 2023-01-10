@@ -27,9 +27,9 @@ const ProductPostedDetail = () => {
     try {
       const fetchData = async () => {
         const res = sendRequestGetProduct({
-          url: `http://localhost:8080/api/user/product/products-posted/${productId}`,
+          url: `http://localhost:8080/api/user/product/product-posted/${productId}`,
           method: "GET",
-          urlRedirect: "/",
+          urlRedirect: "/error",
         });
 
         setProduct(res);
